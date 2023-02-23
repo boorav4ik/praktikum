@@ -8,8 +8,8 @@ import {
   useLocation,
 } from 'react-router-dom'
 import { LoginPage } from './pages/Login'
-import './App.css'
 import { MainPage } from './pages/Main'
+import './App.css'
 
 function ProtectedRoute(props: RouteProps) {
   const location = useLocation()
