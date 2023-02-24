@@ -9,18 +9,19 @@ import {
 } from 'react-router-dom'
 import { LoginPage } from './pages/Login'
 import { MainPage } from './pages/Main'
+import { ProfilePage } from './pages/Profile'
 import './App.css'
 
-function ProtectedRoute(props: RouteProps) {
-  const location = useLocation()
-  const [auth, setAuth] = useState(false)
+// function ProtectedRoute(props: RouteProps) {
+//   const location = useLocation()
+//   const [auth, setAuth] = useState(false)
 
-  return auth ? (
-    <Route {...props} />
-  ) : (
-    <Navigate to="/login" state={{ from: location }} replace />
-  )
-}
+//   return auth ? (
+//     <Route {...props} />
+//   ) : (
+//     <Navigate to="/login" state={{ from: location }} replace />
+//   )
+// }
 
 function App() {
   useEffect(() => {
@@ -41,6 +42,7 @@ function App() {
           <Route path="/" element={<MainPage />} />
           {/* <Route path="/" element={<ProtectedRoute />} /> */}
           <Route path="/login" element={<LoginPage />} />
+          <Route path='/profile' element={<ProfilePage />} />
         </Routes>
       </BrowserRouter>
     </div>

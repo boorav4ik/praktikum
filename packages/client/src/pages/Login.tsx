@@ -1,5 +1,6 @@
-import { Box, Button, Container, Typography } from '@mui/material'
+import { Box, Container, Typography } from '@mui/material'
 import { TextField } from '../components/TextFields'
+import { Button } from '../components/Button'
 
 export function LoginPage() {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -16,7 +17,7 @@ export function LoginPage() {
     <Container component="main" maxWidth="sm">
       <Box
         sx={{
-          my: 8,
+          my: 10,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -42,7 +43,7 @@ export function LoginPage() {
           <TextField id="username" name="username" label="Логин" variant="outlined" />
           <TextField id="password" name="password" label="Пароль" variant="outlined" />
           <Typography component="a">Нет аккаунта?!! Регистрация</Typography>
-          <Button variant="contained" sx={{ fontWeight: 700 }} type="submit">
+          <Button type="submit">
             Авторизация
           </Button>
         </Box>

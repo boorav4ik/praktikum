@@ -1,5 +1,5 @@
-import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
+import { DubleTypography } from './DoubleTypography'
 
 export function GameBoard() {
   return (
@@ -13,21 +13,12 @@ export function GameBoard() {
         flexDirection: 'column',
         alignItems: 'center',
       }}>
-      <Typography
-        component="span"
-        sx={{ fontWeight: 700, fontSize: 32, display: 'contents' }}
-        color="green.64">
-        Счёт:
-      </Typography>
-      <Typography
-        component="span"
-        sx={{ fontWeight: 700, fontSize: 32, display: 'contents' }}
-        >
-        {" "}100500
-      </Typography>
-      <Box>
-        
-      </Box>
+      <DubleTypography
+        first={{ content: 'Счёт:' }}
+        second={{ content: ' 100500' }}
+        sx={{fontSize: 24}}
+      />
+      <Box></Box>
     </Box>
   )
 }
