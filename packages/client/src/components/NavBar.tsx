@@ -21,7 +21,7 @@ export function NavBar() {
         sx={{ fontSize: 36 }}
       />
       <Stack spacing={2}>
-        <Button key="profile">Профидь</Button>
+        <Button key="profile">Профиль</Button>
         <Button key="leaders">Таблица лидеров</Button>
         <Button key="forum">Форум</Button>
       </Stack>

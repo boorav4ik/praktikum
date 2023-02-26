@@ -9,7 +9,7 @@ import {
 } from 'react-router-dom'
 import { LoginPage } from './pages/Login'
 import { MainPage } from './pages/Main'
-import { ProfilePage } from './pages/Profile'
+import { ProfilePage } from './pages/Profile/Profile'
 import './App.css'
 
 // function ProtectedRoute(props: RouteProps) {
@@ -42,7 +42,7 @@ function App() {
           <Route path="/" element={<MainPage />} />
           {/* <Route path="/" element={<ProtectedRoute />} /> */}
           <Route path="/login" element={<LoginPage />} />
-          <Route path='/profile' element={<ProfilePage />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </BrowserRouter>
     </div>
