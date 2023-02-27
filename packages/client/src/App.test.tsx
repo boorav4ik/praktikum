@@ -1,7 +1,5 @@
 import App from './App'
-import { render } from '@testing-library/react'
-
-// const appContent = 'Вот тут будет жить ваше приложение :)'
+import { render, screen } from '@testing-library/react'
 
 // @ts-ignore
 global.fetch = jest.fn(() =>
@@ -9,6 +7,6 @@ global.fetch = jest.fn(() =>
 )
 
 test('Example test', async () => {
-  const {container} = render(<App />)
-  expect(container.querySelector("App")).toBeDefined()
+  render(<App />)
+  expect(screen.getByTestId("App")).toBeDefined()
 })
