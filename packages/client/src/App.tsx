@@ -36,16 +36,15 @@ function App() {
   }, [])
 
   return (
-    <div className="App">
-      <BrowserRouter>
+    <BrowserRouter>
+      <div className="App" data-testid="App">
         <Routes>
           <Route path="/" element={<MainPage />} />
           {/* <Route path="/" element={<ProtectedRoute />} /> */}
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
         </Routes>
-      </BrowserRouter>
-    </div>
+      </div>
+    </BrowserRouter>
   )
 }
 
