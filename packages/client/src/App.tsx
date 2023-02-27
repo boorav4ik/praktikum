@@ -10,6 +10,9 @@ import {
 import { LoginPage } from './pages/Login'
 import { MainPage } from './pages/Main'
 import { ProfilePage } from './pages/Profile'
+import { LeaderboardPage } from './pages/Leaderboard/Leaderboard'
+
+
 import './App.css'
 
 // function ProtectedRoute(props: RouteProps) {
@@ -43,6 +46,7 @@ function App() {
           {/* <Route path="/" element={<ProtectedRoute />} /> */}
           <Route path="/login" element={<LoginPage />} />
           <Route path='/profile' element={<ProfilePage />} />
+          <Route path='/leaderboard' element={<LeaderboardPage />} />
         </Routes>
       </div>
     </BrowserRouter>
