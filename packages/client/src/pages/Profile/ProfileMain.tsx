@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from 'react'
+import { FC, useRef, useEffect } from 'react'
 import { Box, Stack } from '@mui/material'
 import { ProfileFields } from './ProfileFields'
 
@@ -13,14 +13,18 @@ export const ProfileMain: FC<ProfileMainProps> = ({
   editStatus,
   saveUserData,
 }) => {
-  const [newUserData, setNewUserData] = useState<object>(user)
+  const newUserData = useRef<object>(user)
+
   const saveUser = (userData: object) => {
-    setNewUserData({ ...newUserData, ...userData })
+    newUserData.current = { ...newUserData.current, ...userData }
   }
 
   useEffect(() => {
-    if (editStatus === 'save' || editStatus === 'cancel') {
-      saveUserData(newUserData, editStatus)
+    if (editStatus === 'save') {
+      saveUserData(newUserData.current, editStatus)
+    }
+    if (editStatus === 'cancel') {
+      saveUserData(user, editStatus)
     }
   }, [editStatus])
 

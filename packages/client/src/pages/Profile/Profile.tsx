@@ -25,6 +25,7 @@ export function ProfilePage() {
   const saveUserData = (newUserData: object | undefined, status: string) => {
     if (status === 'cancel') {
       setEditStatus('info')
+      console.log('Отмена изменений. Ждем redux')
       return
     }
     const newData = { ...user, ...newUserData }

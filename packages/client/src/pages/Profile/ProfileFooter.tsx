@@ -13,13 +13,6 @@ export const ProfileFooter: FC<ProfileFooterProps> = ({
   editFields,
 }) => {
   const navigate = useNavigate()
-  const [editButtonName, setEditButtonNanme] = useState<string>('Редактировать')
-  const [cancelButtonName, setCancelButtonNanme] = useState<string>('Играть!')
-
-  useEffect(() => {
-    setEditButtonNanme(editStatus === 'info' ? 'Редактировать' : 'Сохранить')
-    setCancelButtonNanme(editStatus === 'info' ? 'Играть!' : 'Отмена')
-  }, [editStatus])
 
   const checkCancel = () => {
     if (editStatus === 'info') {
@@ -45,8 +38,12 @@ export const ProfileFooter: FC<ProfileFooterProps> = ({
         display: 'flex',
         justifyContent: 'space-around',
       }}>
-      <Button onClick={checkSave}>{editButtonName}</Button>
-      <Button onClick={checkCancel}>{cancelButtonName}</Button>
+      <Button onClick={checkSave}>
+        {editStatus === 'info' ? 'Редактировать' : 'Сохранить'}
+      </Button>
+      <Button onClick={checkCancel}>
+        {editStatus === 'info' ? 'Играть!' : 'Отмена'}
+      </Button>
     </Box>
   )
 }

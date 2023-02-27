@@ -42,6 +42,7 @@ function App() {
           <Route path="/" element={<MainPage />} />
           {/* <Route path="/" element={<ProtectedRoute />} /> */}
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </div>
     </BrowserRouter>
