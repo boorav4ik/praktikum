@@ -1,7 +1,48 @@
-import { Box, Container } from '@mui/material'
-import { useState, useEffect } from 'react'
-import { AvatarBox } from '../../components/AvatarBox'
+import { Box, Container, Stack, Divider, Grid  } from '@mui/material'
+import { ItemLeader } from './ItemLeader'
 
+
+const gamers1 = [
+    {
+        number: 1,
+        name: "Иван",
+        score: "2342",
+        avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/2048_logo.svg/1200px-2048_logo.svg.png"
+    },
+    {
+        number: 2,
+        name: "Петр",
+        score: "345435",
+        avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/2048_logo.svg/1200px-2048_logo.svg.png"
+    },
+    {
+        number: 3,
+        name: "Василий",
+        score: "64564",
+        avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/2048_logo.svg/1200px-2048_logo.svg.png"
+    }
+]
+
+const gamers2 = [
+    {
+        number: 4,
+        name: "Аркадий",
+        score: "123",
+        avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/2048_logo.svg/1200px-2048_logo.svg.png"
+    },
+    {
+        number: 5,
+        name: "Афанасий",
+        score: "7895",
+        avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/2048_logo.svg/1200px-2048_logo.svg.png"
+    },
+    {
+        number: 6,
+        name: "Ярослав",
+        score: "9806",
+        avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/2048_logo.svg/1200px-2048_logo.svg.png"
+    },
+]
 
 
 export function LeaderboardPage() {
@@ -21,7 +62,37 @@ export function LeaderboardPage() {
                     borderRadius: '3px',
                     p: 3,
                 }}>
-                <AvatarBox />
+
+
+                <Stack
+                    direction="row"
+                    divider={<Divider orientation="vertical" flexItem />}
+                    spacing={2}
+                >
+                    <Stack spacing={2}>
+
+                        {gamers1.map(item => (
+                            <ItemLeader
+                                number={item.number}
+                                name={item.name}
+                                score={item.score}
+                                avatar={item.avatar}
+                            />
+                        ))}
+
+                    </Stack>
+                    <Stack spacing={2}>
+                        {gamers2.map(item => (
+                            <ItemLeader
+                                number={item.number}
+                                name={item.name}
+                                score={item.score}
+                                avatar={item.avatar}
+                            />
+                        ))}
+
+                    </Stack>
+                </Stack>
             </Box>
         </Container>
     )
