@@ -22,8 +22,7 @@ export const ProfileMain: FC<ProfileMainProps> = ({
   useEffect(() => {
     if (editStatus === 'save') {
       saveUserData(newUserData.current, editStatus)
-    }
-    if (editStatus === 'cancel') {
+    } else if (editStatus === 'cancel') {
       saveUserData(user, editStatus)
     }
   }, [editStatus])

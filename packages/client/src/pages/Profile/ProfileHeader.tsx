@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import { AvatarBox } from '../../components/AvatarBox'
 
 interface ProfileHeaderProps {
@@ -14,16 +14,7 @@ export const ProfileHeader: FC<ProfileHeaderProps> = ({
 }) => {
   return (
     <Box component="header">
-      <input
-        accept="image/*"
-        id="avatar-icon-file"
-        type="file"
-        style={{ display: 'none' }}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-          ChooseFile(event)
-        }
-      />
-      <label htmlFor="avatar-icon-file">
+      <label>
         <AvatarBox
           src={fileData as string}
           sx={{
@@ -32,6 +23,14 @@ export const ProfileHeader: FC<ProfileHeaderProps> = ({
             bgcolor: '#1E515D',
             cursor: 'pointer',
           }}
+        />
+        <input
+          accept="image/*"
+          type="file"
+          style={{ display: 'none' }}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            ChooseFile(event)
+          }
         />
       </label>
     </Box>

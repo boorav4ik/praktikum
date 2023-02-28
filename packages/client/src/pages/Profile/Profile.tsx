@@ -1,5 +1,5 @@
 import { Box, Container } from '@mui/material'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { deepEqual } from '../../utils/deepEqual'
 import { ProfileFooter } from './ProfileFooter'
 import { ProfileHeader } from './ProfileHeader'

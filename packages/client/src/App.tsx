@@ -9,7 +9,7 @@ import {
 } from 'react-router-dom'
 import { LoginPage } from './pages/Login'
 import { MainPage } from './pages/Main'
-import { ProfilePage } from './pages/Profile/Profile'
+import { ProfilePage } from './pages/Profile'
 import './App.css'
 
 // function ProtectedRoute(props: RouteProps) {
