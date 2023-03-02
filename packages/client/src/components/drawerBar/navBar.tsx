@@ -25,7 +25,7 @@ export const NavBar: FC<NavBarProps> = ({ open, handleDrawerOpen }) => {
     backgroundImage: `url(${Image})`,
     backgroundColor: theme.palette.background.default,
     height: 100,
-    transition: theme.transitions.create(['width', 'margin', backgroundImage], {
+    transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
@@ -34,13 +34,10 @@ export const NavBar: FC<NavBarProps> = ({ open, handleDrawerOpen }) => {
       backgroundImage: `url(${Image})`,
       height: 100,
       width: `calc(100% - ${drawerWidth}px)`,
-      transition: theme.transitions.create(
-        ['width', 'margin', backgroundImage],
-        {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.enteringScreen,
-        }
-      ),
+      transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
     }),
   }))
 
