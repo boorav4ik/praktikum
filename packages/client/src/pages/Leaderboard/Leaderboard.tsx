@@ -1,5 +1,6 @@
 import { Box, Container, Stack, Divider, Grid  } from '@mui/material'
 import { ItemLeader } from './ItemLeader'
+import { LeaderHeader } from './LeaderHeader'
 
 
 const gamers1 = [
@@ -50,6 +51,7 @@ export function LeaderboardPage() {
 
     return (
         <Container component="main" maxWidth="md">
+            <LeaderHeader/>
             <Box
                 bgcolor="background.paper"
                 sx={{
@@ -66,7 +68,14 @@ export function LeaderboardPage() {
 
                 <Stack
                     direction="row"
-                    divider={<Divider orientation="vertical" flexItem />}
+                    divider={<Divider
+                        sx={{
+                            borderRightWidth: 3,
+                            bgcolor: '#1E515D'
+                        }}
+                        orientation="vertical"
+                        flexItem
+                    />}
                     spacing={2}
                 >
                     <Stack spacing={2}>

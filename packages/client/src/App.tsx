@@ -10,7 +10,7 @@ import {
 import { LoginPage } from './pages/Login'
 import { MainPage } from './pages/Main'
 import { ProfilePage } from './pages/Profile'
-import { LeaderboardPage } from './pages/Leaderboard/Leaderboard'
+import { LeaderboardPage } from './pages/Leaderboard'
 
 
 import './App.css'
