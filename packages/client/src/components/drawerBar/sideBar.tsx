@@ -47,8 +47,11 @@ export const SideBar: FC<SideBarProps> = ({ open }) => {
           variant="outlined"
           sx={{
             width: '95%',
-            color: '#000',
+            fontWeight: 'bold',
+            fontSize: '0.975rem',
             display: open ? 'block' : 'none',
+            color: '#1E515D',
+            mt: 2,
           }}>
           Войти
         </Button>
@@ -62,13 +65,15 @@ export const SideBar: FC<SideBarProps> = ({ open }) => {
           <ListItem
             key={value.text}
             disablePadding
-            sx={{ display: 'block', mt: 0.5 }}>
+            sx={{
+              display: 'block',
+              mt: 0.5,
+            }}>
             <ListItemButton
               sx={{
                 minHeight: 48,
                 justifyContent: open ? 'initial' : 'center',
                 px: 2.5,
-                color: '#000',
               }}
               onClick={() => navigate(value.to)}>
               <ListItemIcon
@@ -76,12 +81,15 @@ export const SideBar: FC<SideBarProps> = ({ open }) => {
                   minWidth: 0,
                   mr: open ? 3 : 'auto',
                   justifyContent: 'center',
+                  color: '#1E515D',
                 }}>
                 {value.icon}
               </ListItemIcon>
               <ListItemText
                 primary={value.text}
-                sx={{ opacity: open ? 1 : 0 }}
+                sx={{
+                  opacity: open ? 1 : 0,
+                }}
               />
             </ListItemButton>
           </ListItem>

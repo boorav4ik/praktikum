@@ -7,7 +7,7 @@ import MenuIcon from './icons/Menu'
 import { drawerWidth, menuData } from './drawerBarData'
 import IconButton from '@mui/material/IconButton'
 import { Button } from '@mui/material'
-import Image from './icons/appbar.png'
+import backgroundImage from './icons/background.svg'
 
 interface NavBarProps {
   open?: boolean
@@ -22,22 +22,33 @@ export const NavBar: FC<NavBarProps> = ({ open, handleDrawerOpen }) => {
     shouldForwardProp: prop => prop !== 'open',
   })<AppBarProps>(({ theme, open }) => ({
     zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
+    backgroundImage: `url(${Image})`,
+    backgroundColor: theme.palette.background.default,
+    height: 100,
+    transition: theme.transitions.create(['width', 'margin', backgroundImage], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
     ...(open && {
       marginLeft: drawerWidth,
+      backgroundImage: `url(${Image})`,
+      height: 100,
       width: `calc(100% - ${drawerWidth}px)`,
-      transition: theme.transitions.create(['width', 'margin'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
+      transition: theme.transitions.create(
+        ['width', 'margin', backgroundImage],
+        {
+          easing: theme.transitions.easing.sharp,
+          duration: theme.transitions.duration.enteringScreen,
+        }
+      ),
     }),
   }))
 
   return (
-    <AppBar position="fixed" open={open}>
+    <AppBar
+      position="fixed"
+      open={open}
+      style={{ backgroundImage: `url(${backgroundImage})` }}>
       <Toolbar>
         <IconButton
           color="inherit"
@@ -50,11 +61,24 @@ export const NavBar: FC<NavBarProps> = ({ open, handleDrawerOpen }) => {
           }}>
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+        <Typography
+          variant="h6"
+          component="div"
+          sx={{
+            flexGrow: 1,
+            fontWeight: 'bold',
+            fontSize: '1.375rem',
+          }}>
           2048
         </Typography>
         {menuData.map(value => (
-          <Button key={value.text} color="inherit">
+          <Button
+            key={value.text}
+            color="inherit"
+            sx={{
+              fontWeight: 'bold',
+              fontSize: '0.975rem',
+            }}>
             {value.text}
           </Button>
         ))}
