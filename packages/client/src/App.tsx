@@ -11,6 +11,9 @@ import { LoginPage } from './pages/Login'
 import { MainPage } from './pages/Main'
 import { ProfilePage } from './pages/Profile'
 import './App.css'
+import { connect } from 'react-redux'
+import { login, logout } from './store/reducers/user'
+import { User } from './utils/interfaces/User'
 
 // function ProtectedRoute(props: RouteProps) {
 //   const location = useLocation()
@@ -23,15 +26,28 @@ import './App.css'
 //   )
 // }
 
-function App() {
+function App({
+  user,
+  login,
+  logout,
+}: {
+  user: User
+  login: () => void
+  logout: () => void
+}) {
+  console.log({ user, login, logout })
+
   useEffect(() => {
     const fetchServerData = async () => {
       const url = `http://localhost:${__SERVER_PORT__}`
-      const response = await fetch(url)
-      const data = await response.json()
-      console.log(data)
+      try {
+        const response = await fetch(url)
+        const data = await response.json()
+        console.log(data)
+      } catch (error) {
+        console.log(error)
+      }
     }
-
     fetchServerData()
   }, [])
 
@@ -42,11 +58,13 @@ function App() {
           <Route path="/" element={<MainPage />} />
           {/* <Route path="/" element={<ProtectedRoute />} /> */}
           <Route path="/login" element={<LoginPage />} />
-          <Route path='/profile' element={<ProfilePage />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </div>
+      <button onClick={login}>login</button>
+      <button onClick={logout}>logout</button>
     </BrowserRouter>
   )
 }
 
-export default App
+export default connect(({ user }) => user, { login, logout })(App)

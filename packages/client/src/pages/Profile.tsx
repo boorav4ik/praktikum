@@ -1,15 +1,7 @@
 import { Box, Container, Stack, TextField } from '@mui/material'
 import { AvatarBox } from '../components/AvatarBox'
 import { Button } from '../components/Button'
-
-const user = {
-  firstName: 'Василий',
-  secondName: 'Пупкин',
-  phone: '+7 916 000 00 00',
-  email: 'example@mail.com',
-  login: 'Vasilij',
-  password: '************',
-}
+import { user } from '../mock/user'
 
 function Header() {
   return (
@@ -37,16 +29,15 @@ function Main() {
       sx={{
         display: 'flex',
         flexDirection: { xs: 'column', sm: 'row' },
-        justifyContent: "space-evenly",
+        justifyContent: 'space-evenly',
         p: 3,
-        width: "75%",
-
+        width: '75%',
       }}>
       <Stack spacing={2}>
-        {['firstName', 'secondName', 'phone'].map(buildProfileField)}
+        {['displayName', 'firstName', 'secondName'].map(buildProfileField)}
       </Stack>
       <Stack spacing={2}>
-        {['email', 'login', 'password'].map(buildProfileField)}
+        {['email', 'login', 'phone'].map(buildProfileField)}
       </Stack>
     </Box>
   )
