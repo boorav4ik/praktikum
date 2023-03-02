@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { FC, ReactNode, useState } from 'react'
 import { styled, Theme, CSSObject } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import MuiDrawer from '@mui/material/Drawer'
@@ -8,6 +8,9 @@ import { NavBar } from './navBar'
 import { SideBar } from './sideBar'
 import { drawerWidth } from './drawerBarData'
 import { DrawerHeader } from './drawerHeader'
+interface DrawerBarProps {
+  children?: ReactNode
+}
 
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
@@ -47,7 +50,7 @@ const Drawer = styled(MuiDrawer, {
   }),
 }))
 
-export const DrawerBar = () => {
+export const DrawerBar: FC<DrawerBarProps> = ({ children }) => {
   const [open, setOpen] = useState<boolean>(false)
 
   const handleDrawerOpen = () => {
@@ -67,6 +70,16 @@ export const DrawerBar = () => {
         <Divider />
         <SideBar open={open} />
       </Drawer>
+      <Box
+        sx={{
+          width: '100%',
+          minHeight: '100vh',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        {children}
+      </Box>
     </Box>
   )
 }

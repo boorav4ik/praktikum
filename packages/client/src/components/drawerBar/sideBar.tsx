@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { useNavigate } from 'react-router-dom'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
@@ -13,6 +14,7 @@ interface SideBarProps {
 }
 
 export const SideBar: FC<SideBarProps> = ({ open }) => {
+  const navigate = useNavigate()
   return (
     <List>
       <Box
@@ -67,7 +69,8 @@ export const SideBar: FC<SideBarProps> = ({ open }) => {
                 justifyContent: open ? 'initial' : 'center',
                 px: 2.5,
                 color: '#000',
-              }}>
+              }}
+              onClick={() => navigate(value.to)}>
               <ListItemIcon
                 sx={{
                   minWidth: 0,
