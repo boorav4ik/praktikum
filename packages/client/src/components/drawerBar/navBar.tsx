@@ -22,7 +22,6 @@ export const NavBar: FC<NavBarProps> = ({ open, handleDrawerOpen }) => {
     shouldForwardProp: prop => prop !== 'open',
   })<AppBarProps>(({ theme, open }) => ({
     zIndex: theme.zIndex.drawer + 1,
-    backgroundImage: `url(${Image})`,
     backgroundColor: theme.palette.background.default,
     height: 100,
     transition: theme.transitions.create(['width', 'margin'], {
@@ -31,7 +30,6 @@ export const NavBar: FC<NavBarProps> = ({ open, handleDrawerOpen }) => {
     }),
     ...(open && {
       marginLeft: drawerWidth,
-      backgroundImage: `url(${Image})`,
       height: 100,
       width: `calc(100% - ${drawerWidth}px)`,
       transition: theme.transitions.create(['width', 'margin'], {
