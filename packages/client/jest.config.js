@@ -4,13 +4,18 @@ dotenv.config()
 export default {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
-  testMatch: ['<rootDir>/src/**/*.test.{ts,tsx}'],
+  roots: ['./'],
+  testMatch: ['<rootDir>/**/*.test.{ts,tsx}'],
   transform: {
-    '^.+\\.(ts|js|html|svg)$': 'ts-jest',
+    '^.+\\.(ts|tsx|js|jsx|html|svg)$': 'ts-jest',
   },
-  moduleFileExtensions: ['ts', 'js', 'html', 'svg'],
-  // coverageReporters: ['html'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'html', 'svg'],
+  coverageReporters: ['html'],
   globals: {
     __SERVER_PORT__: process.env.SERVER_PORT,
+    'ts-jest': {
+      tsconfig: '<rootDir>/tsconfig.json',
+      stringifyContentPathRegex: '\\.(html|svg)$',
+    },
   },
 }
