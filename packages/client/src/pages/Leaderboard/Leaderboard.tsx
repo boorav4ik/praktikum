@@ -51,7 +51,7 @@ export function LeaderboardPage() {
 
     return (
         <Container component="main" maxWidth="md">
-            <LeaderHeader/>
+
             <Box
                 bgcolor="background.paper"
                 sx={{
@@ -65,20 +65,26 @@ export function LeaderboardPage() {
                     p: 3,
                 }}>
 
-
+                <LeaderHeader/>
                 <Stack
                     direction="row"
+                    sx={{
+                        mt: "35px"
+                    }
+                    }
                     divider={<Divider
                         sx={{
                             borderRightWidth: 3,
-                            bgcolor: '#1E515D'
+                            bgcolor: '#1E515D',
                         }}
                         orientation="vertical"
                         flexItem
                     />}
                     spacing={2}
                 >
-                    <Stack spacing={2}>
+                    <Stack
+
+                        spacing={2}>
 
                         {gamers1.map(item => (
                             <ItemLeader

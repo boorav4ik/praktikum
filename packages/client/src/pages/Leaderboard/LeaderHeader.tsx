@@ -1,31 +1,23 @@
 import { Box } from '@mui/material'
 import React, { FC } from 'react'
 import { AvatarBox } from '../../components/AvatarBox'
+import Typography, { TypographyProps } from '@mui/material/Typography'
 
+interface LeaderHeaderProps {
+    fileData: string | ArrayBuffer | null
+}
 
-
-export const LeaderHeader: FC<> = () => {
+export const LeaderHeader: FC<any> = (
+   ) => {
     return (
         <Box component="header">
-            <label>
-                <AvatarBox
-                    src={fileData as string}
-                    sx={{
-                        width: '100px',
-                        height: '100px',
-                        bgcolor: '#1E515D',
-                        cursor: 'pointer',
-                    }}
-                />
-                <input
-                    accept="image/*"
-                    type="file"
-                    style={{ display: 'none' }}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                        ChooseFile(event)
-                    }
-                />
-            </label>
+            <Typography
+                component="span"
+                sx={{ fontWeight: 700, fontSize: 32, display: 'contents' }}
+                color="green.64"
+              >
+                Список лидеров
+            </Typography>
         </Box>
     )
 }
