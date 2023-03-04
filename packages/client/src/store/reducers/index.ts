@@ -1,5 +1,3 @@
-import { userReducer } from './user'
+import { authReducer as auth } from './auth'
 
-export const rootReducer = {
-  user: userReducer,
-}
+export const rootReducer = { auth }
