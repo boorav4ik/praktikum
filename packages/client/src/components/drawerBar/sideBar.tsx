@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
@@ -52,7 +52,9 @@ export const SideBar: FC<SideBarProps> = ({ open }) => {
             display: open ? 'block' : 'none',
             color: '#1E515D',
             mt: 2,
-          }}>
+          }}
+          component={Link}
+          to="/login">
           Войти
         </Button>
       </Box>

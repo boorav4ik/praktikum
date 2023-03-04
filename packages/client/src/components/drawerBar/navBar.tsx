@@ -8,6 +8,7 @@ import { drawerWidth, menuData } from './drawerBarData'
 import IconButton from '@mui/material/IconButton'
 import { Button } from '@mui/material'
 import backgroundImage from './icons/background.svg'
+import { Link } from 'react-router-dom'
 
 interface NavBarProps {
   open?: boolean
@@ -77,6 +78,16 @@ export const NavBar: FC<NavBarProps> = ({ open, handleDrawerOpen }) => {
             {value.text}
           </Button>
         ))}
+        <Button
+          key="login"
+          sx={{
+            fontWeight: 'bold',
+            fontSize: '0.975rem',
+          }}
+          component={Link}
+          to="/login">
+          Войти
+        </Button>
       </Toolbar>
     </AppBar>
   )
