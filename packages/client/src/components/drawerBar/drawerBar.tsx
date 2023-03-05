@@ -2,7 +2,6 @@ import { FC, ReactNode, useState } from 'react'
 import { styled, Theme, CSSObject } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import MuiDrawer from '@mui/material/Drawer'
-import CssBaseline from '@mui/material/CssBaseline'
 import Divider from '@mui/material/Divider'
 import { NavBar } from './navBar'
 import { SideBar } from './sideBar'
@@ -53,20 +52,15 @@ const Drawer = styled(MuiDrawer, {
 export const DrawerBar: FC<DrawerBarProps> = ({ children }) => {
   const [open, setOpen] = useState<boolean>(false)
 
-  const handleDrawerOpen = () => {
-    setOpen(true)
-  }
-
-  const handleDrawerClose = () => {
-    setOpen(false)
+  const toogleDrawer = () => {
+    setOpen(prev => !prev)
   }
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <NavBar open={open} handleDrawerOpen={handleDrawerOpen} />
+      <NavBar />
       <Drawer variant="permanent" open={open}>
-        <DrawerHeader handleDrawerClose={handleDrawerClose} />
+        <DrawerHeader open={open} toogleDrawer={toogleDrawer} />
         <Divider />
         <SideBar open={open} />
       </Drawer>
