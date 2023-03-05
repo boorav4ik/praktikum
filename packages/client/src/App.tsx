@@ -11,6 +11,7 @@ import { LoginPage } from './pages/Login'
 import { MainPage } from './pages/Main'
 import { ProfilePage } from './pages/Profile'
 import './App.css'
+import { DrawerBar } from './components/drawerBar'
 
 // function ProtectedRoute(props: RouteProps) {
 //   const location = useLocation()
@@ -38,12 +39,14 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App" data-testid="App">
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          {/* <Route path="/" element={<ProtectedRoute />} /> */}
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-        </Routes>
+        <DrawerBar>
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            {/* <Route path="/" element={<ProtectedRoute />} /> */}
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
+          </Routes>
+        </DrawerBar>
       </div>
     </BrowserRouter>
   )
