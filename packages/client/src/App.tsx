@@ -41,13 +41,15 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App" data-testid="App">
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          {/* <Route path="/" element={<ProtectedRoute />} /> */}
-          <Route path="/login" element={<LoginPage />} />
-          <Route path='/profile' element={<ProfilePage />} />
-          <Route path='/leaderboard' element={<LeaderboardPage />} />
-        </Routes>
+        <DrawerBar>
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            {/* <Route path="/" element={<ProtectedRoute />} /> */}
+            <Route path="/login" element={<LoginPage />} />
+            <Route path='/profile' element={<ProfilePage />} />
+            <Route path='/leaderboard' element={<LeaderboardPage />} />
+          </Routes>
+        </DrawerBar>
       </div>
     </BrowserRouter>
   )
