@@ -70,8 +70,7 @@ export function LeaderboardPage() {
                     direction="row"
                     sx={{
                         mt: "35px"
-                    }
-                    }
+                    }}
                     divider={<Divider
                         sx={{
                             borderRightWidth: 3,
@@ -83,7 +82,9 @@ export function LeaderboardPage() {
                     spacing={2}
                 >
                     <Stack
-
+                        sx={{
+                            mr: "35px"
+                        }}
                         spacing={2}>
 
                         {gamers1.map(item => (
@@ -96,7 +97,12 @@ export function LeaderboardPage() {
                         ))}
 
                     </Stack>
-                    <Stack spacing={2}>
+                    <Stack
+                        sx={{
+                            ml: "55px!important"
+                        }}
+                        spacing={2}>
+
                         {gamers2.map(item => (
                             <ItemLeader
                                 number={item.number}
