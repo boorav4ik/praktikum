@@ -3,12 +3,7 @@ import React, { FC } from 'react'
 import { AvatarBox } from '../../components/AvatarBox'
 import Typography, { TypographyProps } from '@mui/material/Typography'
 
-interface LeaderHeaderProps {
-    fileData: string | ArrayBuffer | null
-}
-
-export const LeaderHeader: FC<any> = (
-   ) => {
+export const LeaderHeader = () => {
     return (
         <Box component="header">
             <Typography
