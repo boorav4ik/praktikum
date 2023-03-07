@@ -1,13 +1,20 @@
-import Box from '@mui/material/Box'
-import { DubleTypography } from './DoubleTypography'
+import { useState } from 'react';
+import Box from '@mui/material/Box';
+import { DubleTypography } from './DoubleTypography';
+import { GameField } from './GameField';
 
 export function GameBoard() {
+  const [score, setScore] = useState(0);
+  const updateScore = (value: number) => {
+    setScore(value);
+  }
+
   return (
     <Box
       sx={{
-        height: 540,
+        height: 570,
         width: 540,
-        borderRadius: 16,
+        borderRadius: 0,
         border: '3px solid #1E515D',
         display: 'flex',
         flexDirection: 'column',
@@ -15,10 +22,12 @@ export function GameBoard() {
       }}>
       <DubleTypography
         first={{ content: 'Счёт:' }}
-        second={{ content: ' 100500' }}
+        second={{ content: String(score) }}
         sx={{fontSize: 24}}
       />
-      <Box></Box>
+      <Box>
+        <GameField updateScore={updateScore} />
+      </Box>
     </Box>
   )
 }

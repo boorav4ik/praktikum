@@ -1,6 +1,6 @@
-import { Box, Container } from '@mui/material'
-import { GameBoard } from '../components/GameBoard'
-import { NavBar } from '../components/NavBar'
+import { Box, Container } from '@mui/material';
+import { GameBoard } from '../components/GameBoard';
+import { NavBar } from '../components/NavBar';
 
 export function MainPage() {
   return (
