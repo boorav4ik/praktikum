@@ -1,39 +1,27 @@
 import { FC, useEffect, useState } from 'react'
-import { Box, Container } from '@mui/material'
-import Button from '@mui/material/Button'
+import { Box, Container, Grid } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { HeaderForPage } from '../components/HeaderForPage';
+import { ForumRow } from '../components/ForumRow'
+import { ChatSmileIcon } from '../components/icons/ChatSmileIcon'
+import { defaultThemes } from '../mocs/forum'
 
 export type ForumTheme = {
   id: number,
   text: string,
   themeName: string
 }
-export const defaultThemes: ForumTheme[] = [
-  {
-    id: 1,
-    text: 'Отзывы',
-    themeName: 'reviews'
-  }, {
-    id: 2,
-    text: 'Технологии',
-    themeName: 'technologies'
-  }, {
-    id: 3,
-    text: 'Называние',
-    themeName: 'namings'
-  }
-]
+
 type Props = FC;
 const ForumPage: Props = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [themes, setThemes] = useState<ForumTheme[]>([])
   useEffect(() => {
     setThemes(defaultThemes)
   }, [])
   const goToTheme = (theme: ForumTheme) => {
     navigate(`/forum/${theme.themeName}`, {
-      state: theme
+      state: { theme }
     })
   }
   return (
@@ -53,14 +41,27 @@ const ForumPage: Props = () => {
           }
         }>
         <HeaderForPage text={'Форум'}/>
+        <Grid
+          container
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
+          maxWidth={'90%'}
+          marginY={2}
+          rowSpacing={4}
+        >
         {
           themes.map(theme => (
-            <div key={theme.id}>
-              <span>{theme.text}</span>
-              <Button onClick={() => goToTheme(theme)}>Темы</Button>
-            </div>
+              <ForumRow
+                key={theme.id}
+                onClick={() => goToTheme(theme)}
+                icon={() => ChatSmileIcon({width:"25", height:"25" ,viewBox:"0 0 25 25"})}
+                text={theme.text}
+                btnText={'Темы'}
+              />
           ))
         }
+        </Grid>
       </Box>
     </Container>
   )

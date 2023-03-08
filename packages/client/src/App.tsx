@@ -12,7 +12,8 @@ import { MainPage } from './pages/Main'
 import { ProfilePage } from './pages/Profile'
 import { ForumPage } from './pages/Forum'
 import './App.css'
-import { ThemePage } from './pages/Theme'
+import { ThemePage } from './pages/Themes'
+import { ThemeBranchPage } from './pages/ThemeBranch'
 
 // function ProtectedRoute(props: RouteProps) {
 //   const location = useLocation()
@@ -46,6 +47,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path='/forum' element={<ForumPage />} />
           <Route path='/forum/:theme_name' element={<ThemePage />} />
+          <Route path='/forum/:theme_name/:theme_branch' element={<ThemeBranchPage />} />
           <Route path='/profile' element={<ProfilePage />} />
         </Routes>
       </div>
