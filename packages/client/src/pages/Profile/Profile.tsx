@@ -1,9 +1,12 @@
 import { Box, Container } from '@mui/material'
 import { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { deepEqual } from '../../utils/deepEqual'
 import { ProfileFooter } from './ProfileFooter'
 import { ProfileHeader } from './ProfileHeader'
 import { ProfileMain } from './ProfileMain'
+import { RootState } from '../../store'
+import { change } from '../../store/slices/auth'
 
 interface FileProps {
   data: string | ArrayBuffer | null
@@ -11,16 +14,11 @@ interface FileProps {
 }
 
 export function ProfilePage() {
+  const { user } = useSelector((state: RootState) => state.auth)
+
   const [editStatus, setEditStatus] = useState<string>('info')
   const [file, setFile] = useState<FileProps>()
-  const [user, setUser] = useState<object>({
-    firstName: 'Василий',
-    secondName: 'Пупкин',
-    phone: '+7 916 000 00 00',
-    email: 'example@mail.com',
-    login: 'Vasilij',
-    password: '************',
-  })
+  const dispatch = useDispatch()
 
   const saveUserData = (newUserData: object | undefined, status: string) => {
     if (status === 'cancel') {
@@ -31,8 +29,9 @@ export function ProfilePage() {
     const newData = { ...user, ...newUserData }
     const checkUser = deepEqual(user, newData)
     if (!checkUser || file) {
-      console.log('Save data to Server: user data + avatar')
-      setUser(newData)
+      dispatch(change(newData))
+      // console.log('Save data to Server: user data + avatar')
+      // (newData)
     }
     setEditStatus('info')
   }
@@ -75,7 +74,7 @@ export function ProfilePage() {
           fileData={file ? file.data : ''}
         />
         <ProfileMain
-          user={user}
+          user={user ?? {}}
           editStatus={editStatus}
           saveUserData={saveUserData}
         />

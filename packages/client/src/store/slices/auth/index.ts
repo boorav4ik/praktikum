@@ -26,8 +26,12 @@ export const authSlise = createSlice({
       state.user = null
       state.isLoading = false
     },
+    change(state, action) {
+      state.user = { ...state.user, ...action.payload }
+      state.isLoading = false
+    },
   },
 })
 
 export const authReducer = authSlise.reducer
-export const { signin, signout } = authSlise.actions
+export const { signin, signout, change } = authSlise.actions
