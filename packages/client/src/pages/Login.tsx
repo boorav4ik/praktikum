@@ -1,19 +1,24 @@
 import { Box, Container, Typography } from '@mui/material'
 import { TextField } from '../components/TextFields'
 import { Button } from '../components/Button'
-import { useDispatch } from 'react-redux'
-import { login } from '../store/reducers/auth'
+import { useAppDispatch } from '../store/index'
+import { signIn } from '../api/userApi'
+import { useSelector } from 'react-redux'
 
 export function LoginPage() {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    const data = new FormData(event.currentTarget) 
-    const username = data.get('username') as string,
+    const data = new FormData(event.currentTarget)
+    const login = data.get('username') as string,
       password = data.get('password') as string
-
-    dispatch(login(username, password))
+    console.log('username = ', login)
+    console.log('password = ', password)
+    dispatch(signIn(login, password, ''))
   }
+
+  const playerList = useSelector((state: any) => state)
+  console.log('playerList = ', playerList)
 
   return (
     <Container component="main" maxWidth="sm">
