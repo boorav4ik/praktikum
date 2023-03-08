@@ -5,6 +5,7 @@ import MuiAppBar from '@mui/material/AppBar'
 import { menuData } from './drawerBarData'
 import { Button } from '@mui/material'
 import backgroundImage from './icons/background.svg'
+import { Link } from 'react-router-dom'
 
 export const NavBar = () => {
   const AppBar = styled(MuiAppBar)(({ theme }) => ({
@@ -43,6 +44,16 @@ export const NavBar = () => {
             {value.text}
           </Button>
         ))}
+        <Button
+          key="login"
+          sx={{
+            fontWeight: 'bold',
+            fontSize: '0.975rem',
+          }}
+          component={Link}
+          to="/login">
+          Войти
+        </Button>
       </Toolbar>
     </AppBar>
   )
