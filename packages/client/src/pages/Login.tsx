@@ -1,16 +1,26 @@
 import { Box, Container, Typography } from '@mui/material'
 import { TextField } from '../components/TextFields'
 import { Button } from '../components/Button'
+import { redirect, useLocation } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { signin } from '../store/slices/auth'
 
 export function LoginPage() {
+  const { state } = useLocation()
+  const dispatch = useDispatch()
+
+  console.log(state)
+
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
-    console.log({
-      username: data.get('username'),
-      password: data.get('password'),
-      test: data.get('test'),
-    })
+    dispatch(
+      signin({
+        username: data.get('username'),
+        password: data.get('password'),
+      })
+    )
+    // if (state.from) redirect(state.from)
   }
 
   return (
@@ -40,12 +50,20 @@ export function LoginPage() {
           <Typography sx={{ fontWeight: 700, fontSize: 32 }} color="green.64">
             Вход
           </Typography>
-          <TextField id="username" name="username" label="Логин" variant="outlined" />
-          <TextField id="password" name="password" label="Пароль" variant="outlined" />
+          <TextField
+            id="username"
+            name="username"
+            label="Логин"
+            variant="outlined"
+          />
+          <TextField
+            id="password"
+            name="password"
+            label="Пароль"
+            variant="outlined"
+          />
           <Typography component="a">Нет аккаунта?!! Регистрация</Typography>
-          <Button type="submit">
-            Авторизация
-          </Button>
+          <Button type="submit">Авторизация</Button>
         </Box>
       </Box>
     </Container>
