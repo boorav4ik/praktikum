@@ -3,7 +3,7 @@ import { Button } from '@mui/material'
 import { useAuth } from '../../hooks/useAuth'
 import { useDispatch } from 'react-redux'
 import { signout } from '../../store/slices/auth'
-import { Routes } from '../../utils/routing/routes'
+import { Routes } from '../../utils/routes'
 
 export function AuthButton({ isExpanded }: { isExpanded: boolean }) {
   const { user } = useAuth()

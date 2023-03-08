@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import * as Pages from './pages'
 import { DrawerBar } from './components/drawerBar'
 import { RequaredAuth } from './utils/routing/ProtectedRoute'
-import { Routes as Paths } from './utils/routing/routes'
+import { Routes as Paths } from './utils/routes'
 import './App.css'
 
 function App() {
