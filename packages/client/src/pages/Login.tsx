@@ -1,26 +1,26 @@
 import { Box, Container, Typography } from '@mui/material'
 import { TextField } from '../components/TextFields'
 import { Button } from '../components/Button'
-import { Navigate, useLocation, useNavigate } from 'react-router-dom'
-import { useAuth } from '../hooks/useAuth'
-import { Routes } from '../utils/routes'
+import { useDispatch } from 'react-redux'
+import { login } from '../store/reducers/auth'
 
 export function LoginPage() {
   const location = useLocation()
   const navigate = useNavigate()
   const [{ user }, { signin }] = useAuth()
 
+  const dispatch = useAppDispatch()
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
-    signin(
-      {
-        username: data.get('username') as string,
-        password: data.get('password') as string,
-      },
-      () => navigate(location.state.from ?? '/')
-    )
+    const username = data.get('username') as string,
+      password = data.get('password') as string
+
+    dispatch(login(username, password))
   }
+
+  const playerList = useSelector((state: any) => state)
+  console.log('playerList = ', playerList)
 
   return user ? (
     <Navigate to={Routes.Index} replace />
