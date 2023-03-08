@@ -1,20 +1,56 @@
 import { FC } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import Box from '@mui/material/Box'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import { menuData } from './drawerBarData'
-import { Box, Button } from '@mui/material'
 import AvatarIcon from './icons/AvatarIcon'
+import { AuthButton } from './AuthButton'
 
 interface SideBarProps {
   open?: boolean
 }
 
-export const SideBar: FC<SideBarProps> = ({ open }) => {
-  const navigate = useNavigate()
+interface NanListItemProps {
+  icon: JSX.Element
+  text: string
+  to: string
+  isExpanded: boolean
+}
+
+function NanListItem({ icon, text, to, isExpanded }: NanListItemProps) {
+  return (
+    <ListItem disablePadding sx={{ display: 'block', mt: 0.5 }}>
+      <ListItemButton
+        sx={{
+          minHeight: 48,
+          justifyContent: isExpanded ? 'initial' : 'center',
+          px: 2.5,
+        }}
+        component={Link}
+        to={to}>
+        <ListItemIcon
+          sx={{
+            minWidth: 0,
+            mr: isExpanded ? 3 : 'auto',
+            justifyContent: 'center',
+            color: '#1E515D',
+          }}>
+          {icon}
+        </ListItemIcon>
+        <ListItemText
+          primary={text}
+          sx={{ display: isExpanded ? 'block' : 'none' }}
+        />
+      </ListItemButton>
+    </ListItem>
+  )
+}
+
+export const SideBar: FC<SideBarProps> = ({ open = false }) => {
   return (
     <List>
       <Box
@@ -43,18 +79,7 @@ export const SideBar: FC<SideBarProps> = ({ open }) => {
             open={open}
           />
         </Box>
-        <Button
-          variant="outlined"
-          sx={{
-            width: '95%',
-            fontWeight: 'bold',
-            fontSize: '0.975rem',
-            display: open ? 'block' : 'none',
-            color: '#1E515D',
-            mt: 2,
-          }}>
-          Войти
-        </Button>
+        <AuthButton isExpanded={open} />
       </Box>
       <Box
         component="div"
@@ -62,37 +87,7 @@ export const SideBar: FC<SideBarProps> = ({ open }) => {
           mt: 3,
         }}>
         {menuData.map(value => (
-          <ListItem
-            key={value.text}
-            disablePadding
-            sx={{
-              display: 'block',
-              mt: 0.5,
-            }}>
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? 'initial' : 'center',
-                px: 2.5,
-              }}
-              onClick={() => navigate(value.to)}>
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : 'auto',
-                  justifyContent: 'center',
-                  color: '#1E515D',
-                }}>
-                {value.icon}
-              </ListItemIcon>
-              <ListItemText
-                primary={value.text}
-                sx={{
-                  opacity: open ? 1 : 0,
-                }}
-              />
-            </ListItemButton>
-          </ListItem>
+          <NanListItem key={value.text} {...value} isExpanded={open} />
         ))}
       </Box>
     </List>

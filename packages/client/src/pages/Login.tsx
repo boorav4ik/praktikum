@@ -20,7 +20,7 @@ export function LoginPage() {
         password: data.get('password'),
       })
     )
-    // if (state.from) redirect(state.from)
+    if (state.from) return redirect(state.from)
   }
 
   return (
