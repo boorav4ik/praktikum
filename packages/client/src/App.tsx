@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import * as Pages from './pages'
-import { DrawerBar } from './components/drawerBar'
+import * as Layouts from './layouts'
 import { RequaredAuth } from './hoks/RequaredAuth'
 import { Routes as Paths } from './utils/routes'
 import './App.css'
@@ -22,7 +22,7 @@ function App() {
     <BrowserRouter>
       <div className="App" data-testid="App">
         <Routes>
-          <Route path={Paths.Home} element={<DrawerBar />}>
+          <Route path={Paths.Home} element={<Layouts.Main />}>
             <Route index element={<Pages.Home />} />
             <Route path={Paths.Login} element={<Pages.Login />} />
             <Route

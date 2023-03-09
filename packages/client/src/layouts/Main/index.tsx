@@ -45,7 +45,7 @@ const Drawer = styled(MuiDrawer, {
   }),
 }))
 
-export const DrawerBar = () => {
+export const MainLayout = () => {
   const [open, setOpen] = useState<boolean>(false)
   const toogleDrawer = () => {
     setOpen(prev => !prev)

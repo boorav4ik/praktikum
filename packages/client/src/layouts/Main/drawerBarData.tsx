@@ -1,8 +1,8 @@
-import Main from './icons/Main'
-import ProfileIcon from './icons/Profile'
-import WinnerIcon from './icons/Winner'
-import ForumIcon from './icons/Forum'
-import GameIcon from './icons/Game'
+import Main from '../../layouts/Main/icons/Main'
+import ProfileIcon from '../../layouts/Main/icons/Profile'
+import WinnerIcon from '../../layouts/Main/icons/Winner'
+import ForumIcon from '../../layouts/Main/icons/Forum'
+import GameIcon from '../../layouts/Main/icons/Game'
 
 export const menuData = [
   { text: 'Главная', icon: <Main />, to: '/' },

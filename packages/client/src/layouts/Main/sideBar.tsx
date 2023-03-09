@@ -7,7 +7,7 @@ import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import { menuData } from './drawerBarData'
-import AvatarIcon from './icons/AvatarIcon'
+import AvatarIcon from '../../layouts/Main/icons/AvatarIcon'
 import { AuthButton } from './AuthButton'
 
 interface SideBarProps {
