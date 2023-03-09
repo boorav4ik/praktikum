@@ -7,6 +7,20 @@ import { Button } from '@mui/material'
 import backgroundImage from './icons/background.svg'
 import { Link } from 'react-router-dom'
 
+function NavItem({ text, ...rest }: { text: string; to: string }) {
+  return (
+    <Button
+      color="inherit"
+      component={Link}
+      sx={{
+        fontWeight: 'bold',
+        fontSize: '0.975rem',
+      }}
+      {...rest}>
+      {text}
+    </Button>
+  )
+}
 export const NavBar = () => {
   const AppBar = styled(MuiAppBar)(({ theme }) => ({
     zIndex: theme.zIndex.drawer + 1,
@@ -34,15 +48,7 @@ export const NavBar = () => {
           2048
         </Typography>
         {menuData.map(value => (
-          <Button
-            key={value.text}
-            color="inherit"
-            sx={{
-              fontWeight: 'bold',
-              fontSize: '0.975rem',
-            }}>
-            {value.text}
-          </Button>
+          <NavItem key={value.text} {...value} />
         ))}
         <Button
           key="login"

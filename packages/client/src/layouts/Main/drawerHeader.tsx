@@ -1,8 +1,8 @@
 import { FC } from 'react'
 import { styled } from '@mui/material/styles'
 import IconButton from '@mui/material/IconButton'
-import LeftArrow from './icons/LeftArrow'
-import RightArrow from './icons/RightArrow'
+import LeftArrow from '../../layouts/Main/icons/LeftArrow'
+import RightArrow from '../../layouts/Main/icons/RightArrow'
 
 interface SideBarProps {
   open?: boolean
