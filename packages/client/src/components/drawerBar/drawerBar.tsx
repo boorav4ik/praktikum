@@ -1,15 +1,11 @@
-import { FC, ReactNode, useState } from 'react'
+import { useState } from 'react'
 import { styled, Theme, CSSObject } from '@mui/material/styles'
-import Box from '@mui/material/Box'
-import MuiDrawer from '@mui/material/Drawer'
-import Divider from '@mui/material/Divider'
+import { Box, Divider, Drawer as MuiDrawer } from '@mui/material'
 import { NavBar } from './navBar'
 import { SideBar } from './sideBar'
 import { drawerWidth } from './drawerBarData'
 import { DrawerHeader } from './drawerHeader'
-interface DrawerBarProps {
-  children?: ReactNode
-}
+import { Outlet } from 'react-router-dom'
 
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
@@ -49,9 +45,8 @@ const Drawer = styled(MuiDrawer, {
   }),
 }))
 
-export const DrawerBar: FC<DrawerBarProps> = ({ children }) => {
+export const DrawerBar = () => {
   const [open, setOpen] = useState<boolean>(false)
-
   const toogleDrawer = () => {
     setOpen(prev => !prev)
   }
@@ -72,7 +67,7 @@ export const DrawerBar: FC<DrawerBarProps> = ({ children }) => {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        {children}
+        <Outlet />
       </Box>
     </Box>
   )

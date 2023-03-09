@@ -21,9 +21,9 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App" data-testid="App">
-        <DrawerBar>
-          <Routes>
-            <Route path={Paths.Home} element={<Pages.Home />} />
+        <Routes>
+          <Route path={Paths.Home} element={<DrawerBar />}>
+            <Route index element={<Pages.Home />} />
             <Route path={Paths.Login} element={<Pages.Login />} />
             <Route
               path={Paths.Profile}
@@ -33,8 +33,9 @@ function App() {
                 </RequaredAuth>
               }
             />
-          </Routes>
-        </DrawerBar>
+          </Route>
+          <Route path="*" element={<Pages.Error />} />
+        </Routes>
       </div>
     </BrowserRouter>
   )
