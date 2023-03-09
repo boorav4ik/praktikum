@@ -1,11 +1,13 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { signin } from '../api/userApi'
 import { RootState } from '../store'
-import { AuthState, changeProfile, signin, signout } from '../store/slices/auth'
+import { useAppDispatch } from '../store/hooks'
+import { AuthState, changeProfile, signout } from '../store/slices/auth'
 import { User } from '../store/slices/auth/interfaces'
 
 interface AuthActions {
   signin: (
-    authData: { username: string; password: string },
+    authData: { login: string; password: string },
     callback: () => void
   ) => void
   signout: () => void
@@ -14,7 +16,8 @@ interface AuthActions {
 
 export function useAuth(): [AuthState, AuthActions] {
   const auth = useSelector((state: RootState) => state.auth)
-  const dispatch = useDispatch()
+  console.log('auth = ', auth)
+  const dispatch = useAppDispatch()
 
   return [
     auth,

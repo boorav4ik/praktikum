@@ -12,10 +12,11 @@ export function LoginPage() {
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
+    console.log('location.state = ', location.state)
     const data = new FormData(event.currentTarget)
     signin(
       {
-        username: data.get('username') as string,
+        login: data.get('login') as string,
         password: data.get('password') as string,
       },
       () => navigate(location.state.from ?? '/')
@@ -51,12 +52,7 @@ export function LoginPage() {
           <Typography sx={{ fontWeight: 700, fontSize: 32 }} color="green.64">
             Вход
           </Typography>
-          <TextField
-            id="username"
-            name="username"
-            label="Логин"
-            variant="outlined"
-          />
+          <TextField id="login" name="login" label="Логин" variant="outlined" />
           <TextField
             id="password"
             name="password"
