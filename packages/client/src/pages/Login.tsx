@@ -1,19 +1,14 @@
 import { Box, Container, Typography } from '@mui/material'
 import { TextField } from '../components/TextFields'
 import { Button } from '../components/Button'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
+import { Routes } from '../utils/routes'
 
 export function LoginPage() {
   const location = useLocation()
   const navigate = useNavigate()
   const [{ user }, { signin }] = useAuth()
-
-  if (user) return redirect()
-
-  function redirect() {
-    navigate(location.state.from ?? '/')
-  }
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -23,11 +18,13 @@ export function LoginPage() {
         username: data.get('username') as string,
         password: data.get('password') as string,
       },
-      redirect
+      () => navigate(location.state.from ?? '/')
     )
   }
 
-  return (
+  return user ? (
+    <Navigate to={Routes.Index} replace />
+  ) : (
     <Container component="main" maxWidth="sm">
       <Box
         sx={{
