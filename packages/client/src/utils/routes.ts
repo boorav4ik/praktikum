@@ -1,6 +1,9 @@
 export enum Routes {
-  Home = '/',
+  Index = '/',
   Login = 'login',
   Profile = 'profile',
+  Leaders = 'leaders',
+  Forum = 'forum',
+  Game = 'game',
   NotFounde = '*',
 }

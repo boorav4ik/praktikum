@@ -1,18 +1,15 @@
 import { useNavigate } from 'react-router-dom'
 import { Button } from '@mui/material'
 import { useAuth } from '../../hooks/useAuth'
-import { useDispatch } from 'react-redux'
-import { signout } from '../../store/slices/auth'
 import { Routes } from '../../utils/routes'
 
 export function AuthButton({ isExpanded }: { isExpanded: boolean }) {
-  const { user } = useAuth()
+  const [{ user }, { signout }] = useAuth()
   const navigate = useNavigate()
-  const dispatch = useDispatch()
 
   return (
     <Button
-      onClick={() => (user ? dispatch(signout()) : navigate(Routes.Login))}
+      onClick={() => (user ? signout() : navigate(Routes.Login))}
       variant="outlined"
       sx={{
         width: '95%',

@@ -22,7 +22,7 @@ function App() {
     <BrowserRouter>
       <div className="App" data-testid="App">
         <Routes>
-          <Route path={Paths.Home} element={<Layouts.Main />}>
+          <Route path={Paths.Index} element={<Layouts.Main />}>
             <Route index element={<Pages.Home />} />
             <Route path={Paths.Login} element={<Pages.Login />} />
             <Route
@@ -34,7 +34,7 @@ function App() {
               }
             />
           </Route>
-          <Route path="*" element={<Pages.Error />} />
+          <Route path={Paths.NotFounde} element={<Pages.Error />} />
         </Routes>
       </div>
     </BrowserRouter>

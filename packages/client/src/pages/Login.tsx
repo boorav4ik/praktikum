@@ -1,26 +1,30 @@
 import { Box, Container, Typography } from '@mui/material'
 import { TextField } from '../components/TextFields'
 import { Button } from '../components/Button'
-import { redirect, useLocation } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { signin } from '../store/slices/auth'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { useAuth } from '../hooks/useAuth'
 
 export function LoginPage() {
-  const { state } = useLocation()
-  const dispatch = useDispatch()
+  const location = useLocation()
+  const navigate = useNavigate()
+  const [{ user }, { signin }] = useAuth()
 
-  console.log(state)
+  if (user) return redirect()
+
+  function redirect() {
+    navigate(location.state.from ?? '/')
+  }
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
-    dispatch(
-      signin({
-        username: data.get('username'),
-        password: data.get('password'),
-      })
+    signin(
+      {
+        username: data.get('username') as string,
+        password: data.get('password') as string,
+      },
+      redirect
     )
-    if (state.from) return redirect(state.from)
   }
 
   return (

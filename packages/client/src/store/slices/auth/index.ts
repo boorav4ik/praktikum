@@ -2,13 +2,13 @@ import { createSlice } from '@reduxjs/toolkit'
 import { User } from './interfaces'
 import { user } from './mockUser'
 
-type authState = {
+export type AuthState = {
   user: User | null
   isLoading: boolean
   error?: string
 }
 
-const initialState: authState = {
+const initialState: AuthState = {
   user: null,
   isLoading: false,
 }
@@ -26,7 +26,7 @@ export const authSlise = createSlice({
       state.user = null
       state.isLoading = false
     },
-    change(state, action) {
+    changeProfile(state, action) {
       state.user = { ...state.user, ...action.payload }
       state.isLoading = false
     },
@@ -34,4 +34,4 @@ export const authSlise = createSlice({
 })
 
 export const authReducer = authSlise.reducer
-export const { signin, signout, change } = authSlise.actions
+export const { signin, signout, changeProfile } = authSlise.actions
