@@ -6,23 +6,25 @@ export const defaultThemes: ForumTheme[] = [
   {
     id: 1,
     text: 'Отзывы',
-    themeName: 'reviews'
-  }, {
+    themeName: 'reviews',
+  },
+  {
     id: 2,
     text: 'Технологии',
-    themeName: 'technologies'
-  }, {
+    themeName: 'technologies',
+  },
+  {
     id: 3,
     text: 'Называние',
-    themeName: 'namings'
-  }
+    themeName: 'namings',
+  },
 ]
 export const mockedBranches: ThemeBranch[] = [
   {
     id: 1,
     name: 'еппп',
     branchName: 'adddd',
-  }
+  },
 ]
 export const mockedMessages: Message[] = [
   {
@@ -30,15 +32,15 @@ export const mockedMessages: Message[] = [
     text: '������������',
     user: {
       id: 1,
-      name: 'John Doe'
-    }
+      name: 'John Doe',
+    },
   },
   {
     id: 2,
     text: 'asf dasf fasd sdfas fas fas fas fas fas fas fas fas f asdf asf asf asf asf asf asf asf asf asf',
     user: {
       id: 1,
-      name: 'John Doe'
-    }
+      name: 'John Doe',
+    },
   },
 ]

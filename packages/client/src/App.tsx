@@ -45,10 +45,13 @@ function App() {
           <Route path="/" element={<MainPage />} />
           {/* <Route path="/" element={<ProtectedRoute />} /> */}
           <Route path="/login" element={<LoginPage />} />
-          <Route path='/forum' element={<ForumPage />} />
-          <Route path='/forum/:theme_name' element={<ThemePage />} />
-          <Route path='/forum/:theme_name/:theme_branch' element={<ThemeBranchPage />} />
-          <Route path='/profile' element={<ProfilePage />} />
+          <Route path="/forum" element={<ForumPage />} />
+          <Route path="/forum/:theme_name" element={<ThemePage />} />
+          <Route
+            path="/forum/:theme_name/:theme_branch"
+            element={<ThemeBranchPage />}
+          />
+          <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </div>
     </BrowserRouter>
