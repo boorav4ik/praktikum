@@ -14,6 +14,7 @@ import { ForumPage } from './pages/Forum'
 import './App.css'
 import { ThemePage } from './pages/Themes'
 import { ThemeBranchPage } from './pages/ThemeBranch'
+import { DrawerBar } from './components/drawerBar'
 
 // function ProtectedRoute(props: RouteProps) {
 //   const location = useLocation()
@@ -41,18 +42,20 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App" data-testid="App">
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          {/* <Route path="/" element={<ProtectedRoute />} /> */}
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/forum" element={<ForumPage />} />
-          <Route path="/forum/:theme_name" element={<ThemePage />} />
-          <Route
-            path="/forum/:theme_name/:theme_branch"
-            element={<ThemeBranchPage />}
-          />
-          <Route path="/profile" element={<ProfilePage />} />
-        </Routes>
+        <DrawerBar>
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            {/* <Route path="/" element={<ProtectedRoute />} /> */}
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/forum" element={<ForumPage />} />
+            <Route path="/forum/:theme_name" element={<ThemePage />} />
+            <Route
+              path="/forum/:theme_name/:theme_branch"
+              element={<ThemeBranchPage />}
+            />
+            <Route path="/profile" element={<ProfilePage />} />
+          </Routes>
+        </DrawerBar>
       </div>
     </BrowserRouter>
   )

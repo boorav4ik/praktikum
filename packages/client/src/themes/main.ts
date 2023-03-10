@@ -31,4 +31,13 @@ export const theme = createTheme({
       main: green.A400,
     },
   },
+  components: {
+    MuiTypography: {
+      defaultProps: {
+        fontWeight: '800',
+        fontSize: '0.975rem',
+        color: '#1E515D',
+      },
+    },
+  },
 } as ThemeOptions)
