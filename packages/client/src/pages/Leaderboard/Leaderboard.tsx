@@ -1,4 +1,4 @@
-import { Box, Container, Stack, Divider, Grid } from '@mui/material'
+import { Box, Container, Stack, Divider} from '@mui/material'
 import { ItemLeader } from './ItemLeader'
 import { LeaderHeader } from './LeaderHeader'
 
@@ -43,10 +43,9 @@ export function LeaderboardPage() {
             spacing={2}>
             {gamers1.map(item => (
               <ItemLeader
-                number={item.number}
+                rating={item.rating}
                 name={item.name}
                 score={item.score}
-                avatar={item.avatar}
               />
             ))}
           </Stack>
@@ -57,10 +56,9 @@ export function LeaderboardPage() {
             spacing={2}>
             {gamers2.map(item => (
               <ItemLeader
-                number={item.number}
+                rating={item.rating}
                 name={item.name}
                 score={item.score}
-                avatar={item.avatar}
               />
             ))}
           </Stack>

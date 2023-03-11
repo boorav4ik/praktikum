@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react'
+import React, { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Box, Container } from '@mui/material'
 import { Button } from '../../components/Button'

@@ -1,20 +1,18 @@
-import React, { FC, useState, useEffect } from 'react'
-import { Box, Stack } from '@mui/material'
+import { FC } from 'react'
+import { Box } from '@mui/material'
 import { AvatarBox } from '../../components/AvatarBox'
 import Typography from '@mui/material/Typography'
 
 interface ItemLeader {
   name: string
   score: string
-  avatar: string
-  number: number
+  rating: number
 }
 
 export const ItemLeader: FC<ItemLeader> = ({
   name,
   score,
-  avatar,
-  number: number,
+  rating,
 }) => {
   return (
     <Box
@@ -22,8 +20,6 @@ export const ItemLeader: FC<ItemLeader> = ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-around',
-        m: '0',
-        mb: '15px',
       }}>
       <Box
         sx={{
@@ -34,7 +30,7 @@ export const ItemLeader: FC<ItemLeader> = ({
           component="span"
           sx={{ fontWeight: 700, fontSize: 32, display: 'contents' }}
           color="#C1EEE1">
-          {number}
+          {rating}
         </Typography>
       </Box>
 
