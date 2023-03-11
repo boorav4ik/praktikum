@@ -1,25 +1,25 @@
-import { FC, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Box, Container, Grid } from '@mui/material'
-import { HeaderForPage } from '../components/HeaderForPage'
+import { HeaderForPage } from '../../components/forum/HeaderForPage'
 import { useParams, useLocation, useNavigate } from 'react-router-dom'
-import { ForumRow } from '../components/ForumRow'
-import { ChatAnswerIcon } from '../components/icons/ChatAnswerIcon'
-import { mockedBranches } from '../mocs/forum'
+import { ForumRow } from '../../components/forum/ForumRow'
+import { ChatAnswerIcon } from '../../components/forum/icons/ChatAnswerIcon'
+import { mockedBranches } from '../../mocs/forum'
 
-type Props = FC
 export type ThemeBranch = {
   id: number
   name: string
   branchName: string
 }
-const ThemePage: Props = () => {
+
+function ThemePage() {
   const navigate = useNavigate()
   const { theme_name } = useParams()
   const { state } = useLocation()
   const { text, id } = state.theme
   const [branches, setBranches] = useState<ThemeBranch[]>([])
+
   useEffect(() => {
-    console.log('get themes', text)
     setBranches(mockedBranches)
   }, [id, theme_name])
 
@@ -28,6 +28,7 @@ const ThemePage: Props = () => {
       state: { theme: state.theme, branch: branch },
     })
   }
+
   return (
     <Container component="main" maxWidth="md">
       <Box

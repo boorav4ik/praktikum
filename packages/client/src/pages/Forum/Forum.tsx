@@ -1,10 +1,10 @@
-import { FC, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Box, Container, Grid } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
-import { HeaderForPage } from '../components/HeaderForPage'
-import { ForumRow } from '../components/ForumRow'
-import { ChatSmileIcon } from '../components/icons/ChatSmileIcon'
-import { defaultThemes } from '../mocs/forum'
+import { HeaderForPage } from '../../components/forum/HeaderForPage'
+import { ForumRow } from '../../components/forum/ForumRow'
+import { ChatSmileIcon } from '../../components/forum/icons/ChatSmileIcon'
+import { defaultThemes } from '../../mocs/forum'
 
 export type ForumTheme = {
   id: number
@@ -12,18 +12,20 @@ export type ForumTheme = {
   themeName: string
 }
 
-type Props = FC
-const ForumPage: Props = () => {
+function ForumPage() {
   const navigate = useNavigate()
   const [themes, setThemes] = useState<ForumTheme[]>([])
+
   useEffect(() => {
     setThemes(defaultThemes)
   }, [])
+
   const goToTheme = (theme: ForumTheme) => {
     navigate(`/forum/${theme.themeName}`, {
       state: { theme },
     })
   }
+
   return (
     <Container component="main" maxWidth="md">
       <Box

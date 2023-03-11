@@ -1,11 +1,9 @@
 import Typography, { TypographyProps } from '@mui/material/Typography'
-import { FC } from 'react'
 import { Grid, GridProps, Link } from '@mui/material'
 import { Link as RouterLink } from 'react-router-dom'
 import { SxProps } from '@mui/system'
-// import { useNavigate } from 'react-router-dom'
 
-type Props = {
+export type HeaderForPageProps = {
   gridProps?: GridProps
   typographyProps?: TypographyProps
   text: string
@@ -14,18 +12,14 @@ type Props = {
   sx?: SxProps
 }
 
-const HeaderForPage: FC<Props> = ({
+function HeaderForPage({
   gridProps,
   typographyProps,
   text,
   backPath,
   state,
   sx,
-}) => {
-  // const navigate = useNavigate()
-  // const goBack = () => {
-  //   navigate(backPath || '/',{state})
-  // }
+}: HeaderForPageProps) {
   return (
     <Grid
       container

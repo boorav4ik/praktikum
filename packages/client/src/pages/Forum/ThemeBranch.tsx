@@ -1,11 +1,12 @@
 import { ThemeBranch } from './Themes'
-import { FC, FormEvent, useEffect, useState } from 'react'
-import { HeaderForPage } from '../components/HeaderForPage'
+import { FormEvent, useEffect, useState } from 'react'
+import { HeaderForPage } from '../../components/forum/HeaderForPage'
 import { Box, Container, Stack, TextField } from '@mui/material'
 import { useLocation, useParams } from 'react-router-dom'
-import { mockedMessages } from '../mocs/forum'
-import { MessageRow } from '../components/ThemeBranchMessage'
-import { ColorButton } from '../components/ForumRow'
+import { mockedMessages } from '../../mocs/forum'
+import { MessageRow } from '../../components/forum/ThemeBranchMessage'
+import { ColorButton } from '../../components/forum/ForumRow'
+import Typography from '@mui/material/Typography'
 
 export type Message = {
   id: number
@@ -20,7 +21,6 @@ export type FullThemeBranch = ThemeBranch & {
   messages: Message[]
 }
 
-type Props = FC
 const configSxGreenTextField = {
   color: '#FFFFFF',
   minWidth: 500,
@@ -54,12 +54,13 @@ const configSxGreenTextField = {
   },
 }
 
-const ThemeBranchPage: Props = () => {
+function ThemeBranchPage() {
   const { theme_name, theme_branch } = useParams()
   const { state } = useLocation()
   const headerText = state?.branch?.name ?? 'Loading...'
   const [message, setMessage] = useState<Message[]>([])
   const [text, setText] = useState<string>('default')
+
   useEffect(() => {
     Promise.resolve()
       .then(() => {
@@ -69,15 +70,19 @@ const ThemeBranchPage: Props = () => {
         setMessage(mockedMessages)
       })
   }, [theme_name, theme_branch])
+
   const sendMessage = (e: FormEvent) => {
     e.preventDefault()
+
     const target = e.target as typeof e.target & { comment: { value: string } }
     const msg = target.comment.value
+
     setMessage([
       ...message,
       { id: Math.random(), text: msg, user: { id: 1, name: 'John Doe' } },
     ])
   }
+
   return (
     <Container component="main" maxWidth="md">
       <Box
@@ -111,7 +116,9 @@ const ThemeBranchPage: Props = () => {
             border: '3px solid #1E515D',
             p: 3,
           }}>
-          <p>{text}</p>
+          <Typography color={'white'} fontWeight={500}>
+            {text}
+          </Typography>
         </Box>
         <Stack
           direction="column"
@@ -150,4 +157,5 @@ const ThemeBranchPage: Props = () => {
     </Container>
   )
 }
+
 export { ThemeBranchPage }

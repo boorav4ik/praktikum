@@ -1,9 +1,9 @@
-import { FC, HTMLProps } from 'react'
+import { HTMLProps } from 'react'
 import { Box, Grid, GridProps } from '@mui/material'
 import Button, { ButtonProps } from '@mui/material/Button'
 import { styled } from '@mui/material/styles'
 
-type Props = {
+export type ForumRowProps = {
   gridProps?: GridProps
   btnProps?: ButtonProps
   spanProps?: HTMLProps<HTMLSpanElement>
@@ -12,6 +12,7 @@ type Props = {
   icon?: () => JSX.Element
   onClick: () => void
 }
+
 export const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
   color: theme.palette.getContrastText('#FFFFFF'),
   backgroundColor: '#7AB3A2',
@@ -20,7 +21,8 @@ export const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
     textDecoration: 'underline',
   },
 }))
-export const ForumRow: FC<Props> = ({
+
+export function ForumRow({
   gridProps,
   text,
   btnText,
@@ -28,7 +30,7 @@ export const ForumRow: FC<Props> = ({
   spanProps,
   icon,
   onClick,
-}) => {
+}: ForumRowProps) {
   return (
     <Grid
       item

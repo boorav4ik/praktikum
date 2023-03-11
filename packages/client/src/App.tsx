@@ -10,10 +10,10 @@ import {
 import { LoginPage } from './pages/Login'
 import { MainPage } from './pages/Main'
 import { ProfilePage } from './pages/Profile'
-import { ForumPage } from './pages/Forum'
+import { ForumPage } from './pages/Forum/Forum'
 import './App.css'
-import { ThemePage } from './pages/Themes'
-import { ThemeBranchPage } from './pages/ThemeBranch'
+import { ThemePage } from './pages/Forum/Themes'
+import { ThemeBranchPage } from './pages/Forum/ThemeBranch'
 import { DrawerBar } from './components/drawerBar'
 
 // function ProtectedRoute(props: RouteProps) {
@@ -47,12 +47,15 @@ function App() {
             <Route path="/" element={<MainPage />} />
             {/* <Route path="/" element={<ProtectedRoute />} /> */}
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/forum" element={<ForumPage />} />
-            <Route path="/forum/:theme_name" element={<ThemePage />} />
-            <Route
-              path="/forum/:theme_name/:theme_branch"
-              element={<ThemeBranchPage />}
-            />
+            <Route path="/forum">
+              <Route index element={<ForumPage />} />
+              <Route path=":theme_name">
+                <Route index element={<ThemePage />} />
+                <Route path=":theme_branch">
+                  <Route index element={<ThemeBranchPage />} />
+                </Route>
+              </Route>
+            </Route>
             <Route path="/profile" element={<ProfilePage />} />
           </Routes>
         </DrawerBar>
