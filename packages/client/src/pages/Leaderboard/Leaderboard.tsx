@@ -2,7 +2,7 @@ import { Box, Container, Stack, Divider } from '@mui/material'
 import { ItemLeader } from './ItemLeader'
 import { LeaderHeader } from './LeaderHeader'
 
-import { gamers1, gamers2 } from './data.js'
+import { gamers1, gamers2 } from './data'
 
 export function LeaderboardPage() {
   return (
