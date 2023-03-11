@@ -1,4 +1,3 @@
-
 export const gamers1 = [
   {
     rating: 1,
@@ -45,4 +44,4 @@ export const gamers2 = [
     avatar:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/2048_logo.svg/1200px-2048_logo.svg.png',
   },
- ]
+]
