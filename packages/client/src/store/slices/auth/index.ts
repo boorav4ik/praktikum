@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { User } from './interfaces'
 import { user } from './mockUser'
+import { Nullable } from '../../../utils/nullableType'
 
 export type AuthState = {
-  user: User | null
+  user: Nullable<User>
   isLoading: boolean
   error?: string
 }
