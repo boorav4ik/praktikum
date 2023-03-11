@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 export function NavBar() {
   const navigate = useNavigate()
   const goToRoute = (route: string) => {
-    navigate(`/${route}`);
+    navigate(`/${route}`)
   }
   return (
     <Box
@@ -26,9 +26,15 @@ export function NavBar() {
         sx={{ fontSize: 36 }}
       />
       <Stack spacing={2}>
-        <Button onClick={() => goToRoute('profile')} key="profile">Профиль</Button>
-        <Button onClick={() => goToRoute('leaders')} key="leaders">Таблица лидеров</Button>
-        <Button onClick={() => goToRoute('forum')} key="forum">Форум</Button>
+        <Button onClick={() => goToRoute('profile')} key="profile">
+          Профиль
+        </Button>
+        <Button onClick={() => goToRoute('leaders')} key="leaders">
+          Таблица лидеров
+        </Button>
+        <Button onClick={() => goToRoute('forum')} key="forum">
+          Форум
+        </Button>
       </Stack>
     </Box>
   )

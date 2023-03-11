@@ -40,12 +40,20 @@ export function LoginPage() {
           <Typography sx={{ fontWeight: 700, fontSize: 32 }} color="green.64">
             Вход
           </Typography>
-          <TextField id="username" name="username" label="Логин" variant="outlined" />
-          <TextField id="password" name="password" label="Пароль" variant="outlined" />
+          <TextField
+            id="username"
+            name="username"
+            label="Логин"
+            variant="outlined"
+          />
+          <TextField
+            id="password"
+            name="password"
+            label="Пароль"
+            variant="outlined"
+          />
           <Typography component="a">Нет аккаунта?!! Регистрация</Typography>
-          <Button type="submit">
-            Авторизация
-          </Button>
+          <Button type="submit">Авторизация</Button>
         </Box>
       </Box>
     </Container>
