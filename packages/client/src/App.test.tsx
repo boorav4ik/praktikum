@@ -8,5 +8,5 @@ global.fetch = jest.fn(() =>
 
 test('Example test', async () => {
   render(<App />)
-  expect(screen.getByTestId("App")).toBeDefined()
+  expect(screen.getByTestId('App')).toBeDefined()
 })

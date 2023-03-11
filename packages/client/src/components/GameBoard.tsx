@@ -16,7 +16,7 @@ export function GameBoard() {
       <DubleTypography
         first={{ content: 'Счёт:' }}
         second={{ content: ' 100500' }}
-        sx={{fontSize: 24}}
+        sx={{ fontSize: 24 }}
       />
       <Box></Box>
     </Box>

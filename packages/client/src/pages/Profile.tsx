@@ -37,10 +37,9 @@ function Main() {
       sx={{
         display: 'flex',
         flexDirection: { xs: 'column', sm: 'row' },
-        justifyContent: "space-evenly",
+        justifyContent: 'space-evenly',
         p: 3,
-        width: "75%",
-
+        width: '75%',
       }}>
       <Stack spacing={2}>
         {['firstName', 'secondName', 'phone'].map(buildProfileField)}
