@@ -1,13 +1,14 @@
-import Button, { ButtonProps } from '@mui/material/Button'
+import MuiButton, { ButtonProps } from '@mui/material/Button'
 
-function Btn(props: ButtonProps) {
+export function Button(
+  //https://github.com/mui/material-ui/issues/16846
+  props: Omit<ButtonProps, 'component'> & { component: any }
+) {
   return (
-    <Button
+    <MuiButton
       variant="contained"
       sx={{ fontWeight: 700, minWidth: 270 }}
       {...props}
     />
   )
 }
-
-export { Btn as Button }
