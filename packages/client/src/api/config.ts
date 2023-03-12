@@ -3,6 +3,7 @@ export const API_ENDPOINTS = {
   AUTH: {
     SIGNIN: 'auth/signin',
     SIGNUP: 'auth/signup',
+    SIGNOUT: 'auth/logout',
     USER_INFO: 'auth/user',
     LOGOUT: 'auth/logout',
   },

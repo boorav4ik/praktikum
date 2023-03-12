@@ -4,6 +4,7 @@ import { API_HOST } from './config'
 const $host = axios.create({
   baseURL: API_HOST,
   withCredentials: true,
+  timeout: 5000,
   headers: {
     'Content-Type': 'application/json',
   },
