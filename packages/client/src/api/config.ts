@@ -5,7 +5,6 @@ export const API_ENDPOINTS = {
     SIGNUP: 'auth/signup',
     SIGNOUT: 'auth/logout',
     USER_INFO: 'auth/user',
-    LOGOUT: 'auth/logout',
   },
   USER: {
     UPDATE_PASSWORD: 'user/password',
