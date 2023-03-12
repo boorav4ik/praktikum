@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { signin } from '../../../api/userApi'
+import { getUser, signin, signout, signup } from '../../../api/userApi'
 import { User } from './interfaces'
 
 export type AuthState = {
@@ -17,10 +17,6 @@ export const authSlise = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    signout(state) {
-      state.user = null
-      state.isLoading = false
-    },
     changeProfile(state, action) {
       state.user = { ...state.user, ...action.payload }
       state.isLoading = false
@@ -39,9 +35,45 @@ export const authSlise = createSlice({
       state.isLoading = false
       state.error = action.payload
     },
+    [signup.fulfilled.type]: (state, action: PayloadAction<User>) => {
+      state.isLoading = false
+      state.error = ''
+      state.user = action.payload
+    },
+    [signup.pending.type]: state => {
+      state.isLoading = true
+    },
+    [signup.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.isLoading = false
+      state.error = action.payload
+    },
+
+    [signout.fulfilled.type]: (state, action: PayloadAction<User>) => {
+      state.isLoading = false
+      state.error = ''
+      state.user = action.payload
+    },
+    [signout.pending.type]: state => {
+      state.isLoading = true
+    },
+    [signout.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.isLoading = false
+      state.error = action.payload
+    },
+    [getUser.fulfilled.type]: (state, action: PayloadAction<User>) => {
+      state.isLoading = false
+      state.error = ''
+      state.user = action.payload
+    },
+    [getUser.pending.type]: state => {
+      state.isLoading = true
+    },
+    [getUser.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.isLoading = false
+      state.error = action.payload
+    },
   },
 })
 
 export const authReducer = authSlise.reducer
-// export const { signin, signout, changeProfile } = authSlise.actions
-export const { signout, changeProfile } = authSlise.actions
+export const { changeProfile } = authSlise.actions

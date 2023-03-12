@@ -6,7 +6,6 @@ export function RequaredAuth({ children }: { children: JSX.Element }) {
   const [{ user }] = useAuth()
   const { pathname } = useLocation()
 
-  console.log('user = ', user)
   if (!user)
     return (
       <Navigate to={`/${Routes.Login}`} replace state={{ from: pathname }} />

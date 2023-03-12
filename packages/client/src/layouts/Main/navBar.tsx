@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { styled } from '@mui/material/styles'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
@@ -6,6 +7,7 @@ import { menuData } from './drawerBarData'
 import { Button } from '@mui/material'
 import backgroundImage from './icons/background.svg'
 import { Link } from 'react-router-dom'
+import { useAuth } from '../../hooks/useAuth'
 
 function NavItem({ text, ...rest }: { text: string; to: string }) {
   return (
@@ -21,7 +23,10 @@ function NavItem({ text, ...rest }: { text: string; to: string }) {
     </Button>
   )
 }
+
 export const NavBar = () => {
+  const [{ user }, { getUser, signout }] = useAuth()
+
   const AppBar = styled(MuiAppBar)(({ theme }) => ({
     zIndex: theme.zIndex.drawer + 1,
     backgroundColor: theme.palette.background.default,
@@ -31,6 +36,10 @@ export const NavBar = () => {
       duration: theme.transitions.duration.leavingScreen,
     }),
   }))
+
+  useEffect(() => {
+    getUser()
+  }, [])
 
   return (
     <AppBar
@@ -50,16 +59,30 @@ export const NavBar = () => {
         {menuData.map(value => (
           <NavItem key={value.text} {...value} />
         ))}
-        <Button
-          key="login"
-          sx={{
-            fontWeight: 'bold',
-            fontSize: '0.975rem',
-          }}
-          component={Link}
-          to="/login">
-          Войти
-        </Button>
+        {user ? (
+          <Button
+            key="signout"
+            sx={{
+              fontWeight: 'bold',
+              fontSize: '0.975rem',
+            }}
+            onClick={() => signout()}
+            component={Link}
+            to="/login">
+            Выйти
+          </Button>
+        ) : (
+          <Button
+            key="login"
+            sx={{
+              fontWeight: 'bold',
+              fontSize: '0.975rem',
+            }}
+            component={Link}
+            to="/login">
+            Войти
+          </Button>
+        )}
       </Toolbar>
     </AppBar>
   )
