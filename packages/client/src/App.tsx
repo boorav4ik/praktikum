@@ -1,20 +1,13 @@
-import { useEffect, useState } from 'react'
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  RouteProps,
-  Navigate,
-  useLocation,
-} from 'react-router-dom'
-import { LoginPage } from './pages/Login'
-import { MainPage } from './pages/Main'
-import { ProfilePage } from './pages/Profile'
-import { ForumPage } from './pages/Forum/Forum'
+import { useEffect } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import * as Pages from './pages'
+import * as Layouts from './layouts'
+import { RequaredAuth } from './hoks/RequaredAuth'
+import { Routes as Paths } from './utils/routes'
 import './App.css'
+import { ForumPage } from './pages/Forum/Forum'
 import { ThemePage } from './pages/Forum/Themes'
 import { ThemeBranchPage } from './pages/Forum/ThemeBranch'
-import { DrawerBar } from './components/drawerBar'
 
 // function ProtectedRoute(props: RouteProps) {
 //   const location = useLocation()
@@ -29,24 +22,31 @@ import { DrawerBar } from './components/drawerBar'
 
 function App() {
   useEffect(() => {
-    // const fetchServerData = async () => {
-    //   const url = `http://localhost:${__SERVER_PORT__}`
-    //   const response = await fetch(url)
-    //   const data = await response.json()
-    //   console.log(data)
-    // }
-    //
-    // fetchServerData()
+    const fetchServerData = async () => {
+      const url = `http://localhost:${__SERVER_PORT__}`
+      const response = await fetch(url)
+      const data = await response.json()
+      console.log(data)
+    }
+
+    fetchServerData()
   }, [])
 
   return (
     <BrowserRouter>
       <div className="App" data-testid="App">
-        <DrawerBar>
-          <Routes>
-            <Route path="/" element={<MainPage />} />
-            {/* <Route path="/" element={<ProtectedRoute />} /> */}
-            <Route path="/login" element={<LoginPage />} />
+        <Routes>
+          <Route path={Paths.Index} element={<Layouts.Main />}>
+            <Route index element={<Pages.Home />} />
+            <Route path={Paths.Login} element={<Pages.Login />} />
+            <Route
+              path={Paths.Profile}
+              element={
+                <RequaredAuth>
+                  <Pages.Profile />
+                </RequaredAuth>
+              }
+            />
             <Route path="/forum">
               <Route index element={<ForumPage />} />
               <Route path=":theme_name">
@@ -56,9 +56,9 @@ function App() {
                 </Route>
               </Route>
             </Route>
-            <Route path="/profile" element={<ProfilePage />} />
-          </Routes>
-        </DrawerBar>
+          </Route>
+          <Route path={Paths.NotFounde} element={<Pages.Error />} />
+        </Routes>
       </div>
     </BrowserRouter>
   )
