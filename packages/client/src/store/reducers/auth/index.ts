@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { getUser, signin, signout, signup } from '../../../api/userApi'
-import { User } from './interfaces'
+import { User } from '../../slices/auth/interfaces'
 
 export type AuthState = {
   user: User | null
