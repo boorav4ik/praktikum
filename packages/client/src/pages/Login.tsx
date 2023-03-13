@@ -18,7 +18,7 @@ export function LoginPage() {
         login: data.get('login') as string,
         password: data.get('password') as string,
       },
-      () => navigate(location.state.from ?? '/')
+      () => navigate(location.state ?? '/')
     )
   }
 
