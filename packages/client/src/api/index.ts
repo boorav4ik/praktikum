@@ -1,8 +1,8 @@
 import axios from 'axios'
-import { API_HOST } from './config'
+import { ApiHost } from './config'
 
-const $host = axios.create({
-  baseURL: API_HOST,
+const host = axios.create({
+  baseURL: ApiHost,
   withCredentials: true,
   timeout: 5000,
   headers: {
@@ -10,4 +10,4 @@ const $host = axios.create({
   },
 })
 
-export default $host
+export default host

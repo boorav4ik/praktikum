@@ -10,3 +10,16 @@ export interface User {
   email: stringOrNull
   avatar: stringOrNull
 }
+
+export interface Login {
+  login: string
+  password: string
+}
+
+export interface SignUp extends Login {
+  first_name: string
+  second_name: string
+  display_name: string
+  email: string
+  phone: string
+}

@@ -1,15 +1,15 @@
-export const API_HOST = 'https://ya-praktikum.tech/api/v2/'
-export const API_ENDPOINTS = {
-  AUTH: {
-    SIGNIN: 'auth/signin',
-    SIGNUP: 'auth/signup',
-    SIGNOUT: 'auth/logout',
-    USER_INFO: 'auth/user',
+export const ApiHost = 'https://ya-praktikum.tech/api/v2/'
+export const ApiEndPoints = {
+  Auth: {
+    SignIn: 'auth/signin',
+    SignUp: 'auth/signup',
+    SignOut: 'auth/logout',
+    UserInfo: 'auth/user',
   },
-  USER: {
-    UPDATE_PASSWORD: 'user/password',
-    UPDATE_PROFILE: 'user/profile',
-    UPDATE_PROFILE_AVATAR: 'user/profile/avatar',
-    SEARCH: 'user/search',
+  User: {
+    UpdatePassword: 'user/password',
+    UpdateProfile: 'user/profile',
+    UpdateProfileAvatar: 'user/profile/avatar',
+    Search: 'user/search',
   },
 }

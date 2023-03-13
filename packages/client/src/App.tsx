@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import * as Pages from './pages'
 import * as Layouts from './layouts'
-import { RequaredAuth } from './hoks/RequaredAuth'
+import { RequaredAuth } from './HOC/RequaredAuth'
 import { Routes as Paths } from './utils/routes'
 import './App.css'
 
