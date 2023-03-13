@@ -1,19 +1,30 @@
 import { Box, Container, Typography } from '@mui/material'
 import { TextField } from '../components/TextFields'
 import { Button } from '../components/Button'
+import { Navigate, useLocation, useNavigate } from 'react-router-dom'
+import { useAuth } from '../hooks/useAuth'
+import { Routes } from '../utils/routes'
 
 export function LoginPage() {
+  const location = useLocation()
+  const navigate = useNavigate()
+  const [{ user }, { signin }] = useAuth()
+
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
-    console.log({
-      username: data.get('username'),
-      password: data.get('password'),
-      test: data.get('test'),
-    })
+    signin(
+      {
+        username: data.get('username') as string,
+        password: data.get('password') as string,
+      },
+      () => navigate(location.state.from ?? '/')
+    )
   }
 
-  return (
+  return user ? (
+    <Navigate to={Routes.Index} replace />
+  ) : (
     <Container component="main" maxWidth="sm">
       <Box
         sx={{
