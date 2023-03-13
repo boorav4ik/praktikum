@@ -23,7 +23,7 @@ export function SignUpPage() {
         password: data.get('password') as string,
         phone: data.get('phone') as string,
       },
-      () => navigate(location.state.from ?? '/')
+      () => navigate(location.state ?? '/')
     )
   }
 
