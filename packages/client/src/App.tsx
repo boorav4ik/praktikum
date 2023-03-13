@@ -5,9 +5,6 @@ import * as Layouts from './layouts'
 import { RequaredAuth } from './hoks/RequaredAuth'
 import { Routes as Paths } from './utils/routes'
 import './App.css'
-import { ForumPage } from './pages/Forum/Forum'
-import { ThemePage } from './pages/Forum/Themes'
-import { ThemeBranchPage } from './pages/Forum/ThemeBranch'
 
 // function ProtectedRoute(props: RouteProps) {
 //   const location = useLocation()
@@ -47,12 +44,12 @@ function App() {
                 </RequaredAuth>
               }
             />
-            <Route path="/forum">
-              <Route index element={<ForumPage />} />
+            <Route path={Paths.Forum}>
+              <Route index element={<Pages.Forum />} />
               <Route path=":theme_name">
-                <Route index element={<ThemePage />} />
+                <Route index element={<Pages.Theme />} />
                 <Route path=":theme_branch">
-                  <Route index element={<ThemeBranchPage />} />
+                  <Route index element={<Pages.ThemeBranch />} />
                 </Route>
               </Route>
             </Route>
