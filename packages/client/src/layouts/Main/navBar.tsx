@@ -69,7 +69,7 @@ export const NavBar = () => {
             onClick={() => signout()}
             component={Link}
             to="/login">
-            Р’С‹Р№С‚Рё
+            Выйти
           </Button>
         ) : (
           <Button
@@ -80,7 +80,7 @@ export const NavBar = () => {
             }}
             component={Link}
             to="/login">
-            Р’РѕР№С‚Рё
+            Войти
           </Button>
         )}
       </Toolbar>
