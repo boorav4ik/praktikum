@@ -1,28 +1,10 @@
-import { useEffect, useState } from 'react'
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  RouteProps,
-  Navigate,
-  useLocation,
-} from 'react-router-dom'
-import { LoginPage } from './pages/Login'
-import { MainPage } from './pages/Main'
-import { ProfilePage } from './pages/Profile'
+import { useEffect } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import * as Pages from './pages'
+import * as Layouts from './layouts'
+import { RequaredAuth } from './hoks/RequaredAuth'
+import { Routes as Paths } from './utils/routes'
 import './App.css'
-import { DrawerBar } from './components/drawerBar'
-
-// function ProtectedRoute(props: RouteProps) {
-//   const location = useLocation()
-//   const [auth, setAuth] = useState(false)
-
-//   return auth ? (
-//     <Route {...props} />
-//   ) : (
-//     <Navigate to="/login" state={{ from: location }} replace />
-//   )
-// }
 
 function App() {
   useEffect(() => {
@@ -39,14 +21,21 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App" data-testid="App">
-        <DrawerBar>
-          <Routes>
-            <Route path="/" element={<MainPage />} />
-            {/* <Route path="/" element={<ProtectedRoute />} /> */}
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
-          </Routes>
-        </DrawerBar>
+        <Routes>
+          <Route path={Paths.Index} element={<Layouts.Main />}>
+            <Route index element={<Pages.Home />} />
+            <Route path={Paths.Login} element={<Pages.Login />} />
+            <Route
+              path={Paths.Profile}
+              element={
+                <RequaredAuth>
+                  <Pages.Profile />
+                </RequaredAuth>
+              }
+            />
+          </Route>
+          <Route path={Paths.NotFounde} element={<Pages.Error />} />
+        </Routes>
       </div>
     </BrowserRouter>
   )
