@@ -1,5 +1,5 @@
 import { Box, Stack } from '@mui/material'
-import { DubleTypography } from '../../components/DoubleTypography'
+import { DoubleTypography } from '../../components/DoubleTypography'
 import { AvatarBox } from '../../components/AvatarBox'
 import { LinkButton } from '../../components/LinkButton'
 import { Routes } from '../../utils/routes'
@@ -21,7 +21,7 @@ export function NavBar() {
         mx: 5,
       }}>
       <AvatarBox />
-      <DubleTypography
+      <DoubleTypography
         first={{ content: 'Мой рекорд: ' }}
         second={{ content: ' 2436' }}
         sx={{ fontSize: 36 }}
