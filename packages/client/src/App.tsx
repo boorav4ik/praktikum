@@ -6,17 +6,6 @@ import { RequaredAuth } from './hoks/RequaredAuth'
 import { Routes as Paths } from './utils/routes'
 import './App.css'
 
-// function ProtectedRoute(props: RouteProps) {
-//   const location = useLocation()
-//   const [auth, setAuth] = useState(false)
-
-//   return auth ? (
-//     <Route {...props} />
-//   ) : (
-//     <Navigate to="/login" state={{ from: location }} replace />
-//   )
-// }
-
 function App() {
   useEffect(() => {
     const fetchServerData = async () => {
