@@ -1,5 +1,5 @@
 import { Box, Container } from '@mui/material'
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { deepEqual } from '../../utils/deepEqual'
 import { ProfileFooter } from './ProfileFooter'
 import { ProfileHeader } from './ProfileHeader'
@@ -35,7 +35,7 @@ export function ProfilePage() {
     setEditStatus(status)
   }
 
-  const ChooseFile = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const ChooseFile = (event: ChangeEvent<HTMLInputElement>) => {
     const reader = new FileReader()
     reader.onloadend = () => {
       if (!event.target.files) return

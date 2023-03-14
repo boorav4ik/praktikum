@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC, ChangeEvent } from 'react'
 import { TextField } from '@mui/material'
 
 interface ProfileFieldsProps {
@@ -18,11 +18,11 @@ export const ProfileFields: FC<ProfileFieldsProps> = ({
     <TextField
       key={value}
       id={value}
-      disabled={editStatus === 'info' ? true : false}
+      disabled={editStatus === 'info'}
       label={label}
       defaultValue={value}
       variant="filled"
-      onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+      onChange={(event: ChangeEvent<HTMLInputElement>) =>
         changeDataUser({ [label]: event.target.value })
       }
     />
