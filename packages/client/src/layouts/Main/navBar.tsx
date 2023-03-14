@@ -23,22 +23,21 @@ function NavItem({ text, ...rest }: { text: string; to: string }) {
     </Button>
   )
 }
+const AppBar = styled(MuiAppBar)(({ theme }) => ({
+  zIndex: theme.zIndex.drawer + 1,
+  backgroundColor: theme.palette.background.default,
+  height: 100,
+  transition: theme.transitions.create(['width', 'margin'], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+}))
 
-export const NavBar = () => {
+export function NavBar() {
   const [{ user }, { getUser, signout }] = useAuth()
 
-  const AppBar = styled(MuiAppBar)(({ theme }) => ({
-    zIndex: theme.zIndex.drawer + 1,
-    backgroundColor: theme.palette.background.default,
-    height: 100,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  }))
-
   useEffect(() => {
-    getUser()
+    if (!user) getUser()
   }, [])
 
   return (
@@ -59,30 +58,16 @@ export const NavBar = () => {
         {menuData.map(value => (
           <NavItem key={value.text} {...value} />
         ))}
-        {user ? (
-          <Button
-            key="signout"
-            sx={{
-              fontWeight: 'bold',
-              fontSize: '0.975rem',
-            }}
-            onClick={() => signout()}
-            component={Link}
-            to="/login">
-            Выйти
-          </Button>
-        ) : (
-          <Button
-            key="login"
-            sx={{
-              fontWeight: 'bold',
-              fontSize: '0.975rem',
-            }}
-            component={Link}
-            to="/login">
-            Войти
-          </Button>
-        )}
+        <Button
+          sx={{
+            fontWeight: 'bold',
+            fontSize: '0.975rem',
+          }}
+          onClick={() => user && signout()}
+          component={Link}
+          to="/login">
+          {user ? 'Выйти' : 'Войти'}
+        </Button>
       </Toolbar>
     </AppBar>
   )
