@@ -6,10 +6,10 @@ import RightArrow from '../../layouts/Main/icons/RightArrow'
 
 interface SideBarProps {
   open?: boolean
-  toogleDrawer: () => void
+  toggleDrawer: () => void
 }
 
-export const DrawerHeader: FC<SideBarProps> = ({ open, toogleDrawer }) => {
+export const DrawerHeader: FC<SideBarProps> = ({ open, toggleDrawer }) => {
   const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
@@ -20,7 +20,7 @@ export const DrawerHeader: FC<SideBarProps> = ({ open, toogleDrawer }) => {
 
   return (
     <DrawerHeader sx={{ mt: 12, zIndex: 1 }}>
-      <IconButton onClick={toogleDrawer}>
+      <IconButton onClick={toggleDrawer}>
         {open ? <LeftArrow /> : <RightArrow />}
       </IconButton>
     </DrawerHeader>
