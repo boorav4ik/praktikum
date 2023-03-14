@@ -1,6 +1,6 @@
-import React, { FC, useState, useEffect } from 'react'
+import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Box, Container } from '@mui/material'
+import { Box } from '@mui/material'
 import { Button } from '../../components/Button'
 
 interface ProfileFooterProps {

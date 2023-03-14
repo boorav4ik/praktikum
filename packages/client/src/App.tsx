@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import * as Pages from './pages'
 import * as Layouts from './layouts'
-import { RequaredAuth } from './hoks/RequaredAuth'
+import { RequiredAuth } from './hoks/RequiredAuth'
 import { Routes as Paths } from './utils/routes'
 import './App.css'
 
@@ -28,9 +28,9 @@ function App() {
             <Route
               path={Paths.Profile}
               element={
-                <RequaredAuth>
+                <RequiredAuth>
                   <Pages.Profile />
-                </RequaredAuth>
+                </RequiredAuth>
               }
             />
             <Route path={Paths.Forum}>

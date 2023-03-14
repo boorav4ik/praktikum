@@ -2,7 +2,7 @@ import { Navigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
 import { Routes } from '../utils/routes'
 
-export function RequaredAuth({ children }: { children: JSX.Element }) {
+export function RequiredAuth({ children }: { children: JSX.Element }) {
   const [{ user }] = useAuth()
   const { pathname } = useLocation()
 

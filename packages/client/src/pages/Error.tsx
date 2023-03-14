@@ -6,12 +6,12 @@ interface Error {
   message: string
 }
 
-const notFoundeError: Error = {
+const notFoundError: Error = {
   code: 404,
   message: 'Ошибка! Страница не найдена, но мы потом поищем...',
 }
 
-export function ErrorPage({ error = notFoundeError }: { error?: Error }) {
+export function ErrorPage({ error = notFoundError }: { error?: Error }) {
   return (
     <Container
       component="main"
