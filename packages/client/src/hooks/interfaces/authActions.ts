@@ -1,23 +1,12 @@
-import { User } from '../../store/slices/auth/interfaces'
+import { Login, SignUp, User } from '../../store/slices/auth/interfaces'
 
 export interface AuthActions {
   signin: (
-    authData: {
-      login: string
-      password: string
-    },
+    authData: Login,
     callback: () => void
   ) => void
   signup: (
-    signUpData: {
-      first_name: string
-      second_name: string
-      display_name: string
-      login: string
-      email: string
-      password: string
-      phone: string
-    },
+    signUpData: SignUp,
     callback: () => void
   ) => void
   signout: () => void
