@@ -3,7 +3,7 @@ import { SxProps } from '@mui/system'
 
 type TypographyPropsWithContent = TypographyProps & { content: string }
 
-export function DubleTypography({
+export function DoubleTypography({
   first: { content: first, ...firstProps },
   second: { content: second, ...secondProps },
   sx,

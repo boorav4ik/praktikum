@@ -47,7 +47,7 @@ const Drawer = styled(MuiDrawer, {
 
 export const MainLayout = () => {
   const [open, setOpen] = useState<boolean>(false)
-  const toogleDrawer = () => {
+  const toggleDrawer = () => {
     setOpen(prev => !prev)
   }
 
@@ -55,7 +55,7 @@ export const MainLayout = () => {
     <Box sx={{ display: 'flex' }}>
       <NavBar />
       <Drawer variant="permanent" open={open}>
-        <DrawerHeader open={open} toogleDrawer={toogleDrawer} />
+        <DrawerHeader open={open} toggleDrawer={toggleDrawer} />
         <Divider />
         <SideBar open={open} />
       </Drawer>

@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box'
-import { DubleTypography } from './DoubleTypography'
+import { DoubleTypography } from './DoubleTypography'
 
 export function GameBoard() {
   return (
@@ -13,10 +13,10 @@ export function GameBoard() {
         flexDirection: 'column',
         alignItems: 'center',
       }}>
-      <DubleTypography
+      <DoubleTypography
         first={{ content: 'Счёт:' }}
         second={{ content: ' 100500' }}
-        sx={{fontSize: 24}}
+        sx={{ fontSize: 24 }}
       />
       <Box></Box>
     </Box>

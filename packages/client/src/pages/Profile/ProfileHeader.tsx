@@ -1,10 +1,10 @@
 import { Box } from '@mui/material'
-import React, { FC } from 'react'
+import { FC, ChangeEvent } from 'react'
 import { AvatarBox } from '../../components/AvatarBox'
 
 interface ProfileHeaderProps {
   component: string
-  ChooseFile: (event: React.ChangeEvent<HTMLInputElement>) => void
+  ChooseFile: (event: ChangeEvent<HTMLInputElement>) => void
   fileData: string | ArrayBuffer | null
 }
 
@@ -28,9 +28,7 @@ export const ProfileHeader: FC<ProfileHeaderProps> = ({
           accept="image/*"
           type="file"
           style={{ display: 'none' }}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            ChooseFile(event)
-          }
+          onChange={(event: ChangeEvent<HTMLInputElement>) => ChooseFile(event)}
         />
       </label>
     </Box>

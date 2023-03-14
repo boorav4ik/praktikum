@@ -5,12 +5,9 @@ import { ApiEndPoints } from './config'
 
 export const signin = createAsyncThunk(
   'user/signin',
-  async ({ login, password }: Login, thunkAPI) => {
+  async (data: Login, thunkAPI) => {
     try {
-      await $host.post(ApiEndPoints.Auth.SignIn, {
-        login,
-        password,
-      })
+      await $host.post(ApiEndPoints.Auth.SignIn, data)
       const response = await $host.get<User[]>(ApiEndPoints.Auth.UserInfo)
       return response.data
     } catch (e) {
@@ -21,28 +18,9 @@ export const signin = createAsyncThunk(
 
 export const signup = createAsyncThunk(
   'user/signup',
-  async (
-    {
-      first_name,
-      second_name,
-      display_name,
-      login,
-      email,
-      password,
-      phone,
-    }: SignUp,
-    thunkAPI
-  ) => {
+  async (data: SignUp,thunkAPI) => {
     try {
-      await $host.post(ApiEndPoints.Auth.SignUp, {
-        first_name,
-        second_name,
-        display_name,
-        login,
-        email,
-        password,
-        phone,
-      })
+      await $host.post(ApiEndPoints.Auth.SignUp, data)
       const response = await $host.get<User[]>(ApiEndPoints.Auth.UserInfo)
       return response.data
     } catch (e) {
