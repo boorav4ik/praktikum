@@ -33,6 +33,15 @@ function App() {
                 </RequaredAuth>
               }
             />
+            <Route path={Paths.Forum}>
+              <Route index element={<Pages.Forum />} />
+              <Route path=":theme_name">
+                <Route index element={<Pages.Theme />} />
+                <Route path=":theme_branch">
+                  <Route index element={<Pages.ThemeBranch />} />
+                </Route>
+              </Route>
+            </Route>
           </Route>
           <Route path={Paths.NotFounde} element={<Pages.Error />} />
         </Routes>
