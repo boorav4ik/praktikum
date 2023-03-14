@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import * as Pages from './pages'
 import * as Layouts from './layouts'
-import { RequaredAuth } from './HOC/RequaredAuth'
+import { RequaredAuth } from './hoks/RequaredAuth'
 import { Routes as Paths } from './utils/routes'
 import './App.css'
 
@@ -25,7 +25,6 @@ function App() {
           <Route path={Paths.Index} element={<Layouts.Main />}>
             <Route index element={<Pages.Home />} />
             <Route path={Paths.Login} element={<Pages.Login />} />
-            <Route path={Paths.SignUp} element={<Pages.SignUp />} />
             <Route
               path={Paths.Profile}
               element={
