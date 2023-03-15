@@ -1,14 +1,14 @@
-type stringOrNull = string | null
+import { Nullable } from '../../../utils/nullableType'
 
 export interface User {
   id: number
-  login: stringOrNull
-  display_name: stringOrNull
-  first_name: stringOrNull
-  second_name: stringOrNull
-  phone: stringOrNull
-  email: stringOrNull
-  avatar: stringOrNull
+  login: Nullable<string>
+  display_name: Nullable<string>
+  first_name: Nullable<string>
+  second_name: Nullable<string>
+  phone: Nullable<string>
+  email: Nullable<string>
+  avatar: Nullable<string>
 }
 
 export interface Login {
