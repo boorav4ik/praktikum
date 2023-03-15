@@ -59,30 +59,17 @@ export const NavBar = () => {
         {menuData.map(value => (
           <NavItem key={value.text} {...value} />
         ))}
-        {user ? (
-          <Button
-            key="signout"
-            sx={{
-              fontWeight: 'bold',
-              fontSize: '0.975rem',
-            }}
-            onClick={() => signout()}
-            component={Link}
-            to="/login">
-            Выйти
-          </Button>
-        ) : (
-          <Button
-            key="login"
-            sx={{
-              fontWeight: 'bold',
-              fontSize: '0.975rem',
-            }}
-            component={Link}
-            to="/login">
-            Войти
-          </Button>
-        )}
+        <Button
+          key="auth"
+          sx={{
+            fontWeight: 'bold',
+            fontSize: '0.975rem',
+          }}
+          onClick={() => user && signout()}
+          component={Link}
+          to="/login">
+          {user ? 'Выйти' : 'Войти'}
+        </Button>
       </Toolbar>
     </AppBar>
   )
