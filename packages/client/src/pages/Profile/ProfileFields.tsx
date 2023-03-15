@@ -7,13 +7,7 @@ interface ProfileFieldsProps {
   editStatus: string
   changeDataUser: (newUserData: object) => void
 }
-
-export const ProfileFields: FC<ProfileFieldsProps> = ({
-  value,
-  label,
-  editStatus,
-  changeDataUser,
-}) => {
+export function ProfileFields({ value, label, editStatus, changeDataUser }: ProfileFieldsProps) {
   return (
     <TextField
       key={value}

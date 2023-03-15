@@ -7,11 +7,7 @@ interface ProfileHeaderProps {
   ChooseFile: (event: ChangeEvent<HTMLInputElement>) => void
   fileData: string | ArrayBuffer | null
 }
-
-export const ProfileHeader: FC<ProfileHeaderProps> = ({
-  ChooseFile,
-  fileData,
-}) => {
+export function ProfileHeader({ ChooseFile, fileData }: ProfileHeaderProps) {
   return (
     <Box component="header">
       <label>
