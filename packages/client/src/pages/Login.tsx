@@ -4,13 +4,14 @@ import { Button } from '../components/Button'
 import { Navigate, useLocation, useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
 import { Routes } from '../utils/routes'
+import { FormEvent } from 'react'
 
 export function LoginPage() {
   const location = useLocation()
   const navigate = useNavigate()
   const [{ user }, { signin }] = useAuth()
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
     signin(
