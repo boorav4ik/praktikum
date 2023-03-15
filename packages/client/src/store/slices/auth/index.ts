@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { getUser, signin, signout, signup } from '../../../api/userApi'
+import { Nullable } from '../../../utils/nullableType'
 import { User } from './interfaces'
 
 export type AuthState = {
-  user: User | null
+  user: Nullable<User>
   isLoading: boolean
   error?: string
 }
