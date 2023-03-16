@@ -1,4 +1,5 @@
 export const ApiHost = 'https://ya-praktikum.tech/api/v2/'
+export const AvatarHost = 'https://ya-praktikum.tech/api/v2/resources/'
 export const ApiEndPoints = {
   Auth: {
     SignIn: 'auth/signin',

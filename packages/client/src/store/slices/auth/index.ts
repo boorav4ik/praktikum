@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { getUser, signin, signout, signup } from '../../../api/userApi'
+import { getUser } from '../../../api/user'
+import { signin, signout, signup } from '../../../api/auth'
 import { Nullable } from '../../../utils/nullableType'
 import { User } from './interfaces'
 

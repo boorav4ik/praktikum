@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux'
-import { getUser, signin, signout, signup } from '../api/userApi'
+import { getUser } from '../api/user'
+import { signin, signout, signup } from '../api/auth'
 import { RootState } from '../store'
 import { useAppDispatch } from '../store/hooks'
 import { AuthState, changeProfile } from '../store/slices/auth'

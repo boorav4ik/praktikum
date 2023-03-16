@@ -37,6 +37,7 @@ export const ProfileFooter: FC<ProfileFooterProps> = ({
         width: '100%',
         display: 'flex',
         justifyContent: 'space-around',
+        mt: 2,
       }}>
       <Button onClick={checkSave}>
         {editStatus === 'info' ? 'Редактировать' : 'Сохранить'}

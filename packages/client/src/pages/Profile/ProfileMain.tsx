@@ -27,6 +27,7 @@ export const ProfileMain: FC<ProfileMainProps> = ({
     }
   }, [editStatus])
 
+  console.log('user = ', user)
   return (
     <Box
       sx={{
@@ -37,7 +38,7 @@ export const ProfileMain: FC<ProfileMainProps> = ({
         width: '75%',
       }}>
       <Stack spacing={2}>
-        {['firstName', 'secondName', 'phone'].map(field => (
+        {['first_name', 'second_name', 'display_name'].map(field => (
           <ProfileFields
             key={field}
             value={user[field as keyof typeof user]}
@@ -48,7 +49,7 @@ export const ProfileMain: FC<ProfileMainProps> = ({
         ))}
       </Stack>
       <Stack spacing={2}>
-        {['email', 'login', 'password'].map(field => (
+        {['login', 'email', 'phone'].map(field => (
           <ProfileFields
             key={field}
             value={user[field as keyof typeof user]}

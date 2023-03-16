@@ -5,6 +5,7 @@ import { ProfileFooter } from './ProfileFooter'
 import { ProfileHeader } from './ProfileHeader'
 import { ProfileMain } from './ProfileMain'
 import { useAuth } from '../../hooks/useAuth'
+import { ProfileChangePassword } from './ProfileChangePassword'
 
 interface FileProps {
   data: string | ArrayBuffer | null
@@ -67,12 +68,14 @@ export function ProfilePage() {
           component="header"
           ChooseFile={ChooseFile}
           fileData={file ? file.data : ''}
+          avatar={user!.avatar}
         />
         <ProfileMain
           user={user ?? {}}
           editStatus={editStatus}
           saveUserData={saveUserData}
         />
+        <ProfileChangePassword />
         <ProfileFooter editStatus={editStatus} editFields={editFields} />
       </Box>
     </Container>
