@@ -16,6 +16,11 @@ export interface Login {
   password: string
 }
 
+export interface ChangePassword {
+  oldPassword: string
+  newPassword: string
+}
+
 export interface FileProps {
   data: string | ArrayBuffer | null
   info: File

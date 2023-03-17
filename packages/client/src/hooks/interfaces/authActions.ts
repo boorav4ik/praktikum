@@ -1,4 +1,9 @@
-import { FileProps, Login, User } from '../../store/slices/auth/interfaces'
+import {
+  FileProps,
+  Login,
+  User,
+  ChangePassword,
+} from '../../store/slices/auth/interfaces'
 
 export interface AuthActions {
   signin: (authData: Login, callback: () => void) => void
@@ -6,5 +11,6 @@ export interface AuthActions {
   signout: () => void
   changeProfile: (data: User) => void
   changeAvatar: (data: FileProps) => void
+  changePassword: (data: ChangePassword) => void
   getUser: () => void
 }

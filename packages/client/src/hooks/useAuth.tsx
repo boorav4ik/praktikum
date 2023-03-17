@@ -1,5 +1,10 @@
 import { useSelector } from 'react-redux'
-import { getUser, changeProfile, changeAvatar } from '../api/user'
+import {
+  getUser,
+  changeProfile,
+  changeAvatar,
+  changePassword,
+} from '../api/user'
 import { signin, signout, signup } from '../api/auth'
 import { RootState } from '../store'
 import { useAppDispatch } from '../store/hooks'
@@ -30,7 +35,9 @@ export function useAuth(): [AuthState, AuthActions] {
       changeAvatar(data) {
         dispatch(changeAvatar(data))
       },
-
+      changePassword(data) {
+        dispatch(changePassword(data))
+      },
       getUser() {
         dispatch(getUser())
       },

@@ -1,6 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import $host from '.'
-import { FileProps, User } from '../store/slices/auth/interfaces'
+import {
+  ChangePassword,
+  FileProps,
+  User,
+} from '../store/slices/auth/interfaces'
 import { ApiEndPoints } from './config'
 
 export const getUser = createAsyncThunk('user/getuser', async (_, thunkAPI) => {
@@ -45,7 +49,22 @@ export const changeAvatar = createAsyncThunk(
       )
       return response.data
     } catch (e) {
-      return thunkAPI.rejectWithValue('Не удалось обновить данные пользователя')
+      return thunkAPI.rejectWithValue('Не удалось обновить аватар пользователя')
+    }
+  }
+)
+
+export const changePassword = createAsyncThunk(
+  'user/changePassword',
+  async (data: ChangePassword, thunkAPI) => {
+    try {
+      const response = await $host.put<User[]>(
+        ApiEndPoints.User.UpdatePassword,
+        data
+      )
+      return response.data
+    } catch (e) {
+      return thunkAPI.rejectWithValue('Не удалось обновить пароль')
     }
   }
 )
