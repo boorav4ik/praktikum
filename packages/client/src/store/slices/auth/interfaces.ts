@@ -16,10 +16,7 @@ export interface Login {
   password: string
 }
 
-export interface SignUp extends Login {
-  first_name: string
-  second_name: string
-  display_name: string
-  email: string
-  phone: string
+export interface FileProps {
+  data: string | ArrayBuffer | null
+  info: File
 }

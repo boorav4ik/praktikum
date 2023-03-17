@@ -27,7 +27,6 @@ export const ProfileMain: FC<ProfileMainProps> = ({
     }
   }, [editStatus])
 
-  console.log('user = ', user)
   return (
     <Box
       sx={{

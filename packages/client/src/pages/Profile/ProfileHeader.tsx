@@ -15,8 +15,6 @@ export const ProfileHeader: FC<ProfileHeaderProps> = ({
   fileData,
   avatar,
 }) => {
-  console.log('avatar = ', avatar)
-  console.log('fileData = ', fileData as string)
   return (
     <Box component="header">
       <label>

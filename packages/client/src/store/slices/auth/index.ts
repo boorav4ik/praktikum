@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { getUser } from '../../../api/user'
+import { getUser, changeProfile, changeAvatar } from '../../../api/user'
 import { signin, signout, signup } from '../../../api/auth'
 import { Nullable } from '../../../utils/nullableType'
 import { User } from './interfaces'
@@ -18,12 +18,7 @@ const initialState: AuthState = {
 export const authSlise = createSlice({
   name: 'auth',
   initialState,
-  reducers: {
-    changeProfile(state, action) {
-      state.user = { ...state.user, ...action.payload }
-      state.isLoading = false
-    },
-  },
+  reducers: {},
   extraReducers: {
     [signin.fulfilled.type]: (state, action: PayloadAction<User>) => {
       state.isLoading = false
@@ -74,8 +69,31 @@ export const authSlise = createSlice({
       state.isLoading = false
       state.error = action.payload
     },
+    [changeProfile.fulfilled.type]: (state, action: PayloadAction<User>) => {
+      state.isLoading = false
+      state.error = ''
+      state.user = action.payload
+    },
+    [changeProfile.pending.type]: state => {
+      state.isLoading = true
+    },
+    [changeProfile.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.isLoading = false
+      state.error = action.payload
+    },
+    [changeAvatar.fulfilled.type]: (state, action: PayloadAction<User>) => {
+      state.isLoading = false
+      state.error = ''
+      state.user = action.payload
+    },
+    [changeAvatar.pending.type]: state => {
+      state.isLoading = true
+    },
+    [changeAvatar.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.isLoading = false
+      state.error = action.payload
+    },
   },
 })
 
 export const authReducer = authSlise.reducer
-export const { changeProfile } = authSlise.actions

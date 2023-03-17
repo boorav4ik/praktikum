@@ -14,7 +14,6 @@ export const ProfileFields: FC<ProfileFieldsProps> = ({
   editStatus,
   changeDataUser,
 }) => {
-  console.log('value = ', value)
   return (
     <TextField
       key={value}

@@ -6,29 +6,29 @@ import { ProfileHeader } from './ProfileHeader'
 import { ProfileMain } from './ProfileMain'
 import { useAuth } from '../../hooks/useAuth'
 import { ProfileChangePassword } from './ProfileChangePassword'
-
-interface FileProps {
-  data: string | ArrayBuffer | null
-  info: File
-}
+import { FileProps } from '../../store/slices/auth/interfaces'
 
 export function ProfilePage() {
-  const [{ user }, { changeProfile }] = useAuth()
+  const [{ user }, { changeProfile, changeAvatar }] = useAuth()
   const [editStatus, setEditStatus] = useState<string>('info')
   const [file, setFile] = useState<FileProps>()
 
   const saveUserData = (newUserData: object | undefined, status: string) => {
     if (status === 'cancel') {
       setEditStatus('info')
-      console.log('Отмена изменений. Ждем redux')
+      setFile({} as FileProps)
       return
     }
 
     const newData = { ...user!, ...newUserData }
     const checkUser = deepEqual(user, newData)
-    if (!checkUser || file) {
+    if (!checkUser) {
       changeProfile(newData)
     }
+    if (file) {
+      changeAvatar(file)
+    }
+
     setEditStatus('info')
   }
 
