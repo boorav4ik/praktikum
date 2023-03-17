@@ -2,6 +2,23 @@ import { Box, TextField, Typography } from '@mui/material'
 import React, { FC, useState } from 'react'
 import { Button } from '../../components/Button'
 
+const style = {
+  position: 'absolute',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: '40%',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  bgcolor: 'background.paper',
+  border: '3px solid #1E515D',
+  borderRadius: 11,
+  boxShadow: 24,
+  p: 4,
+}
+
 interface ProfileChangePasswordProps {
   handleModal: (state: boolean) => void
   handleChangePassword: (data: {
@@ -35,23 +52,7 @@ export const ProfileChangePassword: FC<ProfileChangePasswordProps> =
       handleModal(false)
     }
     return (
-      <Box
-        sx={{
-          position: 'absolute' as 'absolute',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          width: '40%',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          bgcolor: 'background.paper',
-          border: '3px solid #1E515D',
-          borderRadius: 11,
-          boxShadow: 24,
-          p: 4,
-        }}>
+      <Box sx={style}>
         <Typography>Смена пароля</Typography>
         <Typography sx={{ color: 'red', m: 1, mt: 3, height: 20 }}>
           {error}
