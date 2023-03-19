@@ -1,6 +1,9 @@
-import { FC, useRef, useEffect } from 'react'
-import { Box, Stack } from '@mui/material'
+import { FC, useRef, useEffect, ChangeEvent } from 'react'
+import { Box, Stack, TextField } from '@mui/material'
 import { ProfileFields } from './ProfileFields'
+import { MapProfileInputFields } from './ProfileInputsFields'
+import { useInputsValidate } from '../../hooks/useInputsValidate'
+import { validate } from '../../utils/formInputValidators/validate'
 
 interface ProfileMainProps {
   user: object
@@ -14,6 +17,13 @@ export const ProfileMain: FC<ProfileMainProps> = ({
   saveUserData,
 }) => {
   const newUserData = useRef<object>(user)
+  const {
+    values,
+    handleInputChange,
+    errors,
+    handleInputBlur,
+    checkEmptyInputs,
+  } = useInputsValidate(true, validate)
 
   const saveUser = (userData: object) => {
     newUserData.current = { ...newUserData.current, ...userData }
@@ -32,29 +42,34 @@ export const ProfileMain: FC<ProfileMainProps> = ({
       sx={{
         display: 'flex',
         flexDirection: { xs: 'column', sm: 'row' },
-        justifyContent: 'space-evenly',
+        justifyContent: 'center',
         p: 3,
-        width: '75%',
+        width: '80%',
       }}>
-      <Stack spacing={2}>
-        {['first_name', 'second_name', 'display_name'].map(field => (
-          <ProfileFields
-            key={field}
-            value={user[field as keyof typeof user]}
-            label={field}
-            editStatus={editStatus}
-            changeDataUser={(newUserData: object) => saveUser(newUserData)}
-          />
-        ))}
-      </Stack>
-      <Stack spacing={2}>
-        {['login', 'email', 'phone'].map(field => (
-          <ProfileFields
-            key={field}
-            value={user[field as keyof typeof user]}
-            label={field}
-            editStatus={editStatus}
-            changeDataUser={(newUserData: object) => saveUser(newUserData)}
+      <Stack
+        direction={{ xs: 'column', sm: 'row' }}
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={0}
+        sx={{ flexWrap: 'wrap' }}>
+        {MapProfileInputFields.map(({ label, name }) => (
+          <TextField
+            key={name}
+            defaultValue={user[name as keyof typeof user]}
+            sx={{ width: '45%', height: 60 }}
+            label={label}
+            name={name}
+            disabled={editStatus === 'info'}
+            variant="filled"
+            margin="normal"
+            onBlur={handleInputBlur}
+            {...(errors[name as keyof typeof errors] && {
+              error: true,
+              helperText: errors[name as keyof typeof errors],
+            })}
+            onChange={(event: ChangeEvent<HTMLInputElement>) => (
+              saveUser({ [label]: event.target.value }), handleInputChange
+            )}
           />
         ))}
       </Stack>

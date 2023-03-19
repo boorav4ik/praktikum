@@ -22,6 +22,7 @@ export const ProfileFields: FC<ProfileFieldsProps> = ({
       label={label}
       defaultValue={value}
       variant="filled"
+      margin="normal"
       onChange={(event: ChangeEvent<HTMLInputElement>) =>
         changeDataUser({ [label]: event.target.value })
       }

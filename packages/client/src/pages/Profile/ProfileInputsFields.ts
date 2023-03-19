@@ -12,3 +12,30 @@ export const MapPasswordInputFields = [
     label: 'Confirm Password',
   },
 ]
+
+export const MapProfileInputFields = [
+  {
+    name: 'first_name',
+    label: 'Имя',
+  },
+  {
+    name: 'second_name',
+    label: 'Фамилия',
+  },
+  {
+    name: 'display_name',
+    label: 'Ник',
+  },
+  {
+    name: 'login',
+    label: 'Логин',
+  },
+  {
+    name: 'email',
+    label: 'Почта',
+  },
+  {
+    name: 'phone',
+    label: 'Телефон',
+  },
+]
