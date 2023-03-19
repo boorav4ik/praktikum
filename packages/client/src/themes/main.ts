@@ -14,6 +14,7 @@ export const theme = createTheme({
     },
     green: {
       [64]: '#1E515D',
+      dark: '#7AB3A2',
     },
     background: {
       default: '#C1EEE1',
