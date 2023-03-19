@@ -1,4 +1,5 @@
 import Box from '@mui/material/Box'
+import { Canvas } from '../game/components/Canvas'
 import { DoubleTypography } from './DoubleTypography'
 
 export function GameBoard() {
@@ -18,7 +19,7 @@ export function GameBoard() {
         second={{ content: ' 100500' }}
         sx={{ fontSize: 24 }}
       />
-      <Box></Box>
+      <Canvas />
     </Box>
   )
 }
