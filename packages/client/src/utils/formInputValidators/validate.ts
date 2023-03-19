@@ -2,7 +2,7 @@ import { ValidateProps } from '../../hooks/interfaces/useInputsValidate'
 import { validateMatchString, validatePasswordRegex } from './validatorRules'
 
 export function validate(fieldValues: any, errors: object): ValidateProps {
-  let currentError: any = { ...errors }
+  const currentError: any = { ...errors }
   if ('oldPassword' in fieldValues)
     currentError.oldPassword = validatePasswordRegex(fieldValues.oldPassword)
   if ('newPassword' in fieldValues)
