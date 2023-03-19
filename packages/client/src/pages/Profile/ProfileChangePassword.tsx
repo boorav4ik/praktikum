@@ -1,6 +1,11 @@
 import { Box, TextField, Typography } from '@mui/material'
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import { Button } from '../../components/Button'
+import { useInputsValidate } from '../../hooks/useInputsValidate'
+import { validate } from '../../utils/formInputValidators/validate'
+import { isEmptyObjField } from '../../utils/isEmptyObject'
+import { EnumPasswordFields } from './enumInputFields'
+import { MapPasswordInputFields } from './ProfileInputsFields'
 
 const style = {
   position: 'absolute',
@@ -18,7 +23,6 @@ const style = {
   boxShadow: 24,
   p: 4,
 }
-
 interface ProfileChangePasswordProps {
   handleModal: (state: boolean) => void
   handleChangePassword: (data: {
@@ -29,55 +33,58 @@ interface ProfileChangePasswordProps {
 
 export const ProfileChangePassword: FC<ProfileChangePasswordProps> =
   React.forwardRef(({ handleModal, handleChangePassword }) => {
-    const [oldPassword, setOldPassword] = useState<string>('')
-    const [newPassword, setNewPassword] = useState<string>('')
-    const [confirmPassword, setConfirmPassword] = useState<string>('')
-    const [error, setError] = useState<string>('')
+    const {
+      values,
+      handleInputChange,
+      errors,
+      handleInputBlur,
+      checkEmptyInputs,
+    } = useInputsValidate(true, validate)
 
     const changePassword = () => {
-      if (!oldPassword || !newPassword || !confirmPassword) {
-        setError('Не все поля введены')
+      const checkEmpty = [
+        { field: EnumPasswordFields.oldPassword, value: values.oldPassword },
+        { field: EnumPasswordFields.newPassword, value: values.newPassword },
+        {
+          field: EnumPasswordFields.confirmPassword,
+          value: values.confirmPassword,
+        },
+      ].reduce((acc, { field, value }) => {
+        return !value ? { ...acc, ...{ [field]: value } } : acc
+      }, {} as any)
+
+      if (Object.keys(checkEmpty).length > 0) {
+        checkEmptyInputs(checkEmpty)
         return
       }
 
-      if (newPassword !== confirmPassword) {
-        setError('Пароли не совпадают')
-        return
+      if (isEmptyObjField(errors)) {
+        handleChangePassword({
+          oldPassword: values.oldPassword,
+          newPassword: values.newPassword,
+        })
       }
-      if (newPassword === oldPassword) {
-        setError('Старый и новый пароль одинаковые')
-        return
-      }
-      handleChangePassword({ oldPassword, newPassword })
-      handleModal(false)
     }
+
     return (
       <Box sx={style}>
         <Typography>Смена пароля</Typography>
-        <Typography sx={{ color: 'red', m: 1, mt: 3, height: 20 }}>
-          {error}
-        </Typography>
-        <TextField
-          sx={{ width: '90%', m: 2, mt: 4 }}
-          label="Old Password"
-          variant="filled"
-          value={oldPassword}
-          onChange={e => (setOldPassword(e.target.value), setError(''))}
-        />
-        <TextField
-          sx={{ width: '90%', m: 2 }}
-          label="New Password"
-          variant="filled"
-          value={newPassword}
-          onChange={e => (setNewPassword(e.target.value), setError(''))}
-        />
-        <TextField
-          sx={{ width: '90%', m: 2 }}
-          label="Confirm Password"
-          variant="filled"
-          value={confirmPassword}
-          onChange={e => (setConfirmPassword(e.target.value), setError(''))}
-        />
+        {MapPasswordInputFields.map(({ label, name }) => (
+          <TextField
+            sx={{ width: '90%', m: 2, mt: 4, height: 40 }}
+            label={label}
+            name={name}
+            type="password"
+            variant="filled"
+            value={values[name as keyof typeof values]}
+            onChange={handleInputChange}
+            onBlur={handleInputBlur}
+            {...(errors[name as keyof typeof errors] && {
+              error: true,
+              helperText: errors[name as keyof typeof errors],
+            })}
+          />
+        ))}
         <Button sx={{ width: '70%', m: 5 }} onClick={changePassword}>
           Изменить
         </Button>
