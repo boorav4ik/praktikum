@@ -35,6 +35,7 @@ const Drawer = styled(MuiDrawer, {
   flexShrink: 0,
   whiteSpace: 'nowrap',
   boxSizing: 'border-box',
+    position: 'absolute',
   ...(open && {
     ...openedMixin(theme),
     '& .MuiDrawer-paper': openedMixin(theme),
@@ -54,7 +55,7 @@ export const MainLayout = () => {
   return (
     <Box sx={{ display: 'flex' }}>
       <NavBar />
-      <Drawer variant="permanent" open={open}>
+      <Drawer sx={{ display: { xs: 'flex', md: 'none' } }} variant="permanent" open={open}>
         <DrawerHeader open={open} toggleDrawer={toggleDrawer} />
         <Divider />
         <SideBar open={open} />

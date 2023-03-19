@@ -15,7 +15,7 @@ export function AuthButton({ isExpanded }: { isExpanded: boolean }) {
         width: '95%',
         fontWeight: 'bold',
         fontSize: '0.975rem',
-        display: isExpanded ? 'block' : 'none',
+        display: isExpanded ? 'flex' : 'flex',
         color: '#1E515D',
         mt: 2,
       }}>
