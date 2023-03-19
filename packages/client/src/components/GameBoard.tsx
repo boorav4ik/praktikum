@@ -1,32 +1,36 @@
-import { useState } from 'react';
-import Box from '@mui/material/Box';
-import { DubleTypography } from './DoubleTypography';
-import { GameField } from './GameField';
+import React, { useEffect } from 'react'
+import Box from '@mui/material/Box'
+import { DoubleTypography } from './DoubleTypography'
+import { Canvas } from '../game/components/Canvas'
 
 export function GameBoard() {
-  const [score, setScore] = useState(0);
-  const updateScore = (value: number) => {
-    setScore(value);
-  }
+  // Временное решение, в main.tsx закомитил strictmode
+  const alertGame = React.useCallback(() => {
+    alert('Please press the enter for start the game')
+  }, [])
+
+  useEffect(() => {
+    alertGame()
+  }, [])
 
   return (
     <Box
       sx={{
         height: 570,
         width: 540,
-        borderRadius: 0,
+        borderRadius: 4,
         border: '3px solid #1E515D',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
       }}>
-      <DubleTypography
+      <DoubleTypography
         first={{ content: 'Счёт:' }}
-        second={{ content: String(score) }}
-        sx={{fontSize: 24}}
+        second={{ content: ' 100500' }}
+        sx={{ fontSize: 24 }}
       />
       <Box>
-        <GameField updateScore={updateScore} />
+        <Canvas />
       </Box>
     </Box>
   )

@@ -18,6 +18,7 @@ export const theme = createTheme({
     background: {
       default: '#C1EEE1',
       paper: '#92CCBB',
+      btn: '#7AB3A2',
     },
     primary: {
       main: '#def0eb',
@@ -28,6 +29,15 @@ export const theme = createTheme({
     },
     error: {
       main: green.A400,
+    },
+  },
+  components: {
+    MuiTypography: {
+      defaultProps: {
+        fontWeight: '800',
+        fontSize: '0.975rem',
+        color: '#1E515D',
+      },
     },
   },
 } as ThemeOptions)

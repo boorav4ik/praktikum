@@ -1,27 +1,10 @@
-import { useEffect, useState } from 'react'
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  RouteProps,
-  Navigate,
-  useLocation,
-} from 'react-router-dom'
-import { LoginPage } from './pages/Login'
-import { MainPage } from './pages/Main'
-import { ProfilePage } from './pages/Profile'
+import { useEffect } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import * as Pages from './pages'
+import * as Layouts from './layouts'
+import { RequiredAuth } from './hoks/RequiredAuth'
+import { Routes as Paths } from './utils/routes'
 import './App.css'
-
-// function ProtectedRoute(props: RouteProps) {
-//   const location = useLocation()
-//   const [auth, setAuth] = useState(false)
-
-//   return auth ? (
-//     <Route {...props} />
-//   ) : (
-//     <Navigate to="/login" state={{ from: location }} replace />
-//   )
-// }
 
 function App() {
   useEffect(() => {
@@ -39,10 +22,29 @@ function App() {
     <BrowserRouter>
       <div className="App" data-testid="App">
         <Routes>
-          <Route path="/" element={<MainPage />} />
-          {/* <Route path="/" element={<ProtectedRoute />} /> */}
-          <Route path="/login" element={<LoginPage />} />
-          <Route path='/profile' element={<ProfilePage />} />
+          <Route path={Paths.Index} element={<Layouts.Main />}>
+            <Route index element={<Pages.Home />} />
+            <Route path={Paths.Login} element={<Pages.Login />} />
+            <Route path={Paths.Leaders} element={<Pages.Leader  />} />
+            <Route
+              path={Paths.Profile}
+              element={
+                <RequiredAuth>
+                  <Pages.Profile />
+                </RequiredAuth>
+              }
+            />
+            <Route path={Paths.Forum}>
+              <Route index element={<Pages.Forum />} />
+              <Route path=":theme_name">
+                <Route index element={<Pages.Theme />} />
+                <Route path=":theme_branch">
+                  <Route index element={<Pages.ThemeBranch />} />
+                </Route>
+              </Route>
+            </Route>
+          </Route>
+          <Route path={Paths.NotFounde} element={<Pages.Error />} />
         </Routes>
       </div>
     </BrowserRouter>
