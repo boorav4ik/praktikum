@@ -1,4 +1,4 @@
-import React from 'react'
+import { RefObject, Component, createRef } from 'react'
 import { Cell } from '../core/Cell'
 import { Cells } from '../core/Cells'
 import {
@@ -30,27 +30,21 @@ type roundRectType = {
 // Кто знает как правильно ловить предыдущий стейт?
 let prevStateCells: Cell[][] = []
 
-class Canvas extends React.Component {
-  canvasWidth: number
-
-  canvasHeight: number
-
-  initCells: Cells
-
-  cells: Cell[][]
-
-  size: number
-
-  canvasRef
-
-  state
+class Canvas extends Component {
+  public canvasWidth: number
+  public canvasHeight: number
+  private initCells: Cells
+  public cells: Cell[][]
+  public size: number
+  private canvasRef: RefObject<HTMLCanvasElement>
+  public state: {[key: string]: Cell[][]}
 
   constructor(props = {}) {
     super(props)
     this.canvasWidth = 500
     this.canvasHeight = 500
     this.size = 4
-    this.canvasRef = React.createRef<HTMLCanvasElement>()
+    this.canvasRef = createRef<HTMLCanvasElement>()
     this.initCells = new Cells(this.size, this.canvasWidth)
 
     this.cells = deepCopy(this.initCells.cells as Cell[][]) as Cell[][]
@@ -198,8 +192,9 @@ class Canvas extends React.Component {
       }
     )
   }
-
-  drawRoundRect(context: CanvasRenderingContext2D, options: roundRectType) {
+  // Если указать тип CanvasRenderingContext2D тесты не проходят
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  drawRoundRect(context: any, options: roundRectType) {
     context.beginPath()
     context.roundRect(
       options.coordinates.x,

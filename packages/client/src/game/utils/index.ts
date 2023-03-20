@@ -2,7 +2,7 @@ import { Cell } from '../core/Cell'
 import { PALETTE } from '../consts'
 
 function turnColor(value: number) {
-  return PALETTE[String(value)]
+  return PALETTE[`${value}`]
 }
 
 function mergeLeft(row: number[]) {

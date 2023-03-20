@@ -1,17 +1,17 @@
-import React, { useEffect } from 'react'
+// import { useEffect } from 'react'
 import Box from '@mui/material/Box'
 import { DoubleTypography } from './DoubleTypography'
 import { Canvas } from '../game/components/Canvas'
 
 export function GameBoard() {
-  // Временное решение, в main.tsx закомитил strictmode
-  const alertGame = React.useCallback(() => {
-    alert('Please press the enter for start the game')
-  }, [])
+  // Для запуска игры надо нажать enter
+  // const alertGame = React.useCallback(() => {
+  //   alert('Please press the enter for start the game')
+  // }, [])
 
-  useEffect(() => {
-    alertGame()
-  }, [])
+  // useEffect(() => {
+  //   alertGame()
+  // }, [])
 
   return (
     <Box
