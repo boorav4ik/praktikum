@@ -1,16 +1,13 @@
 import { useNavigate } from 'react-router-dom'
 import { Button } from '@mui/material'
-import { useAuth } from '../../../hooks/useAuth'
 import { Routes } from '../../../utils/routes'
 
 export function RegButton() {
-  const [{ user }, { signout }] = useAuth()
   const navigate = useNavigate()
 
   return (
-
            <Button
-                  onClick={() => (user ? signout() : navigate(Routes.Login))}
+                  onClick={() => (navigate(Routes.Login))}
                   variant="outlined"
                   sx={{
                       width: '95%',
@@ -23,7 +20,5 @@ export function RegButton() {
                   }}>
                  Регистрация
               </Button>
-
-
   )
 }
