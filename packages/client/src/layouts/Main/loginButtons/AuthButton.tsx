@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom'
 import { Button } from '@mui/material'
-import { useAuth } from '../../hooks/useAuth'
-import { Routes } from '../../utils/routes'
+import { useAuth } from '../../../hooks/useAuth'
+import { Routes } from '../../../utils/routes'
 
-export function AuthButton({ isExpanded }: { isExpanded: boolean }) {
+export function AuthButton({ isExpanded = true }: { isExpanded?: boolean }) {
   const [{ user }, { signout }] = useAuth()
   const navigate = useNavigate()
 
@@ -15,9 +15,9 @@ export function AuthButton({ isExpanded }: { isExpanded: boolean }) {
         width: '95%',
         fontWeight: 'bold',
         fontSize: '0.975rem',
-        display: isExpanded ? 'flex' : 'flex',
+        display: isExpanded ? 'block' : 'flex',
         color: '#1E515D',
-        mt: 2,
+        mt: 0,
       }}>
       {user ? 'Выйти' : 'Войти'}
     </Button>

@@ -55,7 +55,7 @@ export function ProfilePage() {
         bgcolor="background.paper"
         sx={{
           display: 'flex',
-          borderRadius: 16,
+          borderRadius: 2,
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'space-around',
