@@ -11,7 +11,6 @@ export const menuData = [
   { text: 'Лидеры', icon: <WinnerIcon />, to: `/${Routes.Leaders}` },
   { text: 'Форум', icon: <ForumIcon />, to: `/${Routes.Forum}` },
   { text: 'Начать игру', icon: <GameIcon />, to: `/${Routes.Game}` },
-
 ]
 
 export const drawerWidth = 355

@@ -36,8 +36,7 @@ export const NavBar = () => {
     <AppBar
       position="fixed"
       style={{ backgroundImage: `url(${backgroundImage})` }}
-      sx={{ display: { xs: 'none', md: 'flex' } }}
-    >
+      sx={{ display: { xs: 'none', md: 'flex' } }}>
       <Toolbar>
         <Typography
           variant="h6"
