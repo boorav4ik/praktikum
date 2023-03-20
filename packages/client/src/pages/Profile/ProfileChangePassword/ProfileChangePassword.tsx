@@ -74,10 +74,10 @@ export const ProfileChangePassword: FC<ProfileChangePasswordProps> =
           <ProfileChangePasswordFields
             label={label}
             name={name}
-            values={values}
+            value={values}
             handleInputChange={handleInputChange}
             handleInputBlur={handleInputBlur}
-            errors={errors}
+            error={errors}
             disabled={false}
           />
         ))}

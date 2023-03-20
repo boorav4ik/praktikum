@@ -2,6 +2,8 @@ import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Box } from '@mui/material'
 import { Button } from '../../components/Button'
+import { useInputsValidate } from '../../hooks/useInputsValidate'
+import { validate } from '../../utils/formInputValidators/validate'
 
 interface ProfileFooterProps {
   editStatus: string
@@ -13,6 +15,7 @@ export const ProfileFooter: FC<ProfileFooterProps> = ({
   editFields,
 }) => {
   const navigate = useNavigate()
+  const { clearErrors } = useInputsValidate(true, validate)
 
   const checkCancel = () => {
     if (editStatus === 'info') {
@@ -20,6 +23,7 @@ export const ProfileFooter: FC<ProfileFooterProps> = ({
       return
     }
     editFields('cancel')
+    clearErrors()
   }
 
   const checkSave = () => {

@@ -21,7 +21,7 @@ export function ProfilePage() {
   const saveUserData = (newUserData: object | undefined, status: string) => {
     if (status === 'cancel') {
       console.log('cancel111')
-      updateUserData(user)
+      updateUserData(user!)
       setEditStatus('info')
       setFile({} as FileProps)
       return
@@ -87,11 +87,7 @@ export function ProfilePage() {
           fileData={file ? file.data : ''}
           avatar={user!.avatar}
         />
-        <ProfileMain
-          user={userData ?? {}}
-          editStatus={editStatus}
-          saveUserData={saveUserData}
-        />
+        <ProfileMain editStatus={editStatus} />
         <Button onClick={() => setModal(prev => !prev)}>Изменить пароль</Button>
         <ProfileFooter editStatus={editStatus} editFields={editFields} />
       </Box>

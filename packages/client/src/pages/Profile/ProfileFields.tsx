@@ -1,33 +1,16 @@
 import { TextField } from '@mui/material'
-import { ChangeEvent, FC } from 'react'
-import { useAuth } from '../../hooks/useAuth'
-import { useInputsValidate } from '../../hooks/useInputsValidate'
-import { validate } from '../../utils/formInputValidators/validate'
-import { ProfileFieldsProps } from './interfaces'
+import { FC } from 'react'
+import { ProfileValidateFieldsProps } from './interfaces'
 
-const ProfileFields: FC<ProfileFieldsProps> = ({
+const ProfileFields: FC<ProfileValidateFieldsProps> = ({
   label,
   name,
-  value,
   disabled,
+  value,
+  handleInputChange,
+  handleInputBlur,
+  error,
 }) => {
-  const [{ user, userData }, { updateUserData }] = useAuth()
-  const {
-    values,
-    handleInputChange,
-    errors,
-    handleInputBlur,
-    checkEmptyInputs,
-  } = useInputsValidate(true, validate)
-
-  const updateData = (event: ChangeEvent<HTMLInputElement>) => {
-    const data = { [name]: event.target.value as string }
-    updateUserData({ ...user, ...data })
-    handleInputChange(event)
-  }
-
-  console.log('value = ', value)
-
   return (
     <TextField
       sx={{ width: '48%', height: 80 }}
@@ -35,13 +18,11 @@ const ProfileFields: FC<ProfileFieldsProps> = ({
       name={name}
       disabled={disabled}
       variant="filled"
-      defaultValue={value}
-      onChange={(event: ChangeEvent<HTMLInputElement>) => updateData(event)}
+      value={value || ''}
+      onChange={handleInputChange}
       onBlur={handleInputBlur}
-      {...(errors[name as keyof typeof errors] && {
-        error: true,
-        helperText: errors[name as keyof typeof errors],
-      })}
+      error={error[name as keyof typeof error]}
+      helperText={error[name as keyof typeof error]}
     />
   )
 }

@@ -1,37 +1,19 @@
-import { FC, useRef, useEffect, ChangeEvent } from 'react'
-import { Box, Stack, TextField } from '@mui/material'
+import { FC, ChangeEvent } from 'react'
+import { Box, Stack } from '@mui/material'
 import { MapProfileInputFields } from './ProfileFieldsData'
+import ProfileFields from './ProfileFields'
 import { useInputsValidate } from '../../hooks/useInputsValidate'
 import { validate } from '../../utils/formInputValidators/validate'
-import ProfileFields from './ProfileFields'
+import { useAuth } from '../../hooks/useAuth'
+import { deepEqual } from '../../utils/deepEqual'
 
 interface ProfileMainProps {
-  user: object
   editStatus: string
-  saveUserData: (newUserData: object | undefined, status: string) => void
 }
 
-export const ProfileMain: FC<ProfileMainProps> = ({
-  user,
-  editStatus,
-  saveUserData,
-}) => {
-  // const newUserData = useRef<object>(user)
-
-  const saveUser = (userData: object) => {
-    newUserData.current = { ...newUserData.current, ...userData }
-  }
-
-  useEffect(() => {
-    if (editStatus === 'save') {
-      // saveUserData(newUserData.current, editStatus)
-    } else if (editStatus === 'cancel') {
-      console.log('cancel')
-      // newUserData.current = user
-      // console.log('newUserData.current = ', newUserData.current)
-      saveUserData(user, editStatus)
-    }
-  }, [editStatus])
+export const ProfileMain: FC<ProfileMainProps> = ({ editStatus }) => {
+  const [{ user, userData }, { updateUserData }] = useAuth()
+  const { errors = {}, handleInputBlur } = useInputsValidate(true, validate)
 
   return (
     <Box
@@ -54,13 +36,15 @@ export const ProfileMain: FC<ProfileMainProps> = ({
             disabled={editStatus === 'info'}
             label={label}
             name={name}
-            value={user[name as keyof typeof user]}
-            // handleInputChange={handleInputChange}
-            // handleInputBlur={handleInputBlur}
-            // errors={errors}
-            // onChange={(event: ChangeEvent<HTMLInputElement>) => (
-            //   saveUser({ [name]: event.target.value }), handleInputChange
-            // )}
+            value={userData![name as keyof typeof userData]}
+            handleInputChange={(event: ChangeEvent<HTMLInputElement>) =>
+              updateUserData({
+                ...userData,
+                ...{ [name]: event.target.value as string },
+              })
+            }
+            handleInputBlur={handleInputBlur}
+            error={deepEqual(user, userData) ? false : errors}
           />
         ))}
       </Stack>

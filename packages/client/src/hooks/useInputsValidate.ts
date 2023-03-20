@@ -40,11 +40,16 @@ export function useInputsValidate(
     setErrors(errorValidate)
   }
 
+  const clearErrors = () => {
+    setErrors(initialState)
+  }
+
   return {
     values,
     handleInputChange,
     errors,
     handleInputBlur,
     checkEmptyInputs,
+    clearErrors,
   }
 }

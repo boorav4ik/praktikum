@@ -1,14 +1,14 @@
 import { TextField } from '@mui/material'
 import { FC } from 'react'
-import { ProfileChangePasswordFieldsProps } from '../interfaces'
+import { ProfileValidateFieldsProps } from '../interfaces'
 
-const ProfileChangePasswordFields: FC<ProfileChangePasswordFieldsProps> = ({
+const ProfileChangePasswordFields: FC<ProfileValidateFieldsProps> = ({
   label,
   name,
-  values,
+  value,
   handleInputChange,
   handleInputBlur,
-  errors,
+  error,
 }) => {
   return (
     <TextField
@@ -17,11 +17,11 @@ const ProfileChangePasswordFields: FC<ProfileChangePasswordFieldsProps> = ({
       name={name}
       type="password"
       variant="filled"
-      value={values[name as keyof typeof values]}
+      value={value[name as keyof typeof value]}
       onChange={handleInputChange}
       onBlur={handleInputBlur}
-      error={errors[name as keyof typeof errors]}
-      helperText={errors[name as keyof typeof errors]}
+      error={error[name as keyof typeof error]}
+      helperText={error[name as keyof typeof error]}
     />
   )
 }
