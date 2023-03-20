@@ -55,7 +55,7 @@ export function ProfilePage() {
         bgcolor="background.paper"
         sx={{
           display: 'flex',
-          borderRadius: 16,
+          borderRadius: 2,
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'space-around',
@@ -65,7 +65,7 @@ export function ProfilePage() {
         }}>
         <ProfileHeader
           component="header"
-          ChooseFile={ChooseFile}
+          onChooseFile={ChooseFile}
           fileData={file ? file.data : ''}
         />
         <ProfileMain

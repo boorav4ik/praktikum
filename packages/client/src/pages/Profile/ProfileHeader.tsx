@@ -4,10 +4,10 @@ import { AvatarBox } from '../../components/AvatarBox'
 
 interface ProfileHeaderProps {
   component: string
-  ChooseFile: (event: ChangeEvent<HTMLInputElement>) => void
+  onChooseFile: (event: ChangeEvent<HTMLInputElement>) => void
   fileData: string | ArrayBuffer | null
 }
-export function ProfileHeader({ ChooseFile, fileData }: ProfileHeaderProps) {
+export function ProfileHeader({ onChooseFile, fileData }: ProfileHeaderProps) {
   return (
     <Box component="header">
       <label>
@@ -24,7 +24,7 @@ export function ProfileHeader({ ChooseFile, fileData }: ProfileHeaderProps) {
           accept="image/*"
           type="file"
           style={{ display: 'none' }}
-          onChange={(event: ChangeEvent<HTMLInputElement>) => ChooseFile(event)}
+          onChange={(event: ChangeEvent<HTMLInputElement>) => onChooseFile(event)}
         />
       </label>
     </Box>
