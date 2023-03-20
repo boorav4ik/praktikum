@@ -35,7 +35,7 @@ export function ProfilePage() {
     setEditStatus(status)
   }
 
-  const ChooseFile = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChooseFile = (event: ChangeEvent<HTMLInputElement>) => {
     const reader = new FileReader()
     reader.onloadend = () => {
       if (!event.target.files) return
@@ -55,7 +55,7 @@ export function ProfilePage() {
         bgcolor="background.paper"
         sx={{
           display: 'flex',
-          borderRadius: 16,
+          borderRadius: 2,
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'space-around',
@@ -65,7 +65,7 @@ export function ProfilePage() {
         }}>
         <ProfileHeader
           component="header"
-          ChooseFile={ChooseFile}
+          onChooseFile={onChooseFile}
           fileData={file ? file.data : ''}
         />
         <ProfileMain

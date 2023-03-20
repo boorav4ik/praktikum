@@ -50,8 +50,8 @@ function NanListItem({ icon, text, to, isExpanded }: NanListItemProps) {
   )
 }
 
-export const SideBar: FC<SideBarProps> = ({ open = false }) => {
-  return (
+export function SideBar({ open = false }: SideBarProps) {
+        return (
     <List>
       <Box
         component="div"
