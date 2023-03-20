@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { styled } from '@mui/material/styles'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
@@ -6,8 +7,9 @@ import { menuData } from './drawerBarData'
 import { Button } from '@mui/material'
 import backgroundImage from './icons/background.svg'
 import { Link } from 'react-router-dom'
-import Box from "@mui/material/Box";
+import { useAuth } from '../../hooks/useAuth'
 import { LoginButtons } from './loginButtons';
+
 
 function NavItem({ text, ...rest }: { text: string; to: string }) {
   return (
@@ -23,7 +25,10 @@ function NavItem({ text, ...rest }: { text: string; to: string }) {
     </Button>
   )
 }
+
 export const NavBar = () => {
+  const [{ user }, { getUser, signout }] = useAuth()
+
   const AppBar = styled(MuiAppBar)(({ theme }) => ({
     zIndex: theme.zIndex.drawer + 1,
     backgroundColor: theme.palette.background.default,
@@ -33,6 +38,10 @@ export const NavBar = () => {
       duration: theme.transitions.duration.leavingScreen,
     }),
   }))
+
+  useEffect(() => {
+    getUser()
+  }, [])
 
   return (
     <AppBar
@@ -51,11 +60,10 @@ export const NavBar = () => {
           }}>
           2048
         </Typography>
-          {menuData.map(value => (
+        {menuData.map(value => (
           <NavItem key={value.text} {...value} />
         ))}
           <LoginButtons/>
-
       </Toolbar>
     </AppBar>
   )
