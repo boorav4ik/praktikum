@@ -67,6 +67,7 @@ export const MainLayout = () => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
+          marginLeft:  { xs: '64px', md: '0' }
         }}>
         <Outlet />
       </Box>

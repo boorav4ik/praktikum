@@ -6,6 +6,8 @@ import { menuData } from './drawerBarData'
 import { Button } from '@mui/material'
 import backgroundImage from './icons/background.svg'
 import { Link } from 'react-router-dom'
+import Box from "@mui/material/Box";
+import { LoginButtons } from './loginButtons';
 
 function NavItem({ text, ...rest }: { text: string; to: string }) {
   return (
@@ -49,9 +51,11 @@ export const NavBar = () => {
           }}>
           2048
         </Typography>
-        {menuData.map(value => (
+          {menuData.map(value => (
           <NavItem key={value.text} {...value} />
         ))}
+          <LoginButtons/>
+
       </Toolbar>
     </AppBar>
   )

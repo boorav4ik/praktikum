@@ -16,7 +16,7 @@ export function LeaderboardPage() {
           justifyContent: 'space-around',
           my: 10,
           border: '3px solid #1E515D',
-          borderRadius: '3px',
+          borderRadius: 2,
           p: 3,
         }}>
         <LeaderHeader />
