@@ -14,4 +14,5 @@ export interface AuthActions {
   changePassword: (data: ChangePassword) => void
   getUser: () => void
   updateUserData: (data: User) => void
+  updateEditStatus: (data: string) => void
 }

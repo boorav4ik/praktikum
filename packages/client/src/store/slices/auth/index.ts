@@ -7,6 +7,7 @@ import { User } from './interfaces'
 export type AuthState = {
   user: Nullable<User>
   userData: Nullable<User>
+  editStatus: string
   isLoading: boolean
   error?: string
 }
@@ -14,6 +15,7 @@ export type AuthState = {
 const initialState: AuthState = {
   user: null,
   userData: null,
+  editStatus: 'info',
   isLoading: false,
 }
 
@@ -23,6 +25,9 @@ export const authSlise = createSlice({
   reducers: {
     updateUserData(state, action) {
       state.userData = action.payload
+    },
+    updateEditStatus(state, action) {
+      state.editStatus = action.payload
     },
   },
   extraReducers: {
@@ -107,4 +112,4 @@ export const authSlise = createSlice({
 })
 
 export const authReducer = authSlise.reducer
-export const { updateUserData } = authSlise.actions
+export const { updateUserData, updateEditStatus } = authSlise.actions

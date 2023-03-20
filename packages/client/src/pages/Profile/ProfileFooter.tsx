@@ -4,18 +4,20 @@ import { Box } from '@mui/material'
 import { Button } from '../../components/Button'
 import { useInputsValidate } from '../../hooks/useInputsValidate'
 import { validate } from '../../utils/formInputValidators/validate'
+import { useAuth } from '../../hooks/useAuth'
 
 interface ProfileFooterProps {
-  editStatus: string
+  // editStatus: string
   editFields: (status: string) => void
 }
 
 export const ProfileFooter: FC<ProfileFooterProps> = ({
-  editStatus,
+  // editStatus,
   editFields,
 }) => {
   const navigate = useNavigate()
   const { clearErrors } = useInputsValidate(true, validate)
+  const [{ editStatus }, { updateEditStatus }] = useAuth()
 
   const checkCancel = () => {
     if (editStatus === 'info') {
@@ -28,10 +30,12 @@ export const ProfileFooter: FC<ProfileFooterProps> = ({
 
   const checkSave = () => {
     if (editStatus === 'info') {
-      editFields('edit')
+      updateEditStatus('edit')
+      // editFields('edit')
       return
     }
-    editFields('save')
+    updateEditStatus('save')
+    // editFields('save')
   }
 
   return (
