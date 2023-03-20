@@ -35,7 +35,7 @@ export function ProfilePage() {
     setEditStatus(status)
   }
 
-  const ChooseFile = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChooseFile = (event: ChangeEvent<HTMLInputElement>) => {
     const reader = new FileReader()
     reader.onloadend = () => {
       if (!event.target.files) return
@@ -65,7 +65,7 @@ export function ProfilePage() {
         }}>
         <ProfileHeader
           component="header"
-          onChooseFile={ChooseFile}
+          onChooseFile={onChooseFile}
           fileData={file ? file.data : ''}
         />
         <ProfileMain
