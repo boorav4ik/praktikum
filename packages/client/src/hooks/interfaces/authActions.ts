@@ -13,4 +13,5 @@ export interface AuthActions {
   changeAvatar: (data: FileProps) => void
   changePassword: (data: ChangePassword) => void
   getUser: () => void
+  updateUserData: (data: User) => void
 }

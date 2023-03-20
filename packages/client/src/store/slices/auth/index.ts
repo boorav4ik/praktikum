@@ -6,24 +6,32 @@ import { User } from './interfaces'
 
 export type AuthState = {
   user: Nullable<User>
+  userData: Nullable<User>
   isLoading: boolean
   error?: string
 }
 
 const initialState: AuthState = {
   user: null,
+  userData: null,
   isLoading: false,
 }
 
 export const authSlise = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    updateUserData(state, action) {
+      console.log('action.payload = ', action.payload)
+      state.userData = action.payload
+    },
+  },
   extraReducers: {
     [signin.fulfilled.type]: (state, action: PayloadAction<User>) => {
       state.isLoading = false
       state.error = ''
       state.user = action.payload
+      state.userData = action.payload
     },
     [signin.pending.type]: state => {
       state.isLoading = true
@@ -36,6 +44,7 @@ export const authSlise = createSlice({
       state.isLoading = false
       state.error = ''
       state.user = action.payload
+      state.userData = action.payload
     },
     [signup.pending.type]: state => {
       state.isLoading = true
@@ -49,6 +58,7 @@ export const authSlise = createSlice({
       state.isLoading = false
       state.error = ''
       state.user = action.payload
+      state.userData = action.payload
     },
     [signout.pending.type]: state => {
       state.isLoading = true
@@ -61,6 +71,7 @@ export const authSlise = createSlice({
       state.isLoading = false
       state.error = ''
       state.user = action.payload
+      state.userData = action.payload
     },
     [getUser.pending.type]: state => {
       state.isLoading = true
@@ -97,3 +108,4 @@ export const authSlise = createSlice({
 })
 
 export const authReducer = authSlise.reducer
+export const { updateUserData } = authSlise.actions

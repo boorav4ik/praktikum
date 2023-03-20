@@ -1,9 +1,9 @@
 import { FC, useRef, useEffect, ChangeEvent } from 'react'
 import { Box, Stack, TextField } from '@mui/material'
-import { ProfileFields } from './ProfileFields'
-import { MapProfileInputFields } from './ProfileInputsFields'
+import { MapProfileInputFields } from './ProfileFieldsData'
 import { useInputsValidate } from '../../hooks/useInputsValidate'
 import { validate } from '../../utils/formInputValidators/validate'
+import ProfileFields from './ProfileFields'
 
 interface ProfileMainProps {
   user: object
@@ -16,14 +16,7 @@ export const ProfileMain: FC<ProfileMainProps> = ({
   editStatus,
   saveUserData,
 }) => {
-  const newUserData = useRef<object>(user)
-  const {
-    values,
-    handleInputChange,
-    errors,
-    handleInputBlur,
-    checkEmptyInputs,
-  } = useInputsValidate(true, validate)
+  // const newUserData = useRef<object>(user)
 
   const saveUser = (userData: object) => {
     newUserData.current = { ...newUserData.current, ...userData }
@@ -31,8 +24,11 @@ export const ProfileMain: FC<ProfileMainProps> = ({
 
   useEffect(() => {
     if (editStatus === 'save') {
-      saveUserData(newUserData.current, editStatus)
+      // saveUserData(newUserData.current, editStatus)
     } else if (editStatus === 'cancel') {
+      console.log('cancel')
+      // newUserData.current = user
+      // console.log('newUserData.current = ', newUserData.current)
       saveUserData(user, editStatus)
     }
   }, [editStatus])
@@ -44,7 +40,7 @@ export const ProfileMain: FC<ProfileMainProps> = ({
         flexDirection: { xs: 'column', sm: 'row' },
         justifyContent: 'center',
         p: 3,
-        width: '80%',
+        width: '95%',
       }}>
       <Stack
         direction={{ xs: 'column', sm: 'row' }}
@@ -53,23 +49,18 @@ export const ProfileMain: FC<ProfileMainProps> = ({
         spacing={0}
         sx={{ flexWrap: 'wrap' }}>
         {MapProfileInputFields.map(({ label, name }) => (
-          <TextField
+          <ProfileFields
             key={name}
-            defaultValue={user[name as keyof typeof user]}
-            sx={{ width: '45%', height: 60 }}
+            disabled={editStatus === 'info'}
             label={label}
             name={name}
-            disabled={editStatus === 'info'}
-            variant="filled"
-            margin="normal"
-            onBlur={handleInputBlur}
-            {...(errors[name as keyof typeof errors] && {
-              error: true,
-              helperText: errors[name as keyof typeof errors],
-            })}
-            onChange={(event: ChangeEvent<HTMLInputElement>) => (
-              saveUser({ [label]: event.target.value }), handleInputChange
-            )}
+            value={user[name as keyof typeof user]}
+            // handleInputChange={handleInputChange}
+            // handleInputBlur={handleInputBlur}
+            // errors={errors}
+            // onChange={(event: ChangeEvent<HTMLInputElement>) => (
+            //   saveUser({ [name]: event.target.value }), handleInputChange
+            // )}
           />
         ))}
       </Stack>

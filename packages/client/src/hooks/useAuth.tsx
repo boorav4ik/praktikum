@@ -8,7 +8,7 @@ import {
 import { signin, signout, signup } from '../api/auth'
 import { RootState } from '../store'
 import { useAppDispatch } from '../store/hooks'
-import { AuthState } from '../store/slices/auth'
+import { AuthState, updateUserData } from '../store/slices/auth'
 import { AuthActions } from './interfaces/authActions'
 
 export function useAuth(): [AuthState, AuthActions] {
@@ -40,6 +40,9 @@ export function useAuth(): [AuthState, AuthActions] {
       },
       getUser() {
         dispatch(getUser())
+      },
+      updateUserData(data) {
+        dispatch(updateUserData(data))
       },
     },
   ]

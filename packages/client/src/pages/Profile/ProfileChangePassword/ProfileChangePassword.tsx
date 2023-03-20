@@ -1,11 +1,12 @@
 import { Box, TextField, Typography } from '@mui/material'
 import React, { FC } from 'react'
-import { Button } from '../../components/Button'
-import { useInputsValidate } from '../../hooks/useInputsValidate'
-import { validate } from '../../utils/formInputValidators/validate'
-import { isEmptyObjField } from '../../utils/isEmptyObject'
+import { Button } from '../../../components/Button'
+import { useInputsValidate } from '../../../hooks/useInputsValidate'
+import { validate } from '../../../utils/formInputValidators/validate'
+import { isEmptyObjField } from '../../../utils/isEmptyObject'
 import { EnumPasswordFields } from './enumInputFields'
-import { MapPasswordInputFields } from './ProfileInputsFields'
+import { MapPasswordInputFields } from '../ProfileFieldsData'
+import ProfileChangePasswordFields from './ProfileChangePasswordFields'
 
 const style = {
   position: 'absolute',
@@ -70,19 +71,14 @@ export const ProfileChangePassword: FC<ProfileChangePasswordProps> =
       <Box sx={style}>
         <Typography>Смена пароля</Typography>
         {MapPasswordInputFields.map(({ label, name }) => (
-          <TextField
-            sx={{ width: '90%', m: 2, mt: 4, height: 40 }}
+          <ProfileChangePasswordFields
             label={label}
             name={name}
-            type="password"
-            variant="filled"
-            value={values[name as keyof typeof values]}
-            onChange={handleInputChange}
-            onBlur={handleInputBlur}
-            {...(errors[name as keyof typeof errors] && {
-              error: true,
-              helperText: errors[name as keyof typeof errors],
-            })}
+            values={values}
+            handleInputChange={handleInputChange}
+            handleInputBlur={handleInputBlur}
+            errors={errors}
+            disabled={false}
           />
         ))}
         <Button sx={{ width: '70%', m: 5 }} onClick={changePassword}>

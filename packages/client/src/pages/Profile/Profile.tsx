@@ -5,32 +5,37 @@ import { ProfileFooter } from './ProfileFooter'
 import { ProfileHeader } from './ProfileHeader'
 import { ProfileMain } from './ProfileMain'
 import { useAuth } from '../../hooks/useAuth'
-import { ProfileChangePassword } from './ProfileChangePassword'
+import { ProfileChangePassword } from './ProfileChangePassword/ProfileChangePassword'
 import { FileProps } from '../../store/slices/auth/interfaces'
 import { Button } from '../../components/Button'
 
 export function ProfilePage() {
-  const [{ user }, { changeProfile, changeAvatar, changePassword }] = useAuth()
+  const [
+    { user, userData },
+    { changeProfile, changeAvatar, changePassword, updateUserData },
+  ] = useAuth()
   const [editStatus, setEditStatus] = useState<string>('info')
   const [file, setFile] = useState<FileProps>()
   const [modal, setModal] = useState<boolean>(false)
 
   const saveUserData = (newUserData: object | undefined, status: string) => {
     if (status === 'cancel') {
+      console.log('cancel111')
+      updateUserData(user)
       setEditStatus('info')
       setFile({} as FileProps)
       return
     }
 
-    const newData = { ...user!, ...newUserData }
-    const checkUser = deepEqual(user, newData)
-    if (!checkUser) {
-      changeProfile(newData)
-    }
-    if (file) {
-      changeAvatar(file)
-    }
-    setEditStatus('info')
+    // const newData = { ...user!, ...newUserData }
+    // const checkUser = deepEqual(user, newData)
+    // if (!checkUser) {
+    //   changeProfile(newData)
+    // }
+    // if (file) {
+    //   changeAvatar(file)
+    // }
+    // setEditStatus('info')
   }
 
   const editFields = (status: string) => {
@@ -83,7 +88,7 @@ export function ProfilePage() {
           avatar={user!.avatar}
         />
         <ProfileMain
-          user={user ?? {}}
+          user={userData ?? {}}
           editStatus={editStatus}
           saveUserData={saveUserData}
         />
