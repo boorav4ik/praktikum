@@ -23,6 +23,7 @@ export function DoubleTypography({
       </Typography>
       <Typography
         component="span"
+        color="primary"
         sx={{ fontWeight: 700, fontSize: 32, display: 'contents', ...sx }}
         {...secondProps}>
         {second}
