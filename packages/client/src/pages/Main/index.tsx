@@ -1,13 +1,14 @@
 import { Box, Container } from '@mui/material'
 import { GameBoard } from '../../components/GameBoard'
-import { NavBar } from './NavBar'
+import { Description } from './Description'
 
 export function MainPage() {
   return (
-    <Container component="main" maxWidth={false}>
-      <Box sx={{ my: 10, display: 'flex', justifyContent: 'center' }}>
-        <NavBar />
+    <Container component="main" maxWidth="md">
+      <Box
+        sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <GameBoard />
+        <Description />
       </Box>
     </Container>
   )
