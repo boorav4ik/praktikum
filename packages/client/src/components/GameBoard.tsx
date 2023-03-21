@@ -12,7 +12,14 @@ import { checkGameIsOver } from '../game/utils/checkGameIsOver'
 import { addNewCell } from '../game/utils/addNewCels'
 import { initCells } from '../game/utils/initCells'
 
-const guide = [
+const BORDERS = [
+  [0, 1, 2, 3],
+  [0, 4, 8, 12],
+  [3, 7, 11, 15],
+  [12, 13, 14, 15],
+]
+
+const GUIDE = [
   { header: 2048, footer: 'Используй стрелки на клавиатуре, чтобы начать' },
   { header: 'Знакомьтесь', footer: 'Для продолжения используй стрелки' },
   { header: 'Передвигай числа', footer: 'Прижми йх к стене' },
@@ -34,7 +41,7 @@ const guide = [
   { header: 'Продолжай', footer: 'чтоб получить 2048' },
 ]
 
-const guideInit = (() => {
+const GUIDE_INIT = (() => {
   const output = Array(16)
   output[5] = 2
   output[10] = 2
@@ -61,12 +68,7 @@ export function GameBoard() {
       const firstIndex = output.indexOf(2)
       const secondIndex = output.indexOf(2, firstIndex)
       if (
-        [
-          [0, 1, 2, 3],
-          [0, 4, 8, 12],
-          [3, 7, 11, 15],
-          [12, 13, 14, 15],
-        ].some(
+        BORDERS.some(
           layer => layer.includes(firstIndex) && layer.includes(secondIndex)
         )
       ) {
@@ -106,7 +108,7 @@ export function GameBoard() {
   useEffect(() => {
     switch (guideStep) {
       case 1:
-        return setCells(guideInit)
+        return setCells(GUIDE_INIT)
     }
   }, [guideStep])
 
@@ -117,7 +119,7 @@ export function GameBoard() {
           minHeight: 40,
           fontSize: 24,
         }}>
-        {guide[guideStep].header ?? ''}
+        {GUIDE[guideStep].header ?? ''}
       </Typography>
 
       <Box
@@ -143,7 +145,7 @@ export function GameBoard() {
           minHeight: 40,
           fontSize: 24,
         }}>
-        {guide[guideStep].footer ?? ''}
+        {GUIDE[guideStep].footer ?? ''}
       </Typography>
     </>
   )
