@@ -42,18 +42,18 @@ function drawCell(
   ctx: CanvasRenderingContext2D,
   row: number,
   column: number,
-  value: number
+  value = 0
 ) {
   drawRoundSquare(ctx, row * 120 + 15, column * 120 + 15, getColor(value))
-  drawCellText(ctx, value, row * 120 + 70, column * 120 + 80)
+  if (value) drawCellText(ctx, value, row * 120 + 70, column * 120 + 80)
 }
 
 export function drawCells(ctx: CanvasRenderingContext2D, cells: number[]) {
+  ctx.lineWidth = 4
   for (let i = 0; i < 4; i++) {
     for (let j = 0; j < 4; j++) {
       const index = i + j * 4
-      const value = cells[index]
-      if (value) drawCell(ctx, i, j, value)
+      drawCell(ctx, i, j, cells[index])
     }
   }
 }

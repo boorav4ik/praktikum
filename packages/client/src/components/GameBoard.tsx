@@ -2,7 +2,7 @@ import Box from '@mui/material/Box'
 import { Canvas } from '../game/components/Canvas'
 import { useEffect, useState } from 'react'
 import { EndGameDialog } from '../game/components/EndGameDialod'
-import { useArrow } from '../game/components/Canvas/hooks/useArrow'
+import { useArrow } from '../game/hooks/useArrow'
 import { Nullable } from '../utils/nullableType'
 import { Typography } from '@mui/material'
 import { ArrowDirection } from '../game/utils/ArrowDirections'
@@ -29,7 +29,6 @@ const guide = [
   { header: 'Передвигайте числа', footer: '4 + 4 = 8' },
   { header: 'У вас отлично получается' },
   { header: 'Прододжайте', footer: 'чтоб получить 2048' },
-
 ]
 
 const guideInit = (() => {
@@ -56,8 +55,8 @@ export function GameBoard() {
       if (guideStep === 1) setGuideStep(2)
     }
     if (guideStep === 2) {
-      const firstIndex = output.findIndex(value => value)
-      const secondIndex = output.findLastIndex(value => value)
+      const firstIndex = output.indexOf(2)
+      const secondIndex = output.indexOf(2, firstIndex)
       if (
         [
           [0, 1, 2, 3],
@@ -87,7 +86,7 @@ export function GameBoard() {
       setGuideStep(9)
     }
 
-    if (guideStep > 11) addNewCell(output, movedLayers, transform, 2)
+    if (guideStep > 11) addNewCell(output, movedLayers, transform)
     setCells(output)
   }
 
@@ -109,25 +108,40 @@ export function GameBoard() {
   }, [guideStep])
 
   return (
-    <Box
-      bgcolor="background.paper"
-      sx={{
-        height: 555,
-        width: 540,
-        borderRadius: 16,
-        border: `3px solid ${[2, 3].includes(guideStep) ? 'red' : '#1E515D'}`,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}>
-      <Typography>{guide[guideStep].header ?? ''}</Typography>
-      <Canvas cells={cells} />
-      <EndGameDialog
-        open={isGameOver}
-        score={score ?? 0}
-        onRestartClick={onRestart}
-      />
-      <Typography>{guide[guideStep].footer ?? ''}</Typography>
-    </Box>
+    <>
+      <Typography
+        sx={{
+          minHeight: 40,
+          fontSize: 24,
+        }}>
+        {guide[guideStep].header ?? ''}
+      </Typography>
+
+      <Box
+        bgcolor="background.paper"
+        sx={{
+          height: 520,
+          width: 520,
+          borderRadius: 16,
+          border: `4px solid ${[2, 3].includes(guideStep) ? 'red' : '#1E515D'}`,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}>
+        <Canvas cells={cells} />
+        <EndGameDialog
+          open={isGameOver}
+          score={score ?? 0}
+          onRestartClick={onRestart}
+        />
+      </Box>
+      <Typography
+        sx={{
+          minHeight: 40,
+          fontSize: 24,
+        }}>
+        {guide[guideStep].footer ?? ''}
+      </Typography>
+    </>
   )
 }

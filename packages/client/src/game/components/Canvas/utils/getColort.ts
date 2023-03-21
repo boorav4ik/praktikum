@@ -1,34 +1,32 @@
 export function getColor(value: number) {
   switch (value) {
-    case 0:
-      return '#5FD3C6'
     case 2:
-      return '#83DED3'
+      return '#7AB3A2'
     case 4:
-      return '#93E1D8'
+      return '#9AADA8'
     case 8:
-      return '#FFA69E'
+      return '#B3A8A0'
     case 16:
-      return '#D57582'
+      return '#6A9B9B'
     case 32:
-      return '#AA4465'
+      return '#3E6E7A'
     case 64:
-      return '#982D5E'
+      return '#1E515D'
     case 128:
-      return '#861657'
+      return '#636277'
     case 256:
-      return '#8C215F'
+      return '#444666'
     case 512:
-      return '#912B66'
+      return '#2C2A4C'
     case 1024:
-      return '#6E214E'
+      return '#232037'
     case 2048:
-      return '#4F1738'
+      return '#512D38'
     case 4096:
       return '#2F0E21'
     case 8192:
       return '#10050B'
     default:
-      return '#fff'
+      return "#92CCBB"
   }
 }

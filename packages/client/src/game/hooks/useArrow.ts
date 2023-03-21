@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { ArrowDirection } from '../../../utils/ArrowDirections'
+import { ArrowDirection } from '../utils/ArrowDirections'
 
 export function useArrow(calback: (direction: ArrowDirection) => void) {
   const move = (e: KeyboardEvent) => {

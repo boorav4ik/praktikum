@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { Cells } from './hooks/useCells'
+import { Cells } from '../../utils/moveCells'
 import { clearCanvas, drawCells } from './utils/Canvas'
 
 export function Canvas({ cells }: { cells: Cells }) {
