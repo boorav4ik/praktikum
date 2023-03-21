@@ -10,7 +10,6 @@ import {
 
 export function validate(fieldValues: any, errors: object): ValidateProps {
   const currentError: any = { ...errors }
-  console.log('fieldValues = ', fieldValues)
   if ('first_name' in fieldValues)
     currentError.first_name = validateNameRegex(fieldValues.first_name)
   if ('second_name' in fieldValues)

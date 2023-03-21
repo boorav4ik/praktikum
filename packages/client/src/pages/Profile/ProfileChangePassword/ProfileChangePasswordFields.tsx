@@ -19,8 +19,8 @@ export function ProfileChangePasswordFields({
       value={value[name as keyof typeof value]}
       onChange={handleInputChange}
       onBlur={handleInputBlur}
-      error={error[name as keyof typeof error]}
-      helperText={error[name as keyof typeof error]}
+      error={error && error.length ? true : false}
+      helperText={error}
     />
   )
 }

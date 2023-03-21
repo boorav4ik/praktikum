@@ -40,7 +40,11 @@ export function ProfileMain() {
               })
             }
             handleInputBlur={handleInputBlur}
-            error={deepEqual(user, userData) ? false : errors}
+            error={
+              deepEqual(user, userData)
+                ? ''
+                : errors[name as keyof typeof errors]
+            }
           />
         ))}
       </Stack>

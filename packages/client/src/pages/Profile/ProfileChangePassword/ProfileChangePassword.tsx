@@ -1,4 +1,4 @@
-import { Box, TextField, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import React, { FC } from 'react'
 import { Button } from '../../../components/Button'
 import { useInputsValidate } from '../../../hooks/useInputsValidate'
@@ -33,7 +33,7 @@ interface ProfileChangePasswordProps {
 }
 
 export const ProfileChangePassword: FC<ProfileChangePasswordProps> =
-  React.forwardRef(({ handleModal, handleChangePassword }) => {
+  React.forwardRef(({ handleModal, handleChangePassword }, ref) => {
     const {
       values,
       handleInputChange,
@@ -68,7 +68,7 @@ export const ProfileChangePassword: FC<ProfileChangePasswordProps> =
     }
 
     return (
-      <Box sx={style}>
+      <Box sx={style} ref={ref}>
         <Typography>Смена пароля</Typography>
         {MapPasswordInputFields.map(({ label, name }) => (
           <ProfileChangePasswordFields
@@ -78,7 +78,7 @@ export const ProfileChangePassword: FC<ProfileChangePasswordProps> =
             value={values}
             handleInputChange={handleInputChange}
             handleInputBlur={handleInputBlur}
-            error={errors}
+            error={errors[name as keyof typeof errors]}
             disabled={false}
           />
         ))}

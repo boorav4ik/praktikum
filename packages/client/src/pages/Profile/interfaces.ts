@@ -7,5 +7,5 @@ export interface ProfileValidateFieldsProps {
   disabled: boolean
   handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void
   handleInputBlur: (e: FocusEvent<HTMLInputElement>) => void
-  error: object
+  error: string
 }
