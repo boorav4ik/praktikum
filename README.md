@@ -1,9 +1,9 @@
 Выпускной командный проект курса [Мидл фронтенд-разработчик](https://practicum.yandex.ru/middle-frontend/)
 
-Демо: [link](https://praktikum-client.vercel.app/)
+Демо: [link](https://praktikum-client-git-test-game-boorav4ik.vercel.app/)
 
 
-<img src="https://sun9-32.userapi.com/impg/6HuIZuRUg4YST4mrnUE_2cWAtf1Oajtr_90UCg/04d97exm_0Y.jpg?size=1280x671&quality=96&sign=a2b078af7868bfa3c8c883a4c2b5e21c&type=album" alt="demo" style="width: 600px;"/>
+<img src="https://sun9-51.userapi.com/impg/ptjlJeNim2Jo464ZXOUdzDM4pO_urWca9wuYTQ/314dvJCtx5s.jpg?size=1280x740&quality=96&sign=dafb64a52a0605ec1eedc13146500e32&type=album" alt="demo" style="width: 600px;"/>
 
 
 ### 2048
