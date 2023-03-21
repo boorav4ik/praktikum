@@ -11,9 +11,6 @@ export function ProfileMain() {
   const [{ user, userData, editStatus }, { updateUserData }] = useAuth()
   const { errors = {}, handleInputBlur } = useInputsValidate(true, validate)
 
-  // console.log('ProfileMain editStatus = ', editStatus)
-  // console.log('ProfileMain userData = ', userData)
-
   return (
     <Box
       sx={{

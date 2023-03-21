@@ -7,7 +7,7 @@ interface ProfileHeaderProps {
   component: string
   ChooseFile: (event: ChangeEvent<HTMLInputElement>) => void
   fileData: string | ArrayBuffer | null
-  avatar: string | null
+  avatar: string | null | undefined
 }
 
 export function ProfileHeader({
