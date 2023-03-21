@@ -8,8 +8,7 @@ import { Button } from '@mui/material'
 import backgroundImage from './icons/background.svg'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
-import { LoginButtons } from './loginButtons';
-
+import { LoginButtons } from './loginButtons'
 
 function NavItem({ text, ...rest }: { text: string; to: string }) {
   return (
@@ -62,7 +61,7 @@ export const NavBar = () => {
         {menuData.map(value => (
           <NavItem key={value.text} {...value} />
         ))}
-          <LoginButtons/>
+        <LoginButtons />
       </Toolbar>
     </AppBar>
   )
