@@ -55,7 +55,6 @@ export function GameBoard() {
   const [isGameOver, setIsGameOver] = useState(false)
 
   useArrow(direction => (!guideStep ? setGuideStep(1) : move(direction)))
-  console.log(guideStep)
 
   function move(direction: ArrowDirection) {
     const transform = transformations.getTransformation(direction)
