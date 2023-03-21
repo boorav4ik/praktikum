@@ -1,19 +1,22 @@
 import { useNavigate } from 'react-router-dom'
 import { Box } from '@mui/material'
 import { Button } from '../../components/Button'
-import { useInputsValidate } from '../../hooks/useInputsValidate'
-import { validate } from '../../utils/formInputValidators/validate'
 import { useAuth } from '../../hooks/useAuth'
+import { isEmptyObjField } from '../../utils/isEmptyObject'
 
-export function ProfileFooter() {
+interface ProfileFooterProps {
+  errors: object
+  clearErrors: () => void
+}
+
+export function ProfileFooter({ errors, clearErrors }: ProfileFooterProps) {
   const navigate = useNavigate()
-  const { clearErrors } = useInputsValidate(true, validate)
   const [{ editStatus }, { updateEditStatus }] = useAuth()
 
   const checkCancel = () => {
     editStatus === 'info'
       ? navigate('/')
-      : (updateEditStatus('cancel'), clearErrors())
+      : (clearErrors(), updateEditStatus('cancel'))
   }
 
   const checkSave = () => {
@@ -29,7 +32,7 @@ export function ProfileFooter() {
         justifyContent: 'space-around',
         mt: 2,
       }}>
-      <Button onClick={checkSave}>
+      <Button onClick={checkSave} disabled={!isEmptyObjField(errors)}>
         {editStatus === 'info' ? 'Редактировать' : 'Сохранить'}
       </Button>
       <Button onClick={checkCancel}>

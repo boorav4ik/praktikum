@@ -1,13 +1,12 @@
 import { Box, Container, Modal } from '@mui/material'
 import { ChangeEvent, useEffect, useState } from 'react'
 import { deepEqual } from '../../utils/deepEqual'
-import { ProfileFooter } from './ProfileFooter'
 import { ProfileHeader } from './ProfileHeader'
 import { ProfileMain } from './ProfileMain'
 import { useAuth } from '../../hooks/useAuth'
 import { ProfileChangePassword } from './ProfileChangePassword/ProfileChangePassword'
 import { FileProps } from '../../store/slices/auth/interfaces'
-import { Button } from '../../components/Button'
+import { isEmptyObjField } from '../../utils/isEmptyObject'
 
 export function ProfilePage() {
   const [
@@ -31,12 +30,15 @@ export function ProfilePage() {
       return
     }
     const checkUser = deepEqual(user, userData)
+    if (checkUser && editStatus === 'save') {
+      updateEditStatus('info')
+    }
     if (!checkUser && editStatus === 'save') {
       changeProfile(userData!)
       updateEditStatus('info')
     }
-    if (file && editStatus === 'save') {
-      changeAvatar(file)
+    if (file && !isEmptyObjField(file! as object) && editStatus === 'save') {
+      changeAvatar(file!)
       updateEditStatus('info')
     }
   }, [editStatus])
@@ -85,9 +87,7 @@ export function ProfilePage() {
           fileData={file ? file.data : ''}
           avatar={user!.avatar}
         />
-        <ProfileMain />
-        <Button onClick={() => setModal(prev => !prev)}>Изменить пароль</Button>
-        <ProfileFooter />
+        <ProfileMain setModal={() => setModal(prev => !prev)} />
       </Box>
     </Container>
   )
