@@ -28,7 +28,7 @@ const guide = [
   { header: '2 + 2 = 4', footer: '4 + 4 = 8' },
   { header: 'Передвигайте числа', footer: '4 + 4 = 8' },
   { header: 'У вас отлично получается' },
-  { header: 'Прододжайте', footer: 'чтоб получить 2048' },
+  { header: 'Продолжайте', footer: 'чтоб получить 2048' },
 ]
 
 const guideInit = (() => {
