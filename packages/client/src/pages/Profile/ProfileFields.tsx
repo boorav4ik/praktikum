@@ -1,8 +1,7 @@
 import { TextField } from '@mui/material'
-import { FC } from 'react'
 import { ProfileValidateFieldsProps } from './interfaces'
 
-const ProfileFields: FC<ProfileValidateFieldsProps> = ({
+export function ProfileFields({
   label,
   name,
   disabled,
@@ -10,7 +9,7 @@ const ProfileFields: FC<ProfileValidateFieldsProps> = ({
   handleInputChange,
   handleInputBlur,
   error,
-}) => {
+}: ProfileValidateFieldsProps) {
   return (
     <TextField
       sx={{ width: '48%', height: 80 }}
@@ -26,5 +25,3 @@ const ProfileFields: FC<ProfileValidateFieldsProps> = ({
     />
   )
 }
-
-export default ProfileFields

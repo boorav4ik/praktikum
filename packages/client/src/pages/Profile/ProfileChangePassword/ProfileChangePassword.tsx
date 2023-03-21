@@ -6,7 +6,7 @@ import { validate } from '../../../utils/formInputValidators/validate'
 import { isEmptyObjField } from '../../../utils/isEmptyObject'
 import { EnumPasswordFields } from './enumInputFields'
 import { MapPasswordInputFields } from '../ProfileFieldsData'
-import ProfileChangePasswordFields from './ProfileChangePasswordFields'
+import { ProfileChangePasswordFields } from './ProfileChangePasswordFields'
 
 const style = {
   position: 'absolute',
@@ -42,7 +42,7 @@ export const ProfileChangePassword: FC<ProfileChangePasswordProps> =
       checkEmptyInputs,
     } = useInputsValidate(true, validate)
 
-    const changePassword = () => {
+    function changePassword() {
       const checkEmpty = [
         { field: EnumPasswordFields.oldPassword, value: values.oldPassword },
         { field: EnumPasswordFields.newPassword, value: values.newPassword },
@@ -72,6 +72,7 @@ export const ProfileChangePassword: FC<ProfileChangePasswordProps> =
         <Typography>Смена пароля</Typography>
         {MapPasswordInputFields.map(({ label, name }) => (
           <ProfileChangePasswordFields
+            key={name}
             label={label}
             name={name}
             value={values}

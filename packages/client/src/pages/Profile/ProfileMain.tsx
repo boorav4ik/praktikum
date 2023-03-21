@@ -1,19 +1,18 @@
 import { FC, ChangeEvent } from 'react'
 import { Box, Stack } from '@mui/material'
 import { MapProfileInputFields } from './ProfileFieldsData'
-import ProfileFields from './ProfileFields'
+import { ProfileFields } from './ProfileFields'
 import { useInputsValidate } from '../../hooks/useInputsValidate'
 import { validate } from '../../utils/formInputValidators/validate'
 import { useAuth } from '../../hooks/useAuth'
 import { deepEqual } from '../../utils/deepEqual'
 
-interface ProfileMainProps {
-  editStatus: string
-}
-
-export const ProfileMain: FC<ProfileMainProps> = ({ editStatus }) => {
-  const [{ user, userData }, { updateUserData }] = useAuth()
+export function ProfileMain() {
+  const [{ user, userData, editStatus }, { updateUserData }] = useAuth()
   const { errors = {}, handleInputBlur } = useInputsValidate(true, validate)
+
+  // console.log('ProfileMain editStatus = ', editStatus)
+  // console.log('ProfileMain userData = ', userData)
 
   return (
     <Box

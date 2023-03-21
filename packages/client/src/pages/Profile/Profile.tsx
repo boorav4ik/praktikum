@@ -1,5 +1,5 @@
 import { Box, Container, Modal } from '@mui/material'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { deepEqual } from '../../utils/deepEqual'
 import { ProfileFooter } from './ProfileFooter'
 import { ProfileHeader } from './ProfileHeader'
@@ -11,36 +11,35 @@ import { Button } from '../../components/Button'
 
 export function ProfilePage() {
   const [
-    { user, userData },
-    { changeProfile, changeAvatar, changePassword, updateUserData },
+    { user, userData, editStatus },
+    {
+      changeProfile,
+      changeAvatar,
+      changePassword,
+      updateUserData,
+      updateEditStatus,
+    },
   ] = useAuth()
-  const [editStatus, setEditStatus] = useState<string>('info')
   const [file, setFile] = useState<FileProps>()
   const [modal, setModal] = useState<boolean>(false)
 
-  const saveUserData = (newUserData: object | undefined, status: string) => {
-    if (status === 'cancel') {
-      console.log('cancel111')
+  useEffect(() => {
+    if (editStatus === 'cancel') {
       updateUserData(user!)
-      setEditStatus('info')
+      updateEditStatus('info')
       setFile({} as FileProps)
       return
     }
-
-    // const newData = { ...user!, ...newUserData }
-    // const checkUser = deepEqual(user, newData)
-    // if (!checkUser) {
-    //   changeProfile(newData)
-    // }
-    // if (file) {
-    //   changeAvatar(file)
-    // }
-    // setEditStatus('info')
-  }
-
-  const editFields = (status: string) => {
-    setEditStatus(status)
-  }
+    const checkUser = deepEqual(user, userData)
+    if (!checkUser && editStatus === 'save') {
+      changeProfile(userData!)
+      updateEditStatus('info')
+    }
+    if (file && editStatus === 'save') {
+      changeAvatar(file)
+      updateEditStatus('info')
+    }
+  }, [editStatus])
 
   const ChooseFile = (event: ChangeEvent<HTMLInputElement>) => {
     const reader = new FileReader()
@@ -48,7 +47,7 @@ export function ProfilePage() {
       if (!event.target.files) return
       setFile({ info: event.target?.files[0], data: reader.result })
       if (editStatus === 'info') {
-        editFields('edit')
+        updateEditStatus('edit')
       }
     }
     event.target.files instanceof FileList
@@ -80,16 +79,15 @@ export function ProfilePage() {
             handleChangePassword={changePassword}
           />
         </Modal>
-
         <ProfileHeader
           component="header"
           ChooseFile={ChooseFile}
           fileData={file ? file.data : ''}
           avatar={user!.avatar}
         />
-        <ProfileMain editStatus={editStatus} />
+        <ProfileMain />
         <Button onClick={() => setModal(prev => !prev)}>Изменить пароль</Button>
-        <ProfileFooter editStatus={editStatus} editFields={editFields} />
+        <ProfileFooter />
       </Box>
     </Container>
   )

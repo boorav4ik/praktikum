@@ -10,11 +10,11 @@ interface ProfileHeaderProps {
   avatar: string | null
 }
 
-export const ProfileHeader: FC<ProfileHeaderProps> = ({
+export function ProfileHeader({
   ChooseFile,
   fileData,
   avatar,
-}) => {
+}: ProfileHeaderProps) {
   return (
     <Box component="header">
       <label>
