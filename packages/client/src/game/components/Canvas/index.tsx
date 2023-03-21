@@ -2,9 +2,10 @@ import { useEffect, useRef } from 'react'
 import { useArrow } from './hooks/useArrow'
 import { useCells } from './hooks/useCells'
 import { clearCanvas, drawCells } from './utils/Canvas'
+import { EndGameDialog } from '../EndGameDialod'
 
 export function Canvas() {
-  const [cells, moveCells] = useCells()
+  const [cells, gameOver, moveCells, restart] = useCells()
 
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -19,5 +20,10 @@ export function Canvas() {
     }
   }, [...cells])
 
-  return <canvas width={500} height={500} ref={canvasRef} />
+  return (
+    <>
+      <canvas width={500} height={500} ref={canvasRef} />
+      <EndGameDialog open={gameOver} onRestartClick={restart} />
+    </>
+  )
 }
