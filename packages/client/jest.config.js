@@ -9,6 +9,7 @@ export default {
   transform: {
     '^.+\\.(ts|tsx|js|jsx|html|svg)$': 'ts-jest',
   },
+  setupFilesAfterEnv: ['./jest.setup.ts'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'html', 'svg'],
   coverageReporters: ['html'],
   globals: {
