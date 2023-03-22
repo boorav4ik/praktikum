@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import $host from '.'
-import { Login, User } from '../store/slices/auth/interfaces'
+import { Login, SignUp, User } from '../store/slices/auth/interfaces'
 import { ApiEndPoints } from './config'
 
 export const signin = createAsyncThunk(
@@ -18,7 +18,7 @@ export const signin = createAsyncThunk(
 
 export const signup = createAsyncThunk(
   'user/signup',
-  async (signUpData: User, thunkAPI) => {
+  async (signUpData: SignUp, thunkAPI) => {
     try {
       await $host.post(ApiEndPoints.Auth.SignUp, signUpData)
       const response = await $host.get<User[]>(ApiEndPoints.Auth.UserInfo)
