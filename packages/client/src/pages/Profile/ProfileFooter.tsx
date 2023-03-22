@@ -8,6 +8,7 @@ interface ProfileFooterProps {
   errors: object
   clearErrors: () => void
 }
+export function ProfileFooter({ editStatus, editFields }: ProfileFooterProps) {
 
 export function ProfileFooter({ errors, clearErrors }: ProfileFooterProps) {
   const navigate = useNavigate()

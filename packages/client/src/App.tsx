@@ -25,7 +25,8 @@ function App() {
           <Route path={Paths.Index} element={<Layouts.Main />}>
             <Route index element={<Pages.Home />} />
             <Route path={Paths.Login} element={<Pages.Login />} />
-            <Route path={Paths.Leaders} element={<Pages.Leader  />} />
+            <Route path={Paths.Leaders} element={<Pages.Leader />} />
+            <Route path={Paths.SignUp} element={<Pages.SignUp />} />
             <Route
               path={Paths.Profile}
               element={

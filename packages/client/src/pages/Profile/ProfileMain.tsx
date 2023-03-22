@@ -12,6 +12,7 @@ import { Button } from '../../components/Button'
 interface ProfileMainProps {
   setModal: () => void
 }
+export function ProfileMain({ user, editStatus, saveUserData, }: ProfileMainProps) {
 
 export function ProfileMain({ setModal }: ProfileMainProps) {
   const [{ user, userData, editStatus }, { updateUserData }] = useAuth()
