@@ -1,3 +1,4 @@
+import { SignUp } from './../../store/slices/auth/interfaces'
 import {
   FileProps,
   Login,
@@ -7,7 +8,7 @@ import {
 
 export interface AuthActions {
   signin: (authData: Login, callback: () => void) => void
-  signup: (signUpData: User, callback: () => void) => void
+  signup: (signUpData: SignUp, callback: () => void) => void
   signout: () => void
   changeProfile: (data: User) => void
   changeAvatar: (data: FileProps) => void

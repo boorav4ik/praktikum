@@ -12,6 +12,16 @@ export interface User {
   password: stringOrNull
 }
 
+export interface SignUp {
+  login: stringOrNull
+  display_name: stringOrNull
+  first_name: stringOrNull
+  second_name: stringOrNull
+  phone: stringOrNull
+  email: stringOrNull
+  password: stringOrNull
+}
+
 export interface Login {
   login: string
   password: string
