@@ -1,12 +1,12 @@
 import { Box, Typography } from '@mui/material'
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { Button } from '../../../components/Button'
 import { useInputsValidate } from '../../../hooks/useInputsValidate'
+import { MapPasswordInputFields } from '../ProfileFieldsData'
+import { ProfileChangePasswordFields } from './ProfileChangePasswordFields'
 import { validate } from '../../../utils/formInputValidators/validate'
 import { isEmptyObjField } from '../../../utils/isEmptyObject'
 import { EnumPasswordFields } from './enumInputFields'
-import { MapPasswordInputFields } from '../ProfileFieldsData'
-import { ProfileChangePasswordFields } from './ProfileChangePasswordFields'
 
 const style = {
   position: 'absolute',
