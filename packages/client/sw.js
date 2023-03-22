@@ -50,5 +50,5 @@ const getFromCache = (req) => {
   })
 }
 self.addEventListener('fetch', event => {
-  event.respondWith(tryNetwork(event.request, 2000).catch(() => getFromCache(event.request)))
+  event.respondWith(tryNetwork(event.request, 60000).catch(() => getFromCache(event.request)))
 })
