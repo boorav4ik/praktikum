@@ -9,6 +9,7 @@ export interface User {
   phone?: stringOrNull
   email?: stringOrNull
   avatar?: stringOrNull
+  password?: stringOrNull
 }
 
 export interface Login {

@@ -1,5 +1,5 @@
 import { Box, Container, Modal } from '@mui/material'
-import { ChangeEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import { deepEqual } from '../../utils/deepEqual'
 import { ProfileHeader } from './ProfileHeader'
 import { ProfileMain } from './ProfileMain'
@@ -76,10 +76,12 @@ export function ProfilePage() {
           onClose={setModal}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description">
-          <ProfileChangePassword
-            handleModal={setModal}
-            handleChangePassword={changePassword}
-          />
+          <>
+            <ProfileChangePassword
+              handleModal={setModal}
+              handleChangePassword={changePassword}
+            />
+          </>
         </Modal>
         <ProfileHeader
           component="header"

@@ -32,62 +32,64 @@ interface ProfileChangePasswordProps {
   }) => void
 }
 
-export const ProfileChangePassword: FC<ProfileChangePasswordProps> =
-  React.forwardRef(({ handleModal, handleChangePassword }, ref) => {
-    const {
-      values,
-      handleInputChange,
-      errors,
-      handleInputBlur,
-      checkEmptyInputs,
-    } = useInputsValidate(true, validate)
+export const ProfileChangePassword: FC<ProfileChangePasswordProps> = ({
+  handleModal,
+  handleChangePassword,
+}) => {
+  const {
+    values,
+    handleInputChange,
+    errors,
+    handleInputBlur,
+    checkEmptyInputs,
+  } = useInputsValidate(true, validate)
 
-    function changePassword() {
-      const checkEmpty = [
-        { field: EnumPasswordFields.oldPassword, value: values.oldPassword },
-        { field: EnumPasswordFields.newPassword, value: values.newPassword },
-        {
-          field: EnumPasswordFields.confirmPassword,
-          value: values.confirmPassword,
-        },
-      ].reduce((acc, { field, value }) => {
-        return !value ? { ...acc, ...{ [field]: value } } : acc
-      }, {} as any)
+  function changePassword() {
+    const checkEmpty = [
+      { field: EnumPasswordFields.oldPassword, value: values.oldPassword },
+      { field: EnumPasswordFields.newPassword, value: values.newPassword },
+      {
+        field: EnumPasswordFields.confirmPassword,
+        value: values.confirmPassword,
+      },
+    ].reduce((acc, { field, value }) => {
+      return !value ? { ...acc, ...{ [field]: value } } : acc
+    }, {} as any)
 
-      if (Object.keys(checkEmpty).length > 0) {
-        checkEmptyInputs(checkEmpty)
-        return
-      }
-
-      if (isEmptyObjField(errors)) {
-        handleChangePassword({
-          oldPassword: values.oldPassword,
-          newPassword: values.newPassword,
-        })
-      }
+    if (Object.keys(checkEmpty).length > 0) {
+      checkEmptyInputs(checkEmpty)
+      return
     }
 
-    return (
-      <Box sx={style} ref={ref}>
-        <Typography>Смена пароля</Typography>
-        {MapPasswordInputFields.map(({ label, name }) => (
-          <ProfileChangePasswordFields
-            key={name}
-            label={label}
-            name={name}
-            value={values}
-            handleInputChange={handleInputChange}
-            handleInputBlur={handleInputBlur}
-            error={errors[name as keyof typeof errors]}
-            disabled={false}
-          />
-        ))}
-        <Button sx={{ width: '70%', m: 5 }} onClick={changePassword}>
-          Изменить
-        </Button>
-        <Button sx={{ width: '70%' }} onClick={() => handleModal(false)}>
-          Отмена
-        </Button>
-      </Box>
-    )
-  })
+    if (isEmptyObjField(errors)) {
+      handleChangePassword({
+        oldPassword: values.oldPassword,
+        newPassword: values.newPassword,
+      })
+    }
+  }
+
+  return (
+    <Box sx={style}>
+      <Typography>Смена пароля</Typography>
+      {MapPasswordInputFields.map(({ label, name }) => (
+        <ProfileChangePasswordFields
+          key={name}
+          label={label}
+          name={name}
+          value={values}
+          handleInputChange={handleInputChange}
+          handleInputBlur={handleInputBlur}
+          error={errors[name as keyof typeof errors]}
+          disabled={false}
+        />
+      ))}
+      <Button sx={{ width: '70%', m: 5 }} onClick={changePassword}>
+        Изменить
+      </Button>
+      <Button sx={{ width: '70%' }} onClick={() => handleModal(false)}>
+        Отмена
+      </Button>
+    </Box>
+  )
+}
