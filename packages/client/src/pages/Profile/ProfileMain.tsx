@@ -46,7 +46,7 @@ export function ProfileMain({ setModal }: ProfileMainProps) {
               value={userData![name as keyof typeof userData]}
               handleInputChange={(event: ChangeEvent<HTMLInputElement>) =>
                 updateUserData({
-                  ...userData,
+                  ...userData!,
                   ...{ [name]: event.target.value as string },
                 })
               }
