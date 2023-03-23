@@ -4,6 +4,7 @@ import { DoubleTypography } from './DoubleTypography'
 export function GameBoard() {
   return (
     <Box
+      bgcolor="background.paper"
       sx={{
         height: 540,
         width: 540,

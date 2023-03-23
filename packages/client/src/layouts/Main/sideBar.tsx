@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import { Link } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import List from '@mui/material/List'
@@ -52,10 +51,10 @@ function NanListItem({ icon, text, to, isExpanded }: NanListItemProps) {
   )
 }
 
-export const SideBar: FC<SideBarProps> = ({ open = false }) => {
-  const [{ user }, { signout }] = useAuth()
+export function SideBar({ open = false }: SideBarProps) {
+    const [{ user }, { signout }] = useAuth()
 
-  return (
+       return (
     <List>
       <Box
         component="div"
