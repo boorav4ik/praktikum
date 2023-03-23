@@ -1,26 +1,26 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import $host from '.'
+import host from './config'
 import {
-  ChangePassword,
+  ChangePasswordProps,
   FileProps,
   User,
 } from '../store/slices/auth/interfaces'
 import { ApiEndPoints } from './config'
 
-export const getUser = createAsyncThunk('user/getuser', async (_, thunkAPI) => {
+export const GetUser = createAsyncThunk('user/getuser', async (_, thunkAPI) => {
   try {
-    const response = await $host.get<User[]>(ApiEndPoints.Auth.UserInfo)
+    const response = await host.get<User[]>(ApiEndPoints.Auth.UserInfo)
     return response.data
   } catch (e) {
     return thunkAPI.rejectWithValue('Не удалось получить данные пользователя')
   }
 })
 
-export const changeProfile = createAsyncThunk(
+export const ChangeProfile = createAsyncThunk(
   'user/changeProfile',
   async (data: User, thunkAPI) => {
     try {
-      const response = await $host.put<User[]>(
+      const response = await host.put<User[]>(
         ApiEndPoints.User.UpdateProfile,
         data
       )
@@ -31,7 +31,7 @@ export const changeProfile = createAsyncThunk(
   }
 )
 
-export const changeAvatar = createAsyncThunk(
+export const ChangeAvatar = createAsyncThunk(
   'user/changeAvatar',
   async (data: FileProps, thunkAPI) => {
     try {
@@ -42,7 +42,7 @@ export const changeAvatar = createAsyncThunk(
       }
       const formData = new FormData()
       formData.append('avatar', data.info as Blob)
-      const response = await $host.put<User[]>(
+      const response = await host.put<User[]>(
         ApiEndPoints.User.UpdateProfileAvatar,
         formData,
         config
@@ -54,11 +54,11 @@ export const changeAvatar = createAsyncThunk(
   }
 )
 
-export const changePassword = createAsyncThunk(
+export const ChangePassword = createAsyncThunk(
   'user/changePassword',
-  async (data: ChangePassword, thunkAPI) => {
+  async (data: ChangePasswordProps, thunkAPI) => {
     try {
-      const response = await $host.put<User[]>(
+      const response = await host.put<User[]>(
         ApiEndPoints.User.UpdatePassword,
         data
       )

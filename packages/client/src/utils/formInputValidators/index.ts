@@ -17,4 +17,5 @@ export const initialState = {
   oldPassword: '',
   newPassword: '',
   confirmPassword: '',
+  phone: '',
 }

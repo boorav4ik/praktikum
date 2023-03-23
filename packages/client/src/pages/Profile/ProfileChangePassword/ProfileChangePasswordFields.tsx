@@ -8,6 +8,7 @@ export function ProfileChangePasswordFields({
   handleInputChange,
   handleInputBlur,
   error,
+  errorText,
 }: ProfileValidateFieldsProps) {
   return (
     <TextField
@@ -16,11 +17,11 @@ export function ProfileChangePasswordFields({
       name={name}
       type="password"
       variant="filled"
-      value={value[name as keyof typeof value]}
+      value={value![name as keyof typeof value]}
       onChange={handleInputChange}
       onBlur={handleInputBlur}
-      error={error && error.length ? true : false}
-      helperText={error}
+      error={error}
+      helperText={errorText}
     />
   )
 }

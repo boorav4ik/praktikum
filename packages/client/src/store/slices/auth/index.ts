@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { getUser, changeProfile, changeAvatar } from '../../../api/user'
+import { GetUser, ChangeProfile, ChangeAvatar } from '../../../api/user'
 import { signin, signout, signup } from '../../../api/auth'
 import { Nullable } from '../../../utils/nullableType'
 import { FileProps, User } from './interfaces'
@@ -71,40 +71,40 @@ export const authSlise = createSlice({
       state.isLoading = false
       state.error = action.payload
     },
-    [getUser.fulfilled.type]: (state, action: PayloadAction<User>) => {
+    [GetUser.fulfilled.type]: (state, action: PayloadAction<User>) => {
       state.isLoading = false
       state.error = ''
       state.user = action.payload
       state.userData = action.payload
     },
-    [getUser.pending.type]: state => {
+    [GetUser.pending.type]: state => {
       state.isLoading = true
     },
-    [getUser.rejected.type]: (state, action: PayloadAction<string>) => {
+    [GetUser.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false
       state.error = action.payload
     },
-    [changeProfile.fulfilled.type]: (state, action: PayloadAction<User>) => {
+    [ChangeProfile.fulfilled.type]: (state, action: PayloadAction<User>) => {
       state.isLoading = false
       state.error = ''
       state.user = action.payload
     },
-    [changeProfile.pending.type]: state => {
+    [ChangeProfile.pending.type]: state => {
       state.isLoading = true
     },
-    [changeProfile.rejected.type]: (state, action: PayloadAction<string>) => {
+    [ChangeProfile.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false
       state.error = action.payload
     },
-    [changeAvatar.fulfilled.type]: (state, action: PayloadAction<User>) => {
+    [ChangeAvatar.fulfilled.type]: (state, action: PayloadAction<User>) => {
       state.isLoading = false
       state.error = ''
       state.user = action.payload
     },
-    [changeAvatar.pending.type]: state => {
+    [ChangeAvatar.pending.type]: state => {
       state.isLoading = true
     },
-    [changeAvatar.rejected.type]: (state, action: PayloadAction<string>) => {
+    [ChangeAvatar.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false
       state.error = action.payload
     },

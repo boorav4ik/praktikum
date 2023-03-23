@@ -52,9 +52,11 @@ export const ProfileChangePassword: FC<ProfileChangePasswordProps> = ({
         field: EnumPasswordFields.confirmPassword,
         value: values.confirmPassword,
       },
-    ].reduce((acc, { field, value }) => {
-      return !value ? { ...acc, ...{ [field]: value } } : acc
-    }, {} as any)
+    ].reduce(
+      (acc, { field, value }) =>
+        !value ? { ...acc, ...{ [field]: value } } : acc,
+      {} as any
+    )
 
     if (Object.keys(checkEmpty).length > 0) {
       checkEmptyInputs(checkEmpty)
@@ -80,7 +82,8 @@ export const ProfileChangePassword: FC<ProfileChangePasswordProps> = ({
           value={values}
           handleInputChange={handleInputChange}
           handleInputBlur={handleInputBlur}
-          error={errors[name as keyof typeof errors]}
+          error={errors[name] !== ''}
+          errorText={errors[name]}
           disabled={false}
         />
       ))}

@@ -8,7 +8,8 @@ export function ProfileFields({
   value,
   handleInputChange,
   handleInputBlur,
-  error,
+  error = false,
+  errorText,
 }: ProfileValidateFieldsProps) {
   return (
     <TextField
@@ -20,8 +21,8 @@ export function ProfileFields({
       value={value || ''}
       onChange={handleInputChange}
       onBlur={handleInputBlur}
-      error={error && error.length ? true : false}
-      helperText={error}
+      error={error}
+      helperText={errorText}
     />
   )
 }

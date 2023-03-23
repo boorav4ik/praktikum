@@ -11,7 +11,7 @@ export const MapPasswordInputFields = [
     name: 'confirmPassword',
     label: 'Confirm Password',
   },
-]
+] as const
 
 export const MapProfileInputFields = [
   {
@@ -38,4 +38,4 @@ export const MapProfileInputFields = [
     name: 'phone',
     label: 'Телефон',
   },
-]
+] as const

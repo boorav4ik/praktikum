@@ -8,4 +8,5 @@ export interface ValidateProps {
   oldPassword: string
   newPassword: string
   confirmPassword: string
+  phone: string
 }

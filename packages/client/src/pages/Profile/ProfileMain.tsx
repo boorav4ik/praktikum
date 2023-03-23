@@ -43,7 +43,7 @@ export function ProfileMain({ setModal }: ProfileMainProps) {
               disabled={editStatus === 'info'}
               label={label}
               name={name}
-              value={userData![name as keyof typeof userData]}
+              value={userData![name]}
               handleInputChange={(event: ChangeEvent<HTMLInputElement>) =>
                 updateUserData({
                   ...userData!,
@@ -51,11 +51,8 @@ export function ProfileMain({ setModal }: ProfileMainProps) {
                 })
               }
               handleInputBlur={handleInputBlur}
-              error={
-                deepEqual(user, userData)
-                  ? ''
-                  : errors[name as keyof typeof errors]
-              }
+              error={user![name] !== userData![name]}
+              errorText={errors[name]}
             />
           ))}
         </Stack>
