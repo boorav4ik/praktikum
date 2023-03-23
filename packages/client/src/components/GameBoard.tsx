@@ -8,7 +8,7 @@ export function GameBoard() {
       sx={{
         height: 540,
         width: 540,
-        borderRadius: 16,
+        borderRadius: 2,
         border: '3px solid #1E515D',
         display: 'flex',
         flexDirection: 'column',

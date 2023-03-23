@@ -8,6 +8,7 @@ import { Button } from '@mui/material'
 import backgroundImage from './icons/background.svg'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
+import { LoginButtons } from './loginButtons'
 
 function NavItem({ text, ...rest }: { text: string; to: string }) {
   return (
@@ -44,7 +45,8 @@ export const NavBar = () => {
   return (
     <AppBar
       position="fixed"
-      style={{ backgroundImage: `url(${backgroundImage})` }}>
+      style={{ backgroundImage: `url(${backgroundImage})` }}
+      sx={{ display: { xs: 'none', md: 'flex' } }}>
       <Toolbar>
         <Typography
           variant="h6"
@@ -59,17 +61,7 @@ export const NavBar = () => {
         {menuData.map(value => (
           <NavItem key={value.text} {...value} />
         ))}
-        <Button
-          key="auth"
-          sx={{
-            fontWeight: 'bold',
-            fontSize: '0.975rem',
-          }}
-          onClick={() => user && signout()}
-          component={Link}
-          to="/login">
-          {user ? 'Выйти' : 'Войти'}
-        </Button>
+        <LoginButtons />
       </Toolbar>
     </AppBar>
   )

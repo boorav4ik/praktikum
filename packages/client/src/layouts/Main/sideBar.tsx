@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import { Link } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import List from '@mui/material/List'
@@ -8,7 +7,9 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import { menuData } from './drawerBarData'
 import AvatarIcon from '../../layouts/Main/icons/AvatarIcon'
-import { AuthButton } from './AuthButton'
+import { LinkButton } from '../../components/LinkButton'
+import { Routes } from '../../utils/routes'
+import { useAuth } from '../../hooks/useAuth'
 
 interface SideBarProps {
   open?: boolean
@@ -51,7 +52,9 @@ function NanListItem({ icon, text, to, isExpanded }: NanListItemProps) {
 }
 
 export function SideBar({ open = false }: SideBarProps) {
-        return (
+  const [{ user }, { signout }] = useAuth()
+
+  return (
     <List>
       <Box
         component="div"
@@ -79,7 +82,12 @@ export function SideBar({ open = false }: SideBarProps) {
             open={open}
           />
         </Box>
-        <AuthButton isExpanded={open} />
+        <LinkButton
+          onClick={() => user && signout()}
+          sx={{ width: '95%' }}
+          to={`/${Routes.Login}`}>
+          {user ? 'Выйти' : 'Войти'}
+        </LinkButton>
       </Box>
       <Box
         component="div"
