@@ -8,7 +8,6 @@ interface ProfileFooterProps {
   editFields: (status: string) => void
 }
 export function ProfileFooter({ editStatus, editFields }: ProfileFooterProps) {
-
   const navigate = useNavigate()
 
   const checkCancel = () => {

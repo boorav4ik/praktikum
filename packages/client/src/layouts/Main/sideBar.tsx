@@ -52,9 +52,9 @@ function NanListItem({ icon, text, to, isExpanded }: NanListItemProps) {
 }
 
 export function SideBar({ open = false }: SideBarProps) {
-    const [{ user }, { signout }] = useAuth()
+  const [{ user }, { signout }] = useAuth()
 
-       return (
+  return (
     <List>
       <Box
         component="div"

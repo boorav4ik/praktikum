@@ -24,7 +24,9 @@ export function ProfileHeader({ onChooseFile, fileData }: ProfileHeaderProps) {
           accept="image/*"
           type="file"
           style={{ display: 'none' }}
-          onChange={(event: ChangeEvent<HTMLInputElement>) => onChooseFile(event)}
+          onChange={(event: ChangeEvent<HTMLInputElement>) =>
+            onChooseFile(event)
+          }
         />
       </label>
     </Box>
