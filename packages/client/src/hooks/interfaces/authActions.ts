@@ -3,7 +3,7 @@ import {
   FileProps,
   Login,
   User,
-  ChangePassword,
+  ChangePasswordProps,
 } from '../../store/slices/auth/interfaces'
 
 export interface AuthActions {
@@ -12,7 +12,7 @@ export interface AuthActions {
   signout: () => void
   changeProfile: (data: User) => void
   changeAvatar: (data: FileProps) => void
-  changePassword: (data: ChangePassword) => void
+  changePassword: (data: ChangePasswordProps) => void
   getUser: () => void
   updateUserData: (data: User) => void
   updateEditStatus: (data: string) => void
