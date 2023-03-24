@@ -19,7 +19,7 @@ export const DrawerHeader: FC<SideBarProps> = ({ open, toggleDrawer }) => {
   }))
 
   return (
-    <DrawerHeader sx={{ mt: 12, zIndex: 1 }}>
+    <DrawerHeader sx={{ mt: 0, zIndex: 1 }}>
       <IconButton onClick={toggleDrawer}>
         {open ? <LeftArrow /> : <RightArrow />}
       </IconButton>

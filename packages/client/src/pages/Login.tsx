@@ -40,7 +40,7 @@ export function LoginPage() {
           onSubmit={handleSubmit}
           bgcolor="background.paper"
           sx={{
-            borderRadius: 16,
+            borderRadius: 2,
             border: '3px solid #1E515D',
             display: 'flex',
             flexDirection: 'column',
