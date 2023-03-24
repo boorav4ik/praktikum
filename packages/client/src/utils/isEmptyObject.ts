@@ -6,10 +6,8 @@ export const isEmptyObjField = (obj: object) => {
     const key = keys[i]
     const elementAreObject = typeof obj[key as keyof typeof obj]
 
-    if (elementAreObject !== 'object') {
-      if (obj[key as keyof typeof obj] !== '') {
-        return false
-      }
+    if (elementAreObject !== 'object' && obj[key as keyof typeof obj] !== '') {
+      return false
     }
     if (
       elementAreObject === 'object' &&

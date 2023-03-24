@@ -19,7 +19,7 @@ export function ProfileHeader({
     <Box component="header">
       <label>
         <AvatarBox
-          src={fileData ? (fileData as string) : `${AvatarHost}${avatar}`}
+          src={(fileData ?? `${AvatarHost}${avatar}`) as string}
           sx={{
             width: '100px',
             height: '100px',
@@ -31,9 +31,7 @@ export function ProfileHeader({
           accept="image/*"
           type="file"
           style={{ display: 'none' }}
-          onChange={(event: ChangeEvent<HTMLInputElement>) =>
-            onChooseFile(event)
-          }
+          onChange={onChooseFile}
         />
       </label>
     </Box>
