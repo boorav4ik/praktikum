@@ -32,10 +32,10 @@ interface ProfileChangePasswordProps {
   }) => void
 }
 
-export const ProfileChangePassword: FC<ProfileChangePasswordProps> = ({
+export function ProfileChangePassword({
   handleModal,
   handleChangePassword,
-}) => {
+}: ProfileChangePasswordProps) {
   const {
     values,
     handleInputChange,
