@@ -1,27 +1,27 @@
 import { Nullable } from '../../../utils/nullableType'
 
-type stringOrNull = string | null
+type NullableString = Nullable<string>
 
 export interface User {
   id: number
-  login: Nullable<string>
-  display_name: Nullable<string>
-  first_name: Nullable<string>
-  second_name: Nullable<string>
-  phone: Nullable<string>
-  email: Nullable<string>
-  avatar: Nullable<string>
-  password: Nullable<string>
+  login: NullableString
+  display_name: NullableString
+  first_name: NullableString
+  second_name: NullableString
+  phone: NullableString
+  email: NullableString
+  avatar: NullableString
+  password: NullableString
 }
 
 export interface SignUp {
-  login: Nullable<string>
-  display_name: Nullable<string>
-  first_name: Nullable<string>
-  second_name: Nullable<string>
-  phone: Nullable<string>
-  email: Nullable<string>
-  password: Nullable<string>
+  login: NullableString
+  display_name: NullableString
+  first_name: NullableString
+  second_name: NullableString
+  phone: NullableString
+  email: NullableString
+  password: NullableString
 }
 
 export interface Login {
