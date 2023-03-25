@@ -18,7 +18,17 @@
     "rootDir": "./src/",
     "baseUrl": "./src/",
     "paths": {
-      "storeAuth/*": ["store/slices/auth/*"]
+      "storeAuth/*": ["store/slices/auth/*"],
+      "api/*": ["api/*"],
+      "pages/*": ["pages/*"],
+      "layouts/*": ["layouts/*"],
+      "components/*": ["components/*"],
+      "static/*": ["static/*"],
+      "utils/*": ["utils/*"],
+      "tests/*": ["tests/*"],
+      "hoks/*": ["hoks/*"],
+      "hooks/*": ["hooks/*"],
+      "store/*": ["store/*"]
     }
   },
   "include": ["src"],

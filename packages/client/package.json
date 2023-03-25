@@ -17,9 +17,9 @@
     "components": "./src/components",
     "utils": "./src/utils",
     "static": "./src/static",
-    "hocs": "./src/hocs",
+    "hoks": "./src/hoks",
     "hooks": "./src/hooks",
-    "storeAuth": "./src/store/slices/auth"
+    "store": "./src/store"
   },
   "dependencies": {
     "@emotion/react": "11.10.6",

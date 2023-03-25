@@ -4,7 +4,7 @@ import App from './App'
 import { theme } from './themes/main'
 import { CssBaseline, ThemeProvider } from '@mui/material'
 import { Provider } from 'react-redux'
-import { store } from 'store'
+import { store } from './store'
 import './index.css'
 function startServiceWorker() {
   if ('serviceWorker' in navigator) {
