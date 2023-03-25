@@ -1,5 +1,5 @@
 import { Box, Container } from '@mui/material'
-import { GameBoard } from '../../components/GameBoard'
+import { GameBoard } from 'components/GameBoard'
 import { Description } from './Description'
 
 export function MainPage() {

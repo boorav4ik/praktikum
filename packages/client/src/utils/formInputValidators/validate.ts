@@ -1,4 +1,4 @@
-import { ValidateProps } from '../../hooks/interfaces/useInputsValidate'
+import { ValidateProps } from 'hooks/interfaces/useInputsValidate'
 import {
   validateEmailRegex,
   validateLoginRegex,

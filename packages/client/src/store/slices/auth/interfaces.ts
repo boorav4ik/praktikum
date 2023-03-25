@@ -1,4 +1,4 @@
-import { Nullable } from '../../../utils/nullableType'
+import { Nullable } from 'utils/nullableType'
 
 type NullableString = Nullable<string>
 

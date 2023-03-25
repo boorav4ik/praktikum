@@ -1,7 +1,7 @@
-import { useAuth } from '../../../hooks/useAuth'
+import { useAuth } from 'hooks/useAuth'
 import { Box } from '@mui/material'
-import { LinkButton } from '../../../components/LinkButton'
-import { Routes } from '../../../utils/routes'
+import { LinkButton } from 'components/LinkButton'
+import { Routes } from 'utils/routes'
 
 export function LoginButtons() {
   const [{ user }, { signout }] = useAuth()

@@ -1,10 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import host from './config'
-import {
-  ChangePasswordProps,
-  FileProps,
-  User,
-} from '../store/slices/auth/interfaces'
+import { ChangePasswordProps, FileProps, User } from 'storeAuth/interfaces'
 import { ApiEndPoints } from './config'
 
 export const GetUser = createAsyncThunk('user/getuser', async (_, thunkAPI) => {

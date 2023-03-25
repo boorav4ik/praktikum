@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Box, Container, Grid } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
-import { HeaderForPage } from '../../components/forum/HeaderForPage'
-import { ForumRow } from '../../components/forum/ForumRow'
-import { ChatSmileIcon } from '../../components/forum/icons/ChatSmileIcon'
+import { HeaderForPage } from 'components/forum/HeaderForPage'
+import { ForumRow } from 'components/forum/ForumRow'
+import { ChatSmileIcon } from 'components/forum/icons/ChatSmileIcon'
 import { defaultThemes } from '../../mocs/forum'
 
 export type ForumTheme = {

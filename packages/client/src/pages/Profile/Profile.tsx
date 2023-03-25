@@ -1,12 +1,12 @@
 import { Box, Container, Modal } from '@mui/material'
-import React, { ChangeEvent, useEffect, useState } from 'react'
-import { deepEqual } from '../../utils/deepEqual'
+import { ChangeEvent, useEffect, useState } from 'react'
+import { deepEqual } from 'utils/deepEqual'
 import { ProfileHeader } from './ProfileHeader'
 import { ProfileMain } from './ProfileMain'
-import { useAuth } from '../../hooks/useAuth'
+import { useAuth } from 'hooks/useAuth'
 import { ProfileChangePassword } from './ProfileChangePassword/ProfileChangePassword'
-import { FileProps } from '../../store/slices/auth/interfaces'
-import { isEmptyObjField } from '../../utils/isEmptyObject'
+import { FileProps } from 'storeAuth/interfaces'
+import { isEmptyObjField } from 'utils/isEmptyObject'
 
 export function ProfilePage() {
   const [
