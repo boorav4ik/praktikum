@@ -1,39 +1,47 @@
-import { Box, Container } from '@mui/material'
-import { ChangeEvent, useState } from 'react'
+import { Box, Container, Modal } from '@mui/material'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import { deepEqual } from '../../utils/deepEqual'
-import { ProfileFooter } from './ProfileFooter'
 import { ProfileHeader } from './ProfileHeader'
 import { ProfileMain } from './ProfileMain'
 import { useAuth } from '../../hooks/useAuth'
-
-interface FileProps {
-  data: string | ArrayBuffer | null
-  info: File
-}
+import { ProfileChangePassword } from './ProfileChangePassword/ProfileChangePassword'
+import { FileProps } from '../../store/slices/auth/interfaces'
+import { isEmptyObjField } from '../../utils/isEmptyObject'
 
 export function ProfilePage() {
-  const [{ user }, { changeProfile }] = useAuth()
-  const [editStatus, setEditStatus] = useState<string>('info')
+  const [
+    { user, userData, editStatus },
+    {
+      changeProfile,
+      changeAvatar,
+      changePassword,
+      updateUserData,
+      updateEditStatus,
+    },
+  ] = useAuth()
   const [file, setFile] = useState<FileProps>()
+  const [modal, setModal] = useState<boolean>(false)
 
-  const saveUserData = (newUserData: object | undefined, status: string) => {
-    if (status === 'cancel') {
-      setEditStatus('info')
-      console.log('Отмена изменений. Ждем redux')
+  useEffect(() => {
+    if (editStatus === 'cancel') {
+      updateUserData(user!)
+      updateEditStatus('info')
+      setFile({} as FileProps)
       return
     }
-
-    const newData = { ...user!, ...newUserData }
-    const checkUser = deepEqual(user, newData)
-    if (!checkUser || file) {
-      changeProfile(newData)
+    const checkUser = deepEqual(user, userData)
+    if (checkUser && editStatus === 'save') {
+      updateEditStatus('info')
     }
-    setEditStatus('info')
-  }
-
-  const editFields = (status: string) => {
-    setEditStatus(status)
-  }
+    if (!checkUser && editStatus === 'save') {
+      changeProfile(userData!)
+      updateEditStatus('info')
+    }
+    if (file && !isEmptyObjField(file! as object) && editStatus === 'save') {
+      changeAvatar(file!)
+      updateEditStatus('info')
+    }
+  }, [editStatus])
 
   const onChooseFile = (event: ChangeEvent<HTMLInputElement>) => {
     const reader = new FileReader()
@@ -41,7 +49,7 @@ export function ProfilePage() {
       if (!event.target.files) return
       setFile({ info: event.target?.files[0], data: reader.result })
       if (editStatus === 'info') {
-        editFields('edit')
+        updateEditStatus('edit')
       }
     }
     event.target.files instanceof FileList
@@ -63,17 +71,25 @@ export function ProfilePage() {
           border: '3px solid #1E515D',
           p: 3,
         }}>
+        <Modal
+          open={modal}
+          onClose={setModal}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description">
+          <>
+            <ProfileChangePassword
+              handleModal={setModal}
+              handleChangePassword={changePassword}
+            />
+          </>
+        </Modal>
         <ProfileHeader
           component="header"
           onChooseFile={onChooseFile}
           fileData={file ? file.data : ''}
+          avatar={user!.avatar}
         />
-        <ProfileMain
-          user={user ?? {}}
-          editStatus={editStatus}
-          saveUserData={saveUserData}
-        />
-        <ProfileFooter editStatus={editStatus} editFields={editFields} />
+        <ProfileMain setModal={() => setModal(prev => !prev)} />
       </Box>
     </Container>
   )

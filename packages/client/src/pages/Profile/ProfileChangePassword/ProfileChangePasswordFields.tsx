@@ -1,24 +1,23 @@
 import { TextField } from '@mui/material'
-import { ProfileValidateFieldsProps } from './interfaces'
+import { ProfileValidateFieldsProps } from '../interfaces'
 
-export function ProfileFields({
+export function ProfileChangePasswordFields({
   label,
   name,
-  disabled,
   value,
   handleInputChange,
   handleInputBlur,
-  error = false,
+  error,
   errorText,
 }: ProfileValidateFieldsProps) {
   return (
     <TextField
-      sx={{ width: '48%', height: 80 }}
+      sx={{ width: '90%', m: 2, mt: 4, height: 40 }}
       label={label}
       name={name}
-      disabled={disabled}
+      type="password"
       variant="filled"
-      value={value || ''}
+      value={value![name as keyof typeof value]}
       onChange={handleInputChange}
       onBlur={handleInputBlur}
       error={error}

@@ -1,14 +1,27 @@
-type stringOrNull = string | null
+import { Nullable } from '../../../utils/nullableType'
+
+type NullableString = Nullable<string>
 
 export interface User {
   id: number
-  login: stringOrNull
-  display_name: stringOrNull
-  first_name: stringOrNull
-  second_name: stringOrNull
-  phone: stringOrNull
-  email: stringOrNull
-  avatar: stringOrNull
+  login: NullableString
+  display_name: NullableString
+  first_name: NullableString
+  second_name: NullableString
+  phone: NullableString
+  email: NullableString
+  avatar: NullableString
+  password: NullableString
+}
+
+export interface SignUp {
+  login: NullableString
+  display_name: NullableString
+  first_name: NullableString
+  second_name: NullableString
+  phone: NullableString
+  email: NullableString
+  password: NullableString
 }
 
 export interface Login {
@@ -16,10 +29,12 @@ export interface Login {
   password: string
 }
 
-export interface SignUp extends Login {
-  first_name: string
-  second_name: string
-  display_name: string
-  email: string
-  phone: string
+export interface ChangePasswordProps {
+  oldPassword: string
+  newPassword: string
+}
+
+export interface FileProps {
+  data: string | ArrayBuffer | null
+  info: File
 }

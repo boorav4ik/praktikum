@@ -1,29 +1,26 @@
-import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Box } from '@mui/material'
 import { Button } from '../../components/Button'
+import { useAuth } from '../../hooks/useAuth'
+import { isEmptyObjField } from '../../utils/isEmptyObject'
 
 interface ProfileFooterProps {
-  editStatus: string
-  editFields: (status: string) => void
+  errors: object
+  clearErrors: () => void
 }
-export function ProfileFooter({ editStatus, editFields }: ProfileFooterProps) {
+
+export function ProfileFooter({ errors, clearErrors }: ProfileFooterProps) {
   const navigate = useNavigate()
+  const [{ editStatus }, { updateEditStatus }] = useAuth()
 
   const checkCancel = () => {
-    if (editStatus === 'info') {
-      navigate('/')
-      return
-    }
-    editFields('cancel')
+    editStatus === 'info'
+      ? navigate('/')
+      : (clearErrors(), updateEditStatus('cancel'))
   }
 
   const checkSave = () => {
-    if (editStatus === 'info') {
-      editFields('edit')
-      return
-    }
-    editFields('save')
+    editStatus === 'info' ? updateEditStatus('edit') : updateEditStatus('save')
   }
 
   return (
@@ -33,8 +30,9 @@ export function ProfileFooter({ editStatus, editFields }: ProfileFooterProps) {
         width: '100%',
         display: 'flex',
         justifyContent: 'space-around',
+        mt: 2,
       }}>
-      <Button onClick={checkSave}>
+      <Button onClick={checkSave} disabled={!isEmptyObjField(errors)}>
         {editStatus === 'info' ? 'Редактировать' : 'Сохранить'}
       </Button>
       <Button onClick={checkCancel}>

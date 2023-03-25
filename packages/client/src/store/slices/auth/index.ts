@@ -1,16 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { getUser, signin, signout, signup } from '../../../api/userApi'
+import { GetUser, ChangeProfile, ChangeAvatar } from '../../../api/user'
+import { signin, signout, signup } from '../../../api/auth'
 import { Nullable } from '../../../utils/nullableType'
-import { User } from './interfaces'
+import { FileProps, User } from './interfaces'
 
 export type AuthState = {
   user: Nullable<User>
+  userData: Nullable<User>
+  editStatus: string
   isLoading: boolean
   error?: string
 }
 
 const initialState: AuthState = {
   user: null,
+  userData: null,
+  editStatus: 'info',
   isLoading: false,
 }
 
@@ -18,9 +23,11 @@ export const authSlise = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    changeProfile(state, action) {
-      state.user = { ...state.user, ...action.payload }
-      state.isLoading = false
+    updateUserData(state, action) {
+      state.userData = action.payload
+    },
+    updateEditStatus(state, action) {
+      state.editStatus = action.payload
     },
   },
   extraReducers: {
@@ -28,6 +35,7 @@ export const authSlise = createSlice({
       state.isLoading = false
       state.error = ''
       state.user = action.payload
+      state.userData = action.payload
     },
     [signin.pending.type]: state => {
       state.isLoading = true
@@ -40,6 +48,7 @@ export const authSlise = createSlice({
       state.isLoading = false
       state.error = ''
       state.user = action.payload
+      state.userData = action.payload
     },
     [signup.pending.type]: state => {
       state.isLoading = true
@@ -53,6 +62,7 @@ export const authSlise = createSlice({
       state.isLoading = false
       state.error = ''
       state.user = action.payload
+      state.userData = action.payload
     },
     [signout.pending.type]: state => {
       state.isLoading = true
@@ -61,15 +71,40 @@ export const authSlise = createSlice({
       state.isLoading = false
       state.error = action.payload
     },
-    [getUser.fulfilled.type]: (state, action: PayloadAction<User>) => {
+    [GetUser.fulfilled.type]: (state, action: PayloadAction<User>) => {
+      state.isLoading = false
+      state.error = ''
+      state.user = action.payload
+      state.userData = action.payload
+    },
+    [GetUser.pending.type]: state => {
+      state.isLoading = true
+    },
+    [GetUser.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.isLoading = false
+      state.error = action.payload
+    },
+    [ChangeProfile.fulfilled.type]: (state, action: PayloadAction<User>) => {
       state.isLoading = false
       state.error = ''
       state.user = action.payload
     },
-    [getUser.pending.type]: state => {
+    [ChangeProfile.pending.type]: state => {
       state.isLoading = true
     },
-    [getUser.rejected.type]: (state, action: PayloadAction<string>) => {
+    [ChangeProfile.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.isLoading = false
+      state.error = action.payload
+    },
+    [ChangeAvatar.fulfilled.type]: (state, action: PayloadAction<User>) => {
+      state.isLoading = false
+      state.error = ''
+      state.user = action.payload
+    },
+    [ChangeAvatar.pending.type]: state => {
+      state.isLoading = true
+    },
+    [ChangeAvatar.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false
       state.error = action.payload
     },
@@ -77,4 +112,4 @@ export const authSlise = createSlice({
 })
 
 export const authReducer = authSlise.reducer
-export const { changeProfile } = authSlise.actions
+export const { updateUserData, updateEditStatus } = authSlise.actions
