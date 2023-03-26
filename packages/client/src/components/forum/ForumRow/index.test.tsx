@@ -21,10 +21,10 @@ describe('ForumRow component', () => {
     expect(onClick).toHaveBeenCalledTimes(1)
   })
 
-  it('renders ChatAnswerIcon', () => {
-    render(<ForumRow text={text} btnText={btnText} onClick={onClick} icon={ChatAnswerIcon}/>)
+  it('ForumRow snapshot', () => {
+    const row = render(<ForumRow text={text} btnText={btnText} onClick={onClick} icon={ChatAnswerIcon}/>)
 
-    expect(screen.getByRole('path')).toBeInTheDocument()
+    expect(row).toMatchSnapshot()
   })
 })
 export {}
