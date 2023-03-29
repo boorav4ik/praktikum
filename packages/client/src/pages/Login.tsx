@@ -1,9 +1,9 @@
 import { Box, Container, Typography } from '@mui/material'
-import { TextField } from '../components/TextFields'
-import { Button } from '../components/Button'
+import { TextField } from 'components/TextFields'
+import { Button } from 'components/Button'
 import { Navigate, useLocation, useNavigate, Link } from 'react-router-dom'
-import { useAuth } from '../hooks/useAuth'
-import { Routes } from '../utils/routes'
+import { useAuth } from 'hooks/useAuth'
+import { Routes } from 'utils/routes'
 import { FormEvent } from 'react'
 
 export function LoginPage() {

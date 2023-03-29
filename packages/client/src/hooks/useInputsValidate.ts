@@ -1,5 +1,5 @@
 import { useState, FocusEvent, ChangeEvent } from 'react'
-import { initialState } from '../utils/formInputValidators'
+import { initialState } from 'utils/formInputValidators'
 import { ValidateProps } from './interfaces/useInputsValidate'
 
 export function useInputsValidate(

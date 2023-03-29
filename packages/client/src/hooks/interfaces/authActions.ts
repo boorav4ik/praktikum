@@ -1,11 +1,10 @@
-import { SignUp } from './../../store/slices/auth/interfaces'
 import {
+  SignUp,
   FileProps,
   Login,
   User,
   ChangePasswordProps,
-} from '../../store/slices/auth/interfaces'
-
+} from 'storeAuth/interfaces'
 export interface AuthActions {
   signin: (authData: Login, callback: () => void) => void
   signup: (signUpData: SignUp, callback: () => void) => void

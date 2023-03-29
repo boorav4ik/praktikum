@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import { DoubleTypography } from '../../components/DoubleTypography'
+import { DoubleTypography } from 'components/DoubleTypography'
 
 export function Description() {
   return (

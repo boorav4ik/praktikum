@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { Login, SignUp, User } from '../store/slices/auth/interfaces'
+import { Login, SignUp, User } from 'storeAuth/interfaces'
 import host, { ApiEndPoints } from './config'
 
 export const signin = createAsyncThunk(

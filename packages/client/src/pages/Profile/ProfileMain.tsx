@@ -2,12 +2,11 @@ import { ChangeEvent } from 'react'
 import { Box, Stack } from '@mui/material'
 import { MapProfileInputFields } from './ProfileFieldsData'
 import { ProfileFields } from './ProfileFields'
-import { useInputsValidate } from '../../hooks/useInputsValidate'
-import { validate } from '../../utils/formInputValidators/validate'
-import { useAuth } from '../../hooks/useAuth'
-import { deepEqual } from '../../utils/deepEqual'
+import { useInputsValidate } from 'hooks/useInputsValidate'
+import { useAuth } from 'hooks/useAuth'
+import { validate } from 'utils/formInputValidators/validate'
 import { ProfileFooter } from './ProfileFooter'
-import { Button } from '../../components/Button'
+import { Button } from 'components/Button'
 
 interface ProfileMainProps {
   setModal: () => void

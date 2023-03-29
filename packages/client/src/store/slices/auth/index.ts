@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { GetUser, ChangeProfile, ChangeAvatar } from '../../../api/user'
-import { signin, signout, signup } from '../../../api/auth'
-import { Nullable } from '../../../utils/nullableType'
-import { FileProps, User } from './interfaces'
+import { GetUser, ChangeProfile, ChangeAvatar } from 'api/user'
+import { signin, signout, signup } from 'api/auth'
+import { Nullable } from 'utils/nullableType'
+import { User } from './interfaces'
 
 export type AuthState = {
   user: Nullable<User>
