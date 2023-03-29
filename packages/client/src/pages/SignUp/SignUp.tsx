@@ -1,12 +1,14 @@
+import { useEffect } from 'react'
 import { Box, Container, Typography } from '@mui/material'
 import { TextField } from '../../components/TextFields'
 import { Button } from '../../components/Button'
 import { Navigate, useLocation, useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
 import { Routes } from '../../utils/routes'
-import { MapSignUpFields } from './SignUpData'
+import { MapSignUpFields, MapSignUpFieldsTest } from './SignUpData'
 import {
   useForm,
+  useFieldArray,
   SubmitHandler,
   Controller,
   useFormState,
@@ -18,7 +20,18 @@ export function SignUpPage() {
   const location = useLocation()
   const navigate = useNavigate()
   const [{ user }, { signup }] = useAuth()
-  const { handleSubmit, control } = useForm<SignUp>({ mode: 'onBlur' })
+  const { handleSubmit, control, register } = useForm({
+    mode: 'onBlur',
+    defaultValues: {
+      list: MapSignUpFieldsTest,
+    },
+  })
+  const { errors } = useFormState({ control })
+
+  const { fields } = useFieldArray({
+    control,
+    name: 'list',
+  })
 
   function submitForm(data: SignUp) {
     console.log('data = ', data)
@@ -65,9 +78,76 @@ export function SignUpPage() {
           <Typography sx={{ fontWeight: 700, fontSize: 28 }} color="green.64">
             Регистрация
           </Typography>
-          {MapSignUpFields.map(value => (
-            <SignUpFields key={value.name} value={value} />
-          ))}
+          {/* {fields.map(({ id }, index) => {
+            return (
+              <Controller
+                control={control}
+                // name="login"
+                name={`first_name[${index}].first_name`}
+                rules={`first_name[${index}].first_name`}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    // name={value.name}
+                    // id={value.name}
+                    // label={value.label}
+                    // variant="outlined"
+                    // sx={{ width: '68%', margin: 1.2 }}
+                    // onChange={field.onChange}
+                    // onBlur={field.onBlur}
+                    // value={field.value || ''}
+                    // error={!!errors.login?.message}
+                    // helperText={errors?.login?.message}
+                    {...field}
+                    error={!!errors?.first_name}
+                    helperText={
+                      errors.first_name && `${errors.first_name.message}`
+                    }
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="first_name"
+                    label={`first_name - ${index + 1}`}
+                    inputProps={{ style: { height: 10 } }}
+                    // InputLabelProps={{ style: { top: -5, marginTop: 0 } }}
+                    FormHelperTextProps={{
+                      style: { height: 0, marginTop: -2 },
+                    }}
+                  />
+                )}
+              />
+            )
+          })} */}
+          {fields.map(({ id, name, label, validation }, index) => {
+            console.log('index = ', { id, name, label, validation })
+            return (
+              <Controller
+                key={id}
+                control={control}
+                name={`list.${index}.name`}
+                rules={validation}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    id="list"
+                    label={label}
+                    variant="outlined"
+                    margin="normal"
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                    value={field.value || ''}
+                    error={!!errors[name]?.message}
+                    helperText={errors[name]?.message}
+                    inputProps={{ style: { height: 10 } }}
+                    // InputLabelProps={{ style: { top: -5, marginTop: 0 } }}
+                    FormHelperTextProps={{
+                      style: { height: 0, marginTop: -2 },
+                    }}
+                  />
+                )}
+              />
+            )
+          })}
           <Typography component={Link} to={`/${Routes.Login}`}>
             Есть аккаунт?!! Авторизация
           </Typography>
