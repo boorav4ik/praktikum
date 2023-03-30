@@ -25,7 +25,6 @@ export function SignUpPage() {
   const location = useLocation()
   const navigate = useNavigate()
   const [{ user }, { signup }] = useAuth()
-
   const { handleSubmit, control, register } = useForm<SignUpValues>({
     mode: 'onBlur',
     defaultValues: {
@@ -33,14 +32,12 @@ export function SignUpPage() {
     },
   })
   const { errors } = useFormState({ control })
-
   const { fields } = useFieldArray({
     control,
     name: 'list',
   })
 
   function submitForm(data: SignUpValues) {
-    console.log('data = ', data)
     signup(
       {
         first_name: data.first_name,
@@ -54,8 +51,6 @@ export function SignUpPage() {
       () => navigate(location.state ?? '/')
     )
   }
-
-  console.log('error = ', errors)
 
   return user ? (
     <Navigate to={Routes.Index} replace />
@@ -94,8 +89,6 @@ export function SignUpPage() {
                 {...register(`list.${index}.value`)}
                 rules={validation}
                 render={({ field }) => {
-                  console.log('field = ', field.name)
-                  console.log('errors = ', errors)
                   return (
                     <TextField
                       {...field}
@@ -104,14 +97,12 @@ export function SignUpPage() {
                       variant="outlined"
                       sx={{ width: '68%' }}
                       margin="normal"
-                      error={!!errors.list}
-                      helperText={
-                        errors.list ? errors?.list[index]?.value?.message : ''
-                      }
-                      inputProps={{ style: { height: 10 } }}
-                      InputLabelProps={{ style: { top: -5, marginTop: 0 } }}
+                      error={!!(errors?.list ?? [])[index]?.value?.message}
+                      helperText={(errors?.list ?? [])[index]?.value?.message}
+                      inputProps={{ style: { height: 5 } }}
+                      InputLabelProps={{ style: { top: -7, marginTop: 0 } }}
                       FormHelperTextProps={{
-                        style: { height: 0, marginTop: -2 },
+                        style: { height: 0, marginTop: -1, zIndex: 999 },
                       }}
                     />
                   )
