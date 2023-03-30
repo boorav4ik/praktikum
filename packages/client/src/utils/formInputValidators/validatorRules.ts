@@ -68,6 +68,7 @@ export const passwordValidation = {
 export const nameValidation = {
   required: REQUIRED_FIELD,
   validate: (value: string) => {
+    console.log('validate value = ', value)
     if (!value.match('^[а-яА-Яa-zA-Z]+$')) {
       return 'Только латиниские буквы или кирилицу, цифры'
     }
