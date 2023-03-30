@@ -17,7 +17,7 @@ interface SignUpValues extends SignUp {
   list: {
     label: string
     value: string
-    validation: {}
+    validation: object
   }[]
 }
 
