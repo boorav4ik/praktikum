@@ -6,10 +6,10 @@ import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import { menuData } from './drawerBarData'
-import AvatarIcon from '../../layouts/Main/icons/AvatarIcon'
-import { LinkButton } from '../../components/LinkButton'
-import { Routes } from '../../utils/routes'
-import { useAuth } from '../../hooks/useAuth'
+import AvatarIcon from 'layouts/Main/icons/AvatarIcon'
+import { LinkButton } from 'components/LinkButton'
+import { Routes } from 'utils/routes'
+import { useAuth } from 'hooks/useAuth'
 
 interface SideBarProps {
   open?: boolean

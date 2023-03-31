@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
-import { FC, ChangeEvent } from 'react'
-import { AvatarHost } from '../../api/config'
-import { AvatarBox } from '../../components/AvatarBox'
+import { ChangeEvent } from 'react'
+import { AvatarHost } from 'api/config'
+import { AvatarBox } from 'components/AvatarBox'
 
 interface ProfileHeaderProps {
   component: string

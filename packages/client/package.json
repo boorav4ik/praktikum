@@ -10,6 +10,17 @@
     "format": "prettier --write .",
     "test": "jest ./"
   },
+  "alias": {
+    "api": "./src/api",
+    "pages": "./src/pages",
+    "layouts": "./src/layouts",
+    "components": "./src/components",
+    "utils": "./src/utils",
+    "static": "./src/static",
+    "hoks": "./src/hoks",
+    "hooks": "./src/hooks",
+    "store": "./src/store"
+  },
   "dependencies": {
     "@emotion/react": "11.10.6",
     "@emotion/styled": "11.10.6",
