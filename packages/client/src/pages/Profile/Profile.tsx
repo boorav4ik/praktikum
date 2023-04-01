@@ -4,7 +4,7 @@ import { deepEqual } from 'utils/deepEqual'
 import { ProfileHeader } from './ProfileHeader'
 import { ProfileMain } from './ProfileMain'
 import { useAuth } from 'hooks/useAuth'
-import { ProfileChangePassword } from './ProfileChangePassword/ProfileChangePassword'
+import { ProfileChangePassword } from './ProfileChangePassword'
 import { FileProps } from 'storeAuth/interfaces'
 import { isEmptyObjField } from 'utils/isEmptyObject'
 

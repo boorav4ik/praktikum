@@ -6,7 +6,7 @@ import {
   useFormState,
 } from 'react-hook-form'
 import { Button } from 'components/Button'
-import { MapPasswordInputFields } from '../ProfileFieldsData'
+import { MapPasswordInputFields } from './ProfileFieldsData'
 import { TextField } from 'components/TextFields'
 
 const style = {
@@ -46,14 +46,12 @@ export function ProfileChangePassword({
   handleModal,
   handleChangePassword,
 }: ProfileChangePasswordProps) {
-  const { handleSubmit, control, watch } = useForm<ProfileChangePasswordValues>(
-    {
-      mode: 'onBlur',
-      defaultValues: {
-        list: MapPasswordInputFields,
-      },
-    }
-  )
+  const { handleSubmit, control } = useForm<ProfileChangePasswordValues>({
+    mode: 'onBlur',
+    defaultValues: {
+      list: MapPasswordInputFields,
+    },
+  })
   const { errors } = useFormState({ control })
   const { fields } = useFieldArray({
     control,

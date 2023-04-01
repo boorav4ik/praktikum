@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom'
 import { Box } from '@mui/material'
 import { Button } from 'components/Button'
 import { useAuth } from 'hooks/useAuth'
-import { isEmptyObjField } from 'utils/isEmptyObject'
 
 interface ProfileFooterProps {
   isValid: boolean
