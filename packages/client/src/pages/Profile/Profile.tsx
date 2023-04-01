@@ -86,7 +86,7 @@ export function ProfilePage() {
         <ProfileHeader
           component="header"
           onChooseFile={onChooseFile}
-          fileData={file ? file.data : ''}
+          fileData={file?.data}
           avatar={user!.avatar}
         />
         <ProfileMain setModal={() => setModal(prev => !prev)} />

@@ -1,11 +1,13 @@
 import { Box, Typography } from '@mui/material'
+import {
+  useForm,
+  useFieldArray,
+  Controller,
+  useFormState,
+} from 'react-hook-form'
 import { Button } from 'components/Button'
-import { useInputsValidate } from 'hooks/useInputsValidate'
 import { MapPasswordInputFields } from '../ProfileFieldsData'
-import { ProfileChangePasswordFields } from './ProfileChangePasswordFields'
-import { validate } from 'utils/formInputValidators/validate'
-import { isEmptyObjField } from 'utils/isEmptyObject'
-import { EnumPasswordFields } from './enumInputFields'
+import { TextField } from 'components/TextFields'
 
 const style = {
   position: 'absolute',
@@ -31,62 +33,73 @@ interface ProfileChangePasswordProps {
   }) => void
 }
 
+interface ProfileChangePasswordValues {
+  list: {
+    label: string
+    value: string
+    validation: object
+    type: string
+  }[]
+}
+
 export function ProfileChangePassword({
   handleModal,
   handleChangePassword,
 }: ProfileChangePasswordProps) {
-  const {
-    values,
-    handleInputChange,
-    errors,
-    handleInputBlur,
-    checkEmptyInputs,
-  } = useInputsValidate(true, validate)
-
-  function changePassword() {
-    const checkEmpty = [
-      { field: EnumPasswordFields.oldPassword, value: values.oldPassword },
-      { field: EnumPasswordFields.newPassword, value: values.newPassword },
-      {
-        field: EnumPasswordFields.confirmPassword,
-        value: values.confirmPassword,
+  const { handleSubmit, control, watch } = useForm<ProfileChangePasswordValues>(
+    {
+      mode: 'onBlur',
+      defaultValues: {
+        list: MapPasswordInputFields,
       },
-    ].reduce(
-      (acc, { field, value }) =>
-        !value ? { ...acc, ...{ [field]: value } } : acc,
-      {} as any
-    )
-
-    if (Object.keys(checkEmpty).length > 0) {
-      checkEmptyInputs(checkEmpty)
-      return
     }
+  )
+  const { errors } = useFormState({ control })
+  const { fields } = useFieldArray({
+    control,
+    name: 'list',
+  })
 
-    if (isEmptyObjField(errors)) {
-      handleChangePassword({
-        oldPassword: values.oldPassword,
-        newPassword: values.newPassword,
-      })
-    }
+  function changePassword(data: ProfileChangePasswordValues) {
+    handleChangePassword({
+      oldPassword: data.list[0].value,
+      newPassword: data.list[1].value,
+    })
   }
 
   return (
-    <Box sx={style}>
+    <Box sx={style} component="form" onSubmit={handleSubmit(changePassword)}>
       <Typography>Смена пароля</Typography>
-      {MapPasswordInputFields.map(({ label, name }) => (
-        <ProfileChangePasswordFields
-          key={name}
-          label={label}
-          name={name}
-          value={values}
-          handleInputChange={handleInputChange}
-          handleInputBlur={handleInputBlur}
-          error={errors[name] !== ''}
-          errorText={errors[name]}
-          disabled={false}
-        />
-      ))}
-      <Button sx={{ width: '70%', m: 5 }} onClick={changePassword}>
+      {fields.map(({ id, label, validation, type }, index) => {
+        return (
+          <Controller
+            key={id}
+            control={control}
+            name={`list.${index}.value`}
+            rules={validation}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                inputRef={field.ref}
+                label={label}
+                type={type}
+                variant="outlined"
+                sx={{ width: '90%', m: 2, mt: 4, height: 40 }}
+                margin="normal"
+                value={field.value || ''}
+                error={!!(errors?.list ?? [])[index]?.value?.message}
+                helperText={(errors?.list ?? [])[index]?.value?.message}
+                inputProps={{ style: { height: 5 } }}
+                InputLabelProps={{ style: { top: -7, marginTop: 0 } }}
+                FormHelperTextProps={{
+                  style: { height: 0, marginTop: -1, zIndex: 999 },
+                }}
+              />
+            )}
+          />
+        )
+      })}
+      <Button type="submit" sx={{ width: '70%', m: 5 }}>
         Изменить
       </Button>
       <Button sx={{ width: '70%' }} onClick={() => handleModal(false)}>

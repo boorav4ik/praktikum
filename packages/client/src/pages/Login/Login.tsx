@@ -1,33 +1,48 @@
 import { Box, Container, Typography } from '@mui/material'
-import { TextField } from '../../components/TextFields'
-import { Button } from '../../components/Button'
+import { Button } from 'components/Button'
 import { Navigate, useLocation, useNavigate, Link } from 'react-router-dom'
 import {
   useForm,
-  SubmitHandler,
+  useFieldArray,
   Controller,
   useFormState,
 } from 'react-hook-form'
-import { useAuth } from '../../hooks/useAuth'
-import { Routes } from '../../utils/routes'
-import { Login } from '../../store/slices/auth/interfaces'
-import {
-  loginValidation,
-  passwordValidation,
-} from '../../utils/formInputValidators/validatorRules'
+import { useAuth } from 'hooks/useAuth'
+import { Routes } from 'utils/routes'
+import { Login } from 'storeAuth/interfaces'
+import { MapLoginFields } from './LoginData'
+import { TextField } from 'components/TextFields'
+
+interface LoginValues extends Login {
+  list: {
+    label: string
+    value: string
+    validation: object
+    type: string
+  }[]
+}
 
 export function LoginPage() {
   const location = useLocation()
   const navigate = useNavigate()
   const [{ user }, { signin }] = useAuth()
-  const { handleSubmit, control } = useForm<Login>({ mode: 'onBlur' })
+  const { handleSubmit, control } = useForm<LoginValues>({
+    mode: 'onBlur',
+    defaultValues: {
+      list: MapLoginFields,
+    },
+  })
   const { errors } = useFormState({ control })
+  const { fields } = useFieldArray({
+    control,
+    name: 'list',
+  })
 
-  function submitForm(data: Login) {
+  function submitForm(data: LoginValues) {
     signin(
       {
-        login: data.login,
-        password: data.password,
+        login: data.list[0].value,
+        password: data.list[1].value,
       },
       () => navigate(location.state ?? '/')
     )
@@ -62,48 +77,35 @@ export function LoginPage() {
           <Typography sx={{ fontWeight: 700, fontSize: 32 }} color="green.64">
             Вход
           </Typography>
-          <Controller
-            control={control}
-            name="login"
-            rules={loginValidation}
-            render={({ field }) => (
-              <TextField
-                name="login"
-                id="login"
-                label="Логин"
-                variant="outlined"
-                sx={{ width: '68%' }}
-                onChange={field.onChange}
-                onBlur={field.onBlur}
-                value={field.value || ''}
-                error={!!errors.login?.message}
-                helperText={errors?.login?.message}
-                InputLabelProps={{ style: { top: -5 } }}
-                FormHelperTextProps={{ style: { height: 0 } }}
+          {fields.map(({ id, label, validation, type }, index) => {
+            return (
+              <Controller
+                key={id}
+                control={control}
+                name={`list.${index}.value`}
+                rules={validation}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    inputRef={field.ref}
+                    label={label}
+                    type={type}
+                    variant="outlined"
+                    sx={{ width: '68%' }}
+                    margin="normal"
+                    value={field.value || ''}
+                    error={!!(errors?.list ?? [])[index]?.value?.message}
+                    helperText={(errors?.list ?? [])[index]?.value?.message}
+                    inputProps={{ style: { height: 5 } }}
+                    InputLabelProps={{ style: { top: -7, marginTop: 0 } }}
+                    FormHelperTextProps={{
+                      style: { height: 0, marginTop: -1, zIndex: 999 },
+                    }}
+                  />
+                )}
               />
-            )}
-          />
-          <Controller
-            control={control}
-            name="password"
-            rules={passwordValidation}
-            render={({ field }) => (
-              <TextField
-                name="password"
-                id="password"
-                label="Пароль"
-                variant="outlined"
-                sx={{ width: '68%', marginTop: 2 }}
-                onChange={field.onChange}
-                onBlur={field.onBlur}
-                value={field.value || ''}
-                error={!!errors.password?.message}
-                helperText={errors?.password?.message}
-                InputLabelProps={{ style: { top: -5 } }}
-                FormHelperTextProps={{ style: { height: 0 } }}
-              />
-            )}
-          />
+            )
+          })}
           <Typography component={Link} to={`/${Routes.SignUp}`}>
             Нет аккаунта?!! Регистрация
           </Typography>

@@ -5,18 +5,15 @@ import { useAuth } from 'hooks/useAuth'
 import { isEmptyObjField } from 'utils/isEmptyObject'
 
 interface ProfileFooterProps {
-  errors: object
-  clearErrors: () => void
+  isValid: boolean
 }
 
-export function ProfileFooter({ errors, clearErrors }: ProfileFooterProps) {
+export function ProfileFooter({ isValid }: ProfileFooterProps) {
   const navigate = useNavigate()
   const [{ editStatus }, { updateEditStatus }] = useAuth()
 
   const checkCancel = () => {
-    editStatus === 'info'
-      ? navigate('/')
-      : (clearErrors(), updateEditStatus('cancel'))
+    editStatus === 'info' ? navigate('/') : updateEditStatus('cancel')
   }
 
   const checkSave = () => {
@@ -32,7 +29,7 @@ export function ProfileFooter({ errors, clearErrors }: ProfileFooterProps) {
         justifyContent: 'space-around',
         mt: 2,
       }}>
-      <Button onClick={checkSave} disabled={!isEmptyObjField(errors)}>
+      <Button type="submit" onClick={checkSave} disabled={!isValid}>
         {editStatus === 'info' ? 'Редактировать' : 'Сохранить'}
       </Button>
       <Button onClick={checkCancel}>

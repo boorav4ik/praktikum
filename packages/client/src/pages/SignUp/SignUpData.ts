@@ -4,7 +4,7 @@ import {
   nameValidation,
   passwordValidation,
   phoneValidation,
-} from '../../utils/formInputValidators/validatorRules'
+} from 'utils/validatorRules'
 
 export const MapSignUpFields = [
   {
