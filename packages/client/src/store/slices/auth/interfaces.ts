@@ -36,5 +36,5 @@ export interface ChangePasswordProps {
 
 export interface FileProps {
   data: string | ArrayBuffer | null
-  info: File
+  info: File | undefined
 }

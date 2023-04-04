@@ -4,7 +4,7 @@ import { signin, signout, signup } from 'api/auth'
 import { RootState } from 'store'
 import { useAppDispatch } from 'store/hooks'
 import { AuthState, updateEditStatus, updateUserData } from 'store/slices/auth'
-import { AuthActions } from './interfaces/authActions'
+import { AuthActions } from './authActions'
 
 export function useAuth(): [AuthState, AuthActions] {
   const auth = useSelector((state: RootState) => state.auth)

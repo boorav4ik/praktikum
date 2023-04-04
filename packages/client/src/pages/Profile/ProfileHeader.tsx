@@ -6,7 +6,7 @@ import { AvatarBox } from 'components/AvatarBox'
 interface ProfileHeaderProps {
   component: string
   onChooseFile: (event: ChangeEvent<HTMLInputElement>) => void
-  fileData: string | ArrayBuffer | null
+  fileData: string | ArrayBuffer | undefined | null
   avatar: string | null | undefined
 }
 
