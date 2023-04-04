@@ -4,10 +4,11 @@ import Typography from '@mui/material/Typography'
 
 export type ThemeBranchMessageProps = {
   message: Message
-  gridProps?: GridProps
+  gridProps?: GridProps,
+  color ?: string
 }
 
-export function MessageRow({ gridProps, message }: ThemeBranchMessageProps) {
+export function MessageRow({ gridProps, message, color = 'white' }: ThemeBranchMessageProps) {
   const { text, user } = message
 
   return (
@@ -24,12 +25,12 @@ export function MessageRow({ gridProps, message }: ThemeBranchMessageProps) {
       }}
       {...gridProps}>
       <Box>
-        <Typography color={'white'} fontWeight={500}>
+        <Typography color={color} fontWeight={500}>
           {text}
         </Typography>
       </Box>
       <Box sx={{ textAlign: 'end' }}>
-        <Typography color={'white'} fontWeight={500}>
+        <Typography color={color} fontWeight={500}>
           {user.name}
         </Typography>
       </Box>
