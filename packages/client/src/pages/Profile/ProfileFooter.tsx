@@ -1,30 +1,22 @@
-import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Box } from '@mui/material'
-import { Button } from '../../components/Button'
+import { Button } from 'components/Button'
+import { useAuth } from 'hooks/useAuth'
 
 interface ProfileFooterProps {
-  editStatus: string
-  editFields: (status: string) => void
+  isValid: boolean
 }
-export function ProfileFooter({ editStatus, editFields }: ProfileFooterProps) {
 
+export function ProfileFooter({ isValid }: ProfileFooterProps) {
   const navigate = useNavigate()
+  const [{ editStatus }, { updateEditStatus }] = useAuth()
 
   const checkCancel = () => {
-    if (editStatus === 'info') {
-      navigate('/')
-      return
-    }
-    editFields('cancel')
+    editStatus === 'info' ? navigate('/') : updateEditStatus('cancel')
   }
 
   const checkSave = () => {
-    if (editStatus === 'info') {
-      editFields('edit')
-      return
-    }
-    editFields('save')
+    editStatus === 'info' ? updateEditStatus('edit') : updateEditStatus('save')
   }
 
   return (
@@ -34,8 +26,9 @@ export function ProfileFooter({ editStatus, editFields }: ProfileFooterProps) {
         width: '100%',
         display: 'flex',
         justifyContent: 'space-around',
+        mt: 2,
       }}>
-      <Button onClick={checkSave}>
+      <Button type="submit" onClick={checkSave} disabled={!isValid}>
         {editStatus === 'info' ? 'Редактировать' : 'Сохранить'}
       </Button>
       <Button onClick={checkCancel}>

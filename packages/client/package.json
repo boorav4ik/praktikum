@@ -10,6 +10,17 @@
     "format": "prettier --write .",
     "test": "jest ./"
   },
+  "alias": {
+    "api": "./src/api",
+    "pages": "./src/pages",
+    "layouts": "./src/layouts",
+    "components": "./src/components",
+    "utils": "./src/utils",
+    "static": "./src/static",
+    "hoks": "./src/hoks",
+    "hooks": "./src/hooks",
+    "store": "./src/store"
+  },
   "dependencies": {
     "@emotion/react": "11.10.6",
     "@emotion/styled": "11.10.6",
@@ -21,6 +32,7 @@
     "prettier": "2.7.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.43.8",
     "react-redux": "8.0.5",
     "react-router-dom": "6.8.1"
   },

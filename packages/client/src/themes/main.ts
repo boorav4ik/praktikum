@@ -1,5 +1,5 @@
 import { ThemeOptions, createTheme } from '@mui/material/styles'
-import { green } from '@mui/material/colors'
+import { green, red } from '@mui/material/colors'
 
 export const theme = createTheme({
   typography: {
@@ -29,7 +29,8 @@ export const theme = createTheme({
       main: '#1E515D',
     },
     error: {
-      main: green.A400,
+      main: red[400],
+      height: 20,
     },
   },
   components: {

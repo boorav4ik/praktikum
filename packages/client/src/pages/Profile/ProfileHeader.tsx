@@ -1,18 +1,25 @@
 import { Box } from '@mui/material'
-import { FC, ChangeEvent } from 'react'
-import { AvatarBox } from '../../components/AvatarBox'
+import { ChangeEvent } from 'react'
+import { AvatarHost } from 'api/config'
+import { AvatarBox } from 'components/AvatarBox'
 
 interface ProfileHeaderProps {
   component: string
   onChooseFile: (event: ChangeEvent<HTMLInputElement>) => void
-  fileData: string | ArrayBuffer | null
+  fileData: string | ArrayBuffer | undefined | null
+  avatar: string | null | undefined
 }
-export function ProfileHeader({ onChooseFile, fileData }: ProfileHeaderProps) {
+
+export function ProfileHeader({
+  onChooseFile,
+  fileData,
+  avatar,
+}: ProfileHeaderProps) {
   return (
     <Box component="header">
       <label>
         <AvatarBox
-          src={fileData as string}
+          src={(fileData ?? `${AvatarHost}${avatar}`) as string}
           sx={{
             width: '100px',
             height: '100px',
@@ -24,7 +31,7 @@ export function ProfileHeader({ onChooseFile, fileData }: ProfileHeaderProps) {
           accept="image/*"
           type="file"
           style={{ display: 'none' }}
-          onChange={(event: ChangeEvent<HTMLInputElement>) => onChooseFile(event)}
+          onChange={onChooseFile}
         />
       </label>
     </Box>

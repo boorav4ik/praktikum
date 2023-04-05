@@ -1,5 +1,5 @@
 import { Box, GridProps, Stack } from '@mui/material'
-import { Message } from '../../../pages/Forum/ThemeBranch'
+import { Message } from 'pages/Forum/ThemeBranch'
 import Typography from '@mui/material/Typography'
 
 export type ThemeBranchMessageProps = {
