@@ -22,9 +22,7 @@ export function FullScreen({ children }: { children: JSX.Element }) {
 
   const [fullScreen, toggleFullScreen] = useFullScreen(fullScreenElement)
 
-  const handleFullScreen = toggleFullScreen as
-    | MouseEventHandler<HTMLButtonElement>
-    | undefined
+  const handleFullScreen = toggleFullScreen as | MouseEventHandler<HTMLButtonElement>
 
   return (
     <Screen ref={fullScreenElement} className={'fullscreen'}>
