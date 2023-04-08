@@ -8,6 +8,7 @@ import {
 } from 'hooks/useFullScreen'
 import { DefaultScreenIcon } from 'layouts/Main/icons/DefaultScreen'
 import { FullScreenIcon } from 'layouts/Main/icons/FullScreen'
+import { Audio } from './Audio'
 
 const Screen = styled(Box)(() => ({
   '&::backdrop': {
@@ -29,16 +30,17 @@ export function FullScreen({ children }: { children: JSX.Element }) {
       {children}
       <Box
         sx={{
+          display: 'flex',
           position: 'fixed',
           bottom: '48px',
           right: '24px',
         }}>
+        <Audio />
         <Button
           title={!fullScreen ? 'Полноэкранный режим' : 'Обычный режим'}
           onClick={handleFullScreen}
           sx={{
             padding: '12px',
-            boxShadow: '0 0 4px rgba(0, 0, 0, .33)',
             maxWidth: '54px',
             minWidth: '54px',
           }}>
