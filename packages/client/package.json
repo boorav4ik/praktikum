@@ -4,22 +4,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build --config vite.config.ts",
+    "build:ssr": "tsc && vite build --config ssr.config.ts",
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write .",
     "test": "jest ./"
-  },
-  "alias": {
-    "api": "./src/api",
-    "pages": "./src/pages",
-    "layouts": "./src/layouts",
-    "components": "./src/components",
-    "utils": "./src/utils",
-    "static": "./src/static",
-    "hoks": "./src/hoks",
-    "hooks": "./src/hooks",
-    "store": "./src/store"
   },
   "dependencies": {
     "@emotion/react": "11.10.6",
