@@ -12,4 +12,8 @@ export default defineConfig({
     __SERVER_PORT__: process.env.SERVER_PORT,
   },
   plugins: [react()],
+  optimizeDeps: { include: ['react/jsx-dev-runtime'] },
+  build: {
+    minify: false,
+  },
 })
