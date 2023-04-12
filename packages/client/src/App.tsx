@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { Route, Routes } from 'react-router-dom'
 
 function App() {
   useEffect(() => {
@@ -11,7 +12,15 @@ function App() {
 
     fetchServerData()
   }, [])
-  return <div className="App">Вот тут будет жить ваше приложение :)</div>
+  return (
+    <Routes>
+      <Route path="/" element={<div>Index</div>} />
+      <Route path="/login" element={<div>Login</div>} />
+      <Route path="/game" element={<div>Game</div>} />
+      <Route path="/forum" element={<div>Forum</div>} />
+      <Route path="/profile" element={<div>Profile</div>} />
+    </Routes>
+  )
 }
 
 export default App

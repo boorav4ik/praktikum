@@ -10,7 +10,8 @@
     "test": "lerna run test",
     "lint": "lerna run lint",
     "format": "lerna run format",
-    "preview": "lerna run preview"
+    "preview": "lerna run preview",
+    "start:ssr": "yarn build && node packages/server/dist/index.js"
   },
   "license": "MIT",
   "workspaces": [
@@ -20,7 +21,7 @@
     "node": ">=15"
   },
   "devDependencies": {
-    "@evilmartians/lefthook": "^1.1.1",
-    "lerna": "^5.4.3"
+    "@evilmartians/lefthook": "1.1.1",
+    "lerna": "5.4.3"
   }
 }

@@ -16,4 +16,7 @@ export default defineConfig({
   build: {
     minify: false,
   },
+  ssr: {
+    format: 'cjs',
+  },
 })
