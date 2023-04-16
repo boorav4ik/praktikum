@@ -11,6 +11,7 @@
     "test": "jest ./"
   },
   "alias": {
+    "assets": "./src/assets",
     "api": "./src/api",
     "pages": "./src/pages",
     "layouts": "./src/layouts",
