@@ -7,8 +7,11 @@ interface ProfileMainProps {
   editStatus: string
   saveUserData: (newUserData: object | undefined, status: string) => void
 }
-export function ProfileMain({ user, editStatus, saveUserData, }: ProfileMainProps) {
-
+export function ProfileMain({
+  user,
+  editStatus,
+  saveUserData,
+}: ProfileMainProps) {
   const newUserData = useRef<object>(user)
 
   const saveUser = (userData: object) => {

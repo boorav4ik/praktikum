@@ -27,6 +27,6 @@ export function getColor(value: number) {
     case 8192:
       return '#10050B'
     default:
-      return "#92CCBB"
+      return '#92CCBB'
   }
 }

@@ -51,7 +51,7 @@ function NanListItem({ icon, text, to, isExpanded }: NanListItemProps) {
 }
 
 export function SideBar({ open = false }: SideBarProps) {
-        return (
+  return (
     <List>
       <Box
         component="div"

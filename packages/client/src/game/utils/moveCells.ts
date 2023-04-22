@@ -1,11 +1,20 @@
-import { TransformationMethod } from './Transformations'
+import { type TransformationMethod } from './Transformations'
 
 //TODO: Add fixed length array type
-export type Cells = number[]
-type Layer = number[]
+export enum Effect {
+  idle = 'idle',
+  moving = 'moving',
+  appears = 'APPEARS',
+  vanish = 'VANISH',
+}
+
+export type Cell = [number, Effect]
+type Layer = Cell[]
+export type Cells = Cell[]
+export const EmptyCell: Cell = [0, Effect.idle]
 
 export function moveCells(cells: Cells, transformIndex: TransformationMethod) {
-  const output: number[] = []
+  const output: Cells = []
   const movedLayers: Set<number> = new Set()
   for (let i = 0; i < 4; i++) {
     const layer = getLayer(cells, i, transformIndex)
@@ -20,20 +29,31 @@ function getLayer(
   layerIndex: number,
   transformIndex: TransformationMethod
 ) {
-  return [0, 1, 2, 3].map(i => cells[transformIndex(layerIndex, i)])
+  const output: Layer = []
+  for (let i = 0; i < 4; i++) {
+    output.push([...cells[transformIndex(layerIndex, i)]])
+  }
+  return output
+  // return [0, 1, 2, 3].map(i => cells[transformIndex(layerIndex, i)])
 }
+
 function moveLayer(layer: Layer): boolean {
   let isMerged = false
   let isMoved = false
-  for (let j = 1; j < 4; j++) {
-    if (layer[j]) {
-      if (!layer[j - 1]) {
-        shiftCell(layer, j)
+  for (let i = 0; i < 4; i++) {
+    const [value] = layer[i]
+    if (!i) layer[i] = [value, Effect.idle]
+    else if (value) {
+      const [nextCellValue] = layer[i - 1]
+      if (!nextCellValue) {
+        shiftCell(layer, i)
         isMoved = true
-      } else if (!isMerged && layer[j - 1] === layer[j]) {
-        jounCell(layer, j)
+      } else if (!isMerged && value === nextCellValue) {
+        jounCell(layer, i)
         isMerged = true
         isMoved = true
+      } else {
+        layer[i] = [value, Effect.idle]
       }
     }
   }
@@ -41,13 +61,15 @@ function moveLayer(layer: Layer): boolean {
 }
 
 function shiftCell(layer: Layer, index: number) {
-  layer[index - 1] = layer[index]
-  layer[index] = 0
+  const [value] = layer[index]
+  layer[index - 1] = [value, Effect.moving]
+  layer[index] = EmptyCell
 }
 
 function jounCell(layer: Layer, index: number) {
-  layer[index - 1] *= 2
-  layer[index] = 0
+  const [value] = layer[index]
+  layer[index - 1] = [value * 2, Effect.moving]
+  layer[index] = EmptyCell
 }
 
 function addLayer(
