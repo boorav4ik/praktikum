@@ -7,18 +7,19 @@ export default {
   roots: ['./src'],
   testMatch: ['<rootDir>/**/*.test.{ts,tsx}'],
   transform: {
-    '^.+\\.(ts|tsx|js|jsx|html|svg)$': 'ts-jest',
+    '^.+\\.(ts|tsx|js|jsx|html|svg|mp3)$': 'ts-jest',
   },
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'html', 'svg'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'html', 'svg', 'mp3'],
   coverageReporters: ['html'],
   globals: {
     __SERVER_PORT__: process.env.SERVER_PORT,
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.json',
-      stringifyContentPathRegex: '\\.(html|svg)$',
+      stringifyContentPathRegex: '\\.(html|svg|mp3)$',
     },
   },
   moduleNameMapper: {
+    '^assets(.*)$': '<rootDir>/src/assets$1',
     '^api(.*)$': '<rootDir>/src/api$1',
     '^pages(.*)$': '<rootDir>/src/pages$1',
     '^layouts(.*)$': '<rootDir>/src/layouts$1',

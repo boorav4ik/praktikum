@@ -30,6 +30,7 @@ export const theme = createTheme({
     },
     error: {
       main: red[400],
+      height: 20,
     },
   },
   components: {

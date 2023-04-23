@@ -4,7 +4,7 @@ import { deepEqual } from 'utils/deepEqual'
 import { ProfileHeader } from './ProfileHeader'
 import { ProfileMain } from './ProfileMain'
 import { useAuth } from 'hooks/useAuth'
-import { ProfileChangePassword } from './ProfileChangePassword/ProfileChangePassword'
+import { ProfileChangePassword } from './ProfileChangePassword'
 import { FileProps } from 'storeAuth/interfaces'
 import { isEmptyObjField } from 'utils/isEmptyObject'
 
@@ -86,7 +86,7 @@ export function ProfilePage() {
         <ProfileHeader
           component="header"
           onChooseFile={onChooseFile}
-          fileData={file ? file.data : ''}
+          fileData={file?.data}
           avatar={user!.avatar}
         />
         <ProfileMain setModal={() => setModal(prev => !prev)} />
