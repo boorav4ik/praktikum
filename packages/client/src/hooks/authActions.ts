@@ -15,4 +15,5 @@ export interface AuthActions {
   getUser: () => void
   updateUserData: (data: User) => void
   updateEditStatus: (data: string) => void
+  GetLeaderBoard: (data: any) => void
 }

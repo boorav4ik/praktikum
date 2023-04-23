@@ -3,8 +3,13 @@ import { ItemLeader } from './ItemLeader'
 import { LeaderHeader } from './LeaderHeader'
 
 import { gamers1, gamers2 } from './data'
+import { useAuth } from '../../hooks/useAuth'
 
 export function LeaderboardPage() {
+  const [{ leaderData }] = useAuth()
+  console.log('12')
+  console.log(leaderData)
+
   return (
     <Container component="main" maxWidth="md">
       <Box
@@ -41,11 +46,11 @@ export function LeaderboardPage() {
               mr: '35px',
             }}
             spacing={2}>
-            {gamers1.map(item => (
+            {leaderData.map((item, index, arr) => (
               <ItemLeader
-                rating={item.rating}
+                rating={index + 1}
                 name={item.name}
-                score={item.score}
+                score={item.data.score}
               />
             ))}
           </Stack>

@@ -64,3 +64,36 @@ export const ChangePassword = createAsyncThunk(
     }
   }
 )
+
+export const GetLeaderBoard = createAsyncThunk(
+  'user/getLeaderBoard',
+  async (data: any, thunkAPI) => {
+    try {
+      const response = await host.post<any>(
+        ApiEndPoints.LeaderBoard.GetTeam,
+        data
+      )
+      console.log('leader')
+      console.log(response.data)
+      return response.data
+    } catch (e) {
+      return thunkAPI.rejectWithValue('Не удалось получить данные лидерборда')
+    }
+  }
+)
+
+export const UpdateUserLeader = createAsyncThunk(
+  'user/UpdateUserLeader',
+  async (data: any, thunkAPI) => {
+    try {
+      const response = await host.post<any[]>(
+        ApiEndPoints.LeaderBoard.UpdateUserInfo,
+        data
+      )
+      console.log(response.data)
+      return response.data
+    } catch (e) {
+      return thunkAPI.rejectWithValue('Не удалось обновить данные пользователя')
+    }
+  }
+)
