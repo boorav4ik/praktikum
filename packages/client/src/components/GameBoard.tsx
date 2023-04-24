@@ -38,7 +38,11 @@ export function GameBoard({ soundDisabled = true }) {
       !soundDisabled && moveSoundEffect && moveSoundEffect.play()
       setCells(newState)
     } else {
+      //TODO: error animation
       !soundDisabled && errorSoundEffect && errorSoundEffect.play()
+      window.navigator.vibrate([
+        10, 3, 10, 3, 10, 20, 20, 3, 20, 3, 20, 20, 10, 3, 10, 3, 10,
+      ])
     }
   })
 
