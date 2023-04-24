@@ -1,5 +1,5 @@
 import { ArrowDirection } from '../../../utils/ArrowDirections'
-import { Cells, Cell, Effect } from '../../../utils/moveCells'
+import { type Cell, Effect } from '../../../utils/moveCells'
 import { getColor } from './getColort'
 
 function drawRoundSquare(
@@ -99,7 +99,7 @@ function drawCell(
 
 export function drawCells(
   ctx: CanvasRenderingContext2D,
-  cells: Cells,
+  cells: Cell[],
   frame: number,
   direction?: ArrowDirection
 ) {

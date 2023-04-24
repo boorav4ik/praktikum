@@ -1,6 +1,5 @@
 import { type TransformationMethod } from './Transformations'
 
-//TODO: Add fixed length array type
 export enum Effect {
   idle = 'idle',
   moving = 'moving',
@@ -8,13 +7,12 @@ export enum Effect {
   vanish = 'VANISH',
 }
 
+//TODO: Add fixed length array type
 export type Cell = [number, Effect]
-type Layer = Cell[]
-export type Cells = Cell[]
 export const EmptyCell: Cell = [0, Effect.idle]
 
-export function moveCells(cells: Cells, transformIndex: TransformationMethod) {
-  const output: Cells = []
+export function moveCells(cells: Cell[], transformIndex: TransformationMethod) {
+  const output: Cell[] = []
   const movedLayers: Set<number> = new Set()
   for (let i = 0; i < 4; i++) {
     const layer = getLayer(cells, i, transformIndex)
@@ -25,11 +23,11 @@ export function moveCells(cells: Cells, transformIndex: TransformationMethod) {
 }
 
 function getLayer(
-  cells: Cells,
+  cells: Cell[],
   layerIndex: number,
   transformIndex: TransformationMethod
 ) {
-  const output: Layer = []
+  const output: Cell[] = []
   for (let i = 0; i < 4; i++) {
     output.push([...cells[transformIndex(layerIndex, i)]])
   }
@@ -37,7 +35,7 @@ function getLayer(
   // return [0, 1, 2, 3].map(i => cells[transformIndex(layerIndex, i)])
 }
 
-function moveLayer(layer: Layer): boolean {
+function moveLayer(layer: Cell[]): boolean {
   let isMerged = false
   let isMoved = false
   for (let i = 0; i < 4; i++) {
@@ -60,21 +58,21 @@ function moveLayer(layer: Layer): boolean {
   return isMoved
 }
 
-function shiftCell(layer: Layer, index: number) {
+function shiftCell(layer: Cell[], index: number) {
   const [value] = layer[index]
   layer[index - 1] = [value, Effect.moving]
   layer[index] = EmptyCell
 }
 
-function jounCell(layer: Layer, index: number) {
+function jounCell(layer: Cell[], index: number) {
   const [value] = layer[index]
   layer[index - 1] = [value * 2, Effect.moving]
   layer[index] = EmptyCell
 }
 
 function addLayer(
-  cells: Cells,
-  layer: Layer,
+  cells: Cell[],
+  layer: Cell[],
   i: number,
   transformIndex: TransformationMethod
 ) {

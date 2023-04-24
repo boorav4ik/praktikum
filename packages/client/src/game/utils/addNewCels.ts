@@ -1,8 +1,8 @@
 import { TransformationMethod } from './Transformations'
-import { Cells, Effect } from './moveCells'
+import { type Cell, Effect } from './moveCells'
 
 export function addNewCell(
-  cells: Cells,
+  cells: Cell[],
   movedLayers: Set<number>,
   transformIndex: TransformationMethod,
   value?: number

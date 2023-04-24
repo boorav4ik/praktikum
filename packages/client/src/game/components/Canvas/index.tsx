@@ -1,16 +1,14 @@
 import { useEffect, useRef } from 'react'
-import { type Cells } from '../../utils/moveCells'
+import { type Cell } from '../../utils/moveCells'
 import { clearCanvas, drawCells } from './utils/Canvas'
 import { type ArrowDirection } from '../../utils/ArrowDirections'
 
 export type CanvasProps = {
-  cells: Cells
+  cells: Cell[]
   direction?: ArrowDirection
 }
 
 export function Canvas({ cells, direction }: CanvasProps) {
-  console.log({ cells, direction })
-
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -25,7 +23,7 @@ export function Canvas({ cells, direction }: CanvasProps) {
       if (frame < 12) {
         setTimeout(() => {
           renderFrame(frame + 1)
-        }, 10) 
+        }, 10)
         clearCanvas(ctx)
         drawCells(ctx, cells, frame, direction)
         animationFrame = window.requestAnimationFrame(renderFrame)

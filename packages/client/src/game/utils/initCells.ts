@@ -1,7 +1,7 @@
-import { type Cells, Effect } from './moveCells'
+import { type Cell, Effect } from './moveCells'
 import { EmptyCell } from './moveCells'
-export function initCells(): Cells {
-  const state: Cells = Array.from(Array(16), () => EmptyCell)
+export function initCells(): Cell[] {
+  const state: Cell[] = Array.from(Array(16), () => EmptyCell)
 
   for (let i = 0; i < 4; i++) {
     const index = Math.floor(Math.random() * 15)
