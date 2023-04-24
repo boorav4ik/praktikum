@@ -19,7 +19,7 @@ export function moveCells(cells: Cell[], transformIndex: TransformationMethod) {
     if (moveLayer(layer)) movedLayers.add(i)
     addLayer(output, layer, i, transformIndex)
   }
-  return { output, movedLayers }
+  return { cells: output, movedLayers }
 }
 
 function getLayer(

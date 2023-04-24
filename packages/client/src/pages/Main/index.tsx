@@ -1,33 +1,56 @@
-import { Box, Container, Fab, SvgIcon, Tooltip } from '@mui/material'
-import { GameBoard } from '../../components/GameBoard'
-import GraphicEq from '@mui/icons-material/GraphicEq'
 import { useState } from 'react'
+import { Box, Container } from '@mui/material'
+import { Fab } from '../../components/FloatingActionButton'
+import GraphicEq from '@mui/icons-material/GraphicEq'
+import Vibration from '@mui/icons-material/Vibration'
+import School from '@mui/icons-material/School'
+import { GameMode } from '../../components/GameModeSwitch'
+import { Game } from '../../components/GameBoard'
 
 export function MainPage() {
   const [isSoundEffectsDisabled, setIsSoundEffectsDisabled] = useState(true)
+  const [isVibrationDisabled, setIsVibrationDisabled] = useState(true)
+  const [gameMode, setGameMode] = useState<GameMode>()
 
   return (
     <Container component="main" maxWidth="md">
       <Box
         sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <GameBoard soundDisabled={isSoundEffectsDisabled}/>
+        <Game
+          soundDisabled={isSoundEffectsDisabled}
+          vibrationDisable={isVibrationDisabled}
+          mode={gameMode}
+        />
       </Box>
-      <Tooltip
+      <Fab
+        active={gameMode === GameMode.Guide}
+        order={0}
+        title={`${
+          gameMode === GameMode.Guide ? 'Выключить' : 'Включить'
+        } режим обучения`}
+        onClick={() =>
+          setGameMode(state =>
+            state === GameMode.Guide ? undefined : GameMode.Guide
+          )
+        }>
+        <School />
+      </Fab>
+      <Fab
+        order={1}
+        active={!isSoundEffectsDisabled}
+        onClick={() => setIsSoundEffectsDisabled(state => !state)}
         title={`${
           isSoundEffectsDisabled ? 'Включить' : 'Выключить'
         } звуковые эффекты`}>
-        <Fab
-          sx={{ position: 'absolute', bottom: 16, right: 16 }}
-          onClick={() => setIsSoundEffectsDisabled(state => !state)}>
-          {isSoundEffectsDisabled ? (
-            <GraphicEq />
-          ) : (
-            <SvgIcon>
-              <path d="M 7 18 h 2 V 6 H 7 v 12 z M 11 22 H 13 v -20 h -2 v 20 z m -8 -8 h 2 v -4 H 3 v 4 z m 12 4 h 2 V 6 h -2 v 12 z m 4 -8 v 4 h 2 v -4 h -2 z M 18 22 h 3 L 6 2 h -3 Z" />
-            </SvgIcon>
-          )}
-        </Fab>
-      </Tooltip>
+        <GraphicEq />
+      </Fab>
+      <Fab
+        active={!isVibrationDisabled}
+        order={2}
+        title={`${isVibrationDisabled ? 'Включить' : 'Выключить'} вибрацию`}
+        onClick={() => setIsVibrationDisabled(state => !state)}>
+        <Vibration />
+      </Fab>
     </Container>
   )
 }

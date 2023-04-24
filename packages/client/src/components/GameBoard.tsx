@@ -1,50 +1,53 @@
 import { useMemo, useState } from 'react'
 import { useArrow } from '../game/hooks/useArrow'
 import { type ArrowDirection } from '../game/utils/ArrowDirections'
-import { transformations } from '../game/utils/Transformations'
-import { type Cell, moveCells } from '../game/utils/moveCells'
-import { addNewCell } from '../game/utils/addNewCels'
+import { type Cell } from '../game/utils/moveCells'
 import { Board } from './Board'
-import { initCells } from '../game/utils/initCells'
-import moveSound from '../assets/audio/cards-scrape.mp3'
+import shiftSound from '../assets/audio/cards-scrape.mp3'
 import errorSound from '../assets/audio/erro-tech.mp3'
+import { GameModeWrapper } from './GameModeSwitch'
 
-function move(cells: Cell[], direction: ArrowDirection) {
-  const transform = transformations.getTransformation(direction)
-  const { output, movedLayers } = moveCells([...cells], transform)
-  if (!movedLayers.size) return //nothing changed
-
-  addNewCell(output, movedLayers, transform)
-  return output
+export type GameBoardProps = {
+  soundDisabled: boolean
+  vibrationDisable: boolean
+  initCells: () => Cell[]
+  moveCells: (cells: Cell[], direction: ArrowDirection) => Cell[] | undefined
 }
 
-export function GameBoard({ soundDisabled = true }) {
-  const [cells, setCells] = useState<Cell[]>(initCells)
+function GameBoard({
+  soundDisabled,
+  vibrationDisable,
+  ...props
+}: GameBoardProps) {
+  const [cells, setCells] = useState<Cell[]>(props.initCells)
 
-  const moveSoundEffect = useMemo(
-    () => !soundDisabled && new Audio(moveSound),
-    [soundDisabled]
-  )
-
-  const errorSoundEffect = useMemo(
-    () => !soundDisabled && new Audio(errorSound),
+  const soundEffects = useMemo(
+    () =>
+      !soundDisabled && {
+        shift: new Audio(shiftSound),
+        error: new Audio(errorSound),
+      },
     [soundDisabled]
   )
 
   const direction = useArrow((direction: ArrowDirection) => {
-    const newState = move(cells, direction)
-
-    if (newState) {
-      !soundDisabled && moveSoundEffect && moveSoundEffect.play()
-      setCells(newState)
+    const newCells = props.moveCells(cells, direction)
+    if (newCells) {
+      !soundDisabled && soundEffects && soundEffects.shift.play()
+      setCells(newCells)
     } else {
       //TODO: error animation
-      !soundDisabled && errorSoundEffect && errorSoundEffect.play()
-      window.navigator.vibrate([
-        10, 3, 10, 3, 10, 20, 20, 3, 20, 3, 20, 20, 10, 3, 10, 3, 10,
-      ])
+      !soundDisabled && soundEffects && soundEffects.error.play()
+      !vibrationDisable &&
+        window.navigator.vibrate([
+          10, 3, 10, 3, 10, 20, 20, 3, 20, 3, 20, 20, 10, 3, 10, 3, 10,
+        ])
     }
   })
 
   return <Board cells={cells} direction={direction} />
 }
+
+export const Game = GameModeWrapper(GameBoard)
+
+export type GameBordType = typeof GameBoard
