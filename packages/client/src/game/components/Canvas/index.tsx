@@ -21,10 +21,11 @@ export function Canvas({ cells, direction }: CanvasProps) {
     const ctx = canvas.getContext('2d')!
 
     function renderFrame(frame: number) {
+      //10ms * 12 frames
       if (frame < 12) {
         setTimeout(() => {
           renderFrame(frame + 1)
-        }, 120)
+        }, 10) 
         clearCanvas(ctx)
         drawCells(ctx, cells, frame, direction)
         animationFrame = window.requestAnimationFrame(renderFrame)
@@ -33,8 +34,6 @@ export function Canvas({ cells, direction }: CanvasProps) {
     renderFrame(0)
 
     return () => {
-      console.log({ animationFrame })
-
       window.cancelAnimationFrame(animationFrame)
     }
   }, [...cells])

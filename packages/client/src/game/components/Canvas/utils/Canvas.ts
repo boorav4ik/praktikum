@@ -1,5 +1,4 @@
 import { ArrowDirection } from '../../../utils/ArrowDirections'
-import { transformations } from '../../../utils/Transformations'
 import { Cells, Cell, Effect } from '../../../utils/moveCells'
 import { getColor } from './getColort'
 
@@ -12,8 +11,6 @@ function drawRoundSquare(
 ) {
   const r = 5 * frameScale //radius of border
   const a = 55 * frameScale //side of square
-
-  // console.log({ r, a })
   if (bgColor) ctx.fillStyle = bgColor
 
   ctx.beginPath()
@@ -109,19 +106,14 @@ export function drawCells(
   ctx.lineWidth = 4
   for (let i = 0; i < 4; i++) {
     for (let j = 0; j < 4; j++) {
-      console.log()
-
       if (
         direction === ArrowDirection.ArrowUp ||
         direction === ArrowDirection.ArrowLeft
       ) {
         const index = 15 - i - 4 * j
-        console.log(cells[index])
-
         drawCell(ctx, 3 - i, 3 - j, cells[index], frame, direction)
       } else {
         const index = i + j * 4
-        console.log(cells[index])
         drawCell(ctx, i, j, cells[index], frame, direction)
       }
     }
