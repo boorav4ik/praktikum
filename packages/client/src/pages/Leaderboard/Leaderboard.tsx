@@ -4,11 +4,14 @@ import { LeaderHeader } from './LeaderHeader'
 
 import { gamers1, gamers2 } from './data'
 import { useAuth } from '../../hooks/useAuth'
+import { useEffect, useState } from 'react'
 
 export function LeaderboardPage() {
   const [{ leaderData }] = useAuth()
+
   console.log('12')
   console.log(leaderData)
+  // const [list1, setList1] = useState([])
 
   return (
     <Container component="main" maxWidth="md">
@@ -46,11 +49,11 @@ export function LeaderboardPage() {
               mr: '35px',
             }}
             spacing={2}>
-            {leaderData.map((item, index, arr) => (
+            {leaderData.map((item, index) => (
               <ItemLeader
                 rating={index + 1}
-                name={item.name}
-                score={item.data.score}
+                name={item.data?.name}
+                score={item.data?.score}
               />
             ))}
           </Stack>
