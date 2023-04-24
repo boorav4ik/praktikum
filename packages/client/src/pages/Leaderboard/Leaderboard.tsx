@@ -49,7 +49,7 @@ export function LeaderboardPage() {
               mr: '35px',
             }}
             spacing={2}>
-            {leaderData.map((item, index) => (
+            {leaderData.slice(0, 3).map((item, index) => (
               <ItemLeader
                 rating={index + 1}
                 name={item.data?.name}
@@ -62,11 +62,11 @@ export function LeaderboardPage() {
               ml: '55px!important',
             }}
             spacing={2}>
-            {gamers2.map(item => (
+            {leaderData.slice(3, 6).map((item, index) => (
               <ItemLeader
-                rating={item.rating}
-                name={item.name}
-                score={item.score}
+                rating={index + 1}
+                name={item.data?.name}
+                score={item.data?.score}
               />
             ))}
           </Stack>
