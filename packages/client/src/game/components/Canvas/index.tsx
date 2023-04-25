@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { type Cell } from '../../utils/moveCells'
+import { EmptyCell, type Cell } from '../../utils/moveCells'
 import { clearCanvas, drawCells } from './utils/Canvas'
 import { type ArrowDirection } from '../../utils/ArrowDirections'
 
@@ -37,4 +37,8 @@ export function Canvas({ cells, direction }: CanvasProps) {
   }, [...cells])
 
   return <canvas width={500} height={500} ref={canvasRef} />
+}
+
+Canvas.defaultProps = {
+  cells: Array.from(Array(16), () => EmptyCell),
 }

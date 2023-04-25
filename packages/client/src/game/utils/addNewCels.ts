@@ -14,7 +14,7 @@ export function addNewCell(
   ]
   cells[transformIndex(addNewCellLayerIndex, 3)] = [
     value ?? Math.random() >= 0.9 ? 4 : 2,
-    Effect.appears,
+    Effect.Appears,
   ]
 
   return true

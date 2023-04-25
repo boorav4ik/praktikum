@@ -4,8 +4,7 @@ import { Fab } from '../../components/FloatingActionButton'
 import GraphicEq from '@mui/icons-material/GraphicEq'
 import Vibration from '@mui/icons-material/Vibration'
 import School from '@mui/icons-material/School'
-import { GameMode } from '../../components/GameModeSwitch'
-import { Game } from '../../components/GameBoard'
+import { Game, GameMode } from '../../components/GameBoard'
 
 export function MainPage() {
   const [isSoundEffectsDisabled, setIsSoundEffectsDisabled] = useState(true)
@@ -35,6 +34,7 @@ export function MainPage() {
         }>
         <School />
       </Fab>
+      {/* TODO: add confirm dialog on switch to guide mode */}
       <Fab
         order={1}
         active={!isSoundEffectsDisabled}

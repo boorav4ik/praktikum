@@ -1,8 +1,10 @@
 import Box, { type BoxProps } from '@mui/material/Box'
 import Typography, { type TypographyProps } from '@mui/material/Typography'
 import { Canvas, type CanvasProps } from '../game/components/Canvas'
+import { Cell, EmptyCell } from '../game/utils/moveCells'
 
-interface BoardProps extends CanvasProps {
+type BoardProps = Omit<CanvasProps, 'cells'> & {
+  cells?: Cell[]
   header?: string
   footer?: string
   boardProps?: BoxProps
@@ -34,10 +36,14 @@ export function Board(props: BoardProps) {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
+          justifyContent: 'center',
           ...boardSX,
         }}
         {...boardProps}>
-        <Canvas cells={props.cells} direction={props.direction} />
+        <Canvas
+          cells={props.cells ?? Array.from(Array(16), () => EmptyCell)}
+          direction={props.direction}
+        />
       </Box>
       <BoardTypography>{props.footer}</BoardTypography>
     </>

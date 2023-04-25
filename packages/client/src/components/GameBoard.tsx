@@ -1,53 +1,43 @@
 import { useMemo, useState } from 'react'
-import { useArrow } from '../game/hooks/useArrow'
-import { type ArrowDirection } from '../game/utils/ArrowDirections'
-import { type Cell } from '../game/utils/moveCells'
-import { Board } from './Board'
-import shiftSound from '../assets/audio/cards-scrape.mp3'
-import errorSound from '../assets/audio/erro-tech.mp3'
-import { GameModeWrapper } from './GameModeSwitch'
+import { Cell } from '../game/utils/moveCells'
 
-export type GameBoardProps = {
+import shiftSound from '../assets/audio/cards-scrape.mp3'
+import shakeSound from '../assets/audio/silk-handling.mp3'
+import { DefaultMode } from '../game/modes/default'
+export enum GameMode {
+  Guide = 1,
+}
+
+type GameProps = {
   soundDisabled: boolean
   vibrationDisable: boolean
-  initCells: () => Cell[]
-  moveCells: (cells: Cell[], direction: ArrowDirection) => Cell[] | undefined
+
+  mode?: GameMode
 }
 
-function GameBoard({
-  soundDisabled,
-  vibrationDisable,
-  ...props
-}: GameBoardProps) {
-  const [cells, setCells] = useState<Cell[]>(props.initCells)
-
+function GameModeSwitch(mode?: GameMode) {
+  switch (mode) {
+    default:
+      return DefaultMode
+  }
+}
+export function Game({ mode, ...rest }: GameProps) {
+  const [cells, setCells] = useState<Cell[]>()
   const soundEffects = useMemo(
     () =>
-      !soundDisabled && {
+      !rest.soundDisabled && {
         shift: new Audio(shiftSound),
-        error: new Audio(errorSound),
+        shake: new Audio(shakeSound),
       },
-    [soundDisabled]
+    [rest.soundDisabled]
   )
 
-  const direction = useArrow((direction: ArrowDirection) => {
-    const newCells = props.moveCells(cells, direction)
-    if (newCells) {
-      !soundDisabled && soundEffects && soundEffects.shift.play()
-      setCells(newCells)
-    } else {
-      //TODO: error animation
-      !soundDisabled && soundEffects && soundEffects.error.play()
-      !vibrationDisable &&
-        window.navigator.vibrate([
-          10, 3, 10, 3, 10, 20, 20, 3, 20, 3, 20, 20, 10, 3, 10, 3, 10,
-        ])
-    }
+  function handleUdateCells(cells: Cell[]) {
+    setCells(cells)
+  }
+  return GameModeSwitch(mode)({
+    handleUdateCells,
+    cells,
+    soundEffects,
   })
-
-  return <Board cells={cells} direction={direction} />
 }
-
-export const Game = GameModeWrapper(GameBoard)
-
-export type GameBordType = typeof GameBoard

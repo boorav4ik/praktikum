@@ -42,8 +42,8 @@ export function GuideMode(GameComponent: GameBordType) {
       {...props}
       initCells={() => {
         const cells = Array.from(Array(16), () => EmptyCell)
-        cells[5] = [2, Effect.appears]
-        cells[8] = [2, Effect.appears]
+        cells[5] = [2, Effect.Appears]
+        cells[8] = [2, Effect.Appears]
       return cells     }}
       moveCells={(cells: Cell[],direction: ArrowDirection) => {
         const transform = transformations.getTransformation(direction)

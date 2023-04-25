@@ -1,15 +1,16 @@
 import { type TransformationMethod } from './Transformations'
 
 export enum Effect {
-  idle = 'idle',
-  moving = 'moving',
-  appears = 'APPEARS',
-  vanish = 'VANISH',
+  Idle,
+  Moving,
+  Appears,
+  Vanish,
+  Shake,
 }
 
 //TODO: Add fixed length array type
 export type Cell = [number, Effect]
-export const EmptyCell: Cell = [0, Effect.idle]
+export const EmptyCell: Cell = [0, Effect.Idle]
 
 export function moveCells(cells: Cell[], transformIndex: TransformationMethod) {
   const output: Cell[] = []
@@ -40,7 +41,7 @@ function moveLayer(layer: Cell[]): boolean {
   let isMoved = false
   for (let i = 0; i < 4; i++) {
     const [value] = layer[i]
-    if (!i) layer[i] = [value, Effect.idle]
+    if (!i) layer[i] = [value, Effect.Idle]
     else if (value) {
       const [nextCellValue] = layer[i - 1]
       if (!nextCellValue) {
@@ -51,7 +52,7 @@ function moveLayer(layer: Cell[]): boolean {
         isMerged = true
         isMoved = true
       } else {
-        layer[i] = [value, Effect.idle]
+        layer[i] = [value, Effect.Idle]
       }
     }
   }
@@ -60,13 +61,13 @@ function moveLayer(layer: Cell[]): boolean {
 
 function shiftCell(layer: Cell[], index: number) {
   const [value] = layer[index]
-  layer[index - 1] = [value, Effect.moving]
+  layer[index - 1] = [value, Effect.Moving]
   layer[index] = EmptyCell
 }
 
 function jounCell(layer: Cell[], index: number) {
   const [value] = layer[index]
-  layer[index - 1] = [value * 2, Effect.moving]
+  layer[index - 1] = [value * 2, Effect.Moving]
   layer[index] = EmptyCell
 }
 

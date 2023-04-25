@@ -2,6 +2,11 @@ import { ArrowDirection } from '../../../utils/ArrowDirections'
 import { type Cell, Effect } from '../../../utils/moveCells'
 import { getColor } from './getColort'
 
+const GRID_STEP = 120
+const GRID_INDENT = 70
+
+type Point = { x: number; y: number }
+
 function drawRoundSquare(
   ctx: CanvasRenderingContext2D,
   x: number,
@@ -30,36 +35,58 @@ function drawRoundSquare(
 function drawCellText(
   ctx: CanvasRenderingContext2D,
   value: number,
-  x: number,
-  y: number
+  { x, y }: Point
 ) {
   ctx.font = 'bold 24px Raleway'
   ctx.fillStyle = '#ffffffb3'
   ctx.textAlign = 'center'
-  ctx.fillText(String(value), x, y, 120)
+  ctx.fillText(String(value), x, y + 10, 120)
 }
 
-function calculateСoordinates(
-  row: number,
-  column: number,
-  frame: number,
-  direction?: ArrowDirection
-) {
-  const x = row * 120 + 70,
-    y = column * 120 + 70
-  if (!direction) return { x, y }
+function getCellCenterCoordinates(row: number, column: number) {
+  return {
+    x: row * GRID_STEP + GRID_INDENT,
+    y: column * GRID_STEP + GRID_INDENT,
+  }
+}
 
-  const bias = 120 * (1 - (frame + 1) / 12)
+function directionBiasSwitch(
+  bias: number,
+  direction?: ArrowDirection
+): (point: Point) => Point {
+  console.log(bias)
 
   switch (direction) {
     case ArrowDirection.ArrowUp:
-      return { x, y: y + bias }
+      return ({ x, y }) => ({ x, y: y + bias })
     case ArrowDirection.ArrowDown:
-      return { x, y: y - bias }
+      return ({ x, y }) => ({ x, y: y - bias })
     case ArrowDirection.ArrowLeft:
-      return { x: x + bias, y }
+      return ({ x, y }) => ({ x: x + bias, y })
     case ArrowDirection.ArrowRight:
-      return { x: x - bias, y }
+      return ({ x, y }) => ({ x: x - bias, y })
+  }
+  return point => point
+}
+
+function addMoving(point: Point, frame: number, direction?: ArrowDirection) {
+  const bias = 120 * (1 - (frame + 1) / 12)
+  return directionBiasSwitch(bias, direction)(point)
+}
+
+function addShake(point: Point, frame: number, direction?: ArrowDirection) {
+  const bias = (frame % 4) - 3
+  return directionBiasSwitch(bias, direction)(point)
+}
+
+function addEffect(effect: Effect) {
+  switch (effect) {
+    case Effect.Moving:
+      return addMoving
+    case Effect.Shake:
+      return addShake
+    default:
+      return (point: Point) => point
   }
 }
 
@@ -72,27 +99,23 @@ function drawCell(
   direction?: ArrowDirection
 ) {
   const [value, effect] = cell
-
-  const { x, y } = calculateСoordinates(
-    row,
-    column,
+  const { x, y } = addEffect(effect)(
+    getCellCenterCoordinates(row, column),
     frame,
-    effect === Effect.moving ? direction : undefined
+    direction
   )
 
   switch (effect) {
-    case Effect.appears:
+    case Effect.Appears:
       drawRoundSquare(ctx, x, y, getColor(value), (frame + 1) / 12)
-      drawCellText(ctx, value, x, y + 10)
+      drawCellText(ctx, value, { x, y })
       break
-    case Effect.moving:
-      drawRoundSquare(ctx, x, y, getColor(value))
-      drawCellText(ctx, value, x, y + 10)
-      break
-    case Effect.idle:
+    case Effect.Moving:
+    case Effect.Shake:
+    case Effect.Idle:
     default:
-      drawRoundSquare(ctx, x, column * 120 + 70, getColor(value))
-      if (value) drawCellText(ctx, value, x, y + 10)
+      drawRoundSquare(ctx, x, y, getColor(value))
+      if (value) drawCellText(ctx, value, { x, y })
       break
   }
 }
