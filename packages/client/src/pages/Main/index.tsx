@@ -9,7 +9,7 @@ import { Game, GameMode } from '../../components/GameBoard'
 export function MainPage() {
   const [isSoundEffectsDisabled, setIsSoundEffectsDisabled] = useState(true)
   const [isVibrationDisabled, setIsVibrationDisabled] = useState(true)
-  const [gameMode, setGameMode] = useState<GameMode>(GameMode.Guide)
+  const [gameMode, setGameMode] = useState<GameMode>()
 
   return (
     <Container component="main" maxWidth="md">
