@@ -54,8 +54,6 @@ function directionBiasSwitch(
   bias: number,
   direction?: ArrowDirection
 ): (point: Point) => Point {
-  console.log(bias)
-
   switch (direction) {
     case ArrowDirection.ArrowUp:
       return ({ x, y }) => ({ x, y: y + bias })
