@@ -9,7 +9,7 @@ import { Game, GameMode } from '../../components/GameBoard'
 export function MainPage() {
   const [isSoundEffectsDisabled, setIsSoundEffectsDisabled] = useState(true)
   const [isVibrationDisabled, setIsVibrationDisabled] = useState(true)
-  const [gameMode, setGameMode] = useState<GameMode>()
+  const [gameMode, setGameMode] = useState<GameMode>(GameMode.Guide)
 
   return (
     <Container component="main" maxWidth="md">
@@ -29,7 +29,7 @@ export function MainPage() {
         } режим обучения`}
         onClick={() =>
           setGameMode(state =>
-            state === GameMode.Guide ? undefined : GameMode.Guide
+            state === GameMode.Guide ? GameMode.Default : GameMode.Guide
           )
         }>
         <School />

@@ -1,44 +1,31 @@
-import { useEffect } from 'react'
-import { useArrow } from '../hooks/useArrow'
-import { Board } from '../../components/Board'
-import { Effect } from '../utils/moveCells'
-import { moveCells, type Cell, EmptyCell } from '../utils/moveCells'
+import { ArrowDirection } from '../utils/ArrowDirections'
 import { transformations } from '../utils/Transformations'
-import { type ArrowDirection } from '../utils/ArrowDirections'
 import { addNewCell } from '../utils/addNewCels'
+import { Cell, Effect, EmptyCell, moveCells } from '../utils/moveCells'
 
-export function DefaultMode({
-  handleUdateCells,
-  soundEffects,
-  ...props
-}: {
-  cells?: Cell[]
-  handleUdateCells: (cells: Cell[]) => void
-  soundEffects: false | { shift: HTMLAudioElement; shake: HTMLAudioElement }
-}) {
-  const direction = useArrow(move)
-
-  function move(direction: ArrowDirection) {
-    const transform = transformations.getTransformation(direction)
-    const { cells, movedLayers } = moveCells([...props.cells!], transform)
-    if (!movedLayers.size) {
-      soundEffects && soundEffects.shake.play()
-      handleUdateCells(cells.map(([value]: Cell) => [value, Effect.Shake]))
-    } else {
-      addNewCell(cells, movedLayers, transform)
-      soundEffects && soundEffects.shift.play()
-      handleUdateCells(cells)
+export class DefaultMode {
+  init() {
+    const cells = Array.from(Array(16), () => EmptyCell)
+    for (let i = 0; i < 4; i++) {
+      cells[Math.floor(Math.random() * 15)] = [2, Effect.Appears]
     }
+    return cells
   }
 
-  useEffect(() => {
-    if (props.cells) return
-    const newCells = Array.from(Array(16), () => EmptyCell)
-    for (let i = 0; i < 4; i++) {
-      newCells[Math.floor(Math.random() * 15)] = [2, Effect.Appears]
-    }
-    handleUdateCells(newCells)
-  }, [])
+  move(previousCells: Cell[], direction: ArrowDirection) {
+    const transform = transformations.getTransformation(direction)
+    const { cells, movedLayers } = moveCells([...previousCells], transform)
+    if (!movedLayers.size) return null
+    addNewCell(cells, movedLayers, transform)
+    return cells
+  }
 
-  return <Board {...props} direction={direction} />
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  getLegend(cells: Cell[], step: number): { header?: string; footer?: string } {
+    return {
+      header: `Score: ${cells.reduce((s, [value]) => s * (value || 1), 1)}`,
+    }
+  }
 }
+
+export const defaultMode = new DefaultMode()

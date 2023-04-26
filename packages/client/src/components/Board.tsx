@@ -2,12 +2,15 @@ import Box, { type BoxProps } from '@mui/material/Box'
 import Typography, { type TypographyProps } from '@mui/material/Typography'
 import { Canvas, type CanvasProps } from '../game/components/Canvas'
 import { Cell, EmptyCell } from '../game/utils/moveCells'
+// import { ArrowDirection } from '../game/utils/ArrowDirections'
 
-type BoardProps = Omit<CanvasProps, 'cells'> & {
-  cells?: Cell[]
+export type BoardProps = Omit<CanvasProps, 'cells'> & {
+  cells: Cell[]
   header?: string
   footer?: string
   boardProps?: BoxProps
+  // handleMove: (cells: Cell[], direction: ArrowDirection) => Cell[] | undefined
+  // handleInit: () => Cell[]
 }
 
 function BoardTypography(props: TypographyProps) {
@@ -23,6 +26,8 @@ function BoardTypography(props: TypographyProps) {
 }
 
 export function Board(props: BoardProps) {
+  console.log(props);
+
   const { sx: boardSX = {}, ...boardProps } = props.boardProps ?? {}
   return (
     <>
@@ -30,9 +35,9 @@ export function Board(props: BoardProps) {
       <Box
         bgcolor="background.paper"
         sx={{
-          height: 520,
-          width: 520,
-          borderRadius: 16,
+          height: 500,
+          width: 500,
+          borderRadius: 3,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
