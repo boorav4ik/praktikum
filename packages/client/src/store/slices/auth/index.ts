@@ -7,7 +7,7 @@ import { User, Leader } from './interfaces'
 export type AuthState = {
   user: Nullable<User>
   userData: Nullable<User>
-  leaderData: [Leader] | []
+  leaderData: Leader[]
   editStatus: string
   isLoading: boolean
   error?: string
