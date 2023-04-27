@@ -25,7 +25,7 @@ interface LoginValues extends Login {
 export function LoginPage() {
   const location = useLocation()
   const navigate = useNavigate()
-  const [{ user }, { signin }] = useAuth()
+  const [{ user }, { signin, signinOauth }] = useAuth()
   const { handleSubmit, control } = useForm<LoginValues>({
     mode: 'onBlur',
     defaultValues: {
@@ -46,6 +46,10 @@ export function LoginPage() {
       },
       () => navigate(location.state ?? '/')
     )
+  }
+
+  function fetchOAuth() {
+    signinOauth('http://localhost:3000', () => navigate(location.state ?? '/'))
   }
 
   return user ? (
@@ -110,6 +114,7 @@ export function LoginPage() {
             Нет аккаунта?!! Регистрация
           </Typography>
           <Button type="submit">Авторизация</Button>
+          <Button type="button" onClick={fetchOAuth}>Авторизация через Яндекс</Button>
         </Box>
       </Box>
     </Container>

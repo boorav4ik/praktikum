@@ -38,3 +38,8 @@ export interface FileProps {
   data: string | ArrayBuffer | null
   info: File | undefined
 }
+
+export type SignUpOAuth = {
+  "code": string,
+  "redirect_uri": string
+}
