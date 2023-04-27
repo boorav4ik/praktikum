@@ -54,5 +54,4 @@ function App() {
     </FullScreen>
   )
 }
-
 export default App

@@ -9,7 +9,6 @@ import backgroundImage from './icons/background.svg'
 import { Link } from 'react-router-dom'
 import { useAuth } from 'hooks/useAuth'
 import { LoginButtons } from './loginButtons'
-
 function NavItem({ text, ...rest }: { text: string; to: string }) {
   return (
     <Button

@@ -9,6 +9,7 @@ import {
 import { DefaultScreenIcon } from 'layouts/Main/icons/DefaultScreen'
 import { FullScreenIcon } from 'layouts/Main/icons/FullScreen'
 import { Audio } from './Audio'
+import { ThemeButton } from './ThemeButton'
 
 const Screen = styled(Box)(() => ({
   '&::backdrop': {
@@ -35,6 +36,7 @@ export function FullScreen({ children }: { children: JSX.Element }) {
           bottom: '48px',
           right: '24px',
         }}>
+        <ThemeButton/>
         <Audio />
         <Button
           title={!fullScreen ? 'Полноэкранный режим' : 'Обычный режим'}
