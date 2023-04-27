@@ -52,3 +52,5 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
+    ports:
+      - "${POSTGRES_PORT}:5432"
