@@ -1,17 +1,13 @@
 import { Box, Container, Stack, Divider } from '@mui/material'
 import { ItemLeader } from './ItemLeader'
 import { LeaderHeader } from './LeaderHeader'
-
-import { gamers1, gamers2 } from './data'
-import { useAuth } from '../../hooks/useAuth'
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../store'
 
 export function LeaderboardPage() {
-  const [{ leaderData }] = useAuth()
-
-  console.log('12')
+  const leaderData = useSelector((state: RootState) => state.leader.leaderData)
   console.log(leaderData)
-  // const [list1, setList1] = useState([])
 
   return (
     <Container component="main" maxWidth="md">

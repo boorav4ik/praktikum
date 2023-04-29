@@ -1,11 +1,8 @@
 import { useSelector } from 'react-redux'
-import {
-  GetUser,
-  ChangeProfile,
-  ChangeAvatar,
-  ChangePassword,
-  GetLeaderBoard,
-} from 'api/user'
+import { GetUser, ChangeProfile, ChangeAvatar, ChangePassword } from 'api/user'
+
+import { GetLeaderBoard } from 'api/leader'
+
 import { signin, signout, signup } from 'api/auth'
 import { RootState } from 'store'
 import { useAppDispatch } from 'store/hooks'
