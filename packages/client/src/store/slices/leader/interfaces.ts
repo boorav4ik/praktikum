@@ -5,3 +5,9 @@ export interface Record {
     score: string
   }
 }
+
+export interface dataGetRecord {
+  ratingFieldName: string
+  cursor: number
+  limit: number
+}
