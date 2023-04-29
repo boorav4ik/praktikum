@@ -1,8 +1,6 @@
 import { useSelector } from 'react-redux'
 import { GetUser, ChangeProfile, ChangeAvatar, ChangePassword } from 'api/user'
 
-import { GetLeaderBoard } from 'api/leader'
-
 import { signin, signout, signup } from 'api/auth'
 import { RootState } from 'store'
 import { useAppDispatch } from 'store/hooks'
@@ -44,9 +42,6 @@ export function useAuth(): [AuthState, AuthActions] {
       },
       updateEditStatus(data) {
         dispatch(updateEditStatus(data))
-      },
-      GetLeaderBoard(data) {
-        dispatch(GetLeaderBoard(data))
       },
     },
   ]

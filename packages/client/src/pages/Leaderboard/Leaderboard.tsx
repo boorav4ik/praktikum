@@ -4,10 +4,22 @@ import { LeaderHeader } from './LeaderHeader'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../store'
+import { useAppDispatch } from '../../store/hooks'
+import { GetLeaderBoard } from 'api/leader'
 
 export function LeaderboardPage() {
   const leaderData = useSelector((state: RootState) => state.leader.leaderData)
-  console.log(leaderData)
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(
+      GetLeaderBoard({
+        ratingFieldName: 'score',
+        cursor: 0,
+        limit: 10,
+      })
+    )
+  }, [])
 
   return (
     <Container component="main" maxWidth="md">

@@ -26,7 +26,7 @@ function NavItem({ text, ...rest }: { text: string; to: string }) {
 }
 
 export const NavBar = () => {
-  const [{ user }, { getUser, GetLeaderBoard, signout }] = useAuth()
+  const [{ user }, { getUser, signout }] = useAuth()
 
   const AppBar = styled(MuiAppBar)(({ theme }) => ({
     zIndex: theme.zIndex.drawer + 1,
@@ -40,11 +40,6 @@ export const NavBar = () => {
 
   useEffect(() => {
     getUser()
-    GetLeaderBoard({
-      ratingFieldName: 'score',
-      cursor: 0,
-      limit: 10,
-    })
   }, [])
 
   return (

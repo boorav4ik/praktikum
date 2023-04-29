@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { GetLeaderBoard } from 'api/leader'
-import { signin, signout, signup } from 'api/auth'
 import { Leader } from './interfaces'
 
 export type AuthState = {
