@@ -1,4 +1,4 @@
-export interface Leader {
+export interface Record {
   data: {
     name: string
     avatar: string

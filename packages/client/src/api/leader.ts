@@ -1,10 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import host from './config'
 import { ApiEndPoints } from './config'
+import { Record } from '../store/slices/leader/interfaces'
 
 export const GetLeaderBoard = createAsyncThunk(
   'getLeaderBoard',
-  async (data: any, thunkAPI) => {
+  async (data: Record[], thunkAPI) => {
     try {
       const response = await host.post<any>(
         ApiEndPoints.LeaderBoard.GetTeam,
@@ -19,7 +20,7 @@ export const GetLeaderBoard = createAsyncThunk(
 
 export const UpdateUserLeader = createAsyncThunk(
   'UpdateUserLeader',
-  async (data: any, thunkAPI) => {
+  async (data: Record[], thunkAPI) => {
     try {
       const response = await host.post<any[]>(
         ApiEndPoints.LeaderBoard.UpdateUserInfo,

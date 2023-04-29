@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { GetLeaderBoard } from 'api/leader'
-import { Leader } from './interfaces'
+import { Record } from './interfaces'
 
 export type AuthState = {
-  leaderData: Leader[]
+  leaderData: Record[]
   isLoading: boolean
   error?: string
 }
@@ -24,7 +24,7 @@ export const leaderSlise = createSlice({
   extraReducers: {
     [GetLeaderBoard.fulfilled.type]: (
       state,
-      action: PayloadAction<[Leader] | []>
+      action: PayloadAction<[Record] | []>
     ) => {
       state.isLoading = false
       state.error = ''
