@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build:ssr": "yarn run build && vite build --ssr",
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write .",
@@ -15,7 +16,8 @@
     "eslint-config-prettier": "^8.5.0",
     "prettier": "^2.7.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.11.0"
   },
   "devDependencies": {
     "@testing-library/react": "^13.3.0",

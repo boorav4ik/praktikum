@@ -8,9 +8,11 @@
     "dev": "cross-env NODE_ENV=development nodemon index.ts",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "test": "jest ."
+    "test": "jest .",
+    "start": "rm -rf dist && yarn build && yarn preview"
   },
   "dependencies": {
+    "client": "*",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.2",
