@@ -5,9 +5,9 @@ import { Record, dataGetRecord } from '../store/slices/leader/interfaces'
 
 export const GetLeaderBoard = createAsyncThunk(
   'getLeaderBoard',
-  async (data: dataGetRecord[], thunkAPI) => {
+  async (data: dataGetRecord, thunkAPI) => {
     try {
-      const response = await host.post<any>(
+      const response = await host.post<Record[]>(
         ApiEndPoints.LeaderBoard.GetTeam,
         data
       )
