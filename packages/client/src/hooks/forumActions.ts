@@ -1,6 +1,4 @@
 import { ForumComments, ForumTopic } from 'store/slices/forum/interfaces'
-import { Nullable } from 'utils/nullableType'
-type NullableString = Nullable<string>
 
 export interface ForumActions {
   getTheme: () => void

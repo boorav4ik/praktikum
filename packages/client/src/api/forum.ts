@@ -5,8 +5,6 @@ import {
   ForumTheme,
   ForumTopic,
 } from 'store/slices/forum/interfaces'
-import { Nullable } from 'utils/nullableType'
-type NullableString = Nullable<string>
 
 export const GetTheme = createAsyncThunk(
   'forum/gettheme',

@@ -31,7 +31,7 @@ interface NewTopicProps {
 export function NewTopic({ handleModal, id_theme }: NewTopicProps) {
   const [title, setTitle] = useState<string>('')
   const [description, setDescription] = useState<string>('')
-  const [{}, { createNewTopic }] = useForum()
+  const [{ topics }, { createNewTopic }] = useForum()
 
   function newTheme() {
     if (!title || !description || !id_theme) return

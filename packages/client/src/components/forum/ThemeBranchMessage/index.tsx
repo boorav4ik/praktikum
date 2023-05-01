@@ -1,8 +1,6 @@
 import { Box, Stack } from '@mui/material'
 import Typography from '@mui/material/Typography'
 import { ThemeBranchMessageProps } from 'store/slices/forum/interfaces'
-import { ColorButton } from '../ForumRow'
-import GarbageIcon from '../icons/GarbageIcon'
 
 export function MessageRow({ gridProps, messages }: ThemeBranchMessageProps) {
   const { text, author } = messages

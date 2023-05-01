@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { ForumComments, ForumTheme, ForumTopic, Message } from './interfaces'
+import { ForumComments, ForumTheme, ForumTopic } from './interfaces'
 import {
   CreateComment,
   GetAllTopics,
