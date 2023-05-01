@@ -1,14 +1,11 @@
-import { Box, GridProps, Stack } from '@mui/material'
-import { Message } from 'pages/Forum/ThemeBranch'
+import { Box, Stack } from '@mui/material'
 import Typography from '@mui/material/Typography'
+import { ThemeBranchMessageProps } from 'store/slices/forum/interfaces'
+import { ColorButton } from '../ForumRow'
+import GarbageIcon from '../icons/GarbageIcon'
 
-export type ThemeBranchMessageProps = {
-  message: Message
-  gridProps?: GridProps
-}
-
-export function MessageRow({ gridProps, message }: ThemeBranchMessageProps) {
-  const { text, user } = message
+export function MessageRow({ gridProps, messages }: ThemeBranchMessageProps) {
+  const { text, author } = messages
 
   return (
     <Stack
@@ -30,7 +27,7 @@ export function MessageRow({ gridProps, message }: ThemeBranchMessageProps) {
       </Box>
       <Box sx={{ textAlign: 'end' }}>
         <Typography color={'white'} fontWeight={500}>
-          {user.name}
+          {author}
         </Typography>
       </Box>
     </Stack>

@@ -1,32 +1,47 @@
 import { useEffect, useState } from 'react'
-import { Box, Container, Grid } from '@mui/material'
-import { HeaderForPage } from '../../components/forum/HeaderForPage'
+import { Box, Container, Grid, Modal } from '@mui/material'
 import { useParams, useLocation, useNavigate } from 'react-router-dom'
-import { ForumRow } from '../../components/forum/ForumRow'
-import { ChatAnswerIcon } from '../../components/forum/icons/ChatAnswerIcon'
-import { mockedBranches } from '../../mocs/forum'
-
-export type ThemeBranch = {
-  id: number
-  name: string
-  branchName: string
-}
+import { Button } from 'components/Button'
+import { ForumRow } from 'components/forum/ForumRow'
+import { ChatAnswerIcon } from 'components/forum/icons/ChatAnswerIcon'
+import { useForum } from 'hooks/useForum'
+import { ForumComments, ForumTopic } from 'store/slices/forum/interfaces'
+import { useAuth } from 'hooks/useAuth'
+import { NewTopic } from './NewTopic'
+import { HeaderForPage } from 'components/forum/HeaderForPage'
+import GarbageIcon from 'components/forum/icons/GarbageIcon'
 
 function ThemePage() {
+  const [modal, setModal] = useState<boolean>(false)
+  const [{ user }] = useAuth()
+
   const navigate = useNavigate()
   const { theme_name } = useParams()
   const { state } = useLocation()
-  const { text, id } = state.theme
-  const [branches, setBranches] = useState<ThemeBranch[]>([])
+  const [{ topics }, { getTopicByTheme, updateComments, deleteTopic }] =
+    useForum()
 
   useEffect(() => {
-    setBranches(mockedBranches)
-  }, [id, theme_name])
+    getTopicByTheme(state.theme.id)
+  }, [])
 
-  const goToBranch = (branch: ThemeBranch) => {
-    navigate(`/forum/${theme_name}/${branch.branchName}`, {
-      state: { theme: state.theme, branch: branch },
+  const goToTopic = (topic: ForumTopic) => {
+    navigate(`/forum/${theme_name}/${topic.id}`, {
+      state: { theme: state.theme, topic: topic },
     })
+    updateComments(topic.Comments as ForumComments)
+  }
+
+  console.log(topics)
+
+  const style = {
+    width: '20%',
+    height: 50,
+    bgcolor: 'background.paper',
+    border: '2px solid #1E515D',
+    boxShadow: 24,
+    fontWeight: 700,
+    fontSize: 16,
   }
 
   return (
@@ -43,19 +58,36 @@ function ThemePage() {
           border: '3px solid #1E515D',
           p: 3,
         }}>
-        <HeaderForPage text={text} backPath="/forum" />
+        <Modal
+          open={modal}
+          onClose={setModal}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description">
+          <>
+            <NewTopic handleModal={setModal} id_theme={state.theme.id} />
+          </>
+        </Modal>
+
+        <Box sx={{ width: '90%', display: 'flex', flexDirection: 'row' }}>
+          <HeaderForPage text={'Темы'} backPath={'/forum'} />
+          {user && (
+            <Button sx={style} onClick={() => setModal(true)}>
+              Новая тема
+            </Button>
+          )}
+        </Box>
         <Grid
           container
           direction="column"
           justifyContent="center"
           alignItems="center"
-          maxWidth={'90%'}
+          maxWidth={'99%'}
           marginY={2}
           rowSpacing={4}>
-          {branches.map(branch => (
+          {topics.map(topic => (
             <ForumRow
-              key={branch.id}
-              onClick={() => goToBranch(branch)}
+              key={topic.id}
+              onClick={() => goToTopic(topic)}
               icon={() =>
                 ChatAnswerIcon({
                   width: '25',
@@ -63,8 +95,17 @@ function ThemePage() {
                   viewBox: '0 0 25 25',
                 })
               }
-              text={branch.name}
+              deleteClick={() => deleteTopic(topic)}
+              iconDelete={() =>
+                GarbageIcon({
+                  width: '25',
+                  height: '25',
+                  viewBox: '0 0 512 512',
+                })
+              }
+              text={topic.title}
               btnText="Ответы"
+              btnDelText={'Удалить'}
             />
           ))}
         </Grid>
