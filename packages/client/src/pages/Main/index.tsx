@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import { Box, Container } from '@mui/material'
+import { Box, Container, Dialog } from '@mui/material'
 import { Fab } from '../../components/FloatingActionButton'
 import GraphicEq from '@mui/icons-material/GraphicEq'
 import Vibration from '@mui/icons-material/Vibration'
 import School from '@mui/icons-material/School'
-import { Game, GameMode } from '../../components/GameBoard'
+import { GameBoard, GameMode } from '../../components/Game'
+
 
 export function MainPage() {
   const [isSoundEffectsDisabled, setIsSoundEffectsDisabled] = useState(true)
@@ -15,7 +16,7 @@ export function MainPage() {
     <Container component="main" maxWidth="md">
       <Box
         sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <Game
+        <GameBoard
           soundDisabled={isSoundEffectsDisabled}
           vibrationDisable={isVibrationDisabled}
           mode={gameMode}
