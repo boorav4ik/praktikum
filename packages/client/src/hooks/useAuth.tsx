@@ -1,9 +1,10 @@
 import { useSelector } from 'react-redux'
-import { getUser, signin, signout, signup } from '../api/userApi'
-import { RootState } from '../store'
-import { useAppDispatch } from '../store/hooks'
-import { AuthState, changeProfile } from '../store/slices/auth'
-import { AuthActions } from './interfaces/authActions'
+import { GetUser, ChangeProfile, ChangeAvatar, ChangePassword } from 'api/user'
+import { signin, signout, signup } from 'api/auth'
+import { RootState } from 'store'
+import { useAppDispatch } from 'store/hooks'
+import { AuthState, updateEditStatus, updateUserData } from 'store/slices/auth'
+import { AuthActions } from './authActions'
 
 export function useAuth(): [AuthState, AuthActions] {
   const auth = useSelector((state: RootState) => state.auth)
@@ -24,10 +25,22 @@ export function useAuth(): [AuthState, AuthActions] {
         dispatch(signout())
       },
       changeProfile(data) {
-        dispatch(changeProfile(data))
+        dispatch(ChangeProfile(data))
+      },
+      changeAvatar(data) {
+        dispatch(ChangeAvatar(data))
+      },
+      changePassword(data) {
+        dispatch(ChangePassword(data))
       },
       getUser() {
-        dispatch(getUser())
+        dispatch(GetUser())
+      },
+      updateUserData(data) {
+        dispatch(updateUserData(data))
+      },
+      updateEditStatus(data) {
+        dispatch(updateEditStatus(data))
       },
     },
   ]

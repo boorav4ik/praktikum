@@ -1,5 +1,5 @@
-export { LoginPage as Login } from './Login'
-export { SignUpPage as SignUp } from './SignUp'
+export { LoginPage as Login } from './Login/Login'
+export { SignUpPage as SignUp } from './SignUp/SignUp'
 export { MainPage as Home } from './Main'
 export { ProfilePage as Profile } from './Profile'
 export { ErrorPage as Error } from './Error'

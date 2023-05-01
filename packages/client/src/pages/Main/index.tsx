@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Box, Container, Dialog } from '@mui/material'
+import { Box, Container } from '@mui/material'
 import { Fab } from '../../components/FloatingActionButton'
 import GraphicEq from '@mui/icons-material/GraphicEq'
 import Vibration from '@mui/icons-material/Vibration'
