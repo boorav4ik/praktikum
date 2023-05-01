@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material'
-import { AvatarBox } from '../../components/AvatarBox'
+import { AvatarBox } from 'components/AvatarBox'
 
 interface ItemLeaderProps {
   name: string

@@ -1,6 +1,6 @@
-import { ForumTheme } from '../pages/Forum/Forum'
-import { ThemeBranch } from '../pages/Forum/Themes'
-import { Message } from '../pages/Forum/ThemeBranch'
+import { ForumTheme } from 'pages/Forum/Forum'
+import { ThemeBranch } from 'pages/Forum/Themes'
+import { Message } from 'pages/Forum/ThemeBranch'
 
 export const defaultThemes: ForumTheme[] = [
   {

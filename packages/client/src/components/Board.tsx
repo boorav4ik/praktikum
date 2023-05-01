@@ -1,13 +1,15 @@
-import Box, { type BoxProps } from '@mui/material/Box'
+import Box from '@mui/material/Box'
 import Typography, { type TypographyProps } from '@mui/material/Typography'
 import { Canvas, type CanvasProps } from '../game/components/Canvas'
-import { Cell, EmptyCell } from '../game/utils/moveCells'
+import { Cell } from '../game/utils/moveCells'
+// import { ArrowDirection } from '../game/utils/ArrowDirections'
 
-type BoardProps = Omit<CanvasProps, 'cells'> & {
-  cells?: Cell[]
+export type BoardProps = Omit<CanvasProps, 'cells'> & {
+  cells: Cell[]
   header?: string
   footer?: string
-  boardProps?: BoxProps
+  // boardProps?: BoxProps
+  borderColor?: string
 }
 
 function BoardTypography(props: TypographyProps) {
@@ -23,25 +25,29 @@ function BoardTypography(props: TypographyProps) {
 }
 
 export function Board(props: BoardProps) {
-  const { sx: boardSX = {}, ...boardProps } = props.boardProps ?? {}
+  // const { sx: boardSX = {}, ...boardProps } = props.boardProps ?? {}
+
   return (
     <>
       <BoardTypography>{props.header}</BoardTypography>
       <Box
         bgcolor="background.paper"
         sx={{
-          height: 520,
-          width: 520,
-          borderRadius: 16,
+          height: 500,
+          width: 500,
+          borderRadius: 3,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          ...boardSX,
+          border: '4px solid #1E515D',
+          borderColor: props.borderColor
+          // ...boardSX,
         }}
-        {...boardProps}>
+        // {...boardProps}
+        >
         <Canvas
-          cells={props.cells ?? Array.from(Array(16), () => EmptyCell)}
+          cells={props.cells}
           direction={props.direction}
         />
       </Box>

@@ -1,7 +1,7 @@
 import { Provider } from 'react-redux'
 import App from './App'
 import { render, screen } from '@testing-library/react'
-import { store } from './store'
+import { store } from 'store'
 
 // @ts-ignore
 global.fetch = jest.fn(() =>

@@ -4,18 +4,19 @@ import { Fab } from '../../components/FloatingActionButton'
 import GraphicEq from '@mui/icons-material/GraphicEq'
 import Vibration from '@mui/icons-material/Vibration'
 import School from '@mui/icons-material/School'
-import { Game, GameMode } from '../../components/GameBoard'
+import { GameBoard, GameMode } from '../../components/Game'
+
 
 export function MainPage() {
   const [isSoundEffectsDisabled, setIsSoundEffectsDisabled] = useState(true)
   const [isVibrationDisabled, setIsVibrationDisabled] = useState(true)
-  const [gameMode, setGameMode] = useState<GameMode>()
+  const [gameMode, setGameMode] = useState<GameMode>(GameMode.Guide)
 
   return (
     <Container component="main" maxWidth="md">
       <Box
         sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <Game
+        <GameBoard
           soundDisabled={isSoundEffectsDisabled}
           vibrationDisable={isVibrationDisabled}
           mode={gameMode}
@@ -29,7 +30,7 @@ export function MainPage() {
         } режим обучения`}
         onClick={() =>
           setGameMode(state =>
-            state === GameMode.Guide ? undefined : GameMode.Guide
+            state === GameMode.Guide ? GameMode.Default : GameMode.Guide
           )
         }>
         <School />

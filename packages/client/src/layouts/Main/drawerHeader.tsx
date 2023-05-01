@@ -1,8 +1,8 @@
 import { FC } from 'react'
 import { styled } from '@mui/material/styles'
 import IconButton from '@mui/material/IconButton'
-import LeftArrow from '../../layouts/Main/icons/LeftArrow'
-import RightArrow from '../../layouts/Main/icons/RightArrow'
+import LeftArrow from 'layouts/Main/icons/LeftArrow'
+import RightArrow from 'layouts/Main/icons/RightArrow'
 
 interface SideBarProps {
   open?: boolean
@@ -19,7 +19,7 @@ export const DrawerHeader: FC<SideBarProps> = ({ open, toggleDrawer }) => {
   }))
 
   return (
-    <DrawerHeader sx={{ mt: 12, zIndex: 1 }}>
+    <DrawerHeader sx={{ mt: 0, zIndex: 1 }}>
       <IconButton onClick={toggleDrawer}>
         {open ? <LeftArrow /> : <RightArrow />}
       </IconButton>

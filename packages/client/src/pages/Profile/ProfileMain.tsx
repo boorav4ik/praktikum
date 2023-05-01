@@ -1,62 +1,121 @@
-import { FC, useRef, useEffect } from 'react'
 import { Box, Stack } from '@mui/material'
-import { ProfileFields } from './ProfileFields'
+import { MapProfileInputFields } from './ProfileFieldsData'
+import {
+  useForm,
+  useFieldArray,
+  Controller,
+  useFormState,
+} from 'react-hook-form'
+import { useAuth } from 'hooks/useAuth'
+import { ProfileFooter } from './ProfileFooter'
+import { Button } from 'components/Button'
+import { User } from 'storeAuth/interfaces'
+import { ChangeEvent, useEffect } from 'react'
+import { TextField } from 'components/TextFields'
 
 interface ProfileMainProps {
-  user: object
-  editStatus: string
-  saveUserData: (newUserData: object | undefined, status: string) => void
+  setModal: () => void
 }
-export function ProfileMain({
-  user,
-  editStatus,
-  saveUserData,
-}: ProfileMainProps) {
-  const newUserData = useRef<object>(user)
 
-  const saveUser = (userData: object) => {
-    newUserData.current = { ...newUserData.current, ...userData }
-  }
+interface ProfileValues extends User {
+  list: {
+    name: string
+    label: string
+    value: string
+    validation: object
+    disabled: boolean
+    type: string
+  }[]
+}
+
+export function ProfileMain({ setModal }: ProfileMainProps) {
+  const [{ user, userData, editStatus }, { updateUserData }] = useAuth()
+
+  const { reset, control } = useForm<ProfileValues>({
+    mode: 'onBlur',
+    defaultValues: {
+      list: MapProfileInputFields.map(data => ({
+        ...data,
+        value: userData![data.name as keyof typeof userData],
+      })),
+    },
+  })
+  const { errors, isValid } = useFormState({ control })
+  const { fields } = useFieldArray({
+    control,
+    name: 'list',
+  })
 
   useEffect(() => {
-    if (editStatus === 'save') {
-      saveUserData(newUserData.current, editStatus)
-    } else if (editStatus === 'cancel') {
-      saveUserData(user, editStatus)
+    if (editStatus === 'cancel') {
+      reset({
+        list: MapProfileInputFields.map(data => ({
+          ...data,
+          value: user![data.name as keyof typeof userData],
+        })),
+      })
     }
   }, [editStatus])
 
   return (
     <Box
-      sx={{
-        display: 'flex',
-        flexDirection: { xs: 'column', sm: 'row' },
-        justifyContent: 'space-evenly',
-        p: 3,
-        width: '75%',
-      }}>
-      <Stack spacing={2}>
-        {['firstName', 'secondName', 'phone'].map(field => (
-          <ProfileFields
-            key={field}
-            value={user[field as keyof typeof user]}
-            label={field}
-            editStatus={editStatus}
-            changeDataUser={(newUserData: object) => saveUser(newUserData)}
-          />
-        ))}
-      </Stack>
-      <Stack spacing={2}>
-        {['email', 'login', 'password'].map(field => (
-          <ProfileFields
-            key={field}
-            value={user[field as keyof typeof user]}
-            label={field}
-            editStatus={editStatus}
-            changeDataUser={(newUserData: object) => saveUser(newUserData)}
-          />
-        ))}
-      </Stack>
+      sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: { xs: 'column', sm: 'row' },
+          justifyContent: 'center',
+          p: 3,
+          width: '95%',
+        }}>
+        <Stack
+          direction={{ xs: 'column', sm: 'row' }}
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={0}
+          sx={{ flexWrap: 'wrap' }}>
+          {fields.map(({ id, name, label, validation, type }, index) => {
+            return (
+              <Controller
+                key={id}
+                control={control}
+                name={`list.${index}.value`}
+                rules={validation}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    inputRef={field.ref}
+                    label={label}
+                    type={type}
+                    disabled={editStatus === 'info'}
+                    variant="outlined"
+                    sx={{ width: '48%', height: 80 }}
+                    margin="normal"
+                    onChange={(event: ChangeEvent<HTMLInputElement>) => (
+                      field.onChange(event),
+                      updateUserData({
+                        ...userData!,
+                        ...{ [name]: event.target.value },
+                      })
+                    )}
+                    error={!!(errors?.list ?? [])[index]?.value?.message}
+                    helperText={(errors?.list ?? [])[index]?.value?.message}
+                    inputProps={{ style: { height: 5 } }}
+                    InputLabelProps={{ style: { top: -7, marginTop: 0 } }}
+                    FormHelperTextProps={{
+                      style: { height: 0, marginTop: -1, zIndex: 999 },
+                    }}
+                  />
+                )}
+              />
+            )
+          })}
+        </Stack>
+      </Box>
+      <Button onClick={setModal} sx={{ width: '40%' }}>
+        Изменить пароль
+      </Button>
+      <ProfileFooter isValid={isValid} />
     </Box>
   )
 }

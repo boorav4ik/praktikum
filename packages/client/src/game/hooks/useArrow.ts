@@ -1,6 +1,8 @@
 import { useEffect, useState, useRef } from 'react'
 import { ArrowDirection } from '../utils/ArrowDirections'
 
+
+
 export function useArrow(calback: (direction: ArrowDirection) => void) {
   const [direction, setDirection] = useState<ArrowDirection>()
   const timer = useRef<NodeJS.Timeout>()
@@ -13,7 +15,7 @@ export function useArrow(calback: (direction: ArrowDirection) => void) {
     }, 120) //10ms * 12 frames
 
     if (e.key in ArrowDirection) {
-      const direction: ArrowDirection = e.key as ArrowDirection
+      const direction = e.key as ArrowDirection
       calback(direction)
       setDirection(direction)
     }
