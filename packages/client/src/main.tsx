@@ -6,6 +6,8 @@ import { CssBaseline, ThemeProvider } from '@mui/material'
 import { Provider } from 'react-redux'
 import { store } from './store'
 import './index.css'
+import { BrowserRouter } from 'react-router-dom'
+
 function startServiceWorker() {
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
@@ -28,11 +30,13 @@ startServiceWorker()
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <App />
-      </ThemeProvider>
-    </Provider>
+    <BrowserRouter>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <App />
+        </ThemeProvider>
+      </Provider>
+    </BrowserRouter>
   </React.StrictMode>
 )
