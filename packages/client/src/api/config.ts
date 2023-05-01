@@ -1,7 +1,5 @@
 import axios from 'axios'
 
-export const baseUrl = import.meta.env.baseUrl
-
 export const ApiHost = 'https://ya-praktikum.tech/api/v2/'
 export const AvatarHost = 'https://ya-praktikum.tech/api/v2/resources/'
 export const ApiEndPoints = {
