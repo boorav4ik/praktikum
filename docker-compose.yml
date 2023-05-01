@@ -37,6 +37,8 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+    networks:
+      - awesome
 
   postgres:
     container_name: prakticum-db
@@ -54,3 +56,9 @@ services:
       retries: 10
     ports:
       - "${POSTGRES_PORT}:5432"
+    networks:
+      - awesome
+
+networks:
+    awesome:
+      driver: bridge

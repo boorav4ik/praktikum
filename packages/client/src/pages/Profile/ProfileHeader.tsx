@@ -23,7 +23,7 @@ export function ProfileHeader({
           sx={{
             width: '100px',
             height: '100px',
-            bgcolor: '#1E515D',
+            bgcolor: 'green.64',
             cursor: 'pointer',
           }}
         />
