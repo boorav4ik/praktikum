@@ -139,7 +139,6 @@ export function GameBoard({
 
   useEffect(() => {
     if ((!isGuideMode || step) && GameUtils.isMoveOver(cells)) {
-      //TODO: save record
       setIsGameOver(true)
     }
   }, [...cells.map(([value]) => value)])

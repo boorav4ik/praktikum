@@ -24,7 +24,7 @@ export function MainPage() {
       </Box>
       <Fab
         active={gameMode === GameMode.Guide}
-        order={0}
+        order={4}
         title={`${
           gameMode === GameMode.Guide ? 'Выключить' : 'Включить'
         } режим обучения`}
@@ -35,9 +35,8 @@ export function MainPage() {
         }>
         <School />
       </Fab>
-      {/* TODO: add confirm dialog on switch to guide mode */}
       <Fab
-        order={1}
+        order={2}
         active={!isSoundEffectsDisabled}
         onClick={() => setIsSoundEffectsDisabled(state => !state)}
         title={`${
@@ -47,7 +46,7 @@ export function MainPage() {
       </Fab>
       <Fab
         active={!isVibrationDisabled}
-        order={2}
+        order={3}
         title={`${isVibrationDisabled ? 'Включить' : 'Выключить'} вибрацию`}
         onClick={() => setIsVibrationDisabled(state => !state)}>
         <Vibration />
