@@ -1,10 +1,12 @@
 import { Box, Typography } from '@mui/material'
 import { AvatarBox } from 'components/AvatarBox'
+import { AvatarHost } from '../../api/config'
 
 interface ItemLeaderProps {
   name: string
   score: string
   rating: number
+  src: string
 }
 
 export function ItemLeader(props: ItemLeaderProps) {
@@ -27,8 +29,16 @@ export function ItemLeader(props: ItemLeaderProps) {
           {props.rating}
         </Typography>
       </Box>
+      <AvatarBox
+        src={props.src}
+        sx={{
+          width: '100px',
+          height: '100px',
+          bgcolor: '#1E515D',
+          cursor: 'pointer',
+        }}
+      />
 
-      <AvatarBox />
       <Box
         sx={{
           width: 100,
