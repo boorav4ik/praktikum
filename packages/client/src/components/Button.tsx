@@ -1,9 +1,9 @@
-import MuiButton, { ButtonProps } from '@mui/material/Button'
+import MuiButton, { ButtonProps as ButtonProps } from '@mui/material/Button'
 
-export function Button(
-  //https://github.com/mui/material-ui/issues/16846
-  props: Omit<ButtonProps, 'component'> & { component?: any }
-) {
+//https://github.com/mui/material-ui/issues/16846
+type TButtonProps = Omit<ButtonProps, 'component'> & { component?: any }
+
+export function Button(props: TButtonProps) {
   return (
     <MuiButton
       variant="contained"

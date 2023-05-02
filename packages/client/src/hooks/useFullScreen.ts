@@ -1,4 +1,4 @@
-import { useState, useEffect, RefObject } from 'react'
+import { useState, useEffect, useRef, RefObject } from 'react'
 
 interface DocumentWithFullScreen extends Document {
   mozFullScreenElement: Element
@@ -15,21 +15,24 @@ export interface DocumentElementWithFullScreen extends HTMLElement {
   webkitRequestFullscreen: () => void
 }
 
-export function useFullScreen(
-  elementRef: RefObject<DocumentElementWithFullScreen>
-) {
+export function useFullScreen(): [
+  RefObject<DocumentElementWithFullScreen>,
+  boolean,
+  () => void
+] {
   const doc = document as DocumentWithFullScreen
+  const elementRef = useRef<DocumentElementWithFullScreen>(null)
   const [fullScreen, setFullScreen] = useState<boolean>(
-    !!(
+    Boolean(
       doc.fullscreenElement ||
-      doc.mozFullScreenElement ||
-      doc.webkitFullscreenElement ||
-      doc.msFullscreenElement
+        doc.mozFullScreenElement ||
+        doc.webkitFullscreenElement ||
+        doc.msFullscreenElement
     )
   )
 
   const toggleFullScreen = () => {
-    const element = elementRef.current as DocumentElementWithFullScreen
+    const element = elementRef.current
 
     if (element) {
       if (!fullScreen) {
@@ -65,7 +68,7 @@ export function useFullScreen(
 
     return () =>
       document.removeEventListener('fullscreenchange', onFullscreenChange)
-  })
+  }, [])
 
-  return [fullScreen, toggleFullScreen]
+  return [elementRef, fullScreen, toggleFullScreen]
 }

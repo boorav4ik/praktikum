@@ -1,39 +1,33 @@
-import { useState } from 'react'
-import { Box } from '@mui/material'
-import Button from '@mui/material/Button'
-import { AudioIcon } from 'layouts/Main/icons/Audio'
-import Track from 'assets/audio/Maco-Mamuco.mp3'
+import { useEffect, useMemo, useState } from 'react'
+import TriangleSquare from 'assets/audio/TriangleSquare.mp3'
+import { Fab } from './FloatingActionButton'
+import MusicNote from '@mui/icons-material/MusicNote'
+import MusicOff from '@mui/icons-material/MusicOff'
 
-export function Audio() {
-  const [toggle, setToggle] = useState<boolean>(false)
+export function AudioPlayer() {
+  const [toggle, setToggle] = useState(false)
+
+  const audio = useMemo(() => {
+    const audio = new Audio(TriangleSquare)
+    audio.loop = true
+    return audio
+  }, [])
 
   const handleToggle = () => {
     setToggle(!toggle)
   }
 
+  useEffect(() => {
+    if (toggle) audio.play()
+    else audio.pause()
+  }, [toggle])
+
   return (
-    <Box>
-      <Button
-        title='Музычку погромче'
-        onClick={handleToggle}
-        sx={{
-          position: 'relative',
-          padding: '12px',
-          maxWidth: '54px',
-          minWidth: '54px',
-        }}>
-        <AudioIcon />
-      </Button>
-      {toggle ? (
-        <Box
-          sx={{
-            position: 'absolute',
-            top: '-3px',
-            left: '-318px',
-          }}>
-          <audio src={Track} controls loop></audio>
-        </Box>
-      ) : null}
-    </Box>
+    <Fab
+      title={toggle ? 'Достаточно музычки' : `Музычку погромче`}
+      onClick={handleToggle}
+      order={1}>
+      {toggle ? <MusicOff /> : <MusicNote />}
+    </Fab>
   )
 }
