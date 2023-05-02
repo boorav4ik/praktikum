@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Cell, Effect, EmptyCell, moveCells } from '../../game/utils/moveCells'
+import { Cell, Effect, moveCells } from '../../game/utils/moveCells'
 import { Board } from '../Board'
 import { GameMode } from './GameMode'
 import { useArrow } from '../../game/hooks/useArrow'
@@ -123,12 +123,10 @@ export function GameBoard({
   }
 
   function boardProps() {
-    if (isGuideMode) {
-      const output = GameUtils.GUIDE[step] ?? {
-        header: `Score: ${cells.reduce((s, [value]) => s * (value || 1), 1)}`,
-      }
-      return output
+    const output = (isGuideMode && GameUtils.GUIDE[step]) || {
+      header: `Score: ${GameUtils.getScore(cells)}`,
     }
+    return output
   }
 
   function resetGame() {
