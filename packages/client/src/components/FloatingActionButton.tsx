@@ -5,17 +5,17 @@ type FabProps = {
   order?: number
   onClick: () => void
   children: React.ReactNode
-  active: boolean
+  active?: boolean
 }
 
 export function Fab({ order = 0, title, active, ...props }: FabProps) {
   return (
-    <Tooltip title={title}>
+    <Tooltip title={title} placement='left' open={true}>
       <MuiFab
         sx={{
           position: 'absolute',
-          bottom: 16,
-          right: 16 + order * 64,
+          bottom: 16 + order * 64,
+          right: 16,
           borderRadius: '20%',
         }}
         color={active ? 'secondary' : 'primary'}
