@@ -33,7 +33,7 @@ export function useFullScreen(): [
 
   const toggleFullScreen = () => {
     const element = elementRef.current
-    console.log('!!!', element)
+
     if (element) {
       if (!fullScreen) {
         if (element.requestFullscreen) {

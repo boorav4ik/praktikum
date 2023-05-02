@@ -1,34 +1,28 @@
-import { useRef } from 'react'
 import Box from '@mui/material/Box'
-// import Button from '@mui/material/Button'
 import { styled } from '@mui/material/styles'
-import {
-  DocumentElementWithFullScreen,
-  useFullScreen,
-} from 'hooks/useFullScreen'
-// import { DefaultScreenIcon } from 'layouts/Main/icons/DefaultScreen'
-// import { FullScreenIcon } from 'layouts/Main/icons/FullScreen'
+import { useFullScreen } from 'hooks/useFullScreen'
 import { AudioPlayer } from './Audio'
 import { Fab } from './FloatingActionButton'
-import { ZoomInMap, ZoomOutMap } from '@mui/icons-material'
+import ZoomInMap from '@mui/icons-material/ZoomInMap'
+import ZoomOutMap from '@mui/icons-material/ZoomInMap'
 
 const Screen = styled(Box)(() => ({
   '&::backdrop': {
-    // background: 'transparent',
-    display: "none"
+    display: 'none',
   },
 }))
 
 export function FullScreen({ children }: { children: JSX.Element }) {
-  // const screenRef = useRef<DocumentElementWithFullScreen>()
   const [screenRef, fullScreen, toggleFullScreen] = useFullScreen()
 
   return (
     <Screen ref={screenRef}>
-      {children} <AudioPlayer />
+      {children}
+      <AudioPlayer />
       <Fab
         title={fullScreen ? 'Обычный режим' : 'Полноэкранный режим'}
-        onClick={toggleFullScreen}>
+        onClick={toggleFullScreen}
+        active={fullScreen}>
         {fullScreen ? <ZoomInMap /> : <ZoomOutMap />}
       </Fab>
     </Screen>

@@ -1,26 +1,63 @@
-import { Fab as MuiFab, Tooltip } from '@mui/material'
+import { ReactNode, useState, MouseEvent } from 'react'
+import MuiFab from '@mui/material/Fab'
+import Popover from '@mui/material/Popover'
+import Typography from '@mui/material/Typography'
 
 type FabProps = {
   title: string
   order?: number
   onClick: () => void
-  children: React.ReactNode
+  children: ReactNode
   active?: boolean
 }
 
 export function Fab({ order = 0, title, active, ...props }: FabProps) {
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
+
+  const handlePopoverOpen = (event: MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null)
+  }
+
+  const open = Boolean(anchorEl)
   return (
-    <Tooltip title={title} placement='left' open={true}>
+    <>
       <MuiFab
+        onMouseEnter={handlePopoverOpen}
+        onMouseLeave={handlePopoverClose}
+        color={active ? 'secondary' : 'primary'}
+        size="small"
         sx={{
           position: 'absolute',
           bottom: 16 + order * 64,
           right: 16,
           borderRadius: '20%',
         }}
-        color={active ? 'secondary' : 'primary'}
         {...props}
       />
-    </Tooltip>
+      <Popover
+        sx={{
+          pointerEvents: 'none',
+          background: 'none',
+        }}
+        open={open}
+        anchorEl={anchorEl}
+        anchorOrigin={{
+          vertical: 'center',
+          horizontal: 'left',
+        }}
+        transformOrigin={{
+          vertical: 'center',
+          horizontal: 'right',
+        }}
+        onClose={handlePopoverClose}
+        disableRestoreFocus
+        container={anchorEl}>
+        <Typography sx={{ p: 1 }}>{title}</Typography>
+      </Popover>
+    </>
   )
 }

@@ -2,13 +2,11 @@ import Box from '@mui/material/Box'
 import Typography, { type TypographyProps } from '@mui/material/Typography'
 import { Canvas, type CanvasProps } from '../game/components/Canvas'
 import { Cell } from '../game/utils/moveCells'
-// import { ArrowDirection } from '../game/utils/ArrowDirections'
 
 export type BoardProps = Omit<CanvasProps, 'cells'> & {
   cells: Cell[]
   header?: string
   footer?: string
-  // boardProps?: BoxProps
   borderColor?: string
 }
 
@@ -25,8 +23,6 @@ function BoardTypography(props: TypographyProps) {
 }
 
 export function Board(props: BoardProps) {
-  // const { sx: boardSX = {}, ...boardProps } = props.boardProps ?? {}
-
   return (
     <>
       <BoardTypography>{props.header}</BoardTypography>
@@ -41,15 +37,9 @@ export function Board(props: BoardProps) {
           alignItems: 'center',
           justifyContent: 'center',
           border: '4px solid #1E515D',
-          borderColor: props.borderColor
-          // ...boardSX,
-        }}
-        // {...boardProps}
-        >
-        <Canvas
-          cells={props.cells}
-          direction={props.direction}
-        />
+          borderColor: props.borderColor,
+        }}>
+        <Canvas cells={props.cells} direction={props.direction} />
       </Box>
       <BoardTypography>{props.footer}</BoardTypography>
     </>
