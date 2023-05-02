@@ -35,7 +35,6 @@ export function MainPage() {
         }>
         <School />
       </Fab>
-      {/* TODO: add confirm dialog on switch to guide mode */}
       <Fab
         order={2}
         active={!isSoundEffectsDisabled}

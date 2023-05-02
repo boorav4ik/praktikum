@@ -8,7 +8,6 @@ export enum Effect {
   Shake,
 }
 
-//TODO: Add fixed length array type
 export type Cell = [number, Effect]
 export const EmptyCell: Cell = [0, Effect.Idle]
 
