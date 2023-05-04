@@ -2,7 +2,7 @@ ARG NODE_VERSION=16
 ARG SERVER_PORT=3001
 
 FROM node:$NODE_VERSION-buster as base
-RUN apt update && apt install -y nodejs && apt install -y npm && apt install -y netcat
+RUN apt update && apt install -y nodejs && apt install -y npm
 WORKDIR /app
 
 FROM base as builder
@@ -21,7 +21,6 @@ WORKDIR /app
 
 COPY --from=builder /app/packages/server/dist/ /app/
 COPY --from=builder /app/packages/server/package.json /app/package.json
-COPY wait-for.sh wait-for.sh
 RUN yarn install --production=true
 
 EXPOSE $SERVER_PORT

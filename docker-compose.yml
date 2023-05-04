@@ -59,9 +59,9 @@ services:
       dockerfile: Dockerfile.server
       args:
         SERVER_PORT: ${SERVER_PORT}
-    # command: sh -c './wait-for.sh postgresql:5432 -- yarn build --scope=server'
-    # depends_on:
-    #   - postgresql
+    depends_on:
+      postgres:
+        condition: service_healthy
     restart: always
     ports:
       - '${SERVER_PORT}:${SERVER_PORT}'
