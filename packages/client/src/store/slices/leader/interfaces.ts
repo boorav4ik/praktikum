@@ -2,8 +2,10 @@ export interface Record {
   data: {
     name: string
     avatar: string
-    score: string
+    score: number
   }
+  ratingFieldName: string
+  teamName: string
 }
 
 export interface dataGetRecord {

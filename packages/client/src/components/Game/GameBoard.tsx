@@ -20,6 +20,9 @@ import {
 } from '@mui/material'
 import * as GameUtils from './utils'
 import { Button } from '../Button'
+import { useAppDispatch } from '../../store/hooks'
+import { UpdateUserLeader } from 'api/leader'
+import { useAuth } from '../../hooks/useAuth'
 
 const SIZE = 16
 
@@ -37,6 +40,8 @@ export function GameBoard({
   soundDisabled: boolean
   vibrationDisable: boolean
 }) {
+  const [{ userData }] = useAuth()
+  const dispatch = useAppDispatch()
   const [cells, setCells] = useState<Cell[]>(() =>
     GameUtils.initEmptyCells(SIZE)
   )
@@ -135,11 +140,29 @@ export function GameBoard({
     setIsGameOver(false)
   }
 
+  function updateLeaderBoard(score: number) {
+    const obj = {
+      data: {
+        name: userData?.first_name,
+        avatar: `https://ya-praktikum.tech/api/v2/resources/${userData?.avatar}`,
+        score: score,
+      },
+      ratingFieldName: 'score',
+      teamName: 'saturn',
+    }
+    dispatch(UpdateUserLeader(obj))
+  }
+
   useEffect(() => {
     if ((!isGuideMode || step) && GameUtils.isMoveOver(cells)) {
       setIsGameOver(true)
+      updateLeaderBoard(GameUtils.getScore(cells))
     }
   }, [...cells.map(([value]) => value)])
+
+  useEffect(() => {
+    updateLeaderBoard(GameUtils.getScore(cells))
+  }, [])
 
   useEffect(() => {
     if (isGuideMode) {

@@ -4,7 +4,7 @@ import { AvatarHost } from '../../api/config'
 
 interface ItemLeaderProps {
   name: string
-  score: string
+  score: number
   rating: number
   src: string
 }
