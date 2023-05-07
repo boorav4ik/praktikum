@@ -1,7 +1,7 @@
 export interface Record {
   data: {
-    name: string
-    avatar: string
+    name: string | null | undefined
+    avatar?: string
     score: number
   }
   ratingFieldName: string

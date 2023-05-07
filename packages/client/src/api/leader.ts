@@ -20,7 +20,7 @@ export const GetLeaderBoard = createAsyncThunk(
 
 export const UpdateUserLeader = createAsyncThunk(
   'UpdateUserLeader',
-  async (data: any, thunkAPI) => {
+  async (data: Record, thunkAPI) => {
     try {
       const response = await host.post<any[]>(
         ApiEndPoints.LeaderBoard.UpdateUserInfo,
