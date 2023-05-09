@@ -8,7 +8,7 @@ import { store } from './store'
 import { BrowserRouter } from 'react-router-dom'
 
 function startServiceWorker() {
-  if ('navigator' in window && 'serviceWorker' in navigator) {
+  if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker
         .register('../sw.js')

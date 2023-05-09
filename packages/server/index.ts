@@ -24,7 +24,7 @@ async function startServer() {
   })
 
   app.use('/assets', express.static(path.resolve(distPath, 'assets')))
-
+  app.use('/sw.js', (_, res) => res.sendFile(require.resolve('client/sw.js')))
   app.use('*', async (req, res, next) => {
     const url = req.originalUrl
 
@@ -37,7 +37,7 @@ async function startServer() {
       const { html, css } = await render(url)
 
       const content = template
-        .replace(`<!--ssr-outlet-->`, html)
+        .replace('<!--ssr-outlet-->', html)
         .replace('<!--ssr-css-->', css)
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(content)
