@@ -1,12 +1,10 @@
 const CACHE_NAME = 'cache_v_0.1'
-const URLS = [
-  '/index.html',
-  '/src/app.tsx',
-  '/src/main.tsx'
-]
-self.addEventListener('install', (event) => {
+const URLS = ['/index.html', '/src/app.tsx', '/src/main.tsx']
+
+self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME)
+    caches
+      .open(CACHE_NAME)
       .then(cache => {
         return cache.addAll(URLS)
       })
@@ -27,13 +25,14 @@ self.addEventListener('activate', event => {
     })
   )
 })
+
 const tryNetwork = (req, timeout) => {
   return new Promise((resolve, reject) => {
     const timeoutId = setTimeout(reject, timeout)
-    fetch(req).then((res) => {
+    fetch(req).then(res => {
       clearTimeout(timeoutId)
       const responseClone = res.clone()
-      caches.open(CACHE_NAME).then((cache) => {
+      caches.open(CACHE_NAME).then(cache => {
         cache.put(req, responseClone)
       })
       resolve(res)
@@ -41,14 +40,18 @@ const tryNetwork = (req, timeout) => {
     }, reject)
   })
 }
-const getFromCache = (req) => {
+
+const getFromCache = req => {
   console.log('network is off so getting from cache...')
-  return caches.open(CACHE_NAME).then((cache) => {
-    return cache.match(req).then((result) => {
+  return caches.open(CACHE_NAME).then(cache => {
+    return cache.match(req).then(result => {
       return result || Promise.reject('no-match')
     })
   })
 }
+
 self.addEventListener('fetch', event => {
-  event.respondWith(tryNetwork(event.request, 60000).catch(() => getFromCache(event.request)))
+  event.respondWith(
+    tryNetwork(event.request, 60000).catch(() => getFromCache(event.request))
+  )
 })

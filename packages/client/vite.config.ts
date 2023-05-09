@@ -5,15 +5,9 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  server: {
-    port: Number(process.env.CLIENT_PORT) || 3000,
-  },
-  define: {
-    __SERVER_PORT__: process.env.SERVER_PORT,
-  },
-  plugins: [react()],
-  resolve: {
+export default defineConfig(({ ssrBuild }) => {
+  const plugins = [react()]
+  const resolve = {
     alias: {
       assets: path.resolve(__dirname, './src/assets'),
       api: path.resolve(__dirname, './src/api'),
@@ -26,5 +20,21 @@ export default defineConfig({
       hooks: path.resolve(__dirname, './src/hooks'),
       store: path.resolve(__dirname, './src/store'),
     },
-  },
+  }
+
+  return ssrBuild
+    ? {
+        plugins,
+        resolve,
+        build: {
+          lib: { entry: './src/ssr.tsx', name: 'Client', formats: ['cjs'] },
+          outDir: 'dist-ssr',
+        },
+      }
+    : {
+        plugins,
+        resolve,
+        server: { port: Number(process.env.CLIENT_PORT) || 3000 },
+        define: { __SERVER_PORT__: process.env.SERVER_PORT },
+      }
 })
