@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../store'
 import { useAppDispatch } from '../../store/hooks'
-import { GetLeaderBoard } from 'api/leader'
+import { getLeaderBoard } from 'api/leader'
 
 export function LeaderboardPage() {
   const leaderData = useSelector((state: RootState) => state.leader.leaderData)
@@ -13,7 +13,7 @@ export function LeaderboardPage() {
 
   useEffect(() => {
     dispatch(
-      GetLeaderBoard({
+      getLeaderBoard({
         ratingFieldName: 'score',
         cursor: 0,
         limit: 10,
@@ -59,7 +59,7 @@ export function LeaderboardPage() {
             spacing={2}>
             {leaderData.slice(0, 3).map((item, index) => (
               <ItemLeader
-                key={item.data?.name + index}
+                key={index}
                 rating={index + 1}
                 name={item.data?.name}
                 score={item.data?.score}
@@ -74,7 +74,7 @@ export function LeaderboardPage() {
             spacing={2}>
             {leaderData.slice(3, 6).map((item, index) => (
               <ItemLeader
-                key={item.data?.name + index}
+                key={index}
                 rating={index + 1}
                 name={item.data?.name}
                 score={item.data?.score}

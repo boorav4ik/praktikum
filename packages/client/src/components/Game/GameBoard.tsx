@@ -21,7 +21,7 @@ import {
 import * as GameUtils from './utils'
 import { Button } from '../Button'
 import { useAppDispatch } from '../../store/hooks'
-import { UpdateUserLeader } from 'api/leader'
+import { updateUserLeader } from 'api/leader'
 import { useAuth } from '../../hooks/useAuth'
 
 const SIZE = 16
@@ -150,7 +150,7 @@ export function GameBoard({
       ratingFieldName: 'score',
       teamName: 'saturn',
     }
-    dispatch(UpdateUserLeader(obj))
+    dispatch(updateUserLeader(obj))
   }
 
   useEffect(() => {

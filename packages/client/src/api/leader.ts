@@ -3,7 +3,7 @@ import host from './config'
 import { ApiEndPoints } from './config'
 import { Record, dataGetRecord } from '../store/slices/leader/interfaces'
 
-export const GetLeaderBoard = createAsyncThunk(
+export const getLeaderBoard = createAsyncThunk(
   'getLeaderBoard',
   async (data: dataGetRecord, thunkAPI) => {
     try {
@@ -18,7 +18,7 @@ export const GetLeaderBoard = createAsyncThunk(
   }
 )
 
-export const UpdateUserLeader = createAsyncThunk(
+export const updateUserLeader = createAsyncThunk(
   'UpdateUserLeader',
   async (data: Record, thunkAPI) => {
     try {

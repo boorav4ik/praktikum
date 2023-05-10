@@ -3,10 +3,10 @@ import { AvatarBox } from 'components/AvatarBox'
 import { AvatarHost } from '../../api/config'
 
 interface ItemLeaderProps {
-  name: string
+  name: string | null | undefined
   score: number
   rating: number
-  src: string
+  src: string | undefined
 }
 
 export function ItemLeader(props: ItemLeaderProps) {
