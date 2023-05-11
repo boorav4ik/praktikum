@@ -49,6 +49,7 @@ export function LoginPage() {
   }
 
   function fetchOAuth() {
+    console.log(2)
     signinOauth('http://localhost:3000/', () => navigate(location.state ?? '/'))
   }
 

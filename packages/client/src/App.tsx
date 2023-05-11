@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import * as Pages from 'pages'
 import * as Layouts from 'layouts'
@@ -25,14 +25,19 @@ function App() {
   const [{ user }, { getUser}] = useAuth()
   const searchParams = useSearchParams();
   const param = searchParams.get('code');
-
-  useEffect(() => {
-    if (param ){
+  const getUserInfo = useCallback(() => {
+    console.log('1')
+    if (param){
+      console.log('3')
       getOuath(param, 'http://localhost:3000/')
         .then(() => getUser())
         .catch(e => console.error('token error', e))
     }
-  }, [])
+  }, [param])
+
+  useEffect(() => {
+    getUserInfo()
+  }, [param])
 
   return (
     <FullScreen>

@@ -54,6 +54,7 @@ export const getServiceId = async (redirectUri: string) => {
 }
 export const getOuath = async (code: string, redirectUri: string) => {
   try {
+    console.log('code:', code)
     await host.post<string>(`${ApiEndPoints.OAuth.SignUp}`, JSON.stringify({
       'code': code,
       'redirect_uri': redirectUri
