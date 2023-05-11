@@ -5,6 +5,7 @@ import { AudioPlayer } from './Audio'
 import { Fab } from './FloatingActionButton'
 import ZoomInMap from '@mui/icons-material/ZoomInMap'
 import ZoomOutMap from '@mui/icons-material/ZoomInMap'
+import { PropsWithChildren } from 'react'
 
 const Screen = styled(Box)(() => ({
   '&::backdrop': {
@@ -12,7 +13,7 @@ const Screen = styled(Box)(() => ({
   },
 }))
 
-export function FullScreen({ children }: { children: JSX.Element }) {
+export function FullScreen({ children }: PropsWithChildren) {
   const [screenRef, fullScreen, toggleFullScreen] = useFullScreen()
 
   return (
