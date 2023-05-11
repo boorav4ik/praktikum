@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { Box, Container, Grid } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { ForumRow } from 'components/forum/ForumRow'
-import { ChatSmileIcon } from 'components/forum/icons/ChatSmileIcon'
+import TopicIcon from '@mui/icons-material/Topic'
 import { useForum } from 'hooks/useForum'
 import { HeaderForPage } from 'components/forum/HeaderForPage'
 
@@ -45,13 +45,7 @@ function ForumPage() {
                   state: { theme },
                 })
               }
-              icon={() =>
-                ChatSmileIcon({
-                  width: '25',
-                  height: '25',
-                  viewBox: '0 0 25 25',
-                })
-              }
+              icon={() => <TopicIcon />}
               text={theme.theme}
               btnText={'Темы'}
             />

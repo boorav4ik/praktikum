@@ -7,7 +7,6 @@ import { ColorButton } from 'components/forum/ForumRow'
 import Typography from '@mui/material/Typography'
 import { useAuth } from 'hooks/useAuth'
 import { useForum } from 'hooks/useForum'
-import GarbageIcon from 'components/forum/icons/GarbageIcon'
 import DeleteIcon from '@mui/icons-material/Delete'
 
 const configSxGreenTextField = {
@@ -129,23 +128,10 @@ function ThemeBranchPage() {
                   alignItems: 'flex-end',
                 }}>
                 <MessageRow messages={msg} />
-                <ColorButton
+                <DeleteIcon
                   onClick={() => deleteComment(msg)}
-                  sx={{
-                    marginLeft: 1,
-                    color: 'white',
-                    width: 10,
-                    maxWidth: 35,
-                    maxHeight: 35,
-                  }}
-                  type={'submit'}
-                  variant="outlined">
-                  {DeleteIcon({
-                    width: '25',
-                    height: '25',
-                    viewBox: '0 0 512 512',
-                  })}
-                </ColorButton>
+                  sx={{ width: 30, height: 30, margin: 1, cursor: 'pointer' }}
+                />
               </Box>
             ))}
         </Stack>

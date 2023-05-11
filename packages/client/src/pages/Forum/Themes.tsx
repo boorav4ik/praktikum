@@ -3,14 +3,13 @@ import { Box, Container, Grid, Modal } from '@mui/material'
 import { useParams, useLocation, useNavigate } from 'react-router-dom'
 import { Button } from 'components/Button'
 import { ForumRow } from 'components/forum/ForumRow'
-import { ChatAnswerIcon } from 'components/forum/icons/ChatAnswerIcon'
 import { useForum } from 'hooks/useForum'
 import { ForumComments, ForumTopic } from 'store/slices/forum/interfaces'
 import { useAuth } from 'hooks/useAuth'
 import { NewTopic } from './NewTopic'
 import { HeaderForPage } from 'components/forum/HeaderForPage'
-import GarbageIcon from 'components/forum/icons/GarbageIcon'
 import DeleteIcon from '@mui/icons-material/Delete'
+import MessageIcon from '@mui/icons-material/Message'
 
 function ThemePage() {
   const [modal, setModal] = useState<boolean>(false)
@@ -87,13 +86,7 @@ function ThemePage() {
             <ForumRow
               key={topic.id}
               onClick={() => goToTopic(topic)}
-              icon={() =>
-                ChatAnswerIcon({
-                  width: '25',
-                  height: '25',
-                  viewBox: '0 0 25 25',
-                })
-              }
+              icon={() => <MessageIcon />}
               deleteClick={() => deleteTopic(topic)}
               iconDelete={() => <DeleteIcon />}
               text={topic.title}
