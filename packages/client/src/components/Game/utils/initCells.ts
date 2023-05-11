@@ -1,5 +1,5 @@
 import { initEmptyCells } from './initEmptyCells'
-import { Effect } from '../../../game/utils/moveCells'
+import { Effect } from 'game/utils/moveCells'
 
 export function initCells(size: number) {
   const cells = initEmptyCells(size)

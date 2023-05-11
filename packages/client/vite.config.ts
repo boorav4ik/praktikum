@@ -25,6 +25,7 @@ export default defineConfig({
       hoks: path.resolve(__dirname, './src/hoks'),
       hooks: path.resolve(__dirname, './src/hooks'),
       store: path.resolve(__dirname, './src/store'),
+      game: path.resolve(__dirname, './src/game'),
     },
   },
 })

@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { Box, Container } from '@mui/material'
-import { Fab } from '../../components/FloatingActionButton'
+import { Fab } from 'components/FloatingActionButton'
 import GraphicEq from '@mui/icons-material/GraphicEq'
 import Vibration from '@mui/icons-material/Vibration'
 import School from '@mui/icons-material/School'
-import { GameBoard, GameMode } from '../../components/Game'
+import { GameBoard, GameMode } from 'components/Game'
 
 
 export function MainPage() {

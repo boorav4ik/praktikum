@@ -1,4 +1,4 @@
-import { Effect } from '../../../game/utils/moveCells'
+import { Effect } from 'game/utils/moveCells'
 import { initEmptyCells } from './initEmptyCells'
 
 export function initGuideCells(size: number) {

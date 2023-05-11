@@ -1,16 +1,16 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Cell, Effect, moveCells } from '../../game/utils/moveCells'
 import { Board } from '../Board'
 import { GameMode } from './GameMode'
-import { useArrow } from '../../game/hooks/useArrow'
+import { useArrow } from 'game/hooks/useArrow'
 import {
-  TransformationMethod,
+  type TransformationMethod,
   transformations,
-} from '../../game/utils/Transformations'
-import { ArrowDirection } from '../../game/utils/ArrowDirections'
-import { addNewCell } from '../../game/utils/addNewCels'
-import shiftSound from '../../assets/audio/cards-scrape.mp3'
-import shakeSound from '../../assets/audio/silk-handling.mp3'
+} from 'game/utils/Transformations'
+import { type Cell, Effect, moveCells } from 'game/utils/moveCells'
+import { ArrowDirection } from 'game/utils/ArrowDirections'
+import { addNewCell } from 'game/utils/addNewCels'
+import shiftSound from 'assets/audio/cards-scrape.mp3'
+import shakeSound from 'assets/audio/silk-handling.mp3'
 import {
   Dialog,
   DialogActions,
@@ -55,14 +55,14 @@ export function GameBoard({
 
   const isGuideMode = mode === GameMode.Guide
 
-  function incStep() {
+  const incStep = () => {
     setStep(step + 1)
   }
 
-  function moveWithEffects(
+  const moveWithEffects = (
     previousState: Cell[],
     transform: TransformationMethod
-  ) {
+  ) => {
     const { cells, movedLayers } = moveCells(previousState, transform)
 
     if (movedLayers.size) soundEffects && soundEffects.shift.play()
@@ -80,7 +80,7 @@ export function GameBoard({
   function shift(direction: ArrowDirection) {
     const transform = transformations.getTransformation(direction)
 
-    function switchStepGuide(cells: Cell[], movedLayers: Set<number>) {
+    const switchStepGuide = (cells: Cell[], movedLayers: Set<number>) => {
       if (!movedLayers.size) return false
       switch (step) {
         case 2:
@@ -122,14 +122,14 @@ export function GameBoard({
     }
   }
 
-  function boardProps() {
+  const boardProps = () => {
     const output = (isGuideMode && GameUtils.GUIDE[step]) || {
       header: `Score: ${GameUtils.getScore(cells)}`,
     }
     return output
   }
 
-  function resetGame() {
+  const resetGame = () => {
     setCells(GameUtils[isGuideMode ? 'initEmptyCells' : 'initCells'](SIZE))
     setStep(0)
     setIsGameOver(false)

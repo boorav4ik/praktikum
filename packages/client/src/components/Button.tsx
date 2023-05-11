@@ -1,4 +1,4 @@
-import MuiButton, { ButtonProps as ButtonProps } from '@mui/material/Button'
+import MuiButton, { type ButtonProps } from '@mui/material/Button'
 
 //https://github.com/mui/material-ui/issues/16846
 type TButtonProps = Omit<ButtonProps, 'component'> & { component?: any }

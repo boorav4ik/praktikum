@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
-import { EmptyCell, type Cell } from '../../utils/moveCells'
+import { EmptyCell, type Cell } from 'game/utils/moveCells'
 import { FrameRenderer } from './utils/Canvas'
-import type { ArrowDirection } from '../../utils/ArrowDirections'
+import type { ArrowDirection } from 'game/utils/ArrowDirections'
 
 export type CanvasProps = {
   cells: Cell[]

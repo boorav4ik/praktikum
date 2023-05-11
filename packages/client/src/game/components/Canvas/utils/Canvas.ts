@@ -1,5 +1,5 @@
-import { ArrowDirection } from '../../../utils/ArrowDirections'
-import { type Cell, Effect } from '../../../utils/moveCells'
+import { ArrowDirection } from 'game/utils/ArrowDirections'
+import { type Cell, Effect } from 'game/utils/moveCells'
 import { getColor } from './getColort'
 
 const GRID_STEP = 120
