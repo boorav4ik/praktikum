@@ -2,12 +2,12 @@ import { Container, Typography } from '@mui/material'
 import bgErrorPage from 'static/svg/bgErrorPage.svg'
 
 interface Error {
-  code: number
+  code?: string
   message: string
 }
 
 const notFoundError: Error = {
-  code: 404,
+  code: '404',
   message: 'Ошибка! Страница не найдена, но мы потом поищем...',
 }
 
