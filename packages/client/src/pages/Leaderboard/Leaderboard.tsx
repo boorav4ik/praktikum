@@ -59,7 +59,7 @@ export function LeaderboardPage() {
             spacing={2}>
             {leaderData.slice(0, 3).map((item, index) => (
               <ItemLeader
-                key={index}
+                key={`${item.data?.name}+${index}`}
                 rating={index + 1}
                 name={item.data?.name}
                 score={item.data?.score}
@@ -74,7 +74,7 @@ export function LeaderboardPage() {
             spacing={2}>
             {leaderData.slice(3, 6).map((item, index) => (
               <ItemLeader
-                key={index}
+                key={`${item.data?.name}+${index}`}
                 rating={index + 1}
                 name={item.data?.name}
                 score={item.data?.score}

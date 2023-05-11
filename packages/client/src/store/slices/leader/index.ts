@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { GetLeaderBoard } from 'api/leader'
+import { getLeaderBoard } from 'api/leader'
 import { Record } from './interfaces'
 
 export type AuthState = {
@@ -22,7 +22,7 @@ export const leaderSlise = createSlice({
     },
   },
   extraReducers: {
-    [GetLeaderBoard.fulfilled.type]: (
+    [getLeaderBoard.fulfilled.type]: (
       state,
       action: PayloadAction<[Record] | []>
     ) => {
@@ -30,10 +30,10 @@ export const leaderSlise = createSlice({
       state.error = ''
       state.leaderData = action.payload
     },
-    [GetLeaderBoard.pending.type]: state => {
+    [getLeaderBoard.pending.type]: state => {
       state.isLoading = true
     },
-    [GetLeaderBoard.rejected.type]: (state, action: PayloadAction<string>) => {
+    [getLeaderBoard.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false
       state.error = action.payload
     },
