@@ -28,7 +28,7 @@ function App() {
 
   useEffect(() => {
     if (param ){
-      getOuath(param, 'http://localhost:3000')
+      getOuath(param, 'http://localhost:3000/')
         .then(() => getUser())
         .catch(e => console.error('token error', e))
     }

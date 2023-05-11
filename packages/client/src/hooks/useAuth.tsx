@@ -26,12 +26,12 @@ export function useAuth(): [AuthState, AuthActions] {
       },
       signinOauth(redirectUri, callback) {
         dispatch(signinOauth(redirectUri))
-          .then((data)=> {
-            if (data.meta.requestStatus === 'fulfilled')
-              callback()
-            else
-              console.error('signinOauth error ', data.payload)
-          })
+          // .then((data)=> {
+          //   if (data.meta.requestStatus === 'fulfilled')
+          //     callback()
+          //   else
+          //     console.error('signinOauth error ', data.payload)
+          // })
       },
       changeProfile(data) {
         dispatch(ChangeProfile(data))
