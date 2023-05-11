@@ -1,4 +1,4 @@
-import { useState, MouseEvent, PropsWithChildren } from 'react'
+import { useState, MouseEvent, type PropsWithChildren } from 'react'
 import MuiFab from '@mui/material/Fab'
 import Popover from '@mui/material/Popover'
 import Typography from '@mui/material/Typography'

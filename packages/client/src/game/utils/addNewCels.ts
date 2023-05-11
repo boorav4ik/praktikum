@@ -1,4 +1,4 @@
-import { TransformationMethod } from './Transformations'
+import type { TransformationMethod } from './Transformations'
 import { type Cell, Effect } from './moveCells'
 
 export function addNewCell(

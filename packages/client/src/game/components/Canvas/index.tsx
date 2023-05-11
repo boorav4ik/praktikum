@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { EmptyCell, type Cell } from '../../utils/moveCells'
 import { clearCanvas, drawCells } from './utils/Canvas'
-import { type ArrowDirection } from '../../utils/ArrowDirections'
+import type { ArrowDirection } from '../../utils/ArrowDirections'
 
 export type CanvasProps = {
   cells: Cell[]

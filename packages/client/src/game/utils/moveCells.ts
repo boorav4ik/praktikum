@@ -1,4 +1,4 @@
-import { type TransformationMethod } from './Transformations'
+import type { TransformationMethod } from './Transformations'
 
 export enum Effect {
   Idle,

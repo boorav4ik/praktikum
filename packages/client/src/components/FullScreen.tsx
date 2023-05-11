@@ -5,7 +5,7 @@ import { AudioPlayer } from './Audio'
 import { Fab } from './FloatingActionButton'
 import ZoomInMap from '@mui/icons-material/ZoomInMap'
 import ZoomOutMap from '@mui/icons-material/ZoomInMap'
-import { PropsWithChildren } from 'react'
+import { type PropsWithChildren } from 'react'
 
 const Screen = styled(Box)(() => ({
   '&::backdrop': {
