@@ -19,7 +19,7 @@ export const ApiEndPoints = {
     getId: 'oauth/yandex/service-id',
     SignUp: 'oauth/yandex',
   }
-}
+} as const
 
 const host = axios.create({
   baseURL: ApiHost,

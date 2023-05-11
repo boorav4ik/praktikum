@@ -54,10 +54,10 @@ export const getServiceId = async (redirectUri: string) => {
 }
 export const getOuath = async (service_id: string, redirectUri: string) => {
   try {
-    await host.post<string>(`${ApiEndPoints.OAuth.SignUp}`, {
+    await host.post<string>(`${ApiEndPoints.OAuth.SignUp}`, JSON.stringify({
       'code': service_id,
       'redirect_uri': redirectUri
-    })
+    }))
     const response = await host.get<User[]>(ApiEndPoints.Auth.UserInfo)
     return response.data
   }
