@@ -101,7 +101,7 @@ export function ForumRow({
               paddingX: 2,
             }}
             {...btnProps}>
-            {iconDelete && iconDelete()}
+            {iconDelete()}
             <span
               {...spanProps}
               style={iconDelete ? { marginLeft: '5px' } : {}}>

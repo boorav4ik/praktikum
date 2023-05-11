@@ -10,7 +10,7 @@ const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT } =
   process.env
 
 const sequelizeOptions: SequelizeOptions = {
-  host: '2048-postgresql', //postgresql-для докера localhost - для npm run dev:ssr
+  host: 'localhost', //2048-postgresql-для докера localhost - для npm run dev:ssr
   port: Number(POSTGRES_PORT),
   username: POSTGRES_USER,
   password: POSTGRES_PASSWORD,

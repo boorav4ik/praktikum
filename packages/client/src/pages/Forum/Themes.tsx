@@ -10,6 +10,7 @@ import { useAuth } from 'hooks/useAuth'
 import { NewTopic } from './NewTopic'
 import { HeaderForPage } from 'components/forum/HeaderForPage'
 import GarbageIcon from 'components/forum/icons/GarbageIcon'
+import DeleteIcon from '@mui/icons-material/Delete'
 
 function ThemePage() {
   const [modal, setModal] = useState<boolean>(false)
@@ -31,8 +32,6 @@ function ThemePage() {
     })
     updateComments(topic.Comments as ForumComments)
   }
-
-  console.log(topics)
 
   const style = {
     width: '20%',
@@ -96,13 +95,7 @@ function ThemePage() {
                 })
               }
               deleteClick={() => deleteTopic(topic)}
-              iconDelete={() =>
-                GarbageIcon({
-                  width: '25',
-                  height: '25',
-                  viewBox: '0 0 512 512',
-                })
-              }
+              iconDelete={() => <DeleteIcon />}
               text={topic.title}
               btnText="Ответы"
               btnDelText={'Удалить'}

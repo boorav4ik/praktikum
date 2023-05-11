@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography'
 import { useAuth } from 'hooks/useAuth'
 import { useForum } from 'hooks/useForum'
 import GarbageIcon from 'components/forum/icons/GarbageIcon'
+import DeleteIcon from '@mui/icons-material/Delete'
 
 const configSxGreenTextField = {
   color: '#FFFFFF',
@@ -139,7 +140,7 @@ function ThemeBranchPage() {
                   }}
                   type={'submit'}
                   variant="outlined">
-                  {GarbageIcon({
+                  {DeleteIcon({
                     width: '25',
                     height: '25',
                     viewBox: '0 0 512 512',
