@@ -1,7 +1,7 @@
 import type { ModelAttributes } from 'sequelize'
 import { DataType, Model } from 'sequelize-typescript'
 
-export interface IComment {
+export interface Comment {
   id?: string
   id_topic: string
   id_theme: string
@@ -10,7 +10,7 @@ export interface IComment {
   author: string
 }
 
-export const commentModel: ModelAttributes<Model, IComment> = {
+export const commentModel: ModelAttributes<Model, Comment> = {
   id: {
     type: DataType.STRING,
     defaultValue: DataType.UUIDV4,

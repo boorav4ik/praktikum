@@ -1,19 +1,19 @@
-import type { ModelAttributes } from 'sequelize';
-import { DataType, Model } from 'sequelize-typescript';
+import type { ModelAttributes } from 'sequelize'
+import { DataType, Model } from 'sequelize-typescript'
 
-export interface IUser {
-  theme: string;
-  avatar: string | null;
-  display_name: string | null;
-  email: string;
-  first_name: string;
-  id: number;
-  login: string;
-  phone: string;
-  second_name: string;
+export interface User {
+  theme: string
+  avatar: string | null
+  display_name: string | null
+  email: string
+  first_name: string
+  id: number
+  login: string
+  phone: string
+  second_name: string
 }
 
-export const topicUser: ModelAttributes<Model, IUser> = {
+export const topicUser: ModelAttributes<Model, User> = {
   id: {
     type: DataType.INTEGER,
     allowNull: false,
@@ -52,4 +52,4 @@ export const topicUser: ModelAttributes<Model, IUser> = {
     type: DataType.STRING,
     allowNull: false,
   },
-};
+}
