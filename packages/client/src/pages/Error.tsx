@@ -1,5 +1,5 @@
 import { Container, Typography } from '@mui/material'
-import bgErrorPage from 'static/svg/bgErrorPage.svg'
+import bgErrorPage from 'assets/svg/bgErrorPage.svg'
 
 interface Error {
   code: number

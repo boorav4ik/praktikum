@@ -1,4 +1,4 @@
-import { Box } from '@mui/material'
+import Box from '@mui/material/Box'
 import { ChangeEvent } from 'react'
 import { AvatarHost } from 'api/config'
 import { AvatarBox } from 'components/AvatarBox'
@@ -18,15 +18,9 @@ export function ProfileHeader({
   return (
     <Box component="header">
       <label>
-        <AvatarBox
-          src={(fileData ?? `${AvatarHost}${avatar}`) as string}
-          sx={{
-            width: '100px',
-            height: '100px',
-            bgcolor: '#1E515D',
-            cursor: 'pointer',
-          }}
-        />
+        <AvatarBox>
+          {fileData ?? avatar ? `${AvatarHost}${avatar}` : undefined}
+        </AvatarBox>
         <input
           accept="image/*"
           type="file"

@@ -1,5 +1,5 @@
 import React from 'react'
-import { hydrateRoot } from 'react-dom/client'
+import { hydrateRoot, createRoot } from 'react-dom/client'
 import App from './App'
 import { theme } from './themes/main'
 import { CssBaseline, ThemeProvider } from '@mui/material'
@@ -27,8 +27,14 @@ function startServiceWorker() {
 
 startServiceWorker()
 
-hydrateRoot(
-  document.getElementById('root') as HTMLElement,
+const renderMethod = (element: React.ReactNode) => {
+  const root = document.getElementById('root')
+  return root && root.innerHTML == ''
+    ? hydrateRoot(root, element)
+    : createRoot(root as HTMLElement).render(element)
+}
+
+renderMethod(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
