@@ -48,7 +48,6 @@ const renderMethod = (element: React.ReactNode) => {
 }
 
 renderMethod(
-  <React.StrictMode>
     <BrowserRouter>
       <Provider store={createStore(preloadedState)}>
         <ThemeProvider theme={theme}>
@@ -57,5 +56,4 @@ renderMethod(
         </ThemeProvider>
       </Provider>
     </BrowserRouter>
-  </React.StrictMode>
 )

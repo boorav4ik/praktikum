@@ -1,13 +1,17 @@
-import { useEffect } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { useCallback, useEffect,  } from 'react'
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import * as Pages from 'pages'
 import * as Layouts from 'layouts'
 import { RequiredAuth } from 'hoks/RequiredAuth'
 import { Routes as Paths } from 'utils/routes'
 import { FullScreen } from 'components/FullScreen'
 import './App.css'
+import { useSearchParams } from './hooks/useSearchParam'
+import { getOuath } from './api/auth'
+import { useAuth } from './hooks/useAuth'
 
 function App() {
+
   useEffect(() => {
     const fetchServerData = async () => {
       const url = `http://localhost:${__SERVER_PORT__}/api`
@@ -18,6 +22,23 @@ function App() {
 
     fetchServerData()
   }, [])
+  const [{ user }, { getUser}] = useAuth()
+  const searchParams = useSearchParams();
+  const param = searchParams.get('code');
+  const location = useLocation()
+  const navigate = useNavigate()
+  const getUserInfo = useCallback(() => {
+    if (param){
+      getOuath(param, 'http://localhost:3000/')
+        .then(() => getUser())
+        .then( () => navigate(location.state ?? '/'))
+        .catch(e => console.error('token error', e))
+    }
+  }, [param])
+
+  useEffect(() => {
+    getUserInfo()
+  }, [param])
 
   return (
     <FullScreen>
