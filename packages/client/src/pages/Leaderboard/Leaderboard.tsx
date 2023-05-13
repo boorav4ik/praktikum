@@ -4,6 +4,34 @@ import { LeaderHeader } from './LeaderHeader'
 
 import { gamers1, gamers2 } from './data'
 
+type Gamer = {
+  rating: number
+  name: string
+  score: string
+  avatar: string
+}
+
+function GamerStack({
+  gamers,
+  left = false,
+}: {
+  gamers: Gamer[]
+  left?: boolean
+}) {
+  return (
+    <Stack sx={left ? { mr: 35 } : { ml: '55px!important' }} spacing={2}>
+      {gamers.map(item => (
+        <ItemLeader
+          key={item.name}
+          rating={item.rating}
+          name={item.name}
+          score={item.score}
+        />
+      ))}
+    </Stack>
+  )
+}
+
 export function LeaderboardPage() {
   return (
     <Container component="main" maxWidth="md">
@@ -36,32 +64,8 @@ export function LeaderboardPage() {
             />
           }
           spacing={2}>
-          <Stack
-            sx={{
-              mr: '35px',
-            }}
-            spacing={2}>
-            {gamers1.map(item => (
-              <ItemLeader
-                rating={item.rating}
-                name={item.name}
-                score={item.score}
-              />
-            ))}
-          </Stack>
-          <Stack
-            sx={{
-              ml: '55px!important',
-            }}
-            spacing={2}>
-            {gamers2.map(item => (
-              <ItemLeader
-                rating={item.rating}
-                name={item.name}
-                score={item.score}
-              />
-            ))}
-          </Stack>
+          <GamerStack gamers={gamers1} />
+          <GamerStack gamers={gamers2} left />
         </Stack>
       </Box>
     </Container>

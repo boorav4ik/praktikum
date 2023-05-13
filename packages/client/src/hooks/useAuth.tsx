@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import { GetUser, ChangeProfile, ChangeAvatar, ChangePassword } from 'api/user'
-import { signin, signout, signup } from 'api/auth'
+import { signin, signout, signup, signinOauth } from 'api/auth'
 import { RootState } from 'store'
 import { useAppDispatch } from 'store/hooks'
 import { AuthState, updateEditStatus, updateUserData } from 'store/slices/auth'
@@ -23,6 +23,9 @@ export function useAuth(): [AuthState, AuthActions] {
       },
       signout() {
         dispatch(signout())
+      },
+      signinOauth(redirectUri) {
+        dispatch(signinOauth(redirectUri))
       },
       changeProfile(data) {
         dispatch(ChangeProfile(data))

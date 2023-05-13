@@ -15,7 +15,11 @@ export const ApiEndPoints = {
     UpdateProfileAvatar: 'user/profile/avatar',
     Search: 'user/search',
   },
-}
+  OAuth: {
+    getId: 'oauth/yandex/service-id',
+    SignUp: 'oauth/yandex',
+  }
+} as const
 
 const host = axios.create({
   baseURL: ApiHost,

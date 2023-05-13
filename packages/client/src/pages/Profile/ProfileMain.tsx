@@ -74,42 +74,41 @@ export function ProfileMain({ setModal }: ProfileMainProps) {
           alignItems="center"
           spacing={0}
           sx={{ flexWrap: 'wrap' }}>
-          {fields.map(({ id, name, label, validation, type }, index) => {
-            return (
-              <Controller
-                key={id}
-                control={control}
-                name={`list.${index}.value`}
-                rules={validation}
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    inputRef={field.ref}
-                    label={label}
-                    type={type}
-                    disabled={editStatus === 'info'}
-                    variant="outlined"
-                    sx={{ width: '48%', height: 80 }}
-                    margin="normal"
-                    onChange={(event: ChangeEvent<HTMLInputElement>) => (
-                      field.onChange(event),
-                      updateUserData({
-                        ...userData!,
-                        ...{ [name]: event.target.value },
-                      })
-                    )}
-                    error={!!(errors?.list ?? [])[index]?.value?.message}
-                    helperText={(errors?.list ?? [])[index]?.value?.message}
-                    inputProps={{ style: { height: 5 } }}
-                    InputLabelProps={{ style: { top: -7, marginTop: 0 } }}
-                    FormHelperTextProps={{
-                      style: { height: 0, marginTop: -1, zIndex: 999 },
-                    }}
-                  />
-                )}
-              />
-            )
-          })}
+          {fields.map(({ id, name, label, validation, type }, index) => (
+            <Controller
+              key={id}
+              control={control}
+              name={`list.${index}.value`}
+              rules={validation}
+              render={({ field: { value, ...field } }) => (
+                <TextField
+                  {...field}
+                  value={value ?? undefined}
+                  inputRef={field.ref}
+                  label={label}
+                  type={type}
+                  disabled={editStatus === 'info'}
+                  variant="outlined"
+                  sx={{ width: '48%', height: 80 }}
+                  margin="normal"
+                  onChange={(event: ChangeEvent<HTMLInputElement>) => (
+                    field.onChange(event),
+                    updateUserData({
+                      ...userData!,
+                      ...{ [name]: event.target.value },
+                    })
+                  )}
+                  error={!!(errors?.list ?? [])[index]?.value?.message}
+                  helperText={(errors?.list ?? [])[index]?.value?.message}
+                  inputProps={{ style: { height: 5 } }}
+                  InputLabelProps={{ style: { top: -7, marginTop: 0 } }}
+                  FormHelperTextProps={{
+                    style: { height: 0, marginTop: -1, zIndex: 999 },
+                  }}
+                />
+              )}
+            />
+          ))}
         </Stack>
       </Box>
       <Button onClick={setModal} sx={{ width: '40%' }}>

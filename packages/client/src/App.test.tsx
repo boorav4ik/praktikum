@@ -1,7 +1,8 @@
 import { Provider } from 'react-redux'
 import App from './App'
 import { render, screen } from '@testing-library/react'
-import { store } from 'store'
+import { createStore } from 'store'
+import { BrowserRouter } from 'react-router-dom'
 
 // @ts-ignore
 global.fetch = jest.fn(() =>
@@ -10,9 +11,11 @@ global.fetch = jest.fn(() =>
 
 test('Example test', async () => {
   render(
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <BrowserRouter>
+      <Provider store={createStore()}>
+        <App />
+      </Provider>
+    </BrowserRouter>
   )
   expect(screen.getByTestId('App')).toBeDefined()
 })
