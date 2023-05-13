@@ -34,11 +34,12 @@ async function startServer() {
     )
     try {
       const { render } = await import(ssrDistPath)
-      const { html, css } = await render(url)
+      const { html, css, state } = await render(url)
 
       const content = template
         .replace('<!--ssr-outlet-->', html)
         .replace('<!--ssr-css-->', css)
+        .replace('<!--ssr-state-->', JSON.stringify(state))
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(content)
     } catch (error) {

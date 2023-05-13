@@ -4,8 +4,21 @@ import App from './App'
 import { theme } from './themes/main'
 import { CssBaseline, ThemeProvider } from '@mui/material'
 import { Provider } from 'react-redux'
-import { store } from './store'
+import { createStore } from './store'
 import { BrowserRouter } from 'react-router-dom'
+
+window.preloadedState = {
+  auth: {
+    user: null,
+    userData: null,
+    editStatus: 'info',
+    isLoading: false,
+  },
+}
+
+const preloadedState = window.preloadedState
+
+delete window.preloadedState
 
 function startServiceWorker() {
   if ('serviceWorker' in navigator) {
@@ -37,7 +50,7 @@ const renderMethod = (element: React.ReactNode) => {
 renderMethod(
   <React.StrictMode>
     <BrowserRouter>
-      <Provider store={store}>
+      <Provider store={createStore(preloadedState)}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <App />

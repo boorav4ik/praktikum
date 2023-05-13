@@ -8,10 +8,11 @@ import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom/server.js'
 import { Provider } from 'react-redux'
-import { store } from 'store'
+import { createStore } from 'store'
 import { theme } from './themes/main'
 
 export function render(path: string) {
+  const store = createStore()
   const cache = createCache({ key: 'css' })
   const { extractCriticalToChunks, constructStyleTagsFromChunks } =
     createEmotionServer(cache)
@@ -33,5 +34,5 @@ export function render(path: string) {
   const emotionChunks = extractCriticalToChunks(html)
   const css = constructStyleTagsFromChunks(emotionChunks)
 
-  return { html, css }
+  return { html, css, state: store.getState() }
 }

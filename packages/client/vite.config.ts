@@ -35,6 +35,6 @@ export default defineConfig(({ ssrBuild }) => {
         plugins,
         resolve,
         server: { port: Number(process.env.CLIENT_PORT) || 3000 },
-        define: { __SERVER_PORT__: process.env.SERVER_PORT },
+        define: { __SERVER_PORT__: process.env.SERVER_PORT || 3001 },
       }
 })
