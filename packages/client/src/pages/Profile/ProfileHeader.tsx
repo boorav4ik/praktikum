@@ -15,12 +15,12 @@ export function ProfileHeader({
   fileData,
   avatar,
 }: ProfileHeaderProps) {
+  const src = fileData ?? avatar ? `${AvatarHost}${avatar}` : undefined
+
   return (
     <Box component="header">
       <label>
-        <AvatarBox>
-          {fileData ?? avatar ? `${AvatarHost}${avatar}` : undefined}
-        </AvatarBox>
+        <AvatarBox src={src} />
         <input
           accept="image/*"
           type="file"

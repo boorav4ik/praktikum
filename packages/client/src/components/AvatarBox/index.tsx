@@ -1,7 +1,7 @@
 import Avatar, { type AvatarProps } from '@mui/material/Avatar'
 import { AddUserIcon } from './AddUserIcon'
 
-export function AvatarBox({ children }: AvatarProps) {
+export function AvatarBox(props: AvatarProps) {
   return (
     <Avatar
       variant="rounded"
@@ -10,8 +10,9 @@ export function AvatarBox({ children }: AvatarProps) {
         height: '100px',
         bgcolor: '#1E515D',
         cursor: 'pointer',
-      }}>
-      {children || <AddUserIcon />}
+      }}
+      {...props}>
+      {!props.src && <AddUserIcon />}
     </Avatar>
   )
 }
