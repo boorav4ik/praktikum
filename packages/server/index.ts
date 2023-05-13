@@ -4,6 +4,7 @@ import path from 'path'
 import fs from 'fs'
 dotenv.config()
 
+// TODO: db
 // import { createClientAndConnect } from './db'
 // createClientAndConnect()
 
@@ -39,7 +40,7 @@ async function startServer() {
       const content = template
         .replace('<!--ssr-outlet-->', html)
         .replace('<!--ssr-css-->', css)
-        .replace('<!--ssr-state-->', JSON.stringify(state))
+        .replace('<!--ssr-state-->', state)
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(content)
     } catch (error) {

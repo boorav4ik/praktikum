@@ -1,35 +1,37 @@
-import { useState, useEffect, RefObject } from 'react'
+import { useState, useEffect, useRef, RefObject } from 'react'
 
-interface DocumentWithFullScreen extends Document {
-  mozFullScreenElement: Element
-  msFullscreenElement: Element
-  webkitFullscreenElement: Element
-  msExitFullscreen: () => void
-  mozCancelFullScreen: () => void
-  webkitExitFullscreen: () => void
-}
-
-export interface DocumentElementWithFullScreen extends HTMLElement {
+export interface ElementWithFullScreen extends HTMLElement {
   msRequestFullscreen: () => void
   mozRequestFullScreen: () => void
   webkitRequestFullscreen: () => void
 }
 
-export function useFullScreen(
-  elementRef: RefObject<DocumentElementWithFullScreen>
-) {
-  const doc = document as DocumentWithFullScreen
-  const [fullScreen, setFullScreen] = useState<boolean>(
-    !!(
+type UseFullscreenOutput = [
+  RefObject<ElementWithFullScreen>,
+  boolean,
+  () => void
+]
+
+export function useFullScreen(): UseFullscreenOutput {
+  const documentRef = useRef<Document>()
+  const elementRef = useRef<ElementWithFullScreen>(null)
+
+  const [fullScreen, setFullScreen] = useState<boolean>(isFullscreen())
+
+  function isFullscreen() {
+    const doc = documentRef.current
+    if (!doc) return false
+
+    return Boolean(
       doc.fullscreenElement ||
-      doc.mozFullScreenElement ||
-      doc.webkitFullscreenElement ||
-      doc.msFullscreenElement
+        doc.mozFullScreenElement ||
+        doc.webkitFullscreenElement ||
+        doc.msFullscreenElement
     )
-  )
+  }
 
   const toggleFullScreen = () => {
-    const element = elementRef.current as DocumentElementWithFullScreen
+    const element = elementRef.current
 
     if (element) {
       if (!fullScreen) {
@@ -43,6 +45,8 @@ export function useFullScreen(
           element.webkitRequestFullscreen()
         }
       } else {
+        const doc = documentRef.current
+        if (!doc) return
         if (doc.exitFullscreen) {
           doc.exitFullscreen()
         } else if (doc.msExitFullscreen) {
@@ -60,12 +64,12 @@ export function useFullScreen(
     function onFullscreenChange() {
       setFullScreen(prev => !prev)
     }
-
     document.addEventListener('fullscreenchange', onFullscreenChange)
-
-    return () =>
+    documentRef.current = document
+    return () => {
       document.removeEventListener('fullscreenchange', onFullscreenChange)
-  })
+    }
+  }, [])
 
-  return [fullScreen, toggleFullScreen]
+  return [elementRef, fullScreen, toggleFullScreen]
 }

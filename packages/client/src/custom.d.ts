@@ -11,6 +11,15 @@ declare global {
   interface Window {
     preloadedState?: RootState
   }
+
+  interface Document {
+    mozFullScreenElement: Element
+    msFullscreenElement: Element
+    webkitFullscreenElement: Element
+    msExitFullscreen: () => void
+    mozCancelFullScreen: () => void
+    webkitExitFullscreen: () => void
+  }
 }
 
 export {}
