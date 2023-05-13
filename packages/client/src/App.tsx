@@ -29,7 +29,7 @@ function App() {
   const navigate = useNavigate()
   const getUserInfo = useCallback(() => {
     if (param){
-      getOuath(param, 'http://localhost:3000/')
+      getOuath(param, 'http://localhost:3001/')
         .then(() => getUser())
         .then( () => navigate(location.state ?? '/'))
         .catch(e => console.error('token error', e))

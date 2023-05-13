@@ -68,7 +68,7 @@ export const getOuath = async (code: string, redirectUri: string) => {
 export const signinOauth = createAsyncThunk('oauth/yandex', async (redirectUri: string, thunkAPI) => {
   try {
     if (!redirectUri)
-      redirectUri = 'http://localhost:3000/'
+      redirectUri = 'http://localhost:3001/'
     const service_id = await getServiceId(redirectUri)
     window.location.replace(`https://oauth.yandex.ru/authorize?response_type=code&client_id=${service_id}&redirect_uri=${redirectUri}`)
   } catch (e) {

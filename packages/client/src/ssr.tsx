@@ -18,7 +18,6 @@ export function render(path: string) {
     createEmotionServer(cache)
 
   const html = renderToString(
-    <React.StrictMode>
       <StaticRouter location={path}>
         <Provider store={store}>
           <CacheProvider value={cache}>
@@ -29,7 +28,6 @@ export function render(path: string) {
           </CacheProvider>
         </Provider>
       </StaticRouter>
-    </React.StrictMode>
   )
   const emotionChunks = extractCriticalToChunks(html)
   const css = constructStyleTagsFromChunks(emotionChunks)

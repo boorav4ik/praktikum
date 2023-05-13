@@ -33,7 +33,7 @@ const tryNetwork = (req, timeout) => {
       clearTimeout(timeoutId)
       const responseClone = res.clone()
       caches.open(CACHE_NAME).then(cache => {
-        cache.put(req, responseClone)
+          cache.put(req, responseClone)
       })
       resolve(res)
       // Reject also if network fetch rejects.
