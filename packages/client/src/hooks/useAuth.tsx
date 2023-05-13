@@ -7,7 +7,11 @@ import { AuthState, updateEditStatus, updateUserData } from 'store/slices/auth'
 import { AuthActions } from './authActions'
 
 export function useAuth(): [AuthState, AuthActions] {
-  const auth = useSelector((state: RootState) => state.auth)
+  const auth = useSelector((state: RootState) => {
+    console.log(state)
+
+    return state.auth
+  })
   const dispatch = useAppDispatch()
 
   return [

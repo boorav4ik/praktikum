@@ -19,6 +19,7 @@ export default defineConfig(({ ssrBuild }) => {
       hoks: path.resolve(__dirname, './src/hoks'),
       hooks: path.resolve(__dirname, './src/hooks'),
       store: path.resolve(__dirname, './src/store'),
+      servises: path.resolve(__dirname, './src/servises'),
     },
   }
 
