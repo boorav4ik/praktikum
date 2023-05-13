@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useMemo } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { useCallback, useEffect,  } from 'react'
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import * as Pages from 'pages'
 import * as Layouts from 'layouts'
 import { RequiredAuth } from 'hoks/RequiredAuth'
@@ -25,12 +25,13 @@ function App() {
   const [{ user }, { getUser}] = useAuth()
   const searchParams = useSearchParams();
   const param = searchParams.get('code');
+  const location = useLocation()
+  const navigate = useNavigate()
   const getUserInfo = useCallback(() => {
-    console.log('1')
     if (param){
-      console.log('3')
       getOuath(param, 'http://localhost:3000/')
         .then(() => getUser())
+        .then( () => navigate(location.state ?? '/'))
         .catch(e => console.error('token error', e))
     }
   }, [param])

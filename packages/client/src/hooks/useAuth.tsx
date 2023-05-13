@@ -24,14 +24,8 @@ export function useAuth(): [AuthState, AuthActions] {
       signout() {
         dispatch(signout())
       },
-      signinOauth(redirectUri, callback) {
+      signinOauth(redirectUri) {
         dispatch(signinOauth(redirectUri))
-          // .then((data)=> {
-          //   if (data.meta.requestStatus === 'fulfilled')
-          //     callback()
-          //   else
-          //     console.error('signinOauth error ', data.payload)
-          // })
       },
       changeProfile(data) {
         dispatch(ChangeProfile(data))

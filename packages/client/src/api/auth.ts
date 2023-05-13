@@ -54,7 +54,6 @@ export const getServiceId = async (redirectUri: string) => {
 }
 export const getOuath = async (code: string, redirectUri: string) => {
   try {
-    console.log('code:', code)
     await host.post<string>(`${ApiEndPoints.OAuth.SignUp}`, JSON.stringify({
       'code': code,
       'redirect_uri': redirectUri
@@ -72,7 +71,6 @@ export const signinOauth = createAsyncThunk('oauth/yandex', async (redirectUri: 
       redirectUri = 'http://localhost:3000/'
     const service_id = await getServiceId(redirectUri)
     window.location.replace(`https://oauth.yandex.ru/authorize?response_type=code&client_id=${service_id}&redirect_uri=${redirectUri}`)
-    //await getOuath(service_id, redirectUri)
   } catch (e) {
     return thunkAPI.rejectWithValue('Не удалось авторизоваться')
   }
