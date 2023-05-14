@@ -20,13 +20,15 @@ export const getLeaderBoard = createAsyncThunk(
 
 export const updateUserLeader = createAsyncThunk(
   'UpdateUserLeader',
-  async (data: Record, thunkAPI) => {
+  async (
+    data: { name: string | null | undefined; avatar: string; score: number },
+    thunkAPI
+  ) => {
     try {
       const response = await host.post<any[]>(
         ApiEndPoints.LeaderBoard.UpdateUserInfo,
-        data
+        { data, ratingFieldName: 'score', teamName: 'saturn' }
       )
-      console.log(response.data)
       return response.data
     } catch (e) {
       return thunkAPI.rejectWithValue('Не удалось обновить данные пользователя')

@@ -141,16 +141,13 @@ export function GameBoard({
   }
 
   function updateLeaderBoard(score: number) {
-    const obj = {
-      data: {
+    dispatch(
+      updateUserLeader({
         name: userData?.first_name,
         avatar: `https://ya-praktikum.tech/api/v2/resources/${userData?.avatar}`,
         score: score,
-      },
-      ratingFieldName: 'score',
-      teamName: 'saturn',
-    }
-    dispatch(updateUserLeader(obj))
+      })
+    )
   }
 
   useEffect(() => {
@@ -161,7 +158,7 @@ export function GameBoard({
   }, [...cells.map(([value]) => value)])
 
   useEffect(() => {
-    updateLeaderBoard(GameUtils.getScore(cells))
+    updateLeaderBoard(522)
   }, [])
 
   useEffect(() => {
