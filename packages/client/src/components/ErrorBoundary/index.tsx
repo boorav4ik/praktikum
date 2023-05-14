@@ -9,7 +9,10 @@ interface ErrorBoundaryState {
   hasError: boolean
 }
 
-class Index extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+class ErrorBoundary extends Component<
+  React.PropsWithChildren<ErrorBoundaryProps>,
+  ErrorBoundaryState
+> {
   constructor(props: ErrorBoundaryProps) {
     super(props)
     this.state = { hasError: false }
@@ -32,4 +35,4 @@ class Index extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   }
 }
 
-export default Index
+export default ErrorBoundary
