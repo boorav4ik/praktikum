@@ -158,10 +158,6 @@ export function GameBoard({
   }, [...cells.map(([value]) => value)])
 
   useEffect(() => {
-    updateLeaderBoard(522)
-  }, [])
-
-  useEffect(() => {
     if (isGuideMode) {
       setStep(0)
       setCells(GameUtils.initEmptyCells(SIZE))
