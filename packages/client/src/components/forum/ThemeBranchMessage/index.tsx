@@ -2,7 +2,11 @@ import { Box, Stack } from '@mui/material'
 import Typography from '@mui/material/Typography'
 import { ThemeBranchMessageProps } from 'store/slices/forum/interfaces'
 
-export function MessageRow({ gridProps, messages }: ThemeBranchMessageProps) {
+export function MessageRow({
+  gridProps,
+  messages,
+  color,
+}: ThemeBranchMessageProps) {
   const { text, author } = messages
 
   return (

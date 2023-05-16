@@ -48,4 +48,5 @@ export type FullThemeBranch = ThemeBranch & {
 export type ThemeBranchMessageProps = {
   gridProps?: GridProps
   messages: ForumComments
+  color?: string
 }
