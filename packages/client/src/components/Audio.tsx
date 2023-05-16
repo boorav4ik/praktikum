@@ -12,9 +12,10 @@ export function AudioPlayer() {
 
   useEffect(() => {
     const music = audioRef.current
-    if (!music) return
-    if (isPaused) music.pause()
-    else music.play()
+    if (music) {
+      if (isPaused) music.pause()
+      else music.play()
+    }
   }, [isPaused])
 
   useEffect(() => {
