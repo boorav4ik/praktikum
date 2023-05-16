@@ -28,7 +28,7 @@ function HeaderForPage({
       alignItems="center"
       spacing={0}
       {...gridProps}>
-      <Grid item xs={11}>
+      <Grid item xs={8}>
         <Typography
           component="span"
           sx={{
