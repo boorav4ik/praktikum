@@ -1,4 +1,4 @@
-import { type Cell } from '../../../game/utils/moveCells'
+import type { Cell } from 'game/utils/moveCells'
 
 const EDGES = [
   [0, 1, 2, 3],

@@ -1,15 +1,14 @@
-import { ReactNode, useState, MouseEvent } from 'react'
+import { useState, MouseEvent, type PropsWithChildren } from 'react'
 import MuiFab from '@mui/material/Fab'
 import Popover from '@mui/material/Popover'
 import Typography from '@mui/material/Typography'
 
-type FabProps = {
+type FabProps = PropsWithChildren<{
   title: string
   order?: number
   onClick: () => void
-  children: ReactNode
   active?: boolean
-}
+}>
 
 export function Fab({ order = 0, title, active, ...props }: FabProps) {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)

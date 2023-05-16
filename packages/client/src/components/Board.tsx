@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box'
 import Typography, { type TypographyProps } from '@mui/material/Typography'
-import { Canvas, type CanvasProps } from '../game/components/Canvas'
-import { Cell } from '../game/utils/moveCells'
+import { Canvas, type CanvasProps } from 'game/components/Canvas'
+import type { Cell } from 'game/utils/moveCells'
 
 export type BoardProps = Omit<CanvasProps, 'cells'> & {
   cells: Cell[]
