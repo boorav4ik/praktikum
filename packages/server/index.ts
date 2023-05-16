@@ -26,7 +26,7 @@ async function startServer() {
 
   app.use('/assets', express.static(path.resolve(distPath, 'assets')))
   app.use('/sw.js', (_, res) => res.sendFile(require.resolve('client/sw.js')))
-  app.use('*', async (req, res, next) => {
+  app.use('*', async (req, res) => {
     const url = req.originalUrl
 
     const template = fs.readFileSync(
@@ -44,7 +44,7 @@ async function startServer() {
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(content)
     } catch (error) {
-      next(error)
+      res.status(500).end((error as Error).stack)
     }
   })
 
