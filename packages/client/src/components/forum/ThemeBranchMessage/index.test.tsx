@@ -5,9 +5,9 @@ describe('MessageRow component', () => {
   const mockMessage = {
     id: '1',
     text: 'Hello, world!',
-    id_topic: '12345',
-    id_theme: '12345',
-    id_author: '12345',
+    id_topic: '123456',
+    id_theme: '123456',
+    id_author: '123456',
     author: 'John Doe',
   }
 
