@@ -23,12 +23,12 @@ export function MessageRow({
       }}
       {...gridProps}>
       <Box>
-        <Typography color={'white'} fontWeight={500}>
+        <Typography color={color} fontWeight={500}>
           {text}
         </Typography>
       </Box>
       <Box sx={{ textAlign: 'end' }}>
-        <Typography color={'white'} fontWeight={500}>
+        <Typography color={color} fontWeight={500}>
           {author}
         </Typography>
       </Box>
