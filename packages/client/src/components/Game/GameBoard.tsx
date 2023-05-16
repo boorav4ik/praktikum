@@ -70,10 +70,17 @@ export function GameBoard({
   ) {
     const { cells, movedLayers } = moveCells(previousState, transform)
 
-    if (movedLayers.size) soundEffects && soundEffects.shift.play()
-    else {
+    if (movedLayers.size) {
+      soundEffects && soundEffects.shift.play()
+    } else {
       soundEffects && soundEffects.shake.play()
       !props.vibrationDisable && navigator.vibrate(VIBRATION_PATTERN)
+      for (let i = 0; i < cells.length; i++) {
+        if (cells[i][0]) {
+          cells[i] = [cells[i][0], Effect.Shake]
+        }
+      }
+
       cells.forEach(([value], i) => {
         if (value) cells[i] = [value, Effect.Shake]
       })
