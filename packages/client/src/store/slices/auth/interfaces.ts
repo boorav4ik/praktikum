@@ -1,7 +1,9 @@
 import { Nullable } from 'utils/nullableType'
 
 type NullableString = Nullable<string>
-
+export interface IUserService {
+  getCurrentUser(): Promise<User>
+}
 export interface User {
   id: number
   login: NullableString

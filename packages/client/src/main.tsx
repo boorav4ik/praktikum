@@ -6,6 +6,8 @@ import { CssBaseline, ThemeProvider } from '@mui/material'
 import { Provider } from 'react-redux'
 import { createStore } from './store'
 import { BrowserRouter } from 'react-router-dom'
+import { UserService } from './api/user'
+import { YandexAPIRepository } from './api/auth'
 
 const preloadedState = window.preloadedState
 
@@ -40,7 +42,10 @@ const renderMethod = (element: React.ReactNode) => {
 
 renderMethod(
     <BrowserRouter>
-      <Provider store={createStore(preloadedState)}>
+      <Provider store={createStore(
+        new UserService(new YandexAPIRepository()),
+        preloadedState
+      )}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <App />

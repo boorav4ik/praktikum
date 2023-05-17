@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { Login, SignUp, User } from 'storeAuth/interfaces'
 import host, { ApiEndPoints } from './config'
+import { UserRepository } from './user'
 
 export const signin = createAsyncThunk(
   'user/signin',
@@ -75,3 +76,11 @@ export const signinOauth = createAsyncThunk('oauth/yandex', async (redirectUri: 
     return thunkAPI.rejectWithValue('Не удалось авторизоваться')
   }
 })
+export class YandexAPIRepository implements UserRepository {
+  async getCurrent(): Promise<User> {
+    const { data } = await host.get(`${ApiEndPoints.Auth.UserInfo}`, {
+      withCredentials: true,
+    })
+    return data
+  }
+}

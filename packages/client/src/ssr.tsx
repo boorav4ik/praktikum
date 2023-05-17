@@ -10,9 +10,10 @@ import { StaticRouter } from 'react-router-dom/server.js'
 import { Provider } from 'react-redux'
 import { createStore } from 'store'
 import { theme } from './themes/main'
+import { UserService } from './api/user'
 
-export function render(path: string) {
-  const store = createStore()
+export function render(path: string, repository: any) {
+  const store = createStore(new UserService(repository))
   const cache = createCache({ key: 'css' })
   const { extractCriticalToChunks, constructStyleTagsFromChunks } =
     createEmotionServer(cache)

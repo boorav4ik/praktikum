@@ -1,16 +1,20 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import host from './config'
-import { ChangePasswordProps, FileProps, User } from 'storeAuth/interfaces'
+import { ChangePasswordProps, FileProps, IUserService, User } from 'storeAuth/interfaces'
 import { ApiEndPoints } from './config'
 
-export const GetUser = createAsyncThunk('user/getuser', async (_, thunkAPI) => {
-  try {
-    const response = await host.get<User[]>(ApiEndPoints.Auth.UserInfo)
-    return response.data
-  } catch (e) {
-    return thunkAPI.rejectWithValue('Не удалось получить данные пользователя')
+export const GetUser = createAsyncThunk('user/getuser',
+  // try {
+  //   const response = await host.get<User[]>(ApiEndPoints.Auth.UserInfo)
+  //   return response.data
+  // } catch (e) {
+  //   return thunkAPI.rejectWithValue('Не удалось получить данные пользователя')
+  // }
+  async (_, thunkApi) => {
+    const service: IUserService = thunkApi.extra as IUserService
+    return service.getCurrentUser()
   }
-})
+)
 
 export const ChangeProfile = createAsyncThunk(
   'user/changeProfile',
@@ -64,3 +68,14 @@ export const ChangePassword = createAsyncThunk(
     }
   }
 )
+
+export interface UserRepository {
+  getCurrent(): Promise<User>
+}
+
+export class UserService {
+  constructor(private _repo: UserRepository) {}
+  getCurrentUser() {
+    return this._repo.getCurrent()
+  }
+}
