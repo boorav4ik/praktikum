@@ -14,6 +14,8 @@ export const ApiEndPoints = {
     UpdateProfile: 'user/profile',
     UpdateProfileAvatar: 'user/profile/avatar',
     Search: 'user/search',
+    ChangeTheme: '/api/user/theme',
+    GetUserTheme: '/api/user/theme/?id=',
   },
   Forum: {
     GetTheme: '/api/forum/theme',
