@@ -2,7 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { Login, SignUp, User } from 'storeAuth/interfaces'
 import host, { ApiEndPoints } from './config'
 import { UserRepository } from './user'
-
+console.log('process client', process.env)
+export const REDIRECT_URL_OAUTH = process.env?.NODE_ENV === 'development' ? 'http://localhost:3000': 'http://localhost:3000'
 export const signin = createAsyncThunk(
   'user/signin',
   async (loginData: Login, thunkAPI) => {
@@ -69,7 +70,7 @@ export const getOuath = async (code: string, redirectUri: string) => {
 export const signinOauth = createAsyncThunk('oauth/yandex', async (redirectUri: string, thunkAPI) => {
   try {
     if (!redirectUri)
-      redirectUri = 'http://localhost:3001/'
+      redirectUri = REDIRECT_URL_OAUTH
     const service_id = await getServiceId(redirectUri)
     window.location.replace(`https://oauth.yandex.ru/authorize?response_type=code&client_id=${service_id}&redirect_uri=${redirectUri}`)
   } catch (e) {

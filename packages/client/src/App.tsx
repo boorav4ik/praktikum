@@ -7,7 +7,7 @@ import { Routes as Paths } from 'utils/routes'
 import { FullScreen } from 'components/FullScreen'
 import './App.css'
 import { useSearchParams } from './hooks/useSearchParam'
-import { getOuath } from './api/auth'
+import { getOuath, REDIRECT_URL_OAUTH } from './api/auth'
 import { useAuth } from './hooks/useAuth'
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
   const navigate = useNavigate()
   const getUserInfo = useCallback(() => {
     if (param){
-      getOuath(param, 'http://localhost:3001/')
+      getOuath(param, REDIRECT_URL_OAUTH)
         .then(() => getUser())
         .then( () => navigate(location.state ?? '/'))
         .catch(e => console.error('token error', e))

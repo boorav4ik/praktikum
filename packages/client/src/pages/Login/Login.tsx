@@ -12,6 +12,7 @@ import { Routes } from 'utils/routes'
 import { Login } from 'storeAuth/interfaces'
 import { MapLoginFields } from './LoginData'
 import { TextField } from 'components/TextFields'
+import { REDIRECT_URL_OAUTH } from '../../api/auth'
 
 interface LoginValues extends Login {
   list: {
@@ -49,7 +50,7 @@ export function LoginPage() {
   }
 
   function fetchOAuth() {
-    signinOauth('http://localhost:3001/', () => navigate(location.state ?? '/'))
+    signinOauth(REDIRECT_URL_OAUTH, () => navigate(location.state ?? '/'))
   }
 
   return user ? (
