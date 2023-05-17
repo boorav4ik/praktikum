@@ -20,6 +20,14 @@
 - `Jest`
 - `Service Worker`
 
+### Утечки
+
+При проведении поиска утечек проблем не было обнаружено.
+
+<img src="https://sun9-3.userapi.com/impg/63QaKasXZXhSTGADtn9QjqBe0tZ6qaekJlorKQ/zSxvKo8Ij04.jpg?size=1280x800&quality=96&sign=d449f42c6bd0e33781178b00b8ab1136&type=album" alt="demo" style="width: 600px;"/>
+
+
+
 
 ### Как запускать?
 
