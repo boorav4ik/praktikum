@@ -14,8 +14,7 @@ import { createProxyMiddleware } from 'http-proxy-middleware'
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import { YandexAPIRepository } from './repository/YandexAPIRepository'
-console.log('process server', process.env)
-const port = Number(process.env.CLIENT_PORT) || 3001
+const port = Number(process?.env?.CLIENT_PORT) || 3001
 // const isDev = () => process.env.NODE_ENV === 'development'
 async function startServer() {
   console.log('port', port)

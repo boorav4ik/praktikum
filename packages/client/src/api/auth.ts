@@ -2,8 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { Login, SignUp, User } from 'storeAuth/interfaces'
 import host, { ApiEndPoints } from './config'
 import { UserRepository } from './user'
-console.log('process client', process.env)
-export const REDIRECT_URL_OAUTH = process.env?.NODE_ENV === 'development' ? 'http://localhost:3000': 'http://localhost:3000'
+console.log('process client', import.meta?.env)
+export const REDIRECT_URL_OAUTH = 'http://localhost:3001'
 export const signin = createAsyncThunk(
   'user/signin',
   async (loginData: Login, thunkAPI) => {
