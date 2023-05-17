@@ -2,11 +2,10 @@ import { useEffect, useMemo, useState } from 'react'
 import { Board } from '../Board'
 import { GameMode } from './GameMode'
 import { useArrow } from 'game/hooks/useArrow'
-import {
-  type TransformationMethod,
-  transformations,
-} from 'game/utils/Transformations'
-import { type Cell, Effect, moveCells } from 'game/utils/moveCells'
+import { transformations } from 'game/utils/Transformations'
+import type { TransformationMethod } from 'game/utils/Transformations'
+import { Effect, moveCells } from 'game/utils/moveCells'
+import type { Cell } from 'game/utils/moveCells'
 import { ArrowDirection } from 'game/utils/ArrowDirections'
 import { addNewCell } from 'game/utils/addNewCels'
 import shiftSound from 'assets/audio/cards-scrape.mp3'
@@ -76,14 +75,11 @@ export function GameBoard({
       soundEffects && soundEffects.shake.play()
       !props.vibrationDisable && navigator.vibrate(VIBRATION_PATTERN)
       for (let i = 0; i < cells.length; i++) {
-        if (cells[i][0]) {
-          cells[i] = [cells[i][0], Effect.Shake]
+        const [value] = cells[i]
+        if (value) {
+          cells[i] = [value, Effect.Shake]
         }
       }
-
-      cells.forEach(([value], i) => {
-        if (value) cells[i] = [value, Effect.Shake]
-      })
     }
 
     return { cells, movedLayers }

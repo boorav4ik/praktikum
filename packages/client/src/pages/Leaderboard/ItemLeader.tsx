@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material'
 import { AvatarBox } from 'components/AvatarBox'
 
 interface ItemLeaderProps {
-  name?: string
+  name: string
   score: number
   rating: number
   src: string | undefined
