@@ -7,10 +7,6 @@ import { ChangeTheme, User } from './interfaces'
 export type AuthState = {
   user: Nullable<User>
   userData: Nullable<User>
-  theme: {
-    id: number
-    theme: string
-  }
   editStatus: string
   isLoading: boolean
   error?: string
@@ -19,10 +15,6 @@ export type AuthState = {
 const initialState: AuthState = {
   user: null,
   userData: null,
-  theme: {
-    id: 0,
-    theme: 'default',
-  },
   editStatus: 'info',
   isLoading: false,
 }
@@ -36,9 +28,6 @@ export const authSlise = createSlice({
     },
     updateEditStatus(state, action) {
       state.editStatus = action.payload
-    },
-    updateUserTheme(state, action) {
-      state.theme = action.payload
     },
   },
   extraReducers: {
@@ -87,7 +76,7 @@ export const authSlise = createSlice({
       const { user, theme } = action.payload
       state.user = user
       state.userData = user
-      state.theme = theme
+      localStorage.setItem('theme', theme.theme ?? 'light')
     },
     [GetUser.pending.type]: state => {
       state.isLoading = true
@@ -124,5 +113,4 @@ export const authSlise = createSlice({
 })
 
 export const authReducer = authSlise.reducer
-export const { updateUserData, updateEditStatus, updateUserTheme } =
-  authSlise.actions
+export const { updateUserData, updateEditStatus } = authSlise.actions

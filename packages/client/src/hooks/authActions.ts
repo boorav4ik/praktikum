@@ -17,5 +17,4 @@ export interface AuthActions {
   getUser: () => void
   updateUserData: (data: User) => void
   updateEditStatus: (data: string) => void
-  updateUserTheme: (data: ChangeThemeProps) => void
 }

@@ -50,7 +50,7 @@ export interface ChangePasswordProps {
 }
 
 export interface ChangeThemeProps {
-  id: number
+  id: number | null | undefined
   theme: string
 }
 export interface FileProps {

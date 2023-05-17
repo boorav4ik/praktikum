@@ -9,12 +9,7 @@ import {
 import { signin, signout, signup } from 'api/auth'
 import { RootState } from 'store'
 import { useAppDispatch } from 'store/hooks'
-import {
-  AuthState,
-  updateEditStatus,
-  updateUserData,
-  updateUserTheme,
-} from 'store/slices/auth'
+import { AuthState, updateEditStatus, updateUserData } from 'store/slices/auth'
 import { AuthActions } from './authActions'
 
 export function useAuth(): [AuthState, AuthActions] {
@@ -55,9 +50,6 @@ export function useAuth(): [AuthState, AuthActions] {
       },
       updateEditStatus(data) {
         dispatch(updateEditStatus(data))
-      },
-      updateUserTheme(data) {
-        dispatch(updateUserTheme(data))
       },
     },
   ]
