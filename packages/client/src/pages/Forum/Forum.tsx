@@ -1,30 +1,18 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Box, Container, Grid } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
-import { HeaderForPage } from 'components/forum/HeaderForPage'
 import { ForumRow } from 'components/forum/ForumRow'
-import { ChatSmileIcon } from 'components/forum/icons/ChatSmileIcon'
-import { defaultThemes } from '../../mocs/forum'
-
-export type ForumTheme = {
-  id: number
-  text: string
-  themeName: string
-}
+import TopicIcon from '@mui/icons-material/Topic'
+import { useForum } from 'hooks/useForum'
+import { HeaderForPage } from 'components/forum/HeaderForPage'
 
 function ForumPage() {
   const navigate = useNavigate()
-  const [themes, setThemes] = useState<ForumTheme[]>([])
+  const [{ themes }, { getTheme }] = useForum()
 
   useEffect(() => {
-    setThemes(defaultThemes)
+    getTheme()
   }, [])
-
-  const goToTheme = (theme: ForumTheme) => {
-    navigate(`/forum/${theme.themeName}`, {
-      state: { theme },
-    })
-  }
 
   return (
     <Container component="main" maxWidth="md">
@@ -46,21 +34,19 @@ function ForumPage() {
           direction="column"
           justifyContent="center"
           alignItems="center"
-          maxWidth={'90%'}
+          maxWidth={'99%'}
           marginY={2}
           rowSpacing={4}>
           {themes.map(theme => (
             <ForumRow
               key={theme.id}
-              onClick={() => goToTheme(theme)}
-              icon={() =>
-                ChatSmileIcon({
-                  width: '25',
-                  height: '25',
-                  viewBox: '0 0 25 25',
+              onClick={() =>
+                navigate(`/forum/${theme.id}`, {
+                  state: { theme },
                 })
               }
-              text={theme.text}
+              icon={() => <TopicIcon />}
+              text={theme.theme}
               btnText={'Темы'}
             />
           ))}
