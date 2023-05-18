@@ -1,25 +1,13 @@
-import { ThemeBranch } from './Themes'
-import { FormEvent, useEffect, useState } from 'react'
-import { HeaderForPage } from '../../components/forum/HeaderForPage'
+import { FormEvent, useEffect } from 'react'
+import { HeaderForPage } from 'components/forum/HeaderForPage'
 import { Box, Container, Stack, TextField } from '@mui/material'
-import { useLocation, useParams } from 'react-router-dom'
-import { mockedMessages } from '../../mocs/forum'
-import { MessageRow } from '../../components/forum/ThemeBranchMessage'
-import { ColorButton } from '../../components/forum/ForumRow'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { MessageRow } from 'components/forum/ThemeBranchMessage'
+import { ColorButton } from 'components/forum/ForumRow'
 import Typography from '@mui/material/Typography'
-
-export type Message = {
-  id: number
-  user: {
-    id: number
-    name: string
-  }
-  text: string
-}
-export type FullThemeBranch = ThemeBranch & {
-  text: string
-  messages: Message[]
-}
+import { useAuth } from 'hooks/useAuth'
+import { useForum } from 'hooks/useForum'
+import DeleteIcon from '@mui/icons-material/Delete'
 
 const configSxGreenTextField = {
   color: '#FFFFFF',
@@ -55,32 +43,37 @@ const configSxGreenTextField = {
 }
 
 function ThemeBranchPage() {
-  const { theme_name, theme_branch } = useParams()
+  const { theme_name } = useParams()
   const { state } = useLocation()
-  const headerText = state?.branch?.name ?? 'Loading...'
-  const [message, setMessage] = useState<Message[]>([])
-  const [text, setText] = useState<string>('default')
+  const navigate = useNavigate()
+  const [{ user }] = useAuth()
+  const [{ comments }, { createComment, getCommentsForTopic, deleteComment }] =
+    useForum()
 
   useEffect(() => {
-    Promise.resolve()
-      .then(() => {
-        setText('some text')
-      })
-      .then(() => {
-        setMessage(mockedMessages)
-      })
-  }, [theme_name, theme_branch])
+    if (!comments) {
+      getCommentsForTopic(state.topic.id)
+    }
+  }, [])
 
   const sendMessage = (e: FormEvent) => {
     e.preventDefault()
 
+    if (!user) {
+      navigate('/login')
+    }
     const target = e.target as typeof e.target & { comment: { value: string } }
     const msg = target.comment.value
 
-    setMessage([
-      ...message,
-      { id: Math.random(), text: msg, user: { id: 1, name: 'John Doe' } },
-    ])
+    if (!msg.length) return
+    createComment({
+      id_topic: state.topic.id,
+      text: msg,
+      id_theme: state.topic.id_theme,
+      id_author: user?.id.toString(),
+      author: user?.display_name,
+    })
+    target.comment.value = ''
   }
 
   return (
@@ -98,7 +91,7 @@ function ThemeBranchPage() {
           p: 3,
         }}>
         <HeaderForPage
-          text={headerText}
+          text={state?.topic?.title}
           state={state}
           backPath={`/forum/${theme_name}`}
         />
@@ -117,7 +110,7 @@ function ThemeBranchPage() {
             p: 3,
           }}>
           <Typography color={'white'} fontWeight={500}>
-            {text}
+            {state?.topic?.description}
           </Typography>
         </Box>
         <Stack
@@ -125,9 +118,22 @@ function ThemeBranchPage() {
           justifyContent="center"
           alignItems="flex-start"
           spacing={2}>
-          {message.map(msg => (
-            <MessageRow key={msg.id} message={msg} />
-          ))}
+          {comments &&
+            comments.map(msg => (
+              <Box
+                key={msg.id}
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'flex-end',
+                }}>
+                <MessageRow messages={msg} />
+                <DeleteIcon
+                  onClick={() => deleteComment(msg)}
+                  sx={{ width: 30, height: 30, margin: 1, cursor: 'pointer' }}
+                />
+              </Box>
+            ))}
         </Stack>
         <Box
           alignItems={'center'}

@@ -6,6 +6,7 @@ import { RequiredAuth } from 'hoks/RequiredAuth'
 import { Routes as Paths } from 'utils/routes'
 import { FullScreen } from 'components/FullScreen'
 import './App.css'
+import ErrorBoundary from 'components/ErrorBoundary'
 
 function App() {
   useEffect(() => {
@@ -22,6 +23,7 @@ function App() {
   return (
     <FullScreen>
       <BrowserRouter>
+          <ErrorBoundary>
         <div className="App" data-testid="App">
           <Routes>
             <Route path={Paths.Index} element={<Layouts.Main />}>
@@ -55,6 +57,7 @@ function App() {
             <Route path={Paths.NotFounde} element={<Pages.Error />} />
           </Routes>
         </div>
+          </ErrorBoundary>
       </BrowserRouter>
     </FullScreen>
   )
