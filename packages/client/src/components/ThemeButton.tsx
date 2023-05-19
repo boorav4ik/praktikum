@@ -3,8 +3,8 @@ import { useContext } from 'react'
 import { ColorModeContext } from '../themes/ThemeWrapper'
 import Brightness4Icon from '@mui/icons-material/Brightness4'
 import Brightness7Icon from '@mui/icons-material/Brightness7'
-import IconButton from '@mui/material/IconButton'
 import { useAuth } from 'hooks/useAuth'
+import { Fab } from './FloatingActionButton'
 
 export function ThemeButton() {
   const theme = useTheme()
@@ -12,26 +12,15 @@ export function ThemeButton() {
   const [{ user }] = useAuth()
 
   return (
-    <Box
-      sx={{
-        color: 'icon.default',
-      }}>
-      <IconButton
-        title="Переключить тему"
-        onClick={() => colorMode.toggleColorMode(user?.id)}
-        color="inherit"
-        sx={{
-          position: 'relative',
-          padding: '12px',
-          maxWidth: '54px',
-          minWidth: '54px',
-        }}>
-        {theme.palette.mode === 'dark' ? (
-          <Brightness7Icon />
-        ) : (
-          <Brightness4Icon />
-        )}
-      </IconButton>
-    </Box>
+    <Fab
+      title={'Переключить тему'}
+      onClick={() => colorMode.toggleColorMode(user?.id)}
+      order={5}>
+      {theme.palette.mode === 'dark' ? (
+        <Brightness7Icon />
+      ) : (
+        <Brightness4Icon />
+      )}
+    </Fab>
   )
 }

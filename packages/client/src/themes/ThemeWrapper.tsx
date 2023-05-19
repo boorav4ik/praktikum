@@ -15,7 +15,7 @@ export const ColorModeContext = createContext({
 export default function ToggleColorMode() {
   const [mode, setMode] = useState<'light' | 'dark'>(defaultTheme)
   const [{ user }, { changeThemeOnServer }] = useAuth()
-  console.log('user = ', user)
+
   const colorMode = useMemo(
     () => ({
       toggleColorMode: (id: number | undefined) => {
