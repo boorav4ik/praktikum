@@ -2,10 +2,11 @@ import { useEffect, useMemo, useState } from 'react'
 import { Board } from '../Board'
 import { GameMode } from './GameMode'
 import { useArrow } from 'game/hooks/useArrow'
-import { transformations } from 'game/utils/Transformations'
-import type { TransformationMethod } from 'game/utils/Transformations'
-import { Effect, moveCells } from 'game/utils/moveCells'
-import type { Cell } from 'game/utils/moveCells'
+import {
+  TransformationMethod,
+  transformations,
+} from 'game/utils/Transformations'
+import { Cell, Effect, moveCells } from 'game/utils/moveCells'
 import { ArrowDirection } from 'game/utils/ArrowDirections'
 import { addNewCell } from 'game/utils/addNewCels'
 import shiftSound from 'assets/audio/cards-scrape.mp3'
@@ -20,8 +21,8 @@ import {
 import * as GameUtils from './utils'
 import { Button } from '../Button'
 import { useAppDispatch } from '../../store/hooks'
-import { updateUserLeader } from 'api/leader'
 import { useAuth } from '../../hooks/useAuth'
+import { updateUserLeader } from '../../api/leader'
 
 const SIZE = 16
 
