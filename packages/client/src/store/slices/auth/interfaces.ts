@@ -14,6 +14,21 @@ export interface User {
   password: NullableString
 }
 
+export interface ChangeTheme extends User {
+  user: {
+    id: number
+    login: NullableString
+    display_name: NullableString
+    first_name: NullableString
+    second_name: NullableString
+    phone: NullableString
+    email: NullableString
+    avatar: NullableString
+    password: NullableString
+  }
+  theme: { id: number; theme: string }
+}
+
 export interface SignUp {
   login: NullableString
   display_name: NullableString
@@ -34,6 +49,10 @@ export interface ChangePasswordProps {
   newPassword: string
 }
 
+export interface ChangeThemeProps {
+  id: number | null | undefined
+  theme: string
+}
 export interface FileProps {
   data: string | ArrayBuffer | null
   info: File | undefined

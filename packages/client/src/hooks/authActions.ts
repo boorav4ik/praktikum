@@ -4,6 +4,7 @@ import {
   Login,
   User,
   ChangePasswordProps,
+  ChangeThemeProps,
 } from 'storeAuth/interfaces'
 export interface AuthActions {
   signin: (authData: Login, callback: () => void) => void
@@ -12,6 +13,7 @@ export interface AuthActions {
   changeProfile: (data: User) => void
   changeAvatar: (data: FileProps) => void
   changePassword: (data: ChangePasswordProps) => void
+  changeThemeOnServer: (data: ChangeThemeProps) => void
   getUser: () => void
   updateUserData: (data: User) => void
   updateEditStatus: (data: string) => void

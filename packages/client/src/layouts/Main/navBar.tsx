@@ -26,7 +26,7 @@ function NavItem({ text, ...rest }: { text: string; to: string }) {
 }
 
 export const NavBar = () => {
-  const [{ user }, { getUser, signout }] = useAuth()
+  const [{ user }, { getUser }] = useAuth()
 
   const AppBar = styled(MuiAppBar)(({ theme }) => ({
     zIndex: theme.zIndex.drawer + 1,

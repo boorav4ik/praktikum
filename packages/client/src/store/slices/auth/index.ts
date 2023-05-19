@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { GetUser, ChangeProfile, ChangeAvatar } from 'api/user'
 import { signin, signout, signup } from 'api/auth'
 import { Nullable } from 'utils/nullableType'
-import { User } from './interfaces'
+import { ChangeTheme, User } from './interfaces'
 
 export type AuthState = {
   user: Nullable<User>
@@ -57,7 +57,6 @@ export const authSlise = createSlice({
       state.isLoading = false
       state.error = action.payload
     },
-
     [signout.fulfilled.type]: (state, action: PayloadAction<User>) => {
       state.isLoading = false
       state.error = ''
@@ -71,11 +70,13 @@ export const authSlise = createSlice({
       state.isLoading = false
       state.error = action.payload
     },
-    [GetUser.fulfilled.type]: (state, action: PayloadAction<User>) => {
+    [GetUser.fulfilled.type]: (state, action: PayloadAction<ChangeTheme>) => {
       state.isLoading = false
       state.error = ''
-      state.user = action.payload
-      state.userData = action.payload
+      const { user, theme } = action.payload
+      state.user = user
+      state.userData = user
+      localStorage.setItem('theme', theme.theme ?? 'light')
     },
     [GetUser.pending.type]: state => {
       state.isLoading = true

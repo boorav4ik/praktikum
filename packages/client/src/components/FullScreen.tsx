@@ -6,6 +6,7 @@ import { Fab } from './FloatingActionButton'
 import ZoomInMap from '@mui/icons-material/ZoomInMap'
 import ZoomOutMap from '@mui/icons-material/ZoomInMap'
 import { type PropsWithChildren } from 'react'
+import { ThemeButton } from './ThemeButton'
 
 const Screen = styled(Box)(() => ({
   '&::backdrop': {
@@ -26,6 +27,7 @@ export function FullScreen({ children }: PropsWithChildren) {
         active={fullScreen}>
         {fullScreen ? <ZoomInMap /> : <ZoomOutMap />}
       </Fab>
+      <ThemeButton />
     </Screen>
   )
 }
