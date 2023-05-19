@@ -3,10 +3,10 @@ import { Board } from '../Board'
 import { GameMode } from './GameMode'
 import { useArrow } from 'game/hooks/useArrow'
 import {
-  type TransformationMethod,
+  TransformationMethod,
   transformations,
 } from 'game/utils/Transformations'
-import { type Cell, Effect, moveCells } from 'game/utils/moveCells'
+import { Cell, Effect, moveCells } from 'game/utils/moveCells'
 import { ArrowDirection } from 'game/utils/ArrowDirections'
 import { addNewCell } from 'game/utils/addNewCels'
 import shiftSound from 'assets/audio/cards-scrape.mp3'
@@ -20,6 +20,9 @@ import {
 } from '@mui/material'
 import * as GameUtils from './utils'
 import { Button } from '../Button'
+import { useAppDispatch } from '../../store/hooks'
+import { useAuth } from '../../hooks/useAuth'
+import { updateUserLeader } from '../../api/leader'
 
 const SIZE = 16
 
@@ -37,6 +40,8 @@ export function GameBoard({
   soundDisabled: boolean
   vibrationDisable: boolean
 }) {
+  const [{ userData }] = useAuth()
+  const dispatch = useAppDispatch()
   const [cells, setCells] = useState<Cell[]>(() =>
     GameUtils.initEmptyCells(SIZE)
   )
@@ -65,13 +70,17 @@ export function GameBoard({
   ) => {
     const { cells, movedLayers } = moveCells(previousState, transform)
 
-    if (movedLayers.size) soundEffects && soundEffects.shift.play()
-    else {
+    if (movedLayers.size) {
+      soundEffects && soundEffects.shift.play()
+    } else {
       soundEffects && soundEffects.shake.play()
       !props.vibrationDisable && navigator.vibrate(VIBRATION_PATTERN)
-      cells.forEach(([value], i) => {
-        if (value) cells[i] = [value, Effect.Shake]
-      })
+      for (let i = 0; i < cells.length; i++) {
+        const [value] = cells[i]
+        if (value) {
+          cells[i] = [value, Effect.Shake]
+        }
+      }
     }
 
     return { cells, movedLayers }
@@ -135,9 +144,20 @@ export function GameBoard({
     setIsGameOver(false)
   }
 
+  function updateLeaderBoard(score: number) {
+    dispatch(
+      updateUserLeader({
+        name: userData?.first_name,
+        avatar: `https://ya-praktikum.tech/api/v2/resources/${userData?.avatar}`,
+        score: score,
+      })
+    )
+  }
+
   useEffect(() => {
     if ((!isGuideMode || step) && GameUtils.isMoveOver(cells)) {
       setIsGameOver(true)
+      updateLeaderBoard(GameUtils.getScore(cells))
     }
   }, [...cells.map(([value]) => value)])
 

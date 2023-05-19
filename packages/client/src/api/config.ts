@@ -15,6 +15,10 @@ export const ApiEndPoints = {
     UpdateProfileAvatar: 'user/profile/avatar',
     Search: 'user/search',
   },
+  LeaderBoard: {
+    UpdateUserInfo: 'leaderboard',
+    GetTeam: 'leaderboard/saturn',
+  },
   Forum: {
     GetTheme: '/api/forum/theme',
     GetAllTopics: '/api/forum/topic',
