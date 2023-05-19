@@ -1,10 +1,26 @@
 import { Box, Container, Stack, Divider } from '@mui/material'
 import { ItemLeader } from './ItemLeader'
 import { LeaderHeader } from './LeaderHeader'
-
-import { gamers1, gamers2 } from './data'
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../store'
+import { useAppDispatch } from '../../store/hooks'
+import { getLeaderBoard } from 'api/leader'
 
 export function LeaderboardPage() {
+  const leaderData = useSelector((state: RootState) => state.leader.leaderData)
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(
+      getLeaderBoard({
+        ratingFieldName: 'score',
+        cursor: 0,
+        limit: 10,
+      })
+    )
+  }, [])
+
   return (
     <Container component="main" maxWidth="md">
       <Box
@@ -41,11 +57,13 @@ export function LeaderboardPage() {
               mr: '35px',
             }}
             spacing={2}>
-            {gamers1.map(item => (
+            {leaderData.slice(0, 3).map((item, index) => (
               <ItemLeader
-                rating={item.rating}
-                name={item.name}
-                score={item.score}
+                key={index}
+                rating={index + 1}
+                name={item.data?.name}
+                score={item.data?.score}
+                src={item.data?.avatar}
               />
             ))}
           </Stack>
@@ -54,11 +72,13 @@ export function LeaderboardPage() {
               ml: '55px!important',
             }}
             spacing={2}>
-            {gamers2.map(item => (
+            {leaderData.slice(3, 6).map((item, index) => (
               <ItemLeader
-                rating={item.rating}
-                name={item.name}
-                score={item.score}
+                key={index}
+                rating={index + 1}
+                name={item.data?.name}
+                score={item.data?.score}
+                src={item.data?.avatar}
               />
             ))}
           </Stack>

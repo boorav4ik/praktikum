@@ -17,6 +17,10 @@ export const ApiEndPoints = {
     ChangeTheme: '/api/user/theme',
     GetUserTheme: '/api/user/theme/?id=',
   },
+  LeaderBoard: {
+    UpdateUserInfo: 'leaderboard',
+    GetTeam: 'leaderboard/saturn',
+  },
   Forum: {
     GetTheme: '/api/forum/theme',
     GetAllTopics: '/api/forum/topic',

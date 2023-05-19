@@ -3,8 +3,9 @@ import { AvatarBox } from 'components/AvatarBox'
 
 interface ItemLeaderProps {
   name: string
-  score: string
+  score: number
   rating: number
+  src: string | undefined
 }
 
 export function ItemLeader(props: ItemLeaderProps) {
@@ -27,8 +28,16 @@ export function ItemLeader(props: ItemLeaderProps) {
           {props.rating}
         </Typography>
       </Box>
+      <AvatarBox
+        src={props.src}
+        sx={{
+          width: '100px',
+          height: '100px',
+          bgcolor: '#1E515D',
+          cursor: 'pointer',
+        }}
+      />
 
-      <AvatarBox />
       <Box
         sx={{
           width: 100,

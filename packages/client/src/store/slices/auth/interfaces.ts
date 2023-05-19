@@ -57,3 +57,11 @@ export interface FileProps {
   data: string | ArrayBuffer | null
   info: File | undefined
 }
+
+export interface Leader {
+  data: {
+    name: string
+    avatar: string
+    score: string
+  }
+}
