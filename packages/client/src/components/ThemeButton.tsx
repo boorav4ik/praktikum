@@ -17,7 +17,7 @@ export function ThemeButton() {
         color: 'icon.default',
       }}>
       <IconButton
-        title="Переключить тему "
+        title="Переключить тему"
         onClick={() => colorMode.toggleColorMode(user?.id)}
         color="inherit"
         sx={{
