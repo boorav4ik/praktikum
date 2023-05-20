@@ -1,0 +1,18 @@
+<svg
+  width="1440"
+  height="700"
+  viewBox="0 0 1440 700"
+  fill="#7AB3A2"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <rect x="180" y="60" width="50" height="50" rx="5" />
+  <rect x="370" y="117" width="50" height="50" rx="5" />
+  <rect x="285" y="257" width="70" height="70" rx="5" />
+  <rect x="115" y="359" width="50" height="50" rx="5" />
+  <rect x="210" y="515" width="50" height="50" rx="5" />
+  <rect x="1020" y="95" width="70" height="70" rx="5" />
+  <rect x="1225" y="60" width="50" height="50" rx="5" />
+  <rect x="1085" y="280" width="50" height="50" rx="5" />
+  <rect x="1275" y="357" width="50" height="50" rx="5" />
+  <rect x="1110" y="531" width="70" height="70" rx="5" />
+</svg>

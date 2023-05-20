@@ -3,6 +3,7 @@
     "target": "ESNext",
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "types": ["node", "jest", "@testing-library/jest-dom"],
     "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": false,
@@ -14,8 +15,14 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "rootDir": "./src/",
+    "baseUrl": "./src/",
+    "paths": {
+      "storeAuth/*": ["store/slices/auth/*"]
+    }
   },
   "include": ["src"],
+  "files": ["src/custom.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
